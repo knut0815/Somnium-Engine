@@ -19,7 +19,6 @@ namespace LKREngine {
 			m_ShaderID = Load();
 		}
 
-
 		Shader::~Shader()
 		{
 			glDeleteProgram(m_ShaderID);
@@ -52,7 +51,7 @@ namespace LKREngine {
 
 				glGetShaderiv(shaders[i], GL_COMPILE_STATUS, &result);
 
-				if (result == GL_FALSE)
+				if (!result)
 				{
 					GLint length;
 					glGetShaderiv(shaders[i], GL_INFO_LOG_LENGTH, &length);
@@ -70,7 +69,8 @@ namespace LKREngine {
 			
 			glLinkProgram(program);
 			glValidateProgram(program);
-
+			glUseProgram(program);
+			
 			for (int i = 0; i < 2; i++)
 				glDeleteShader(shaders[i]);
 

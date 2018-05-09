@@ -118,8 +118,8 @@ namespace LKREngine
 			if (GLenum error = glGetError() != GL_NO_ERROR)
 				cout << glewGetErrorString(error) << endl;
 
-			glfwPollEvents();
 			glfwSwapBuffers(m_Window);
+			glfwPollEvents();
 		}
 
 		void Resize(GLFWwindow* window, int width, int height)
