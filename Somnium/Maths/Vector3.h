@@ -1,6 +1,6 @@
 #pragma once
 
-namespace LKREngine
+namespace Somnium
 {
 	namespace Maths
 	{

@@ -3,7 +3,7 @@
 
 using namespace std;
 
-namespace LKREngine 
+namespace Somnium 
 {
 	namespace Graphics 
 	{

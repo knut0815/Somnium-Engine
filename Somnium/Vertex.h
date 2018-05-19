@@ -1,7 +1,7 @@
 #pragma once
 #include "Maths\Maths.h"
 
-namespace LKREngine
+namespace Somnium
 {
 	namespace Graphics
 	{

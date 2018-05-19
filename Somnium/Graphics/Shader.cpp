@@ -6,11 +6,11 @@
 #include "../Utilities/FileUtilities.h"
 
 using namespace std;
-using namespace LKREngine;
+using namespace Somnium;
 using namespace Utilities;
 using namespace Maths;
 
-namespace LKREngine {
+namespace Somnium {
 	namespace Graphics {
 
 		Shader::Shader(const char* vertexFilePath, const char* fragmentFilePath)

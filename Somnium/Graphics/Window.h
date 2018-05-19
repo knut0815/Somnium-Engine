@@ -3,7 +3,7 @@
 #include <glew.h>
 #include <glfw3.h>
 
-namespace LKREngine {
+namespace Somnium {
 	namespace Graphics {
 		class Window
 		{

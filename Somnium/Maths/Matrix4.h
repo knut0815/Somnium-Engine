@@ -2,7 +2,7 @@
 
 #include "Maths.h"
 
-namespace LKREngine
+namespace Somnium
 {
 	namespace Maths
 	{

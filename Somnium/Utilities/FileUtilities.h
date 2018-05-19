@@ -8,7 +8,7 @@
 
 using namespace std;
 
-namespace LKREngine {
+namespace Somnium {
 	namespace Utilities {
 		static string ReadFile(const char* filePath)
 		{

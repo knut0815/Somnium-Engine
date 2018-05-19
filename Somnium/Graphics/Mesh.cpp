@@ -1,6 +1,6 @@
 #include "Mesh.h"
 
-namespace LKREngine 
+namespace Somnium 
 {
 	namespace Graphics 
 	{

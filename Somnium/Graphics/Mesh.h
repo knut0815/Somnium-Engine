@@ -10,7 +10,7 @@
 #define SHADER_NORMAL_INDEX 1
 #define SHADER_TEXTURE_COORDINATE_INDEX 2
 
-namespace LKREngine
+namespace Somnium
 {
 	namespace Graphics
 	{

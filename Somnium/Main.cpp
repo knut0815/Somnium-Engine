@@ -5,7 +5,7 @@
 #include "Utilities\FileUtilities.h"
 
 using namespace std;
-using namespace LKREngine;
+using namespace Somnium;
 using namespace Graphics;
 using namespace Maths;
 

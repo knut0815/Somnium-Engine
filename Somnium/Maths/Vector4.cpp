@@ -2,7 +2,7 @@
 
 #include <cmath>
 
-namespace LKREngine
+namespace Somnium
 {
 	namespace Maths
 	{

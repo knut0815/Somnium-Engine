@@ -1,6 +1,6 @@
 #include "Vertex.h"
 
-namespace LKREngine
+namespace Somnium
 {
 	namespace Graphics
 	{

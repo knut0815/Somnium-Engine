@@ -3,7 +3,7 @@
 #include <glew.h>
 #include "../Maths/Maths.h"
 
-namespace LKREngine {
+namespace Somnium {
 	namespace Graphics {
 		class Shader
 		{
