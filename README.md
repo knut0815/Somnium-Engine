@@ -1,4 +1,4 @@
-# SomniEngine
+# SOMNIUM
 A game engine focusing on breathtaking visuals, ultra-realistic audio and unparalleled scripting for a life-like experience.
 
 ## LUMACAL Software Group
