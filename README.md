@@ -1,10 +1,13 @@
-# LKRGameEngine
-A game engine focusing on breathtaking visuals, ultra-realistic audio and unparalleled scripting for an ultra-realistic experience.
+# SomniEngine
+A game engine focusing on breathtaking visuals, ultra-realistic audio and unparalleled scripting for a life-like experience.
 
-## Authors
+## LUMACAL Software Group
 [**Luke K. Rose**](http://www.GitHub.com/MrLukeKR) *Graphics Engineer & Lead Programmer*  
 [**Matthew C. Mansell**](http://www.GitHub.com/mmansell14) *Audio Engineer*  
 [**Callum M. Berger**](http://www.GitHub.com/CBerger1997) *Logic Programmer* 
+
+## External Collaborators
+[**Kesava Uthaya-Kumaran**](http://www.GitHub.com/kesava321) *Documentation*
 
 ## Additional Reading
 |Website|What Is It For?|
