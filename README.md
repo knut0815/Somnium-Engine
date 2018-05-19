@@ -10,6 +10,7 @@ A game engine focusing on breathtaking visuals, ultra-realistic audio and unpara
 [**Kesava Uthaya-Kumaran**](http://www.GitHub.com/kesava321) *Documentation*
 
 ## Additional Reading
-|Website|What Is It For?|
-|-------|---------------|
-|[Learn OpenGL](https://learnopengl.com) |Simple OpenGL Tutorials|
+|Subject|Website|What Is It For?|
+|-------|-------|---------------|
+|Graphics|[Learn OpenGL](https://learnopengl.com) |Simple OpenGL Tutorials|
+|Graphics|[ShaderToy](http://shadertoy.com)|Shader Programming Examples|
