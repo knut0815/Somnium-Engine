@@ -1,6 +1,6 @@
 #include <iostream>
-#include "Graphics/Window.h"
-#include "Graphics/Shader.h"
+#include "Graphics\Window.h"
+#include "Graphics\Shader.h"
 #include "Graphics\Mesh.h"
 #include "Utilities\FileUtilities.h"
 
@@ -8,7 +8,6 @@ using namespace std;
 using namespace LKREngine;
 using namespace Graphics;
 using namespace Maths;
-
 
 void calculateFPS()
 {
@@ -27,9 +26,9 @@ void calculateFPS()
 }
 
 int main(int argc, char** argv) {
-	cout << "LKR Engine by Luke K. Rose - " << __TIMESTAMP__ << endl << endl;
+	cout << "SOMNIUM by LUMACAL Software Group - Built " << __TIMESTAMP__ << endl << endl;
 
-	Window myWindow("LKR Game Engine", 1920, 1080);
+	Window myWindow("Somnium Engine", 1920, 1080);
 	glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
 
 	cout << "---------RUNNING GAME LOOP---------" << endl;
@@ -44,7 +43,7 @@ int main(int argc, char** argv) {
 	shader.SetUniform("light_position", Vector2(0.0f, 0));
 	shader.SetUniform("colour", Vector4(0.6f, 0.3f, 0.8f, 1.0f));
 
-	Mesh testMesh = Utilities::LoadOBJ("C:/Users/Luke/Desktop/untitled.obj");
+	Mesh testMesh = Utilities::LoadOBJ("Graphics/Objects/untitled.obj");
 
 	while (!myWindow.IsClosed()) 
 	{ 

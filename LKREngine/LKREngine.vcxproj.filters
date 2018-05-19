@@ -40,6 +40,9 @@
     <Filter Include="Source Files\Graphics\Shaders">
       <UniqueIdentifier>{9d46dd9b-786c-4988-8cd7-ee0a31b3b696}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Resource Files\Objects">
+      <UniqueIdentifier>{dc44560e-7bbe-473c-82cd-be13643447fe}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Maths\Vector3.h">
@@ -108,12 +111,6 @@
     </None>
     <None Include="Graphics\Shaders\basic.vert">
       <Filter>Resource Files\Shaders</Filter>
-    </None>
-    <None Include="Basic.fs">
-      <Filter>Source Files\Graphics\Shaders</Filter>
-    </None>
-    <None Include="Basic.vs">
-      <Filter>Source Files\Graphics\Shaders</Filter>
     </None>
   </ItemGroup>
 </Project>
