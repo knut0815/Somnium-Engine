@@ -14,3 +14,4 @@ A game engine focusing on breathtaking visuals, ultra-realistic audio and unpara
 |-------|-------|---------------|
 |Graphics|[Learn OpenGL](https://learnopengl.com) |Simple OpenGL Tutorials|
 |Graphics|[ShaderToy](http://shadertoy.com)|Shader Programming Examples|
+|Multimedia & I/O|[Simple DirectMedia Layer (SDL)](https://www.libsdl.org/)|Interacting with Audio, I/O and Graphics hardware|
