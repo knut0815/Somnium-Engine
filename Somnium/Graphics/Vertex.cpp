@@ -1,10 +1,14 @@
 #include "Vertex.h"
 
-namespace LKREngine
+namespace Somnium
 {
 	namespace Graphics
 	{
+		Vertex::Vertex(Maths::Vector3 position)
+			: m_Position(position) 
+		{
 
+		}
 	}
 }
 
