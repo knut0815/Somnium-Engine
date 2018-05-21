@@ -158,10 +158,6 @@
     <ClCompile Include="Graphics\Mesh.cpp" />
     <ClCompile Include="Graphics\Vertex.cpp" />
   </ItemGroup>
-  <ItemGroup>
-    <None Include="Graphics\Shaders\basic.frag" />
-    <None Include="Graphics\Shaders\basic.vert" />
-  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>

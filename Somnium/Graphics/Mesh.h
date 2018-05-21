@@ -36,6 +36,7 @@ namespace Somnium
 
 			void Draw(Shader& shader);
 
+			bool StructureExists() const { return !m_Vertices.empty() && !m_Indices.empty(); }
 			inline GLuint GetVAO() const { return m_VAO; }
 
 		private:

@@ -43,7 +43,10 @@ int main(int argc, char** argv) {
 	shader.SetUniform("light_position", Vector2(0.0f, 0));
 	shader.SetUniform("colour", Vector4(0.6f, 0.3f, 0.8f, 1.0f));
 
-	Mesh testMesh = Utilities::LoadOBJ("Graphics/Objects/untitled.obj");
+	Mesh testMesh = Utilities::LoadOBJ("Graphics/Objects/Cube.obj");
+
+	if (!testMesh.StructureExists())
+		cout << "Object has no structure!" << endl;
 
 	while (!myWindow.IsClosed()) 
 	{ 

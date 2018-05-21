@@ -50,7 +50,8 @@ namespace Somnium {
 			if (!file.is_open())
 			{
 				cerr << "Could not load OBJ file " << filePath << endl;
-				//return ...;
+				//Return an empty Mesh object, which can then be checked for emptiness with Mesh.StructureExists();
+				return Graphics::Mesh(vertices, indices, textures);
 			}
 
 			string line;
@@ -59,8 +60,12 @@ namespace Somnium {
 			while (getline(file, line))
 			{
 				int currPos = 0, nextPos = 0;
+				
+				//Determine what structure the current line represents (Vertex, Normal, Index, etc.)
+				string header = line.substr(0, currPos = line.find(" "));
 
-				if (line.substr(0, currPos = line.find(" ")) == "v")
+				//If the structure is a Vertex...
+				if (header == "v")
 				{
 					Graphics::Vertex newVert;
 
@@ -72,10 +77,41 @@ namespace Somnium {
 
 					vertices.push_back(newVert);
 				}
-
-				if (line.substr(0, currPos = line.find(" ")) == "vn")
+				//If the structure is an Object Name...
+				else if (header == "o") 
+				{
+					cout << "OBJECT NAMES NOT IMPLEMENTED YET!" << endl;
+				}
+				//If the structure is a Texture Coordinate...
+				else if (header == "vt") 
+				{
+					cout << "UV TEXTURE COORDINATES NOT IMPLEMENTED YET!" << endl;
+				}
+				//If the structure is a Normal...
+				else if (header == "vn") 
 				{
 					cout << "NORMALS NOT IMPLEMENTED YET!" << endl;
+				}
+				//If the structure is a Face...
+				else if (header == "f")
+				{
+					cout << "FACES NOT IMPLEMENTED YET!" << endl;
+				}
+				//If the structure is a Parameter Space Vertex...
+				else if (header == "vp")
+				{
+					cout << "PARAMETER SPACE VERTICES NOT IMPLEMENTED YET!" << endl;
+				}
+				//If the structure is a Line...
+				else if (header == "l") 
+				{
+					cout << "LINES NOT IMPLEMENTED YET!" << endl;
+				}
+				//If the structure is unknown or invalid...
+				else
+				{
+					cerr << "UNKNOWN/INVALID STRUCTURE '" << header << "'!\n" 
+						 << "If you believe it is valid, please file a bug report at www.GitHub.com/MrLukeKR/Somnium-Engine/issues/new" << endl;
 				}
 			}
 

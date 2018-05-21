@@ -9,10 +9,6 @@
       <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
       <Extensions>h;hh;hpp;hxx;hm;inl;inc;xsd</Extensions>
     </Filter>
-    <Filter Include="Resource Files">
-      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
-      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
-    </Filter>
     <Filter Include="Header Files\Graphics">
       <UniqueIdentifier>{e30e76c6-0dde-4d39-a54d-76f25384107f}</UniqueIdentifier>
     </Filter>
@@ -28,9 +24,6 @@
     <Filter Include="Header Files\Utilities">
       <UniqueIdentifier>{ddb1fd72-2759-49c5-9b7b-460050614843}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Resource Files\Shaders">
-      <UniqueIdentifier>{599bd98f-4705-44ac-bbae-a96d7d013d74}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Header Files\Maths">
       <UniqueIdentifier>{70adc5d9-4c41-4bc6-9941-8578470bd77b}</UniqueIdentifier>
     </Filter>
@@ -39,9 +32,6 @@
     </Filter>
     <Filter Include="Source Files\Graphics\Shaders">
       <UniqueIdentifier>{9d46dd9b-786c-4988-8cd7-ee0a31b3b696}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Resource Files\Objects">
-      <UniqueIdentifier>{dc44560e-7bbe-473c-82cd-be13643447fe}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -72,8 +62,8 @@
     <ClInclude Include="Graphics\Mesh.h">
       <Filter>Header Files\Graphics</Filter>
     </ClInclude>
-    <ClInclude Include="Vertex.h">
-      <Filter>Header Files\Graphics</Filter>
+    <ClInclude Include="Graphics\Vertex.h">
+      <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -101,16 +91,8 @@
     <ClCompile Include="Graphics\Mesh.cpp">
       <Filter>Source Files\Graphics</Filter>
     </ClCompile>
-    <ClCompile Include="Vertex.cpp">
-      <Filter>Source Files\Graphics</Filter>
+    <ClCompile Include="Graphics\Vertex.cpp">
+      <Filter>Source Files</Filter>
     </ClCompile>
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Graphics\Shaders\basic.frag">
-      <Filter>Resource Files\Shaders</Filter>
-    </None>
-    <None Include="Graphics\Shaders\basic.vert">
-      <Filter>Resource Files\Shaders</Filter>
-    </None>
   </ItemGroup>
 </Project>
