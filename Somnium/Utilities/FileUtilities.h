@@ -6,6 +6,12 @@
 #include <vector>
 #include "../Graphics/Mesh.h"
 
+#ifdef _WIN32
+	#define SSCANF sscanf_s
+#else 
+	#define SSCANF sscanf
+#endif
+
 using namespace std;
 
 /**
@@ -113,7 +119,7 @@ namespace Somnium {
 
 					for(int ind = 0; ind < 3; ind++){
 						value = values.substr(0, values.find(' '));
-						if (sscanf_s(value.c_str(), "%d/%d/%d", &vertexIndex, &texCoordIndex, &normalIndex) != 3)
+						if (sscanf(value.c_str(), "%d/%d/%d", &vertexIndex, &texCoordIndex, &normalIndex) != 3)
 						{
 							cerr << "Missing v/vt/vn value in OBJ file" << endl;
 							break;
