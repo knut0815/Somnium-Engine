@@ -27,7 +27,7 @@ namespace Somnium
 			Vector4  operator* (float) const;
 			Vector4& operator*=(float);
 
-			const double Magnitude(void) const;
+			const double magnitude(void) const;
 		};
 	}
 }

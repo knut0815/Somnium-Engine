@@ -34,13 +34,13 @@ namespace Somnium
 			Mesh(std::vector<Vertex> vertices, std::vector<GLuint> indices, std::vector<Texture> textures);
 			~Mesh();
 
-			void Draw(Shader& shader);
+			void draw(Shader& shader);
 
-			bool StructureExists() const { return !m_Vertices.empty() && !m_Indices.empty(); }
-			inline GLuint GetVAO() const { return m_VAO; }
+			bool structureExists() const { return !m_Vertices.empty() && !m_Indices.empty(); }
+			inline GLuint getVAO() const { return m_VAO; }
 
 		private:
-			inline void Setup();
+			inline void setup();
 
 		private:
 			GLuint m_VAO, m_VBO, m_EBO;

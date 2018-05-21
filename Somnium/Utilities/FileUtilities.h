@@ -8,9 +8,18 @@
 
 using namespace std;
 
+/**
+	SOMNIUM Engine, FileUtilities.h
+	Description: Manages the I/O and parsing of various model files into meshes and their mappings
+
+	@author Luke K. Rose
+	@version 0.2 21/05/2018
+
+*/
+
 namespace Somnium {
 	namespace Utilities {
-		static string ReadFile(const char* filePath)
+		static string readFile(const char* filePath)
 		{
 			ifstream file(filePath, ios::binary);
 			
@@ -39,7 +48,7 @@ namespace Somnium {
 			return result;
 		}
 
-		static Graphics::Mesh LoadOBJ(const char* filePath)
+		static Graphics::Mesh loadOBJ(const char* filePath)
 		{
 			ifstream file(filePath, ios::in);
 
@@ -63,6 +72,7 @@ namespace Somnium {
 				
 				//Determine what structure the current line represents (Vertex, Normal, Index, etc.)
 				string header = line.substr(0, currPos = line.find(" "));
+				string values = line.substr(currPos + 1, line.find("\n"));
 
 				//If the structure is a Vertex...
 				if (header == "v")
@@ -76,6 +86,8 @@ namespace Somnium {
 					newVert.position.z = stof(line.substr(currPos, nextPos = line.find(" ", currPos)));
 
 					vertices.push_back(newVert);
+
+					cout << "VERTICES REQUIRE FURTHER DEVELOPMENT!" << endl;
 				}
 				//If the structure is an Object Name...
 				else if (header == "o") 
@@ -95,7 +107,22 @@ namespace Somnium {
 				//If the structure is a Face...
 				else if (header == "f")
 				{
-					cout << "FACES NOT IMPLEMENTED YET!" << endl;
+					unsigned int vertexIndex, texCoordIndex, normalIndex;
+					int end = values.find("\n");
+					string value;
+
+					for(int ind = 0; ind < 3; ind++){
+						value = values.substr(0, values.find(' '));
+						if (sscanf_s(value.c_str(), "%d/%d/%d", &vertexIndex, &texCoordIndex, &normalIndex) != 3)
+						{
+							cerr << "Missing v/vt/vn value in OBJ file" << endl;
+							break;
+						}
+					
+						indices.push_back(vertexIndex);
+						values = values.substr(values.find(' ') + 1, end); //TODO: This may be slightly/extremely inefficient; make it iterator based, not trim-reassignment based
+					}
+					cout << "FACES REQUIRE FURTHER DEVELOPMENT!" << endl;
 				}
 				//If the structure is a Parameter Space Vertex...
 				else if (header == "vp")
@@ -107,8 +134,8 @@ namespace Somnium {
 				{
 					cout << "LINES NOT IMPLEMENTED YET!" << endl;
 				}
-				//If the structure is unknown or invalid...
-				else
+				//Ignore comments and check if the structure is unknown or invalid...
+				else if (header != "#")
 				{
 					cerr << "UNKNOWN/INVALID STRUCTURE '" << header << "'!\n" 
 						 << "If you believe it is valid, please file a bug report at www.GitHub.com/MrLukeKR/Somnium-Engine/issues/new" << endl;

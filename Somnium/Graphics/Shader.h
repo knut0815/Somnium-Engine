@@ -11,19 +11,19 @@ namespace Somnium {
 			Shader(const char* vertexFilePath, const char* fragmentFilePath);
 			~Shader();
 
-			void SetUniform(const GLchar*, int value);
-			void SetUniform(const GLchar*, float value);
-			void SetUniform(const GLchar*, const Maths::Vector2&);
-			void SetUniform(const GLchar*, const Maths::Vector3&);
-			void SetUniform(const GLchar*, const Maths::Vector4&);
-			void SetUniform(const GLchar*, const Maths::Matrix4&);
+			void setUniform(const GLchar*, int value);
+			void setUniform(const GLchar*, float value);
+			void setUniform(const GLchar*, const Maths::Vector2&);
+			void setUniform(const GLchar*, const Maths::Vector3&);
+			void setUniform(const GLchar*, const Maths::Vector4&);
+			void setUniform(const GLchar*, const Maths::Matrix4&);
 
-			void Enable() const;
-			void Disable() const;
+			void enable() const;
+			void disable() const;
 
 		private:
-			GLuint Load();
-			GLint GetUniformLocation(const GLchar*);
+			GLuint load();
+			GLint getUniformLocation(const GLchar*);
 
 		private:
 			GLuint m_ShaderID;

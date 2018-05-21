@@ -7,12 +7,12 @@ namespace Somnium
 {
 	namespace Graphics 
 	{
-		void Resize(GLFWwindow*, int, int);
+		void resize(GLFWwindow*, int, int);
 
 		Window::Window(const char* title, int width, int height)
 			:m_Title(title), m_Width(width), m_Height(height)
 		{
-			if (!Init())
+			if (!init())
 				glfwTerminate();
 		}
 
@@ -21,14 +21,14 @@ namespace Somnium
 			glfwTerminate();
 		}
 
-		void Window::ApplySettings()
+		void Window::applySettings()
 		{
 			glfwMakeContextCurrent(m_Window);
 			glfwSetWindowUserPointer(m_Window, this);
-			glfwSetWindowSizeCallback(m_Window, Resize);
-			glfwSetKeyCallback(m_Window, KeyCallback);
-			glfwSetMouseButtonCallback(m_Window, MouseButtonCallback);
-			glfwSetCursorPosCallback(m_Window, CursorPositionCallback);
+			glfwSetWindowSizeCallback(m_Window, resize);
+			glfwSetKeyCallback(m_Window, keyCallback);
+			glfwSetMouseButtonCallback(m_Window, mouseButtonCallback);
+			glfwSetCursorPosCallback(m_Window, cursorPositionCallback);
 			glfwSwapInterval(0);
 
 			glFrontFace(GL_CW);
@@ -39,7 +39,7 @@ namespace Somnium
 			glEnable(GL_FRAMEBUFFER_SRGB);
 		}
 
-		bool Window::Init()
+		bool Window::init()
 		{
 			cout << "-------INITIALISING GRAPHICS-------" << endl;
 			cout << "GLFW\t";
@@ -66,7 +66,7 @@ namespace Somnium
 				return false;
 			}
 
-			ApplySettings();
+			applySettings();
 
 			cout << glGetString(GL_VERSION) << endl;
 			cout << "GLSL\t" << glGetString(GL_SHADING_LANGUAGE_VERSION) << endl;
@@ -86,7 +86,7 @@ namespace Somnium
 			return true;
 		}
 
-		bool Window::IsKeyPressed(unsigned int keyCode) const
+		bool Window::isKeyPressed(unsigned int keyCode) const
 		{
 			if (keyCode >= GLFW_KEY_LAST)
 				return false;
@@ -94,7 +94,7 @@ namespace Somnium
 			return m_Keys[keyCode];
 		}
 
-		bool Window::IsMouseButtonPressed(unsigned int buttonCode) const
+		bool Window::isMouseButtonPressed(unsigned int buttonCode) const
 		{
 			if (buttonCode >= GLFW_MOUSE_BUTTON_LAST)
 				return false;
@@ -102,18 +102,18 @@ namespace Somnium
 			return m_MouseButtons[buttonCode];
 		}
 
-		void Window::GetMousePosition(double& x, double& y) const
+		void Window::getMousePosition(double& x, double& y) const
 		{
 			x = m_MouseX;
 			y = m_MouseY;
 		}
 
-		void Window::Clear() const
+		void Window::clear() const
 		{
 			glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 		}
 
-		void Window::Update() const
+		void Window::update() const
 		{
 			if (GLenum error = glGetError() != GL_NO_ERROR)
 				cout << glewGetErrorString(error) << endl;
@@ -122,7 +122,7 @@ namespace Somnium
 			glfwPollEvents();
 		}
 
-		void Resize(GLFWwindow* window, int width, int height)
+		void resize(GLFWwindow* window, int width, int height)
 		{
 			Window* currentWindow = (Window*)glfwGetWindowUserPointer(window);
 
@@ -132,14 +132,14 @@ namespace Somnium
 			glViewport(0, 0, width, height);
 		}
 
-		void KeyCallback(GLFWwindow* window, int key, int scancode, int action, int mods)
+		void keyCallback(GLFWwindow* window, int key, int scancode, int action, int mods)
 		{
 			Window* currentWindow = (Window*)glfwGetWindowUserPointer(window);
 
 			currentWindow->m_Keys[key] = action != GLFW_RELEASE;
 		}
 
-		void MouseButtonCallback(GLFWwindow* window, int button, int action, int mods)
+		void mouseButtonCallback(GLFWwindow* window, int button, int action, int mods)
 		{
 			Window* currentWindow = (Window*)glfwGetWindowUserPointer(window);
 
@@ -147,7 +147,7 @@ namespace Somnium
 		}
 
 
-		void CursorPositionCallback(GLFWwindow* window, double mX, double mY)
+		void cursorPositionCallback(GLFWwindow* window, double mX, double mY)
 		{
 			Window* currentWindow = (Window*)glfwGetWindowUserPointer(window);
 

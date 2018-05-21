@@ -33,38 +33,38 @@ int main(int argc, char** argv) {
 
 	cout << "---------RUNNING GAME LOOP---------" << endl;
 
-	Matrix4 ortho = Matrix4::Orthographic(0.0f, 16.0f, 0.0f, 9.0f, -1.0f, 1.0f);
+	Matrix4 ortho = Matrix4::orthographic(0.0f, 16.0f, 0.0f, 9.0f, -1.0f, 1.0f);
 
 	Shader shader("Graphics/Shaders/basic.vert", "Graphics/Shaders/basic.frag");
-	shader.Enable();
-	shader.SetUniform("pr_matrix", ortho);
-	shader.SetUniform("ml_matrix", Matrix4::Translation(Vector3(4, 3, 0)));
+	shader.enable();
+	shader.setUniform("pr_matrix", ortho);
+	shader.setUniform("ml_matrix", Matrix4::translation(Vector3(4, 3, 0)));
 
-	shader.SetUniform("light_position", Vector2(0.0f, 0));
-	shader.SetUniform("colour", Vector4(0.6f, 0.3f, 0.8f, 1.0f));
+	shader.setUniform("light_position", Vector2(0.0f, 0));
+	shader.setUniform("colour", Vector4(0.6f, 0.3f, 0.8f, 1.0f));
 
-	Mesh testMesh = Utilities::LoadOBJ("Graphics/Objects/Cube.obj");
+	Mesh testMesh = Utilities::loadOBJ("Graphics/Objects/Cube.obj");
 
-	if (!testMesh.StructureExists())
+	if (!testMesh.structureExists())
 		cout << "Object has no structure!" << endl;
 
-	while (!myWindow.IsClosed()) 
+	while (!myWindow.isClosed()) 
 	{ 
-		myWindow.Clear();
+		myWindow.clear();
 
 		double x, y;
 
 		//1. Process I/O
-		myWindow.GetMousePosition(x, y);
+		myWindow.getMousePosition(x, y);
 
 		//2. Update objects
-		shader.SetUniform("light_position", Vector2((float)(x * 16.0f / myWindow.GetWidth()), (float)(9.0f - y * 9.0f / myWindow.GetHeight())));
+		shader.setUniform("light_position", Vector2((float)(x * 16.0f / myWindow.getWidth()), (float)(9.0f - y * 9.0f / myWindow.getHeight())));
 
 		//3. Draw objects
-		testMesh.Draw(shader);
+		testMesh.draw(shader);
 
 		//4. Post Processing
-		myWindow.Update();
+		myWindow.update();
 		
 		calculateFPS();
 	}

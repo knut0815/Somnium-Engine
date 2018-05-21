@@ -171,12 +171,12 @@ namespace Somnium
 		}
 
 
-		Matrix4 Matrix4::Identity()
+		Matrix4 Matrix4::identity()
 		{
 			return Matrix4(1);
 		}
 
-		Matrix4 Matrix4::Orthographic(float left, float right, float bottom, float top, float near, float far)
+		Matrix4 Matrix4::orthographic(float left, float right, float bottom, float top, float near, float far)
 		{
 			Matrix4 orthographic(1.0f);
 			
@@ -190,7 +190,7 @@ namespace Somnium
 			return orthographic;
 		}
 
-		Matrix4 Matrix4::Perspective(float fieldOfView, float aspectRatio, float near, float far)
+		Matrix4 Matrix4::perspective(float fieldOfView, float aspectRatio, float near, float far)
 		{
 			Matrix4 perspective(1);
 
@@ -208,7 +208,7 @@ namespace Somnium
 			return perspective;
 		}
 
-		Matrix4 Matrix4::Translation(const Vector3& translation)
+		Matrix4 Matrix4::translation(const Vector3& translation)
 		{
 			Matrix4 translationMatrix(1);
 
@@ -219,7 +219,7 @@ namespace Somnium
 			return translationMatrix;
 		}
 
-		Matrix4 Matrix4::Rotation(float angle, const Vector3& axis)
+		Matrix4 Matrix4::rotation(float angle, const Vector3& axis)
 		{
 			Matrix4 rotationMatrix(1);
 			float r = toRadians(angle),
@@ -244,7 +244,7 @@ namespace Somnium
 			return rotationMatrix;
 		}
 
-		Matrix4 Matrix4::Scale(const Vector3& scale)
+		Matrix4 Matrix4::scale(const Vector3& scale)
 		{
 			Matrix4 scaleMatrix(1);
 

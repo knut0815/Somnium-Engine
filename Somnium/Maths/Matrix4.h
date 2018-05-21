@@ -33,13 +33,13 @@ namespace Somnium
 			friend Matrix4 operator*(const Matrix4&, const int&);
 			friend Matrix4 operator/(const Matrix4&, const int&);
 
-			static Matrix4 Identity();
-			static Matrix4 Orthographic(float, float, float, float, float, float);
-			static Matrix4 Perspective (float, float, float, float);
+			static Matrix4 identity();
+			static Matrix4 orthographic(float, float, float, float, float, float);
+			static Matrix4 perspective (float, float, float, float);
 
-			static Matrix4 Translation(const Vector3&);
-			static Matrix4 Rotation(float, const Vector3&);
-			static Matrix4 Scale(const Vector3&);
+			static Matrix4 translation(const Vector3&);
+			static Matrix4 rotation(float, const Vector3&);
+			static Matrix4 scale(const Vector3&);
 
 			union
 			{

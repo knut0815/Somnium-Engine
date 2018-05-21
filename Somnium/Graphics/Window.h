@@ -5,36 +5,36 @@
 
 namespace Somnium {
 	namespace Graphics {
-		extern void KeyCallback(GLFWwindow*, int, int, int, int);
-		extern void MouseButtonCallback(GLFWwindow*, int, int, int);
-		extern void CursorPositionCallback(GLFWwindow*, double, double);
+		extern void keyCallback(GLFWwindow*, int, int, int, int);
+		extern void mouseButtonCallback(GLFWwindow*, int, int, int);
+		extern void cursorPositionCallback(GLFWwindow*, double, double);
 		class Window
 		{
 		public:
 			Window(const char*, int, int);
 			~Window();
 
-			void Clear(void)  const;
-			void Update(void) const;
+			void clear(void)  const;
+			void update(void) const;
 
-			bool IsClosed(void) const { return glfwWindowShouldClose(m_Window); }
+			bool isClosed(void) const { return glfwWindowShouldClose(m_Window); }
 			
-			inline const int GetWidth(void) const { return m_Width; }
-			inline const int GetHeight(void) const { return m_Height; }
+			inline const int getWidth(void) const { return m_Width; }
+			inline const int getHeight(void) const { return m_Height; }
 
-			bool IsKeyPressed(unsigned int) const;
-			bool IsMouseButtonPressed(unsigned int) const;
-			void GetMousePosition(double& x, double& y) const;
+			bool isKeyPressed(unsigned int) const;
+			bool isMouseButtonPressed(unsigned int) const;
+			void getMousePosition(double& x, double& y) const;
 
-			friend void Resize(GLFWwindow*, int, int);
+			friend void resize(GLFWwindow*, int, int);
 
 		private:
-			void ApplySettings();
-			bool Init(void);
+			void applySettings();
+			bool init(void);
 			
-			friend void KeyCallback(GLFWwindow*, int, int, int, int);
-			friend void MouseButtonCallback(GLFWwindow*, int, int, int);
-			friend void CursorPositionCallback(GLFWwindow*, double, double);
+			friend void keyCallback(GLFWwindow*, int, int, int, int);
+			friend void mouseButtonCallback(GLFWwindow*, int, int, int);
+			friend void cursorPositionCallback(GLFWwindow*, double, double);
 
 		private:
 			friend struct GLFWwindow;

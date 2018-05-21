@@ -42,7 +42,7 @@ namespace Somnium
 			return *this;
 		}
 
-		const double Vector2::Magnitude() const {
+		const double Vector2::magnitude() const {
 			return sqrt(x * x + y * y);
 		}
 	}

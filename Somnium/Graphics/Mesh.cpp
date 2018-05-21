@@ -7,14 +7,14 @@ namespace Somnium
 		Mesh::Mesh(std::vector<Vertex> vertices, std::vector<GLuint> indices, std::vector<Texture> textures)
 			: m_Vertices(vertices), m_Indices(indices), m_Textures(textures)
 		{
-			Setup();
+			setup();
 		}
 
 		Mesh::~Mesh()
 		{
 		}
 
-		inline void Mesh::Setup()
+		inline void Mesh::setup()
 		{
 			glGenVertexArrays(1, &m_VAO);
 			glGenBuffers(1, &m_VBO);
@@ -40,7 +40,7 @@ namespace Somnium
 			glBindVertexArray(0);
 		}
 
-		void Mesh::Draw(Shader& shader)
+		void Mesh::draw(Shader& shader)
 		{
 			glBindVertexArray(m_VAO);
 			glDrawElements(GL_TRIANGLES, m_Indices.size(), GL_UNSIGNED_INT, 0);

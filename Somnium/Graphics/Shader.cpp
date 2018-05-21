@@ -16,7 +16,7 @@ namespace Somnium {
 		Shader::Shader(const char* vertexFilePath, const char* fragmentFilePath)
 			:m_VertexFilePath(vertexFilePath), m_FragmentFilePath(fragmentFilePath)
 		{
-			m_ShaderID = Load();
+			m_ShaderID = load();
 		}
 
 		Shader::~Shader()
@@ -24,15 +24,15 @@ namespace Somnium {
 			glDeleteProgram(m_ShaderID);
 		}
 
-		GLuint Shader::Load() 
+		GLuint Shader::load() 
 		{
 			GLint  result;
 			GLuint program			= glCreateProgram();
 			GLuint vertexShader		= glCreateShader(GL_VERTEX_SHADER);
 			GLuint fragmentShader	= glCreateShader(GL_FRAGMENT_SHADER);
 			
-			string vertexSource		= ReadFile(m_VertexFilePath);
-			string fragmentSource	= ReadFile(m_FragmentFilePath);
+			string vertexSource		= readFile(m_VertexFilePath);
+			string fragmentSource	= readFile(m_FragmentFilePath);
 
 			GLuint shaders[2]		= { vertexShader, fragmentShader };
 			
@@ -77,47 +77,47 @@ namespace Somnium {
 			return program;
 		}
 
-		GLint Shader::GetUniformLocation(const GLchar* name)
+		GLint Shader::getUniformLocation(const GLchar* name)
 		{
 			return glGetUniformLocation(m_ShaderID, name);
 		}
 
-		void Shader::SetUniform(const GLchar* name, int value) 
+		void Shader::setUniform(const GLchar* name, int value) 
 		{
-			glUniform1i(GetUniformLocation(name), value);
+			glUniform1i(getUniformLocation(name), value);
 		}
 
-		void Shader::SetUniform(const GLchar* name, float value)
+		void Shader::setUniform(const GLchar* name, float value)
 		{
-			glUniform1f(GetUniformLocation(name), value);
+			glUniform1f(getUniformLocation(name), value);
 		}
 
-		void Shader::SetUniform(const GLchar* name, const Vector2& vector)
+		void Shader::setUniform(const GLchar* name, const Vector2& vector)
 		{
-			glUniform2f(GetUniformLocation(name), vector.x, vector.y);
+			glUniform2f(getUniformLocation(name), vector.x, vector.y);
 		}
 
-		void Shader::SetUniform(const GLchar* name, const Vector3& vector)
+		void Shader::setUniform(const GLchar* name, const Vector3& vector)
 		{
-			glUniform3f(GetUniformLocation(name), vector.x, vector.y, vector.z);
+			glUniform3f(getUniformLocation(name), vector.x, vector.y, vector.z);
 		}
 
-		void Shader::SetUniform(const GLchar* name, const Vector4& vector)
+		void Shader::setUniform(const GLchar* name, const Vector4& vector)
 		{
-			glUniform4f(GetUniformLocation(name), vector.x, vector.y, vector.z, vector.w);
+			glUniform4f(getUniformLocation(name), vector.x, vector.y, vector.z, vector.w);
 		}
 
-		void Shader::SetUniform(const GLchar* name, const Matrix4& matrix)
+		void Shader::setUniform(const GLchar* name, const Matrix4& matrix)
 		{
-			glUniformMatrix4fv(GetUniformLocation(name), 1, GL_FALSE, matrix.elements);
+			glUniformMatrix4fv(getUniformLocation(name), 1, GL_FALSE, matrix.elements);
 		}
 
-		void Shader::Enable() const 
+		void Shader::enable() const 
 		{
 			glUseProgram(m_ShaderID);
 		}
 
-		void Shader::Disable() const
+		void Shader::disable() const
 		{
 			glUseProgram(0);
 		}

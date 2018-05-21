@@ -66,7 +66,7 @@ namespace Somnium
 			return *this;
 		}
 
-		const double Vector3::Magnitude() const
+		const double Vector3::magnitude() const
 		{
 			return sqrt(x * x + y * y + z * z);
 		}
