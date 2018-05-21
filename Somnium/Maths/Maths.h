@@ -4,6 +4,7 @@
 #include "Vector3.h"
 #include "Vector4.h"
 #include "Matrix4.h"
+#include <math.h>
 
 namespace Somnium
 {

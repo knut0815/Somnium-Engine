@@ -4,6 +4,7 @@
 #include "../Maths/Maths.h"
 #include "Shader.h"
 #include <vector>
+#include <string>
 
 #define NUM_BUFFERS
 #define SHADER_POSITION_INDEX 0

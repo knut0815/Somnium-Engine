@@ -1,8 +1,8 @@
 #include <iostream>
-#include "Graphics\Window.h"
-#include "Graphics\Shader.h"
-#include "Graphics\Mesh.h"
-#include "Utilities\FileUtilities.h"
+#include "Graphics/Window.h"
+#include "Graphics/Shader.h"
+#include "Graphics/Mesh.h"
+#include "Utilities/FileUtilities.h"
 
 using namespace std;
 using namespace Somnium;

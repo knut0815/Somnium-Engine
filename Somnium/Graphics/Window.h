@@ -5,6 +5,9 @@
 
 namespace Somnium {
 	namespace Graphics {
+		extern void KeyCallback(GLFWwindow*, int, int, int, int);
+		extern void MouseButtonCallback(GLFWwindow*, int, int, int);
+		extern void CursorPositionCallback(GLFWwindow*, double, double);
 		class Window
 		{
 		public:
@@ -28,9 +31,10 @@ namespace Somnium {
 		private:
 			void ApplySettings();
 			bool Init(void);
-			friend static void KeyCallback(GLFWwindow*, int, int, int, int);
-			friend static void MouseButtonCallback(GLFWwindow*, int, int, int);
-			friend static void CursorPositionCallback(GLFWwindow*, double, double);
+			
+			friend void KeyCallback(GLFWwindow*, int, int, int, int);
+			friend void MouseButtonCallback(GLFWwindow*, int, int, int);
+			friend void CursorPositionCallback(GLFWwindow*, double, double);
 
 		private:
 			friend struct GLFWwindow;
