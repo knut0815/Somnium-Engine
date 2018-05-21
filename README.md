@@ -13,6 +13,7 @@ A game engine focusing on breathtaking visuals, ultra-realistic audio and unpara
 |Subject|Website|What Is It For?|
 |-------|-------|---------------|
 |Graphics|[Learn OpenGL](https://learnopengl.com) |Simple OpenGL Tutorials|
+|Graphics|[OpenGL-Tutorial](http://www.opengl-tutorial.org)|More Simple OpenGL Tutorials|
 |Graphics|[ShaderToy](http://shadertoy.com)|Shader Programming Examples|
 |Graphics|[Graphics Library Framework (GLFW)](http://www.glfw.org/)|Interacting with graphics hardware via OpenGL|
 |Graphics|[Graphics Library Extension Wrangler (GLEW)](http://glew.sourceforge.net/)|Assists with loading and performing OpenGL operations|
