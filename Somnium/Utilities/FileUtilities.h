@@ -119,7 +119,7 @@ namespace Somnium {
 
 					for(int ind = 0; ind < 3; ind++){
 						value = values.substr(0, values.find(' '));
-						if (sscanf(value.c_str(), "%d/%d/%d", &vertexIndex, &texCoordIndex, &normalIndex) != 3)
+						if (SSCANF(value.c_str(), "%d/%d/%d", &vertexIndex, &texCoordIndex, &normalIndex) != 3)
 						{
 							cerr << "Missing v/vt/vn value in OBJ file" << endl;
 							break;
