@@ -1,5 +1,7 @@
 # Prerequisites
 *.d
+*.suo
+*.db
 
 # Compiled Object files
 *.slo
@@ -32,7 +34,7 @@
 *.app
 
 #Directories
-/.vs
+*/.vs
 /bin
 /Debug
 /x64
