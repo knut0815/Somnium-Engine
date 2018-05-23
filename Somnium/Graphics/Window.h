@@ -41,7 +41,7 @@ namespace Somnium {
 
 			const char *m_Title;
 			int m_Width, m_Height;
-			GLFWwindow *m_Window;
+			GLFWwindow *m_Window = nullptr;
 
 			bool m_Keys[GLFW_KEY_LAST] = { false };
 			bool m_MouseButtons[GLFW_MOUSE_BUTTON_LAST] = { false };

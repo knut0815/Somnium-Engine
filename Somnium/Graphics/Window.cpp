@@ -74,6 +74,8 @@ namespace Somnium
 
 			cout << "GLEW\t";
 
+			glewExperimental = GL_TRUE;
+
 			if (glewInit() != GLEW_OK) //Must be after the ContextCurrent call
 			{
 				cerr << "GLEW initialisation failed";

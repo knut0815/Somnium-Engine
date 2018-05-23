@@ -1,5 +1,5 @@
 CC := clang++
-LDFLAGS:= -l GL -lm -l glfw -l GLEW
+LDFLAGS:= -l GL -lm -l glfw -l GLEW -l X11
 CPPFLAGS := -Wall -g -std=c++11
 CXXFLAGS:=  -I Dependencies/GLEW/include -I Dependencies/GLFW/include
 SRC_DIR:=Somnium
@@ -9,6 +9,8 @@ TARGET := SOMNIUM
 
 SRCS := $(shell find $(SRC_DIR) -name "*.cpp")
 OBJS:=$(patsubst %.cpp,$(OBJ_DIR)/%.o,$(SRCS))
+
+Debugx64:all
 
 all:pre-build main-build
 

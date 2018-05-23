@@ -35,5 +35,6 @@
 #Directories
 */.vs
 /bin
+/Objects
 /Debug
 /x64
