@@ -5,7 +5,7 @@ CXXFLAGS:=  -I Dependencies/GLEW/include -I Dependencies/GLFW/include
 SRC_DIR:=Somnium
 OBJ_DIR:=Objects
 SUB_DIRS := $(shell find $(SRC_DIR) -type d)
-TARGET := SOMNIUM
+TARGET := SOMNIUM.out
 
 SRCS := $(shell find $(SRC_DIR) -name "*.cpp")
 OBJS:=$(patsubst %.cpp,$(OBJ_DIR)/%.o,$(SRCS))
