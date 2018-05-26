@@ -8,7 +8,7 @@
 
 #ifdef _WIN32
 	#define SSCANF sscanf_s
-#else 
+#else
 	#define SSCANF sscanf
 #endif
 
@@ -19,7 +19,7 @@ using namespace std;
 	Description: Manages the I/O and parsing of various model files into meshes and their mappings
 
 	@author Luke K. Rose
-	@version 0.2 21/05/2018
+	@version 0.2 21/05/2018newVert
 
 */
 
@@ -28,7 +28,7 @@ namespace Somnium {
 		static string readFile(const char* filePath)
 		{
 			ifstream file(filePath, ios::binary);
-			
+
 			if(!file.is_open())
 			{
 				cerr << "Could not open file " << filePath << endl;
@@ -42,11 +42,11 @@ namespace Somnium {
 			char *buffer = new char[length];
 
 			file.read(buffer, length);
-			
+
 			file.close();
 
 			string result(buffer, length);
-			
+
 			result.shrink_to_fit();
 
 			delete[] buffer;
@@ -60,6 +60,8 @@ namespace Somnium {
 
 			std::vector<Graphics::Vertex> vertices;
 			std::vector<GLuint> indices;
+            std::vector<Maths::Vector2> uvs;
+            std::vector<Maths::Vector3> normals;
 			std::vector<Graphics::Texture> textures;
 
 			if (!file.is_open())
@@ -75,7 +77,7 @@ namespace Somnium {
 			while (getline(file, line))
 			{
 				int currPos = 0, nextPos = 0;
-				
+
 				//Determine what structure the current line represents (Vertex, Normal, Index, etc.)
 				string header = line.substr(0, currPos = line.find(" "));
 				string values = line.substr(currPos + 1, line.find("\n"));
@@ -85,30 +87,32 @@ namespace Somnium {
 				{
 					Graphics::Vertex newVert;
 
-					newVert.position.x = stof(line.substr(currPos + 1, nextPos = line.find(" ", currPos + 1)));
-					currPos = nextPos + 1;
-					newVert.position.y = stof(line.substr(currPos, nextPos = line.find(" ", currPos)));
-					currPos = nextPos + 1;
-					newVert.position.z = stof(line.substr(currPos, nextPos = line.find(" ", currPos)));
+					SSCANF(line.c_str(),"%f %f %f\n", &newVert.position.x, &newVert.position.y, &newVert.position.z);
 
 					vertices.push_back(newVert);
-
-					cout << "VERTICES REQUIRE FURTHER DEVELOPMENT!" << endl;
 				}
 				//If the structure is an Object Name...
-				else if (header == "o") 
+				else if (header == "o")
 				{
 					cout << "OBJECT NAMES NOT IMPLEMENTED YET!" << endl;
 				}
 				//If the structure is a Texture Coordinate...
-				else if (header == "vt") 
+				else if (header == "vt")
 				{
-					cout << "UV TEXTURE COORDINATES NOT IMPLEMENTED YET!" << endl;
+                    Maths::Vector2 uv;
+
+					SSCANF(line.c_str(),"%f %f\n", &uv.x, &uv.y);
+
+					uvs.push_back(uv);
 				}
 				//If the structure is a Normal...
-				else if (header == "vn") 
+				else if (header == "vn")
 				{
-					cout << "NORMALS NOT IMPLEMENTED YET!" << endl;
+                    Maths::Vector3 normal;
+
+					SSCANF(line.c_str(),"%f %f %f\n", &normal.x, &normal.y, &normal.z);
+
+					normals.push_back(normal);
 				}
 				//If the structure is a Face...
 				else if (header == "f")
@@ -124,7 +128,7 @@ namespace Somnium {
 							cerr << "Missing v/vt/vn value in OBJ file" << endl;
 							break;
 						}
-					
+
 						indices.push_back(vertexIndex);
 						values = values.substr(values.find(' ') + 1, end); //TODO: This may be slightly/extremely inefficient; make it iterator based, not trim-reassignment based
 					}
@@ -136,14 +140,14 @@ namespace Somnium {
 					cout << "PARAMETER SPACE VERTICES NOT IMPLEMENTED YET!" << endl;
 				}
 				//If the structure is a Line...
-				else if (header == "l") 
+				else if (header == "l")
 				{
 					cout << "LINES NOT IMPLEMENTED YET!" << endl;
 				}
 				//Ignore comments and check if the structure is unknown or invalid...
 				else if (header != "#")
 				{
-					cerr << "UNKNOWN/INVALID STRUCTURE '" << header << "'!\n" 
+					cerr << "UNKNOWN/INVALID STRUCTURE '" << header << "'!\n"
 						 << "If you believe it is valid, please file a bug report at www.GitHub.com/MrLukeKR/Somnium-Engine/issues/new" << endl;
 				}
 			}

@@ -1,6 +1,6 @@
 CC := clang++
-LDFLAGS:= -l GL -lm -l glfw -l GLEW -l X11
-CPPFLAGS := -Wall -g -std=c++11
+LDFLAGS:= -l GL -lm -l glfw -l GLEW
+CPPFLAGS := -Wall -g -std=c++11 -Wextra `pkg-config --cflags glfw3 glew`
 CXXFLAGS:=  -I Dependencies/GLEW/include -I Dependencies/GLFW/include
 SRC_DIR:=Somnium
 OBJ_DIR:=Objects
