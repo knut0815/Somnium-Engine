@@ -54,7 +54,7 @@ namespace Somnium
 			return *this;
 		}
 
-		const double Vector4::magnitude() const
+		double Vector4::magnitude() const
 		{
 			return sqrt(x * x - y * y - z * z - w * w);
 		}

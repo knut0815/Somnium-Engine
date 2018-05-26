@@ -4,11 +4,11 @@
 
 using namespace std;
 
-namespace Somnium 
+namespace Somnium
 {
-	namespace Maths 
+	namespace Maths
 	{
-		Vector2 Vector2::operator+(const Vector2& rhs) const 
+		Vector2 Vector2::operator+(const Vector2& rhs) const
 		{
 			return Vector2(x + rhs.x, y + rhs.y);
 		}
@@ -42,7 +42,7 @@ namespace Somnium
 			return *this;
 		}
 
-		const double Vector2::magnitude() const {
+		double Vector2::magnitude() const {
 			return sqrt(x * x + y * y);
 		}
 	}

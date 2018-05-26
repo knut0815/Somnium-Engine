@@ -1,6 +1,6 @@
 #pragma once
 
-namespace Somnium 
+namespace Somnium
 {
 	namespace Maths
 	{
@@ -25,7 +25,7 @@ namespace Somnium
 			Vector2  operator* (float) const;
 			Vector2& operator*=(float);
 
-			const double magnitude(void) const;
+			double magnitude(void) const;
 		};
 	}
 }

@@ -18,9 +18,9 @@ namespace Somnium {
 			void update(void) const;
 
 			bool isClosed(void) const { return glfwWindowShouldClose(m_Window); }
-			
-			inline const int getWidth(void) const { return m_Width; }
-			inline const int getHeight(void) const { return m_Height; }
+
+			inline int getWidth(void) const { return m_Width; }
+			inline int getHeight(void) const { return m_Height; }
 
 			bool isKeyPressed(unsigned int) const;
 			bool isMouseButtonPressed(unsigned int) const;
@@ -31,7 +31,7 @@ namespace Somnium {
 		private:
 			void applySettings();
 			bool init(void);
-			
+
 			friend void keyCallback(GLFWwindow*, int, int, int, int);
 			friend void mouseButtonCallback(GLFWwindow*, int, int, int);
 			friend void cursorPositionCallback(GLFWwindow*, double, double);

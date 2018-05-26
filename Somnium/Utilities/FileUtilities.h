@@ -76,7 +76,7 @@ namespace Somnium {
 
 			while (getline(file, line))
 			{
-				int currPos = 0, nextPos = 0;
+				int currPos = 0;
 
 				//Determine what structure the current line represents (Vertex, Normal, Index, etc.)
 				string header = line.substr(0, currPos = line.find(" "));
