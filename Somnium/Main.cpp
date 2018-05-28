@@ -48,8 +48,8 @@ int main(int argc, char** argv) {
 	if (!testMesh.structureExists())
 		cout << "Object has no structure!" << endl;
 
-	while (!myWindow.isClosed()) 
-	{ 
+	while (!myWindow.isClosed())
+	{
 		myWindow.clear();
 
 		double x, y;
@@ -65,10 +65,10 @@ int main(int argc, char** argv) {
 
 		//4. Post Processing
 		myWindow.update();
-		
+
 		calculateFPS();
 	}
-	
+
 	cout << "-----------------------------------" << endl;
 
 	return 0;

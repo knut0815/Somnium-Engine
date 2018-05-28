@@ -59,16 +59,19 @@ namespace Somnium {
 			ifstream file(filePath, ios::in);
 
 			std::vector<Graphics::Vertex> vertices;
-			std::vector<GLuint> indices;
             std::vector<Maths::Vector2> uvs;
             std::vector<Maths::Vector3> normals;
 			std::vector<Graphics::Texture> textures;
+
+			std::vector<GLuint> vertexIndices;
+			std::vector<GLuint> uvIndices;
+			std::vector<GLuint> normalIndices;
 
 			if (!file.is_open())
 			{
 				cerr << "Could not load OBJ file " << filePath << endl;
 				//Return an empty Mesh object, which can then be checked for emptiness with Mesh.StructureExists();
-				return Graphics::Mesh(vertices, indices, textures);
+				return Graphics::Mesh(vertices, vertexIndices, textures);
 			}
 
 			string line;
@@ -125,14 +128,15 @@ namespace Somnium {
 						value = values.substr(0, values.find(' '));
 						if (SSCANF(value.c_str(), "%d/%d/%d", &vertexIndex, &texCoordIndex, &normalIndex) != 3)
 						{
-							cerr << "Missing v/vt/vn value in OBJ file" << endl;
+							cerr << "Missing v/vt/vn value in OBJ file " << vertexIndex << "" << normalIndex << endl;
 							break;
 						}
 
-						indices.push_back(vertexIndex);
+						vertexIndices.push_back(vertexIndex);
+						uvIndices.push_back(texCoordIndex);
+						normalIndices.push_back(normalIndex);
 						values = values.substr(values.find(' ') + 1, end); //TODO: This may be slightly/extremely inefficient; make it iterator based, not trim-reassignment based
 					}
-					cout << "FACES REQUIRE FURTHER DEVELOPMENT!" << endl;
 				}
 				//If the structure is a Parameter Space Vertex...
 				else if (header == "vp")
@@ -154,7 +158,7 @@ namespace Somnium {
 
 			file.close();
 
-			return Graphics::Mesh(vertices,indices, textures);
+			return Graphics::Mesh(vertices, vertexIndices, textures);
 		}
 	}
 }

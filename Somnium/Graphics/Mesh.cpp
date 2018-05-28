@@ -1,8 +1,8 @@
 #include "Mesh.h"
 
-namespace Somnium 
+namespace Somnium
 {
-	namespace Graphics 
+	namespace Graphics
 	{
 		Mesh::Mesh(std::vector<Vertex> vertices, std::vector<GLuint> indices, std::vector<Texture> textures)
 			: m_Vertices(vertices), m_Indices(indices), m_Textures(textures)
@@ -24,7 +24,7 @@ namespace Somnium
 			glBindBuffer(GL_ARRAY_BUFFER, m_VBO);
 
 			glBufferData(GL_ARRAY_BUFFER, m_Vertices.size() * sizeof(Vertex), &m_Vertices, GL_DYNAMIC_DRAW); //Originally GL_STATIC_DRAW
-		
+
 			glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, m_EBO);
 			glBufferData(GL_ELEMENT_ARRAY_BUFFER, m_Indices.size() * sizeof(GLuint), &m_Indices, GL_DYNAMIC_DRAW); //Originally GL_STATIC_DRAW
 
