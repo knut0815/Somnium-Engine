@@ -64,15 +64,13 @@ namespace Somnium {
 				}
 			}
 
-			for (int i = 0; i < 2; i++) 
-				glAttachShader(program, shaders[i]);
+			for (int i = 0; i < 2; i++) glAttachShader(program, shaders[i]);
 			
 			glLinkProgram(program);
 			glValidateProgram(program);
 			glUseProgram(program);
 			
-			for (int i = 0; i < 2; i++)
-				glDeleteShader(shaders[i]);
+			for (int i = 0; i < 2; i++) glDeleteShader(shaders[i]);
 
 			return program;
 		}
@@ -82,32 +80,32 @@ namespace Somnium {
 			return glGetUniformLocation(m_ShaderID, name);
 		}
 
-		void Shader::setUniform(const GLchar* name, int value) 
+		void Shader::setInt(const GLchar* name, int value) 
 		{
 			glUniform1i(getUniformLocation(name), value);
 		}
 
-		void Shader::setUniform(const GLchar* name, float value)
+		void Shader::setFloat(const GLchar* name, float value)
 		{
 			glUniform1f(getUniformLocation(name), value);
 		}
-
-		void Shader::setUniform(const GLchar* name, const Vector2& vector)
+		
+		void Shader::setVector2(const GLchar* name, const Vector2& vector)
 		{
 			glUniform2f(getUniformLocation(name), vector.x, vector.y);
 		}
 
-		void Shader::setUniform(const GLchar* name, const Vector3& vector)
+		void Shader::setVector3(const GLchar* name, const Vector3& vector)
 		{
 			glUniform3f(getUniformLocation(name), vector.x, vector.y, vector.z);
 		}
 
-		void Shader::setUniform(const GLchar* name, const Vector4& vector)
+		void Shader::setVector4(const GLchar* name, const Vector4& vector)
 		{
 			glUniform4f(getUniformLocation(name), vector.x, vector.y, vector.z, vector.w);
 		}
 
-		void Shader::setUniform(const GLchar* name, const Matrix4& matrix)
+		void Shader::setMatrix4(const GLchar* name, const Matrix4& matrix)
 		{
 			glUniformMatrix4fv(getUniformLocation(name), 1, GL_FALSE, matrix.elements);
 		}

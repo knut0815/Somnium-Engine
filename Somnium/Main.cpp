@@ -29,7 +29,7 @@ int main(int argc, char** argv) {
 	cout << "SOMNIUM by LUMACAL Software Group - Built " << __TIMESTAMP__ << endl << endl;
 
 	Window myWindow("Somnium Engine", 1920, 1080);
-	glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
+	glClearColor(0.0f, 1.0f, 0.0f, 1.0f);
 
 	cout << "---------RUNNING GAME LOOP---------" << endl;
 
@@ -37,14 +37,14 @@ int main(int argc, char** argv) {
 
 	Shader shader("Graphics/Shaders/basic.vert", "Graphics/Shaders/basic.frag");
 	shader.enable();
-	shader.setUniform("pr_matrix", ortho);
-	shader.setUniform("ml_matrix", Matrix4::translation(Vector3(4, 3, 0)));
+	//shader.setMatrix4("pr_matrix", ortho);
+	//shader.setMatrix4("ml_matrix", Matrix4::translation(Vector3(4, 3, 0)));
 
-	shader.setUniform("light_position", Vector2(0.0f, 0));
-	shader.setUniform("colour", Vector4(0.6f, 0.3f, 0.8f, 1.0f));
+	//shader.setVector2("light_position", Vector2(0.0f, 0));
+	//shader.setVector4("colour", Vector4(1.f, 1.f, 1.f, 1.0f));
 
 	Mesh testMesh = Utilities::loadOBJ("Graphics/Objects/Cube.obj");
-
+	
 	if (!testMesh.structureExists())
 		cout << "Object has no structure!" << endl;
 
@@ -58,9 +58,13 @@ int main(int argc, char** argv) {
 		myWindow.getMousePosition(x, y);
 
 		//2. Update objects
-		shader.setUniform("light_position", Vector2((float)(x * 16.0f / myWindow.getWidth()), (float)(9.0f - y * 9.0f / myWindow.getHeight())));
+		shader.setVector2("light_position", Vector2((float)(x * 16.0f / myWindow.getWidth()), (float)(9.0f - y * 9.0f / myWindow.getHeight())));
+
+		static int rotation = 0;
 
 		//3. Draw objects
+		glRotatef(rotation++, 0, 1, 0);
+		glTranslatef(0, 0, rotation);
 		testMesh.draw(shader);
 
 		//4. Post Processing

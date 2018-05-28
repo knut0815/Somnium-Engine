@@ -90,7 +90,7 @@ namespace Somnium {
 				{
 					Graphics::Vertex newVert;
 
-					SSCANF(line.c_str(),"%f %f %f\n", &newVert.position.x, &newVert.position.y, &newVert.position.z);
+					SSCANF(line.c_str(),"v %f %f %f\n", &newVert.position.x, &newVert.position.y, &newVert.position.z);
 
 					vertices.push_back(newVert);
 				}
@@ -104,7 +104,7 @@ namespace Somnium {
 				{
                     Maths::Vector2 uv;
 
-					SSCANF(line.c_str(),"%f %f\n", &uv.x, &uv.y);
+					SSCANF(line.c_str(),"vt %f %f\n", &uv.x, &uv.y);
 
 					uvs.push_back(uv);
 				}
@@ -113,7 +113,7 @@ namespace Somnium {
 				{
                     Maths::Vector3 normal;
 
-					SSCANF(line.c_str(),"%f %f %f\n", &normal.x, &normal.y, &normal.z);
+					SSCANF(line.c_str(),"vn %f %f %f\n", &normal.x, &normal.y, &normal.z);
 
 					normals.push_back(normal);
 				}
@@ -152,11 +152,18 @@ namespace Somnium {
 				else if (header != "#")
 				{
 					cerr << "UNKNOWN/INVALID STRUCTURE '" << header << "'!\n"
-						 << "If you believe it is valid, please file a bug report at www.GitHub.com/MrLukeKR/Somnium-Engine/issues/new" << endl;
+						 << "If you believe it is valid, please file a bug report at www.GitHub.com/LUMACAL/Somnium-Engine/issues/new" << endl;
 				}
 			}
 
 			file.close();
+
+			//TODO: Normal coordinate loading
+			for (int i = 0; i < uvs.size(); i++) vertices[i].texCoords = uvs[i];
+
+			for (int i = 0; i < vertexIndices.size(); i++) vertexIndices[i] -= 1;
+			for (int i = 0; i < normalIndices.size(); i++) normalIndices[i] -= 1;
+			for (int i = 0; i < uvIndices.size(); i++) uvIndices[i] -= 1;
 
 			return Graphics::Mesh(vertices, vertexIndices, textures);
 		}

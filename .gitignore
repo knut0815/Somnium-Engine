@@ -32,8 +32,11 @@
 *.out
 *.app
 
+# Visual Studio Files
+.opendb
+
 #Directories
-*/.vs
+/.vs
 /bin
 /Objects
 /Debug
