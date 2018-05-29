@@ -1,12 +1,11 @@
 #version 330 core
 
-uniform Matrices{
-	mat4 projectionMatrix;
-	mat4 modelMatrix;
-};
+uniform	mat4 projectionMatrix;
+uniform mat4 modelMatrix;
 
 layout (location = 0) in vec3 position;
-
+layout (location = 1) in vec3 normals;
+layout (location = 2) in vec3 texCoords;
 
 void main()
 {

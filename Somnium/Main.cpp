@@ -33,17 +33,19 @@ int main(int argc, char** argv) {
 
 	cout << "---------RUNNING GAME LOOP---------" << endl;
 
-	Matrix4 ortho = Matrix4::orthographic(0.0f, 16.0f, 0.0f, 9.0f, -1.0f, 1.0f);
+	Matrix4 projection = Matrix4::orthographic(0, 16.0f, 0, 9.0f, 0.1f, 100.0f);
+	
+	Matrix4 view = Matrix4::identity();
 
 	Shader shader("Graphics/Shaders/basic.vert", "Graphics/Shaders/basic.frag");
 	shader.enable();
-	shader.setMatrix4("projectionMatrix", ortho);
-	shader.setMatrix4("modelMatrix", Matrix4::translation(Vector3(0, 0, -5)));
+	shader.setMatrix4("projectionMatrix", projection);
+	Matrix4 model;
 
 	shader.setVector2("light_position", Vector2(0.0f, 0));
 	shader.setVector4("colour", Vector4(1.f, 0.f, 1.f, 1.0f));
 
-	Mesh testMesh = Utilities::loadOBJ("Graphics/Objects/Cube.obj");
+	Mesh testMesh = Utilities::loadOBJ("Graphics/Objects/Monkey.obj");
 
 	if (!testMesh.structureExists())
 		cout << "Object has no structure!" << endl;
@@ -59,6 +61,11 @@ int main(int argc, char** argv) {
 
 		//2. Update objects
 		shader.setVector2("light_position", Vector2((float)(x * 16.0f / myWindow.getWidth()), (float)(9.0f - y * 9.0f / myWindow.getHeight())));
+
+		static float rot = 0;
+
+		model = Matrix4::scale(Vector3(3, 3, 3)) * Matrix4::rotation(rot += 0.01f, Vector3(0, 1, 0)) * Matrix4::translation(Vector3(8, 4.5f, -5));
+		shader.setMatrix4("modelMatrix", model);
 
 		//3. Draw objects
 		testMesh.draw(shader);

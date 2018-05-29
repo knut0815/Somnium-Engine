@@ -145,7 +145,6 @@
     <ClInclude Include="Maths\Vector3.h" />
     <ClInclude Include="Maths\Vector4.h" />
     <ClInclude Include="Graphics\Window.h" />
-    <ClInclude Include="Graphics\Vertex.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Main.cpp" />
@@ -156,7 +155,6 @@
     <ClCompile Include="Maths\Vector4.cpp" />
     <ClCompile Include="Maths\Matrix4.cpp" />
     <ClCompile Include="Graphics\Mesh.cpp" />
-    <ClCompile Include="Graphics\Vertex.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

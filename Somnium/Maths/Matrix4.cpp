@@ -183,9 +183,9 @@ namespace Somnium
 			orthographic.elements2D[0][0] = 2.0f / (right - left);
 			orthographic.elements2D[1][1] = 2.0f / (top - bottom);
 			orthographic.elements2D[2][2] = -2.0f / (far - near);
-			orthographic.elements2D[0][3] = -((right + left) / (right - left));
-			orthographic.elements2D[1][3] = -((top + bottom) / (top - bottom));
-			orthographic.elements2D[2][3] = -((far + near) / (far - near));
+			orthographic.elements2D[3][0] = -(right + left) / (right - left);
+			orthographic.elements2D[3][1] = -(top + bottom) / (top - bottom);
+			orthographic.elements2D[3][2] = -(far + near) / (far - near);
 
 			return orthographic;
 		}
@@ -202,8 +202,8 @@ namespace Somnium
 			perspective.elements2D[0][0] = a;
 			perspective.elements2D[1][1] = q;
 			perspective.elements2D[2][2] = b;
-			perspective.elements2D[2][3] = c;
-			perspective.elements2D[3][2] = -1.0f;
+			perspective.elements2D[3][2] = c;
+			perspective.elements2D[2][3] = -1.0f;
 			perspective.elements2D[3][3] = 0;
 
 			return perspective;
@@ -213,9 +213,9 @@ namespace Somnium
 		{
 			Matrix4 translationMatrix(1);
 
-			translationMatrix.elements2D[0][3] = translation.x;
-			translationMatrix.elements2D[1][3] = translation.y;
-			translationMatrix.elements2D[2][3] = translation.z;
+			translationMatrix.elements2D[3][0] = translation.x;
+			translationMatrix.elements2D[3][1] = translation.y;
+			translationMatrix.elements2D[3][2] = translation.z;
 
 			return translationMatrix;
 		}
@@ -233,15 +233,15 @@ namespace Somnium
 				         z = axis.z;
 
 			rotationMatrix.elements2D[0][0] = x * x * omc + c;
-			rotationMatrix.elements2D[0][1] = x * y * omc - z * s;
-			rotationMatrix.elements2D[0][2] = x * z * omc + y * s;
+			rotationMatrix.elements2D[1][0] = x * y * omc - z * s;
+			rotationMatrix.elements2D[2][0] = x * z * omc + y * s;
 
-			rotationMatrix.elements2D[1][0] = y * x * omc + z * s;
+			rotationMatrix.elements2D[0][1] = y * x * omc + z * s;
 			rotationMatrix.elements2D[1][1] = y * y * omc + c;
-			rotationMatrix.elements2D[1][2] = y * z * omc - x * s;
+			rotationMatrix.elements2D[2][1] = y * z * omc - x * s;
 
-			rotationMatrix.elements2D[2][0] = x * z * omc - y * s;
-			rotationMatrix.elements2D[2][1] = y * z * omc + x * s;
+			rotationMatrix.elements2D[0][2] = x * z * omc - y * s;
+			rotationMatrix.elements2D[1][2] = y * z * omc + x * s;
 			rotationMatrix.elements2D[2][2] = z * z * omc + c;
 
 			return rotationMatrix;

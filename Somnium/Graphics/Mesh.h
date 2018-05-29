@@ -43,7 +43,7 @@ namespace Somnium
 			inline void setup();
 
 		private:
-			GLuint m_VAO, m_VBO, m_EBO;
+			GLuint m_VAO, m_VBO, m_IBO;
 
 			const std::vector<Vertex> m_Vertices;
 			const std::vector<GLuint> m_Indices;
