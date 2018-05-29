@@ -35,6 +35,16 @@
 # Visual Studio Files
 .opendb
 
+#LaTeX Files
+.aux
+.lot
+.pdf
+.blg
+.bbl
+.log
+.synctex.gz
+.toc
+
 #Directories
 /.vs
 /bin

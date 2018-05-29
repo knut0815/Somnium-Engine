@@ -24,24 +24,24 @@ namespace Somnium {
 			glDeleteProgram(m_ShaderID);
 		}
 
-		GLuint Shader::load() 
+		GLuint Shader::load()
 		{
 			GLint  result;
 			GLuint program			= glCreateProgram();
 			GLuint vertexShader		= glCreateShader(GL_VERTEX_SHADER);
 			GLuint fragmentShader	= glCreateShader(GL_FRAGMENT_SHADER);
-			
+
 			string vertexSource		= readFile(m_VertexFilePath);
 			string fragmentSource	= readFile(m_FragmentFilePath);
 
 			GLuint shaders[2]		= { vertexShader, fragmentShader };
-			
+
 			if (vertexSource.empty() || fragmentSource.empty())
 				return 0;
 
 			const char * const vs	= vertexSource.c_str();
 			const char * const fs	= fragmentSource.c_str();
-			
+
 			const char * const *sources[2]	= { &vs, &fs };
 
 			for (int i = 0; i < 2; i++)
@@ -65,11 +65,11 @@ namespace Somnium {
 			}
 
 			for (int i = 0; i < 2; i++) glAttachShader(program, shaders[i]);
-			
+
 			glLinkProgram(program);
 			glValidateProgram(program);
 			glUseProgram(program);
-			
+
 			for (int i = 0; i < 2; i++) glDeleteShader(shaders[i]);
 
 			return program;
@@ -80,7 +80,7 @@ namespace Somnium {
 			return glGetUniformLocation(m_ShaderID, name);
 		}
 
-		void Shader::setInt(const GLchar* name, int value) 
+		void Shader::setInt(const GLchar* name, int value)
 		{
 			glUniform1i(getUniformLocation(name), value);
 		}
@@ -89,7 +89,7 @@ namespace Somnium {
 		{
 			glUniform1f(getUniformLocation(name), value);
 		}
-		
+
 		void Shader::setVector2(const GLchar* name, const Vector2& vector)
 		{
 			glUniform2f(getUniformLocation(name), vector.x, vector.y);
@@ -110,7 +110,7 @@ namespace Somnium {
 			glUniformMatrix4fv(getUniformLocation(name), 1, GL_FALSE, matrix.elements);
 		}
 
-		void Shader::enable() const 
+		void Shader::enable() const
 		{
 			glUseProgram(m_ShaderID);
 		}

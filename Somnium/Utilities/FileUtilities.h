@@ -159,7 +159,6 @@ namespace Somnium {
 			file.close();
 
 			//TODO: Normal coordinate loading
-			for (int i = 0; i < uvs.size(); i++) vertices[i].texCoords = uvs[i];
 
 			for (int i = 0; i < vertexIndices.size(); i++) vertexIndices[i] -= 1;
 			for (int i = 0; i < normalIndices.size(); i++) normalIndices[i] -= 1;

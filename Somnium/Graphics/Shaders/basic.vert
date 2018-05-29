@@ -1,11 +1,12 @@
 #version 330 core
 
-layout (location = 0) in vec3 position;
+uniform mat4 pr_matrix;
+uniform mat4 ml_matrix;
+uniform vec4 scale;
 
-out vec4 vertexColour;
+layout (location = 0) in vec3 position;
 
 void main()
 {
-	gl_Position = vec4(position, 1);
-	vertexColour = vec4(1,1,1,1);
+	gl_Position = pr_matrix * ml_matrix * vec4(position, 1);
 }

@@ -37,14 +37,14 @@ int main(int argc, char** argv) {
 
 	Shader shader("Graphics/Shaders/basic.vert", "Graphics/Shaders/basic.frag");
 	shader.enable();
-	//shader.setMatrix4("pr_matrix", ortho);
-	//shader.setMatrix4("ml_matrix", Matrix4::translation(Vector3(4, 3, 0)));
+	shader.setMatrix4("pr_matrix", ortho);
+	shader.setMatrix4("ml_matrix", Matrix4::translation(Vector3(4, 3, 0)));
 
-	//shader.setVector2("light_position", Vector2(0.0f, 0));
-	//shader.setVector4("colour", Vector4(1.f, 1.f, 1.f, 1.0f));
+	shader.setVector2("light_position", Vector2(0.0f, 0));
+	shader.setVector4("colour", Vector4(1.f, 0.f, 1.f, 1.0f));
 
 	Mesh testMesh = Utilities::loadOBJ("Graphics/Objects/Cube.obj");
-	
+
 	if (!testMesh.structureExists())
 		cout << "Object has no structure!" << endl;
 
@@ -60,11 +60,10 @@ int main(int argc, char** argv) {
 		//2. Update objects
 		shader.setVector2("light_position", Vector2((float)(x * 16.0f / myWindow.getWidth()), (float)(9.0f - y * 9.0f / myWindow.getHeight())));
 
-		static int rotation = 0;
+		static float rotation = 0;
 
 		//3. Draw objects
-		glRotatef(rotation++, 0, 1, 0);
-		glTranslatef(0, 0, rotation);
+		shader.setMatrix4("ml_matrix", Matrix4::rotation(rotation+=0.01f, Vector3(0,1,0)) * Matrix4::translation(Vector3(4, 3, 0)));
 		testMesh.draw(shader);
 
 		//4. Post Processing
