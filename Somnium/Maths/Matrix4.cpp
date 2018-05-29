@@ -196,15 +196,15 @@ namespace Somnium
 
 			float q = 1.0f / tan(toRadians(0.5f * fieldOfView)),
 				  a = q / aspectRatio,
-				  b = (near + far) / (near - far),
-				  c = (2.0f * near * far) / (near - far);
+				  b = -((far + near) / (far - near)),
+				  c = -((2.0f * far * near) / (far - near));
 
 			perspective.elements2D[0][0] = a;
 			perspective.elements2D[1][1] = q;
 			perspective.elements2D[2][2] = b;
 			perspective.elements2D[2][3] = c;
 			perspective.elements2D[3][2] = -1.0f;
-
+			perspective.elements2D[3][3] = 0;
 
 			return perspective;
 		}
@@ -226,21 +226,23 @@ namespace Somnium
 			float r = toRadians(angle),
 				  c = cos(r),
 				  s = sin(r),
-				  omc = 1.0f - c;
+				  omc /*One Minus Cos(r)*/ = 1.0f - c;
 
 			const float& x = axis.x,
 				         y = axis.y,
 				         z = axis.z;
 
-			rotationMatrix.elements[0] = x * omc + c;
-			rotationMatrix.elements[4] = y * x * omc + z * s;
-			rotationMatrix.elements[8] = x * z * omc - y * s;
-			rotationMatrix.elements[1] = x * y * omc - z * s;
-			rotationMatrix.elements[5] = y * y * omc + c;
-			rotationMatrix.elements[9] = y * z * omc + x * s;
-			rotationMatrix.elements[2] = x * z * omc + y * s;
-			rotationMatrix.elements[6] = y * z * omc - x * s;
-			rotationMatrix.elements[10] = z * z * omc + c;
+			rotationMatrix.elements2D[0][0] = x * x * omc + c;
+			rotationMatrix.elements2D[0][1] = x * y * omc - z * s;
+			rotationMatrix.elements2D[0][2] = x * z * omc + y * s;
+
+			rotationMatrix.elements2D[1][0] = y * x * omc + z * s;
+			rotationMatrix.elements2D[1][1] = y * y * omc + c;
+			rotationMatrix.elements2D[1][2] = y * z * omc - x * s;
+
+			rotationMatrix.elements2D[2][0] = x * z * omc - y * s;
+			rotationMatrix.elements2D[2][1] = y * z * omc + x * s;
+			rotationMatrix.elements2D[2][2] = z * z * omc + c;
 
 			return rotationMatrix;
 		}

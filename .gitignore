@@ -33,7 +33,7 @@
 *.app
 
 # Visual Studio Files
-.opendb
+*.opendb
 
 # LaTeX Files
 *.aux
