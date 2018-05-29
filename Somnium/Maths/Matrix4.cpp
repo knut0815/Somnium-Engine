@@ -8,7 +8,7 @@ namespace Somnium
 	{
 		Matrix4::Matrix4()
 		{
-		
+
 		}
 
 		Matrix4::Matrix4(float diagonal)
@@ -17,7 +17,7 @@ namespace Somnium
 				elements2D[i][i] = diagonal;
 		}
 
-		Matrix4::~Matrix4() 
+		Matrix4::~Matrix4()
 		{
 
 		}
@@ -179,13 +179,13 @@ namespace Somnium
 		Matrix4 Matrix4::orthographic(float left, float right, float bottom, float top, float near, float far)
 		{
 			Matrix4 orthographic(1.0f);
-			
+
 			orthographic.elements2D[0][0] = 2.0f / (right - left);
 			orthographic.elements2D[1][1] = 2.0f / (top - bottom);
 			orthographic.elements2D[2][2] = -2.0f / (far - near);
-			orthographic.elements2D[3][0] = -((right + left) / (right - left));
-			orthographic.elements2D[3][1] = -((top + bottom) / (top - bottom));
-			orthographic.elements2D[3][2] = -((far + near) / (far - near));
+			orthographic.elements2D[0][3] = -((right + left) / (right - left));
+			orthographic.elements2D[1][3] = -((top + bottom) / (top - bottom));
+			orthographic.elements2D[2][3] = -((far + near) / (far - near));
 
 			return orthographic;
 		}
@@ -202,8 +202,9 @@ namespace Somnium
 			perspective.elements2D[0][0] = a;
 			perspective.elements2D[1][1] = q;
 			perspective.elements2D[2][2] = b;
-			perspective.elements[14] = -1.0f;
-			perspective.elements[11] = c;
+			perspective.elements2D[2][3] = c;
+			perspective.elements2D[3][2] = -1.0f;
+
 
 			return perspective;
 		}
@@ -212,9 +213,9 @@ namespace Somnium
 		{
 			Matrix4 translationMatrix(1);
 
-			translationMatrix.elements2D[3][0] = translation.x;
-			translationMatrix.elements2D[3][1] = translation.y;
-			translationMatrix.elements2D[3][2] = translation.z;
+			translationMatrix.elements2D[0][3] = translation.x;
+			translationMatrix.elements2D[1][3] = translation.y;
+			translationMatrix.elements2D[2][3] = translation.z;
 
 			return translationMatrix;
 		}
@@ -226,12 +227,12 @@ namespace Somnium
 				  c = cos(r),
 				  s = sin(r),
 				  omc = 1.0f - c;
-				  
+
 			const float& x = axis.x,
 				         y = axis.y,
 				         z = axis.z;
 
-			rotationMatrix.elements2D[0][0] = x * omc + c;
+			rotationMatrix.elements[0] = x * omc + c;
 			rotationMatrix.elements[4] = y * x * omc + z * s;
 			rotationMatrix.elements[8] = x * z * omc - y * s;
 			rotationMatrix.elements[1] = x * y * omc - z * s;
