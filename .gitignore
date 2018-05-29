@@ -34,6 +34,7 @@
 
 # Visual Studio Files
 *.opendb
+*.filters
 
 # LaTeX Files
 *.aux
@@ -44,6 +45,10 @@
 *.log
 *.synctex.gz
 *.toc
+
+# Code::Blocks Files
+*.layout
+*.user
 
 # Directories
 */.vs
