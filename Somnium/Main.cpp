@@ -29,7 +29,7 @@ int main(int argc, char** argv) {
 	cout << "SOMNIUM by LUMACAL Software Group - Built " << __TIMESTAMP__ << endl << endl;
 
 	Window myWindow("Somnium Engine", 1920, 1080);
-	glClearColor(0.0f, 1.0f, 0.0f, 1.0f);
+	glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
 
 	cout << "---------RUNNING GAME LOOP---------" << endl;
 
