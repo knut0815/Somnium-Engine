@@ -4,12 +4,12 @@
 	<Project>
 		<Option title="SomniumEngine" />
 		<Option makefile_is_custom="1" />
-		<Option execution_dir="/home/lukerose/Documents/GitHub Projects/Somnium-Engine/" />
+		<Option execution_dir="../Somnium" />
 		<Option pch_mode="2" />
 		<Option compiler="gcc" />
 		<Build>
 			<Target title="Debugx64">
-				<Option output="../SOMNIUM.out" prefix_auto="1" extension_auto="0" />
+				<Option output="SOMNIUM.out" prefix_auto="1" extension_auto="0" />
 				<Option object_output="../bin/Debug/Intermediates/" />
 				<Option deps_output="../bin/Debug/" />
 				<Option type="1" />
@@ -154,8 +154,6 @@
 		<Unit filename="Graphics/Mesh.h" />
 		<Unit filename="Graphics/Shader.cpp" />
 		<Unit filename="Graphics/Shader.h" />
-		<Unit filename="Graphics/Vertex.cpp" />
-		<Unit filename="Graphics/Vertex.h" />
 		<Unit filename="Graphics/Window.cpp" />
 		<Unit filename="Graphics/Window.h" />
 		<Unit filename="Main.cpp" />
