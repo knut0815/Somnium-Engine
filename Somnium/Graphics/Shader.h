@@ -21,6 +21,8 @@ namespace Somnium {
 			void enable() const;
 			void disable() const;
 
+            const GLuint getID(){ return m_ShaderID; } const;
+
 		private:
 			GLuint load();
 			GLint getUniformLocation(const GLchar*);

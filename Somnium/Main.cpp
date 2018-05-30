@@ -34,16 +34,22 @@ int main(int argc, char** argv) {
 	cout << "---------RUNNING GAME LOOP---------" << endl;
 
 	Matrix4 projection = Matrix4::orthographic(0, 16.0f, 0, 9.0f, 0.1f, 100.0f);
-	
+
 	Matrix4 view = Matrix4::identity();
 
 	Shader shader("Graphics/Shaders/basic.vert", "Graphics/Shaders/basic.frag");
+	if(shader.getID() == 0){
+        int n;
+        cin >> n;
+        return 0;
+	}
+
 	shader.enable();
 	shader.setMatrix4("projectionMatrix", projection);
 	Matrix4 model;
 
 	shader.setVector2("light_position", Vector2(0.0f, 0));
-	shader.setVector4("colour", Vector4(1.f, 0.f, 1.f, 1.0f));
+	shader.setVector4("colour", Vector4(1.f, 1.f, 1.f, 1.0f));
 
 	Mesh testMesh = Utilities::loadOBJ("Graphics/Objects/Monkey.obj");
 
