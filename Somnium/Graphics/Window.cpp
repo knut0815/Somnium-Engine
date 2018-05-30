@@ -3,9 +3,9 @@
 
 using namespace std;
 
-namespace Somnium 
+namespace Somnium
 {
-	namespace Graphics 
+	namespace Graphics
 	{
 		void resize(GLFWwindow*, int, int);
 
@@ -29,13 +29,6 @@ namespace Somnium
 			glfwSetKeyCallback(m_Window, keyCallback);
 			glfwSetMouseButtonCallback(m_Window, mouseButtonCallback);
 			glfwSetCursorPosCallback(m_Window, cursorPositionCallback);
-
-#ifdef __APPLE__
-			glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3);
-			glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 2);
-			glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
-			glfwWindowHint(GLFW_OPENGL_FORWARD_COMPAT, GL_TRUE);
-#endif
 
 			glfwSwapInterval(0);
 
@@ -62,6 +55,13 @@ namespace Somnium
 
 			glfwWindowHint(GLFW_DOUBLEBUFFER, GLFW_TRUE);
 			glfwWindowHint(GLFW_SAMPLES, 4);
+
+			#ifdef __APPLE__
+                glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3);
+                glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 2);
+                glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
+                glfwWindowHint(GLFW_OPENGL_FORWARD_COMPAT, GL_TRUE);
+            #endif
 
 			m_Window = glfwCreateWindow(m_Width, m_Height, m_Title, NULL, NULL);
 

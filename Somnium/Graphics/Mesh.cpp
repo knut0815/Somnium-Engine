@@ -32,14 +32,14 @@ namespace Somnium
 
 			glVertexAttribPointer(SHADER_POSITION_INDEX, 3, GL_FLOAT, GL_FALSE, sizeof(Vertex), (GLvoid*)0);
 			glEnableVertexAttribArray(SHADER_POSITION_INDEX);
-			
+
 			glVertexAttribPointer(SHADER_NORMAL_INDEX, 3, GL_FLOAT, GL_FALSE, sizeof(Vertex), (GLvoid*)offsetof(Vertex, normal));
 			glEnableVertexAttribArray(SHADER_NORMAL_INDEX);
-			
-			glVertexAttribPointer(SHADER_TEXTURE_COORDINATE_INDEX, 2, GL_FLOAT, GL_FALSE, sizeof(Vertex), (void*)offsetof(Vertex, texCoords));	
+
+			glVertexAttribPointer(SHADER_TEXTURE_COORDINATE_INDEX, 2, GL_FLOAT, GL_FALSE, sizeof(Vertex), (void*)offsetof(Vertex, texCoords));
             glEnableVertexAttribArray(SHADER_TEXTURE_COORDINATE_INDEX);
-			
-			
+
+
 			glBindVertexArray(0);
 		}
 
