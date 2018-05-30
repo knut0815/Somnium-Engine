@@ -9,6 +9,7 @@ before_script:
     - sudo add-apt-repository ppa:keithw/glfw3 -y
     - sudo apt-get update
     - sudo apt-get install libglfw3-dev libglew-dev
+    - cd Somnium
 notifications:
   slack:
     on_success: change
