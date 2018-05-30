@@ -29,6 +29,14 @@ namespace Somnium
 			glfwSetKeyCallback(m_Window, keyCallback);
 			glfwSetMouseButtonCallback(m_Window, mouseButtonCallback);
 			glfwSetCursorPosCallback(m_Window, cursorPositionCallback);
+
+#ifdef __APPLE__
+			glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3);
+			glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 2);
+			glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
+			glfwWindowHint(GLFW_OPENGL_FORWARD_COMPAT, GL_TRUE);
+#endif
+
 			glfwSwapInterval(0);
 
 			glFrontFace(GL_CW);
