@@ -37,7 +37,16 @@ int main(int argc, char** argv) {
 
 	Matrix4 view = Matrix4::identity();
 
-	Shader shader("Graphics/Shaders/basic.vert", "Graphics/Shaders/basic.frag");
+    #ifdef __APPLE__
+        Shader shader("Graphics/Shaders/Basic/MacOS/basic.vert", "Graphics/Shaders/Basic/MacOS/basic.frag");
+        glBindAttribLocation(shader.getID(), SHADER_POSITION_INDEX, "position");
+        glBindAttribLocation(shader.getID(), SHADER_NORMAL_INDEX, "normals");
+        glBindAttribLocation(shader.getID(), SHADER_TEXTURE_COORDINATE_INDEX, "texCoords");
+    #else
+        Shader shader("Graphics/Shaders/Basic/basic.vert", "Graphics/Shaders/Basic/basic.frag");
+
+    #endif`
+
 	if(shader.getID() == 0){
         int n;
         cin >> n;
@@ -52,6 +61,7 @@ int main(int argc, char** argv) {
 	shader.setVector4("colour", Vector4(1.f, 1.f, 1.f, 1.0f));
 
 	Mesh testMesh = Utilities::loadOBJ("Graphics/Objects/Monkey.obj");
+
 
 	if (!testMesh.structureExists())
 		cout << "Object has no structure!" << endl;

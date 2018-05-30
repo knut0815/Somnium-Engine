@@ -39,7 +39,6 @@ namespace Somnium
 			glVertexAttribPointer(SHADER_TEXTURE_COORDINATE_INDEX, 2, GL_FLOAT, GL_FALSE, sizeof(Vertex), (void*)offsetof(Vertex, texCoords));
             glEnableVertexAttribArray(SHADER_TEXTURE_COORDINATE_INDEX);
 
-
 			glBindVertexArray(0);
 		}
 
