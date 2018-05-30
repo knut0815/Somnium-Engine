@@ -33,7 +33,8 @@ int main(int argc, char** argv) {
 
 	cout << "---------RUNNING GAME LOOP---------" << endl;
 
-	Matrix4 projection = Matrix4::orthographic(0, 16.0f, 0, 9.0f, 0.1f, 100.0f);
+	//Matrix4 projection = Matrix4::orthographic(0, 16.0f, 0, 9.0f, -1.0f, 100.0f);
+	Matrix4 projection;
 
 	Matrix4 view = Matrix4::identity();
 
@@ -47,7 +48,7 @@ int main(int argc, char** argv) {
 
 	shader.enable();
 	shader.setMatrix4("projectionMatrix", projection);
-	Matrix4 model;
+	Matrix4 model, rotM, sca, tra;
 
 	shader.setVector2("light_position", Vector2(0.0f, 0));
 	shader.setVector4("colour", Vector4(1.f, 1.f, 1.f, 1.0f));
@@ -72,9 +73,18 @@ int main(int argc, char** argv) {
 
 		static float rot = 0;
 
-		model = Matrix4::scale(Vector3(3, 3, 3)) * Matrix4::rotation(rot += 0.01f, Vector3(0, 1, 0)) * Matrix4::translation(Vector3(8, 4.5f, -5));
+		sca = Matrix4::scale(Vector3(1, 1, 1));
+		tra = Matrix4::translation(Vector3(0, 0, -5));
+		rotM = Matrix4::rotation(rot+=0.01f, Vector3(1, 0, 0)) * Matrix4::rotation(rot, Vector3(0, 1, 0));
+		projection = Matrix4::perspective(45, (float)myWindow.getWidth() / myWindow.getHeight(), 0.1f, 1000.0f);
+	//	projection = Matrix4::orthographic(-myWindow.getAspectRatio() / 2.0f, myWindow.getAspectRatio() / 2.0f, 0, 1, 0, 100.0f);
+		model = sca * rotM * tra;
+		shader.setMatrix4("projectionMatrix", projection);
 		shader.setMatrix4("modelMatrix", model);
-
+		shader.setMatrix4("rMatrix", rotM);
+		shader.setMatrix4("sMatrix", sca);
+		shader.setMatrix4("tMatrix", tra);
+		
 		//3. Draw objects
 		testMesh.draw(shader);
 

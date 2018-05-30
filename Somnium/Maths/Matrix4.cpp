@@ -183,9 +183,9 @@ namespace Somnium
 			orthographic.elements2D[0][0] = 2.0f / (right - left);
 			orthographic.elements2D[1][1] = 2.0f / (top - bottom);
 			orthographic.elements2D[2][2] = -2.0f / (far - near);
-			orthographic.elements2D[3][0] = -(right + left) / (right - left);
-			orthographic.elements2D[3][1] = -(top + bottom) / (top - bottom);
-			orthographic.elements2D[3][2] = -(far + near) / (far - near);
+			orthographic.elements2D[3][0] = -((right + left) / (right - left));
+			orthographic.elements2D[3][1] = -((top + bottom) / (top - bottom));
+			orthographic.elements2D[3][2] = -((far + near) / (far - near));
 
 			return orthographic;
 		}
@@ -194,16 +194,15 @@ namespace Somnium
 		{
 			Matrix4 perspective(1);
 
-			float q = 1.0f / tan(toRadians(0.5f * fieldOfView)),
-				  a = q / aspectRatio,
-				  b = -((far + near) / (far - near)),
-				  c = -((2.0f * far * near) / (far - near));
+			float tanHalfFOV = tanf(toRadians(0.5f * fieldOfView)),
+				  f = 1.0f / tanHalfFOV,
+				  range = near - far;
 
-			perspective.elements2D[0][0] = a;
-			perspective.elements2D[1][1] = q;
-			perspective.elements2D[2][2] = b;
-			perspective.elements2D[3][2] = c;
+			perspective.elements2D[0][0] =  f / aspectRatio;
+			perspective.elements2D[1][1] = f;
+			perspective.elements2D[2][2] = (near + far) / range;
 			perspective.elements2D[2][3] = -1.0f;
+			perspective.elements2D[3][2] = 2.0f * near * far / range;
 			perspective.elements2D[3][3] = 0;
 
 			return perspective;
@@ -232,17 +231,27 @@ namespace Somnium
 				         y = axis.y,
 				         z = axis.z;
 
-			rotationMatrix.elements2D[0][0] = x * x * omc + c;
-			rotationMatrix.elements2D[1][0] = x * y * omc - z * s;
-			rotationMatrix.elements2D[2][0] = x * z * omc + y * s;
+			float xSq = x * x,
+				  ySq = y * y,
+				  zSq = z * z,
+				  xy  = x * y,
+				  yz  = y * z,
+				  xz  = x * z,
+				  xs  = x * s,
+				  ys  = y * s,
+				  zs  = z * s;
 
-			rotationMatrix.elements2D[0][1] = y * x * omc + z * s;
-			rotationMatrix.elements2D[1][1] = y * y * omc + c;
-			rotationMatrix.elements2D[2][1] = y * z * omc - x * s;
+			rotationMatrix.elements2D[0][0] = xSq * omc + c;
+			rotationMatrix.elements2D[1][0] =  xy * omc - zs;
+			rotationMatrix.elements2D[2][0] =  xz * omc + ys;
 
-			rotationMatrix.elements2D[0][2] = x * z * omc - y * s;
-			rotationMatrix.elements2D[1][2] = y * z * omc + x * s;
-			rotationMatrix.elements2D[2][2] = z * z * omc + c;
+			rotationMatrix.elements2D[0][1] =  xy * omc + zs;
+			rotationMatrix.elements2D[1][1] = ySq * omc + c;
+			rotationMatrix.elements2D[2][1] =  yz * omc - xs;
+
+			rotationMatrix.elements2D[0][2] =  xz * omc - ys;
+			rotationMatrix.elements2D[1][2] =  yz * omc + xs;
+			rotationMatrix.elements2D[2][2] = zSq * omc + c;
 
 			return rotationMatrix;
 		}
