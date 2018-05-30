@@ -3,12 +3,11 @@ OSXLDFLAGS:= -framework OpenGL -lm -l glfw -l GLEW
 LDFLAGS:= -l GL -lm -l glfw -l GLEW
 CPPFLAGS := -Wall -g -std=c++11 -Wextra `pkg-config --cflags glfw3 glew`
 CXXFLAGS:=  -I Dependencies/GLEW/include -I Dependencies/GLFW/include
-SRC_DIR:=Somnium
+SRC_DIR:=.
 OBJ_DIR:=Objects
 SUB_DIRS := $(shell find $(SRC_DIR) -type d)
 TARGET := SOMNIUM.out
 TARGETOSX := SOMNIUM_OSX.out
-EXECUTIONDIR := Somnium
 
 SRCS := $(shell find $(SRC_DIR) -name "*.cpp")
 OBJS:=$(patsubst %.cpp,$(OBJ_DIR)/%.o,$(SRCS))
@@ -27,10 +26,10 @@ main-build:$(TARGET)
 main-build-OSX:$(TARGETOSX)
 
 $(TARGETOSX):$(OBJS)
-	$(CC) $(OBJS) -o $(EXECUTIONDIR)/$(TARGET) $(OSXLDFLAGS)
+	$(CC) $(OBJS) -o $(TARGET) $(OSXLDFLAGS)
 
 $(TARGET):$(OBJS)
-	$(CC) $(OBJS) -o $(EXECUTIONDIR)/$(TARGET) $(LDFLAGS)
+	$(CC) $(OBJS) -o $(TARGET) $(LDFLAGS)
 
 $(OBJ_DIR)/%.o:%.cpp
 	$(CC) $(CPPFLAGS)  $< -c -o $@ $(CXXFLAGS)
@@ -40,4 +39,4 @@ CXXFLAGS += -MMD
 
 clean:
 	rm -r $(OBJ_DIR)
-	rm Somnium/SOMNIUM.out
+	rm SOMNIUM.out
