@@ -37,15 +37,7 @@ int main(int argc, char** argv) {
 
 	Matrix4 view = Matrix4::identity();
 
-    #ifdef __APPLE__
-        Shader shader("Graphics/Shaders/Basic/MacOS/basic.vert", "Graphics/Shaders/Basic/MacOS/basic.frag");
-        glBindAttribLocation(shader.getID(), SHADER_POSITION_INDEX, "position");
-        glBindAttribLocation(shader.getID(), SHADER_NORMAL_INDEX, "normals");
-        glBindAttribLocation(shader.getID(), SHADER_TEXTURE_COORDINATE_INDEX, "texCoords");
-    #else
-        Shader shader("Graphics/Shaders/Basic/basic.vert", "Graphics/Shaders/Basic/basic.frag");
-
-    #endif`
+    Shader shader("Graphics/Shaders/Basic/basic.vert", "Graphics/Shaders/Basic/basic.frag");
 
 	if(shader.getID() == 0){
         int n;
