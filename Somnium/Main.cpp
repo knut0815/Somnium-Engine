@@ -1,13 +1,16 @@
+#include <thread>
 #include <iostream>
 #include "Graphics/Window.h"
 #include "Graphics/Shader.h"
 #include "Graphics/Mesh.h"
+#include "Audio/AudioEngine.h"
 #include "Utilities/FileUtilities.h"
 
 using namespace std;
 using namespace Somnium;
 using namespace Graphics;
 using namespace Maths;
+using namespace Audio;
 
 void calculateFPS()
 {
@@ -30,6 +33,13 @@ int main(int argc, char** argv) {
 
 	Window myWindow("Somnium Engine", 1920, 1080);
 	glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
+    
+    //Sound demo
+    //AudioEngine au;
+    //thread at{&AudioEngine::playSound, this, "Synth1.wav"};
+    //at.join();
+    AudioEngine au;
+    au.playSound("Synth1.wav");
 
 	cout << "---------RUNNING GAME LOOP---------" << endl;
 
@@ -85,6 +95,6 @@ int main(int argc, char** argv) {
 	}
 
 	cout << "-----------------------------------" << endl;
-
+    
 	return 0;
 }
