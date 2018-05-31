@@ -21,7 +21,7 @@ namespace Somnium {
 			void enable() const;
 			void disable() const;
 
-            const GLuint getID() const { return m_ShaderID; };
+            GLuint getID() const { return m_ShaderID; };
 
 		private:
 			GLuint load();

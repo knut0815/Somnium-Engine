@@ -1,8 +1,8 @@
 CC := clang++
-OSXLDFLAGS:= -framework OpenGL -lm -l glfw -l GLEW -L ./Dependencies/portaudio/lib -l portaudio -L ./Dependencies/portsf/lib/ -l portsf -L ./Dependencies/tinyAudioLibrary/lib/ -l tiny
-LDFLAGS:= -l GL -lm -l glfw -l GLEW -L ./Dependencies/portaudio/lib -L ./Dependencies/portsf/lib/ -l portsf -L ./Dependencies/tinyAudioLibrary/lib/ -l tiny
-CPPFLAGS := -Wall -g -std=c++11 -Wextra `pkg-config --cflags glfw3 glew`
-CXXFLAGS:=  -I Dependencies/GLEW/include -I Dependencies/GLFW/include -I Dependencies/portsf/include -I Dependencies/tinyAudioLibrary/include
+OSXLDFLAGS:= -framework OpenGL -lm -l glfw -l GLEW -L ./Dependencies/portaudio/lib -l portaudio -L
+LDFLAGS:= -l GL -lm -l glfw -l GLEW -L ./Dependencies/portaudio/lib
+CPPFLAGS := -Wall -g -std=c++11 -Wextra `pkg-config --cflags glfw3 glew portaudio`
+CXXFLAGS:=  -I Dependencies/GLEW/include -I Dependencies/GLFW/include -I Dependencies/portsf/include
 SRC_DIR:=.
 OBJ_DIR:=Objects
 SUB_DIRS := $(shell find $(SRC_DIR) -type d)
