@@ -1,8 +1,8 @@
 CC := clang++
-OSXLDFLAGS:= -framework OpenGL -lm -l glfw -l GLEW
-LDFLAGS:= -l GL -lm -l glfw -l GLEW
+OSXLDFLAGS:= -framework OpenGL -lm -l glfw -l GLEW -L ./Dependencies/portaudio/lib -l portaudio -L ./Dependencies/portsf/lib/ -l portsf -L ./Dependencies/tinyAudioLibrary/lib/ -l tiny
+LDFLAGS:= -l GL -lm -l glfw -l GLEW -L ./Dependencies/portaudio/lib -L ./Dependencies/portsf/lib/ -l portsf -L ./Dependencies/tinyAudioLibrary/lib/ -l tiny
 CPPFLAGS := -Wall -g -std=c++11 -Wextra `pkg-config --cflags glfw3 glew`
-CXXFLAGS:=  -I Dependencies/GLEW/include -I Dependencies/GLFW/include
+CXXFLAGS:=  -I Dependencies/GLEW/include -I Dependencies/GLFW/include -I Dependencies/portsf/include -I Dependencies/tinyAudioLibrary/include
 SRC_DIR:=.
 OBJ_DIR:=Objects
 SUB_DIRS := $(shell find $(SRC_DIR) -type d)
@@ -14,9 +14,9 @@ OBJS:=$(patsubst %.cpp,$(OBJ_DIR)/%.o,$(SRCS))
 
 Debugx64:all
 
-all:pre-build main-build
+all: pre-build main-build
 
-osx:pre-build main-build-OSX
+osx: pre-build main-build-OSX
 
 pre-build:
 	mkdir -p $(OBJ_DIR) $(addprefix $(OBJ_DIR)/,$(SUB_DIRS))
