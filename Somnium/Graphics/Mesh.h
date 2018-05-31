@@ -2,6 +2,7 @@
 
 #include <glew.h>
 #include "../Maths/Maths.h"
+#include "Renderable.h"
 #include "Shader.h"
 #include <vector>
 #include <string>
@@ -27,22 +28,26 @@ namespace Somnium
 			std::string type;
 		};
 
-		class Mesh
+		class Mesh 
+			: virtual public Renderable
 		{
 		public:
 			Mesh(std::vector<Vertex> vertices, std::vector<GLuint> indices, std::vector<Texture> textures);
 			~Mesh();
 
-			void draw(Shader& shader);
+			virtual void draw();
+			virtual void update() {};
 
 			bool structureExists() const { return !m_Vertices.empty() && !m_Indices.empty(); }
 			inline GLuint getVAO() const { return m_VAO; }
 
 		private:
-			inline void setup();
+			inline void init();
 
 		private:
 			GLuint m_VAO, m_VBO, m_IBO;
+
+			Shader* shader;
 
 			const std::vector<Vertex> m_Vertices;
 			const std::vector<GLuint> m_Indices;

@@ -2,6 +2,7 @@
 #include "Graphics/Window.h"
 #include "Graphics/Shader.h"
 #include "Graphics/Mesh.h"
+#include "Graphics/Renderer.h"
 #include "Utilities/FileUtilities.h"
 
 using namespace std;
@@ -37,6 +38,8 @@ int main(int argc, char** argv) {
 	Matrix4 projection;
 
 	Matrix4 view = Matrix4::identity();
+
+	//Renderer renderer = new Renderer();
 
     Shader shader("Graphics/Shaders/Basic/basic.vert", "Graphics/Shaders/Basic/basic.frag");
 
@@ -86,7 +89,7 @@ int main(int argc, char** argv) {
 		shader.setMatrix4("tMatrix", tra);
 		
 		//3. Draw objects
-		testMesh.draw(shader);
+		testMesh.draw();
 
 		//4. Post Processing
 		myWindow.update();

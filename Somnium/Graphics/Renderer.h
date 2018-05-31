@@ -10,8 +10,11 @@ namespace Somnium
 		{
 		/* Methods */
 		public:
-			Renderer() {};
-			~Renderer() {};
+			Renderer();
+			~Renderer();
+
+			//void addObjectToScene(Renderable *object) { objects.push_back(*object); };
+
 		private:
 			
 		/* Variables */
