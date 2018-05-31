@@ -1,6 +1,6 @@
 CC := clang++
-OSXLDFLAGS:= -framework OpenGL -lm -l glfw -l GLEW -l portaudio -L ./Dependencies/portsf/lib/ -l portsf -L ./Dependencies/tinyAudioLibrary/lib/ -l tiny
-LDFLAGS:= -l GL -lm -l glfw -l GLEW ./Dependencies/portsf/lib/ -l portsf -L ./Dependencies/tinyAudioLibrary/lib/ -l tiny
+OSXLDFLAGS:= -framework OpenGL -lm -l glfw -l GLEW -L ./Dependencies/portaudio/lib -l portaudio -L ./Dependencies/portsf/lib/ -l portsf -L ./Dependencies/tinyAudioLibrary/lib/ -l tiny
+LDFLAGS:= -l GL -lm -l glfw -l GLEW -L ./Dependencies/portaudio/lib -L ./Dependencies/portsf/lib/ -l portsf -L ./Dependencies/tinyAudioLibrary/lib/ -l tiny
 CPPFLAGS := -Wall -g -std=c++11 -Wextra `pkg-config --cflags glfw3 glew`
 CXXFLAGS:=  -I Dependencies/GLEW/include -I Dependencies/GLFW/include -I Dependencies/portsf/include -I Dependencies/tinyAudioLibrary/include
 SRC_DIR:=.
