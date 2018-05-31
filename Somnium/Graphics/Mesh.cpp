@@ -23,7 +23,8 @@ namespace Somnium
 			glGenBuffers(1, &m_VBO);
 			glGenBuffers(1, &m_IBO);
 
-			glBindVertexArray(m_VAO);
+			bind();
+
 			glBindBuffer(GL_ARRAY_BUFFER, m_VBO);
 			glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, m_IBO);
 
@@ -39,14 +40,12 @@ namespace Somnium
 			glVertexAttribPointer(SHADER_TEXTURE_COORDINATE_INDEX, 2, GL_FLOAT, GL_FALSE, sizeof(Vertex), (void*)offsetof(Vertex, texCoords));
             glEnableVertexAttribArray(SHADER_TEXTURE_COORDINATE_INDEX);
 
-			glBindVertexArray(0);
+			unbind();
 		}
 
-		void Mesh::draw()
+		void Mesh::draw() const
 		{
-			glBindVertexArray(m_VAO);
 			glDrawElements(GL_TRIANGLES, (GLsizei)m_Indices.size(), GL_UNSIGNED_INT, nullptr);
-			glBindVertexArray(0); //TODO: Binding/unbinding every object is a waste of processing!!! OPTIMISE!
 		}
 	}
 }

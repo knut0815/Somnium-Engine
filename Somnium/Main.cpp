@@ -4,14 +4,15 @@
 #include "Graphics/Shader.h"
 #include "Graphics/Mesh.h"
 #include "Graphics/Renderer.h"
-#include "Audio/AudioEngine.h"
+
+//#include "Audio/AudioEngine.h"
 #include "Utilities/FileUtilities.h"
 
 using namespace std;
 using namespace Somnium;
 using namespace Graphics;
 using namespace Maths;
-using namespace Audio;
+//using namespace Audio;
 
 void calculateFPS()
 {
@@ -39,8 +40,8 @@ int main(int argc, char** argv) {
     //AudioEngine au;
     //thread at{&AudioEngine::playSound, this, "Synth1.wav"};
     //at.join();
-    AudioEngine au;
-    au.playSound("Synth1.wav");
+  //  AudioEngine au;
+   // au.playSound("Synth1.wav");
 
 	cout << "---------RUNNING GAME LOOP---------" << endl;
 
@@ -66,11 +67,8 @@ int main(int argc, char** argv) {
 	shader.setVector2("light_position", Vector2(0.0f, 0));
 	shader.setVector4("colour", Vector4(1.f, 1.f, 1.f, 1.0f));
 
-	Mesh testMesh = Utilities::loadOBJ("Graphics/Objects/Monkey.obj");
-
-
-	if (!testMesh.structureExists())
-		cout << "Object has no structure!" << endl;
+	Mesh* monkeyMesh = new Mesh(Utilities::loadOBJ("Graphics/Objects/Monkey.obj"));
+	RenderableObject monkey = RenderableObject(monkeyMesh);
 
 	while (!myWindow.isClosed())
 	{
@@ -99,7 +97,8 @@ int main(int argc, char** argv) {
 		shader.setMatrix4("tMatrix", tra);
 		
 		//3. Draw objects
-		testMesh.draw();
+		monkey.draw();
+		//testMesh.draw();
 
 		//4. Post Processing
 		myWindow.update();
@@ -108,6 +107,6 @@ int main(int argc, char** argv) {
 	}
 
 	cout << "-----------------------------------" << endl;
-    
+
 	return 0;
 }

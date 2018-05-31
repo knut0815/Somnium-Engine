@@ -2,7 +2,6 @@
 
 #include <glew.h>
 #include "../Maths/Maths.h"
-#include "Renderable.h"
 #include "Shader.h"
 #include <vector>
 #include <string>
@@ -29,14 +28,14 @@ namespace Somnium
 		};
 
 		class Mesh 
-			: virtual public Renderable
 		{
 		public:
 			Mesh(std::vector<Vertex> vertices, std::vector<GLuint> indices, std::vector<Texture> textures);
 			~Mesh();
 
-			virtual void draw();
-			virtual void update() {};
+			void draw() const;
+			inline void bind() const { glBindVertexArray(m_VAO); }
+			inline void unbind() const { glBindVertexArray(0); }
 
 			bool structureExists() const { return !m_Vertices.empty() && !m_Indices.empty(); }
 			inline GLuint getVAO() const { return m_VAO; }

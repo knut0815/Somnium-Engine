@@ -1,6 +1,7 @@
 #pragma once
 #include <vector>
-#include "Renderable.h"
+#include "RenderableObject.h"
+#include "Camera.h"
 
 namespace Somnium
 {
@@ -10,10 +11,11 @@ namespace Somnium
 		{
 		/* Methods */
 		public:
-			Renderer();
-			~Renderer();
+			Renderer() = default;
+			Renderer(std::vector<RenderableObject> objects) : m_Objects(objects) {};
+			~Renderer() {};
 
-			//void addObjectToScene(Renderable *object) { objects.push_back(*object); };
+			void addObjectToScene(RenderableObject object) { m_Objects.push_back(object); };
 
 		private:
 			
@@ -21,7 +23,8 @@ namespace Somnium
 		public:
 
 		private:
-			const std::vector<Renderable> objects;
+			std::vector<RenderableObject> m_Objects;
+			std::vector<Camera> m_Cameras;
 		};
 	}
 }
