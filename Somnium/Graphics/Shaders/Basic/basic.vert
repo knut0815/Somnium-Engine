@@ -14,6 +14,6 @@ out vec3 basicCol;
 
 void main()
 {
-	gl_Position = projectionMatrix * tMatrix * rMatrix * sMatrix * vec4(position, 1.0f);
+	gl_Position = projectionMatrix * modelMatrix * vec4(position, 1.0f);
 	basicCol = position;
 }

@@ -38,7 +38,10 @@ namespace Somnium
 			static Matrix4 perspective (float fieldOfView, float aspectRatio, float near, float far);
 
 			static Matrix4 translation(const Vector3&);
-			static Matrix4 rotation(float, const Vector3&);
+			static Matrix4 rotationX(float angle);
+			static Matrix4 rotationY(float angle);
+			static Matrix4 rotationZ(float angle);
+			static Matrix4 rotation(float, const Vector3&  axis);
 			static Matrix4 scale(const Vector3&);
 
 			union

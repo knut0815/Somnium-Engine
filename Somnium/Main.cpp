@@ -73,11 +73,11 @@ int main(int argc, char** argv) {
 
 		static float rot = 0;
 
-		sca = Matrix4::scale(Vector3(1, 1, 1));
+		sca = Matrix4::scale(Vector3(.1f, .1f, .1f));
 		tra = Matrix4::translation(Vector3(0, 0, -5));
-		rotM = Matrix4::rotation(rot+=0.01f, Vector3(1, 0, 0)) * Matrix4::rotation(rot, Vector3(0, 1, 0));
+		rotM = Matrix4::rotationX(rot+=0.01f) * Matrix4::rotationY(rot) * Matrix4::rotationZ(rot);
 		projection = Matrix4::perspective(45, (float)myWindow.getWidth() / myWindow.getHeight(), 0.1f, 1000.0f);
-	//	projection = Matrix4::orthographic(-myWindow.getAspectRatio() / 2.0f, myWindow.getAspectRatio() / 2.0f, 0, 1, 0, 100.0f);
+		projection = Matrix4::orthographic(-myWindow.getAspectRatio() / 2.0f, myWindow.getAspectRatio() / 2.0f, -0.5f, 0.5f, 0, 100.0f);
 		model = sca * rotM * tra;
 		shader.setMatrix4("projectionMatrix", projection);
 		shader.setMatrix4("modelMatrix", model);

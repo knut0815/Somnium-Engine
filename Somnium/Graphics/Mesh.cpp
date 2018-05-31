@@ -45,7 +45,7 @@ namespace Somnium
 		void Mesh::draw(Shader& shader)
 		{
 			glBindVertexArray(m_VAO);
-			glDrawElements(GL_TRIANGLES, m_Indices.size(), GL_UNSIGNED_INT, nullptr);
+			glDrawElements(GL_TRIANGLES, (GLsizei)m_Indices.size(), GL_UNSIGNED_INT, nullptr);
 			glBindVertexArray(0); //TODO: Binding/unbinding every object is a waste of processing!!! OPTIMISE!
 		}
 	}

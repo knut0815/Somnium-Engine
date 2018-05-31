@@ -219,6 +219,51 @@ namespace Somnium
 			return translationMatrix;
 		}
 
+		Matrix4 Matrix4::rotationX(float angle) {
+			Matrix4 rotationMatrix(1);
+
+			float r = toRadians(angle),
+				  s = sin(r),
+				  c = cos(r);
+			
+			rotationMatrix.elements2D[1][1] = c;
+			rotationMatrix.elements2D[2][1] = s;
+			rotationMatrix.elements2D[1][2] = -s;
+			rotationMatrix.elements2D[2][2] = c;
+
+			return rotationMatrix;
+		}
+		
+		Matrix4 Matrix4::rotationY(float angle) {
+			Matrix4 rotationMatrix(1);
+
+			float r = toRadians(angle),
+				  s = sin(r),
+				  c = cos(r);
+
+			rotationMatrix.elements2D[0][0] = c;
+			rotationMatrix.elements2D[2][0] = s;
+			rotationMatrix.elements2D[0][2] = -s;
+			rotationMatrix.elements2D[2][2] = c;
+
+			return rotationMatrix;
+		}
+			
+		Matrix4 Matrix4::rotationZ(float angle) {
+			Matrix4 rotationMatrix(1);
+
+			float r = toRadians(angle),
+				  s = sin(r),
+				  c = cos(r);
+
+			rotationMatrix.elements2D[0][0] = c;
+			rotationMatrix.elements2D[1][0] = -s;
+			rotationMatrix.elements2D[0][1] = s;
+			rotationMatrix.elements2D[1][1] = c;
+
+			return rotationMatrix;
+		}
+
 		Matrix4 Matrix4::rotation(float angle, const Vector3& axis)
 		{
 			Matrix4 rotationMatrix(1);
