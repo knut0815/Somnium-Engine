@@ -79,7 +79,7 @@ namespace Somnium {
 
 			while (getline(file, line))
 			{
-				int currPos = 0;
+				size_t currPos = 0;
 
 				//Determine what structure the current line represents (Vertex, Normal, Index, etc.)
 				string header = line.substr(0, currPos = line.find(" "));
@@ -121,7 +121,7 @@ namespace Somnium {
 				else if (header == "f")
 				{
 					unsigned int vertexIndex, texCoordIndex, normalIndex;
-					int end = values.find("\n");
+					size_t end = values.find("\n");
 					string value;
 
 					for(int ind = 0; ind < 3; ind++){

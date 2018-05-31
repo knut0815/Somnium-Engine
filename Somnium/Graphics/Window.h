@@ -21,6 +21,7 @@ namespace Somnium {
 
 			inline int getWidth(void) const { return m_Width; }
 			inline int getHeight(void) const { return m_Height; }
+			inline float getAspectRatio(void) const { return m_Width / (float)m_Height;  }
 
 			bool isKeyPressed(unsigned int) const;
 			bool isMouseButtonPressed(unsigned int) const;

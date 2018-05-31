@@ -138,6 +138,8 @@
   <ItemGroup>
     <ClInclude Include="Maths\Maths.h" />
     <ClInclude Include="Graphics\Mesh.h" />
+    <ClInclude Include="Renderable.h" />
+    <ClInclude Include="Renderer.h" />
     <ClInclude Include="Utilities\FileUtilities.h" />
     <ClInclude Include="Maths\Matrix4.h" />
     <ClInclude Include="Graphics\Shader.h" />
@@ -155,6 +157,7 @@
     <ClCompile Include="Maths\Vector4.cpp" />
     <ClCompile Include="Maths\Matrix4.cpp" />
     <ClCompile Include="Graphics\Mesh.cpp" />
+    <ClCompile Include="Renderer.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

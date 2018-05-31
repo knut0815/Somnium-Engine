@@ -2,6 +2,9 @@
 
 uniform	mat4 projectionMatrix;
 uniform mat4 modelMatrix;
+uniform mat4 rMatrix;
+uniform mat4 sMatrix;
+uniform mat4 tMatrix;
 
 layout (location = 0) in vec3 position;
 layout (location = 1) in vec3 normals;
