@@ -17,6 +17,9 @@ namespace Somnium
 			Vector3  operator+ (const Vector3&) const;
 			Vector3& operator+=(const Vector3&);
 
+			//Negation operator
+			Vector3 operator-() const;
+
 			//Subtraction Operators
 			Vector3  operator- (const Vector3&) const;
 			Vector3& operator-=(const Vector3&);

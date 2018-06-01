@@ -4,6 +4,7 @@
 #include "Graphics/Shader.h"
 #include "Graphics/Mesh.h"
 #include "Graphics/Renderer.h"
+#include "Graphics/Camera.h"
 
 //#include "Audio/AudioEngine.h"
 #include "Utilities/FileUtilities.h"
@@ -45,8 +46,8 @@ int main(int argc, char** argv) {
 
 	cout << "---------RUNNING GAME LOOP---------" << endl;
 
-	//Matrix4 projection = Matrix4::orthographic(0, 16.0f, 0, 9.0f, -1.0f, 100.0f);
-	Matrix4 projection;
+	//Camera mainCamera = Camera(Matrix4::orthographic(-myWindow.getAspectRatio() / 2.0f, myWindow.getAspectRatio() / 2.0f, -0.5f, 0.5f, 1.0f, 100.0f));
+	Camera mainCamera = Camera(Matrix4::perspective(30, (float)myWindow.getWidth() / myWindow.getHeight(), 0.1f, 100.0f));
 
 	Matrix4 view = Matrix4::identity();
 
@@ -61,7 +62,8 @@ int main(int argc, char** argv) {
 	}
 
 	shader.enable();
-	shader.setMatrix4("projectionMatrix", projection);
+	shader.setMatrix4("projectionMatrix", mainCamera.getProjection());
+	shader.setMatrix4("viewMatrix", mainCamera.getView());
 	Matrix4 model, rotM, sca, tra;
 
 	shader.setVector2("light_position", Vector2(0.0f, 0));
@@ -69,6 +71,11 @@ int main(int argc, char** argv) {
 
 	Mesh* monkeyMesh = new Mesh(Utilities::loadOBJ("Graphics/Objects/Monkey.obj"));
 	RenderableObject monkey = RenderableObject(monkeyMesh);
+
+	const float MAX_Z = -10, MIN_Z = 0;
+	float CURRENT_Z = MIN_Z,
+	      Z_DIR = -1,
+	      Z_MAG = 0.001f;
 
 	while (!myWindow.isClosed())
 	{
@@ -79,23 +86,57 @@ int main(int argc, char** argv) {
 		//1. Process I/O
 		myWindow.getMousePosition(x, y);
 
+		if (myWindow.isKeyPressed(GLFW_KEY_LEFT) || myWindow.isKeyPressed(GLFW_KEY_A))
+		{
+			cout << "Pressed Left" << endl;
+			mainCamera.move(Maths::Vector3(-0.01f, 0, 0));
+		}
+		else if (myWindow.isKeyPressed(GLFW_KEY_RIGHT) || myWindow.isKeyPressed(GLFW_KEY_D))
+		{
+			cout << "Pressed Right" << endl;
+			mainCamera.move(Maths::Vector3(0.01f,0,0));
+		}
+		else if (myWindow.isKeyPressed(GLFW_KEY_UP) || myWindow.isKeyPressed(GLFW_KEY_W))
+		{
+			cout << "Pressed Up" << endl;
+			if (myWindow.isKeyPressed(GLFW_KEY_LEFT_CONTROL) || myWindow.isKeyPressed(GLFW_KEY_RIGHT_CONTROL))
+			{
+				cout << "Pressed CTRL" << endl;
+				mainCamera.move(Maths::Vector3(0, 0.01f, 0));
+			}
+			else
+				mainCamera.move(Maths::Vector3(0, 0, -0.01f));
+		}
+		else if (myWindow.isKeyPressed(GLFW_KEY_DOWN) || myWindow.isKeyPressed(GLFW_KEY_S))
+		{
+			cout << "Pressed Down" << endl;
+			if (myWindow.isKeyPressed(GLFW_KEY_LEFT_CONTROL) || myWindow.isKeyPressed(GLFW_KEY_RIGHT_CONTROL)) 
+			{
+				cout << "Pressed CTRL" << endl;
+				mainCamera.move(Maths::Vector3(0, -0.01f, 0));
+			}
+			else
+				mainCamera.move(Maths::Vector3(0, 0, 0.01f));
+		}
+
 		//2. Update objects
 		shader.setVector2("light_position", Vector2((float)(x * 16.0f / myWindow.getWidth()), (float)(9.0f - y * 9.0f / myWindow.getHeight())));
+
+		CURRENT_Z += Z_DIR * Z_MAG;
+		if (CURRENT_Z <= MAX_Z) Z_DIR = 1.0f;
+		else if (CURRENT_Z >= MIN_Z) Z_DIR = -1.0f;
+
+		cout << CURRENT_Z << endl;
 
 		static float rot = 0;
 
 		sca = Matrix4::scale(Vector3(.1f, .1f, .1f));
-		tra = Matrix4::translation(Vector3(0, 0, -5));
+		tra = Matrix4::translation(Vector3(0, 0, CURRENT_Z));
 		rotM = Matrix4::rotationX(rot+=0.01f) * Matrix4::rotationY(rot) * Matrix4::rotationZ(rot);
-		projection = Matrix4::perspective(45, (float)myWindow.getWidth() / myWindow.getHeight(), 0.1f, 1000.0f);
-		projection = Matrix4::orthographic(-myWindow.getAspectRatio() / 2.0f, myWindow.getAspectRatio() / 2.0f, -0.5f, 0.5f, 0, 100.0f);
 		model = sca * rotM * tra;
-		shader.setMatrix4("projectionMatrix", projection);
+		shader.setMatrix4("viewMatrix", mainCamera.getView());
 		shader.setMatrix4("modelMatrix", model);
-		shader.setMatrix4("rMatrix", rotM);
-		shader.setMatrix4("sMatrix", sca);
-		shader.setMatrix4("tMatrix", tra);
-		
+
 		//3. Draw objects
 		monkey.draw();
 		//testMesh.draw();

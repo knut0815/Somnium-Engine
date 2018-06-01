@@ -20,6 +20,11 @@ namespace Somnium
 			return *this;
 		}
 
+		Vector3 Vector3::operator-() const
+		{
+			return Vector3(-x,-y,-z);
+		}
+
 		//Subtraction Operator
 		Vector3  Vector3::operator- (const Vector3& rhs) const
 		{

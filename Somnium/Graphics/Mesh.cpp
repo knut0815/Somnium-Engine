@@ -45,7 +45,7 @@ namespace Somnium
 
 		void Mesh::draw() const
 		{
-			glDrawElements(GL_TRIANGLES, (GLsizei)m_Indices.size(), GL_UNSIGNED_INT, nullptr);
+			glDrawElements(GL_LINE_LOOP, (GLsizei)m_Indices.size(), GL_UNSIGNED_INT, nullptr);
 		}
 	}
 }

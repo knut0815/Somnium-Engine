@@ -54,14 +54,7 @@ namespace Somnium
 
 		Matrix4& Matrix4::operator*=(const Matrix4& rhs)
 		{
-			Matrix4 temp;
-
-			for (int r = 0; r < 4; r++)
-				for (int c = 0; c < 4; c++)
-					for(int e = 0; e < 4; e++)
-						temp.elements2D[r][c] += elements2D[r][e] * rhs.elements2D[e][c];
-
-			*this = temp;
+			*this = *this * rhs;
 
 			return *this;
 		}
