@@ -17,14 +17,10 @@ namespace Somnium
 			RenderableObject(Mesh* mesh) { m_Meshes.push_back(mesh);  };
 			~RenderableObject() { for (Mesh* mesh : m_Meshes) delete mesh; };
 
-			void draw() const {
-				for (Mesh* mesh : m_Meshes)
-				{
-					mesh->bind();
-					mesh->draw();
-					mesh->unbind();
-				}
-			};
+			std::vector<Mesh*> getMeshes() { return m_Meshes; }
+
+			inline const Maths::Vector3 getPosition() const { return m_Position;}
+
 			void update();
 
 		private:

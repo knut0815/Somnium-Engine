@@ -4,7 +4,9 @@
 #include <fstream>
 #include <istream>
 #include <vector>
+
 #include "../Graphics/Mesh.h"
+#include "../Graphics/Shader.h"
 
 #ifdef _WIN32
 	#define SSCANF sscanf_s
@@ -54,7 +56,7 @@ namespace Somnium {
 			return result;
 		}
 
-		static Graphics::Mesh loadOBJ(const char* filePath)
+		static Graphics::Mesh loadOBJ(const char* filePath, Graphics::Shader& shader)
 		{
 			ifstream file(filePath, ios::in);
 
@@ -71,7 +73,7 @@ namespace Somnium {
 			{
 				cerr << "Could not load OBJ file " << filePath << endl;
 				//Return an empty Mesh object, which can then be checked for emptiness with Mesh.StructureExists();
-				return Graphics::Mesh(vertices, vertexIndices, textures);
+				return Graphics::Mesh(vertices, vertexIndices, textures, shader);
 			}
 
 			string line;
@@ -164,7 +166,7 @@ namespace Somnium {
 			for (int i = 0; i < normalIndices.size(); i++) normalIndices[i] -= 1;
 			for (int i = 0; i < uvIndices.size(); i++) uvIndices[i] -= 1;
 
-			return Graphics::Mesh(vertices, vertexIndices, textures);
+			return Graphics::Mesh(vertices, vertexIndices, textures, shader);
 		}
 	}
 }

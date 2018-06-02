@@ -4,8 +4,8 @@ namespace Somnium
 {
 	namespace Graphics
 	{
-		Mesh::Mesh(std::vector<Vertex> vertices, std::vector<GLuint> indices, std::vector<Texture> textures)
-			: m_Vertices(vertices), m_Indices(indices), m_Textures(textures)
+		Mesh::Mesh(std::vector<Vertex> vertices, std::vector<GLuint> indices, std::vector<Texture> textures, Shader& shader)
+			: m_Vertices(vertices), m_Indices(indices), m_Textures(textures), m_Shader(shader)
 		{
 			init();
 		}
@@ -43,9 +43,17 @@ namespace Somnium
 			unbind();
 		}
 
-		void Mesh::draw() const
+		Maths::Matrix4 Mesh::getModelMatrix()
 		{
-			glDrawElements(GL_LINE_LOOP, (GLsizei)m_Indices.size(), GL_UNSIGNED_INT, nullptr);
+			Maths::Matrix4 modelMatrix = Maths::Matrix4::identity();
+
+			modelMatrix *= Maths::Matrix4::rotationX(m_Orientation.x);
+			modelMatrix *= Maths::Matrix4::rotationY(m_Orientation.y);
+			modelMatrix *= Maths::Matrix4::rotationZ(m_Orientation.z);
+			modelMatrix *= Maths::Matrix4::translation(m_Position);
+			modelMatrix *= Maths::Matrix4::scale(m_Scale);
+
+			return modelMatrix;
 		}
 	}
 }
