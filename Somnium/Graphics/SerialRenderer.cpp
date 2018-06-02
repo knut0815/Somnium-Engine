@@ -44,7 +44,7 @@ namespace Somnium
 					mesh->getShader().setMatrix4("viewMatrix", m_Camera.getView());
 					mesh->getShader().setMatrix4("modelMatrix", mesh->getModelMatrix());
 
-					glDrawElements(GL_LINE_LOOP, (GLsizei)mesh->getIBOSize(), GL_UNSIGNED_INT, nullptr);
+					glDrawElements(GL_LINE_LOOP, (GLsizei)mesh->getIBOSize(), GL_UNSIGNED_SHORT, nullptr);
 					
 					mesh->getShader().disable();
 					mesh->unbind();

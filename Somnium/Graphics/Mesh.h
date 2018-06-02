@@ -30,7 +30,7 @@ namespace Somnium
 		class Mesh 
 		{
 		public:
-			Mesh(std::vector<Vertex> vertices, std::vector<GLuint> indices, std::vector<Texture> textures, Shader& shader );
+			Mesh(std::vector<Vertex> vertices, std::vector<GLushort> indices, std::vector<Texture> textures, Shader& shader );
 			~Mesh();
 
 			inline void bind() const { glBindVertexArray(m_VAO); }
@@ -64,7 +64,7 @@ namespace Somnium
 			Shader& m_Shader;
 
 			const std::vector<Vertex> m_Vertices;
-			const std::vector<GLuint> m_Indices;
+			const std::vector<GLushort> m_Indices;
 			const std::vector<Texture> m_Textures;
 
 			Maths::Vector3 m_Orientation = Maths::Vector3(0, 0, 0);

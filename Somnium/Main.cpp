@@ -4,6 +4,7 @@
 #include "Graphics/Shader.h"
 #include "Graphics/Mesh.h"
 #include "Graphics/BatchRenderer.h"
+#include "Graphics/SerialRenderer.h"
 #include "Graphics/RenderableObject.h"
 #include "Graphics/Camera.h"
 
@@ -63,7 +64,7 @@ int main(int argc, char** argv) {
 	for(int i = 0; i < 1000; i++)
 		objects.push_back(new RenderableObject(new Mesh(monkeyMesh)));
 
-	BatchRenderer* renderer = new BatchRenderer(myWindow, mainCamera);
+	SerialRenderer* renderer = new SerialRenderer(myWindow, mainCamera);
 
 	for (RenderableObject* object : objects)
 	{

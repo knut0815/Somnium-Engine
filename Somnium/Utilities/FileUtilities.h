@@ -65,9 +65,9 @@ namespace Somnium {
             std::vector<Maths::Vector3> normals;
 			std::vector<Graphics::Texture> textures;
 
-			std::vector<GLuint> vertexIndices;
-			std::vector<GLuint> uvIndices;
-			std::vector<GLuint> normalIndices;
+			std::vector<GLushort> vertexIndices;
+			std::vector<GLushort> uvIndices;
+			std::vector<GLushort> normalIndices;
 
 			if (!file.is_open())
 			{
@@ -122,7 +122,7 @@ namespace Somnium {
 				//If the structure is a Face...
 				else if (header == "f")
 				{
-					unsigned int vertexIndex, texCoordIndex, normalIndex;
+					unsigned short vertexIndex, texCoordIndex, normalIndex;
 					size_t end = values.find("\n");
 					string value;
 
