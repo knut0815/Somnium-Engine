@@ -1,23 +1,23 @@
-#include "Renderer.h"
+#include "SerialRenderer.h"
 
 namespace Somnium
 {
 	namespace Graphics
 	{
-		void Renderer::updateCamera()
+		void SerialRenderer::updateCamera()
 		{
 			if (m_Window.isKeyPressed(GLFW_KEY_LEFT) || m_Window.isKeyPressed(GLFW_KEY_A))
 				m_Camera.move(Maths::Vector3(-0.01f, 0, 0));
-			else if (m_Window.isKeyPressed(GLFW_KEY_RIGHT) || m_Window.isKeyPressed(GLFW_KEY_D))
+			if (m_Window.isKeyPressed(GLFW_KEY_RIGHT) || m_Window.isKeyPressed(GLFW_KEY_D))
 				m_Camera.move(Maths::Vector3(0.01f, 0, 0));
-			else if (m_Window.isKeyPressed(GLFW_KEY_UP) || m_Window.isKeyPressed(GLFW_KEY_W))
+			if (m_Window.isKeyPressed(GLFW_KEY_UP) || m_Window.isKeyPressed(GLFW_KEY_W))
 			{
 				if (m_Window.isKeyPressed(GLFW_KEY_LEFT_CONTROL) || m_Window.isKeyPressed(GLFW_KEY_RIGHT_CONTROL))
 					m_Camera.move(Maths::Vector3(0, 0.01f, 0));
 				else
 					m_Camera.move(Maths::Vector3(0, 0, -0.01f));
 			}
-			else if (m_Window.isKeyPressed(GLFW_KEY_DOWN) || m_Window.isKeyPressed(GLFW_KEY_S))
+			if (m_Window.isKeyPressed(GLFW_KEY_DOWN) || m_Window.isKeyPressed(GLFW_KEY_S))
 			{
 				if (m_Window.isKeyPressed(GLFW_KEY_LEFT_CONTROL) || m_Window.isKeyPressed(GLFW_KEY_RIGHT_CONTROL))
 					m_Camera.move(Maths::Vector3(0, -0.01f, 0));
@@ -26,7 +26,7 @@ namespace Somnium
 			}
 		}
 
-		void Renderer::flushQueue()
+		void SerialRenderer::flushQueue()
 		{
 			while (!m_RenderQueue.empty()) {
 				RenderableObject* object = m_RenderQueue.front();

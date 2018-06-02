@@ -3,7 +3,8 @@
 #include "Graphics/Window.h"
 #include "Graphics/Shader.h"
 #include "Graphics/Mesh.h"
-#include "Graphics/Renderer.h"
+#include "Graphics/BatchRenderer.h"
+#include "Graphics/RenderableObject.h"
 #include "Graphics/Camera.h"
 
 #include "Audio/AudioEngine.h"
@@ -13,7 +14,7 @@ using namespace std;
 using namespace Somnium;
 using namespace Graphics;
 using namespace Maths;
-//using namespace Audio;
+using namespace Audio;
 
 void calculateFPS()
 {
@@ -54,15 +55,15 @@ int main(int argc, char** argv) {
 	//Renderer renderer = new Renderer();
 
     Shader* shader = new Shader("Graphics/Shaders/Basic/basic.vert", "Graphics/Shaders/Basic/basic.frag");
-	Mesh* monkeyMesh = new Mesh(Utilities::loadOBJ("Graphics/Objects/Monkey.obj", *shader));
-	monkeyMesh->translate(0,0,-5);
+	Mesh monkeyMesh = Mesh(Utilities::loadOBJ("Graphics/Objects/Monkey.obj", *shader));
+	monkeyMesh.translate(0,0,-5);
 
 	std::vector<RenderableObject*> objects;
 
 	for(int i = 0; i < 1000; i++)
-		objects.push_back(new RenderableObject(new Mesh(Utilities::loadOBJ("Graphics/Objects/Monkey.obj", *shader))));
+		objects.push_back(new RenderableObject(new Mesh(monkeyMesh)));
 
-	Renderer renderer = Renderer(myWindow, mainCamera);
+	BatchRenderer* renderer = new BatchRenderer(myWindow, mainCamera);
 
 	for (RenderableObject* object : objects)
 	{
@@ -94,13 +95,13 @@ int main(int argc, char** argv) {
 		{
 			object->getMeshes().front()->translate(0, 0, offset);
 			object->getMeshes().front()->setOrientation(0.01f, 0.01f, 0.01f); //TODO: Setup a glPop/glPushMatrix() functionality system
-			renderer.submitToQueue(object);
+			renderer->submitToQueue(object);
 		}
 
-		renderer.updateCamera();
+		renderer->updateCamera();
 
 		//3. Draw objects
-		renderer.flushQueue();
+		renderer->flushQueue();
 
 		//4. Post Processing
 		myWindow.update();

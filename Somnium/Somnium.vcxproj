@@ -137,10 +137,12 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="Audio\AudioEngine.h" />
+    <ClInclude Include="Graphics\BatchRenderer.h" />
     <ClInclude Include="Graphics\Camera.h" />
     <ClInclude Include="Maths\Maths.h" />
     <ClInclude Include="Graphics\Mesh.h" />
     <ClInclude Include="Graphics\RenderableObject.h" />
+    <ClInclude Include="Graphics\SerialRenderer.h" />
     <ClInclude Include="Graphics\Renderer.h" />
     <ClInclude Include="Utilities\FileUtilities.h" />
     <ClInclude Include="Maths\Matrix4.h" />
@@ -151,6 +153,7 @@
     <ClInclude Include="Graphics\Window.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="Graphics\BatchRenderer.cpp" />
     <ClCompile Include="Graphics\Camera.cpp" />
     <ClCompile Include="Main.cpp" />
     <ClCompile Include="Graphics\Shader.cpp" />
@@ -160,7 +163,7 @@
     <ClCompile Include="Maths\Vector4.cpp" />
     <ClCompile Include="Maths\Matrix4.cpp" />
     <ClCompile Include="Graphics\Mesh.cpp" />
-    <ClCompile Include="Graphics\Renderer.cpp" />
+    <ClCompile Include="Graphics\SerialRenderer.cpp" />
     <ClCompile Include="Graphics\RenderableObject.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
