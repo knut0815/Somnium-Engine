@@ -4,7 +4,7 @@ A game engine focusing on breathtaking visuals, ultra-realistic audio and unpara
 ## [LUMACAL Software Group](https://www.LUMACAL.co.uk)
 [**Luke K. Rose**](http://www.GitHub.com/MrLukeKR) *Graphics Engineer & Lead Programmer*  
 [**Matthew C. Mansell**](http://www.GitHub.com/mmansell14) *Audio Engineer*  
-[**Callum M. Berger**](http://www.GitHub.com/CBerger1997) *Logic Programmer* 
+[**Callum M. Berger**](http://www.GitHub.com/CBerger1997) *Logic Programmer*  
 [**Kesava Uthaya-Kumaran**](http://www.GitHub.com/kesava321) *Documentation*
 
 ## External Collaborators
