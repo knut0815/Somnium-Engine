@@ -5,9 +5,10 @@ A game engine focusing on breathtaking visuals, ultra-realistic audio and unpara
 [**Luke K. Rose**](http://www.GitHub.com/MrLukeKR) *Graphics Engineer & Lead Programmer*  
 [**Matthew C. Mansell**](http://www.GitHub.com/mmansell14) *Audio Engineer*  
 [**Callum M. Berger**](http://www.GitHub.com/CBerger1997) *Logic Programmer* 
+[**Kesava Uthaya-Kumaran**](http://www.GitHub.com/kesava321) *Documentation*
 
 ## External Collaborators
-[**Kesava Uthaya-Kumaran**](http://www.GitHub.com/kesava321) *Documentation*
+**Jemma J. Rose** *Designer*
 
 ## Additional Reading
 |Subject|Website|What Is It For?|
