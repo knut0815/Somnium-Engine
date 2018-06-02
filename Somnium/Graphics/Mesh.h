@@ -40,16 +40,20 @@ namespace Somnium
 			const inline GLuint getVAO() const { return m_VAO; }
 			const inline size_t getIBOSize() const { return m_Indices.size(); }
 			inline Shader& getShader() const { return m_Shader; }
-			Maths::Matrix4 getModelMatrix();
+			const Maths::Matrix4 getModelMatrix();
 
-			void setPosition(float x, float y, float z) { setPosition(Maths::Vector3(x, y, z)); }
-			void setPosition(Maths::Vector3 position) { m_Position = position; }
+			void rotate(float xAngleOffset, float yAngleOffset, float zAngleOffset);
+			void rotate(Maths::Vector3 rotationOffset);
 
-			void rotate(float xAngleOffset, float yAngleOffset, float zAngleOffset) { rotate(Maths::Vector3(xAngleOffset, yAngleOffset, zAngleOffset)); }
-			void rotate(Maths::Vector3 rotationOffset) { m_Orientation += rotationOffset; };
+			void setOrientation(float xAngle, float yAngle, float zAngle) { setOrientation(Maths::Vector3(xAngle, yAngle, zAngle)); }
+			void setOrientation(Maths::Vector3 rotationOffset) { m_Orientation += rotationOffset; };
 
-			void translate(float xOffset, float yOffset, float zOffset) { translate(Maths::Vector3(xOffset, yOffset, zOffset)); }
-			void translate(Maths::Vector3 offset) { m_Position += offset; };
+			void scale(float x, float y, float z);
+			void scale(Maths::Vector3 scaleAmount);
+			void scale(float uniformScale);
+
+			void translate(float xOffset, float yOffset, float zOffset);
+			void translate(Maths::Vector3 offset);
 
 		private:
 			inline void init();
@@ -63,9 +67,9 @@ namespace Somnium
 			const std::vector<GLuint> m_Indices;
 			const std::vector<Texture> m_Textures;
 
-			Maths::Vector3 m_Position = Maths::Vector3(0, 0, 0);
-			Maths::Vector3 m_Scale = Maths::Vector3(1, 1, 1);
 			Maths::Vector3 m_Orientation = Maths::Vector3(0, 0, 0);
+
+			Maths::Matrix4 m_ModelMatrix = Maths::Matrix4::identity();
 		};
 	}
 }

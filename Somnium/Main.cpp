@@ -55,10 +55,20 @@ int main(int argc, char** argv) {
 
     Shader* shader = new Shader("Graphics/Shaders/Basic/basic.vert", "Graphics/Shaders/Basic/basic.frag");
 	Mesh* monkeyMesh = new Mesh(Utilities::loadOBJ("Graphics/Objects/Monkey.obj", *shader));
-	monkeyMesh->setPosition(0,0,-5);
-	RenderableObject* monkey = new RenderableObject(monkeyMesh);
+	monkeyMesh->translate(0,0,-5);
+
+	std::vector<RenderableObject*> objects;
+
+	for(int i = 0; i < 1000; i++)
+		objects.push_back(new RenderableObject(new Mesh(Utilities::loadOBJ("Graphics/Objects/Monkey.obj", *shader))));
 
 	Renderer renderer = Renderer(myWindow, mainCamera);
+
+	for (RenderableObject* object : objects)
+	{
+		object->getMeshes().front()->scale(0.1f, 0.1f, 0.1f);
+		object->getMeshes().front()->translate((float)rand()/RAND_MAX * 10.0f, (float)rand() / RAND_MAX * 10.0f, (float)rand() / RAND_MAX * 10.0f);
+	}
 
 	while (!myWindow.isClosed())
 	{
@@ -80,11 +90,14 @@ int main(int argc, char** argv) {
 
 		monkeyZPos += offset;
 
-		monkey->getMeshes().front()->rotate(0.01f, 0.01f, 0.01f);
-		monkey->getMeshes().front()->translate(0, 0, offset);
+		for (RenderableObject* object : objects)
+		{
+			object->getMeshes().front()->translate(0, 0, offset);
+			object->getMeshes().front()->setOrientation(0.01f, 0.01f, 0.01f); //TODO: Setup a glPop/glPushMatrix() functionality system
+			renderer.submitToQueue(object);
+		}
 
 		renderer.updateCamera();
-		renderer.submitToQueue(monkey);
 
 		//3. Draw objects
 		renderer.flushQueue();

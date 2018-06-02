@@ -43,17 +43,53 @@ namespace Somnium
 			unbind();
 		}
 
-		Maths::Matrix4 Mesh::getModelMatrix()
+		void Mesh::scale(float uniformScale)
 		{
-			Maths::Matrix4 modelMatrix = Maths::Matrix4::identity();
+			scale(Maths::Vector3(uniformScale));
+		}
 
-			modelMatrix *= Maths::Matrix4::rotationX(m_Orientation.x);
-			modelMatrix *= Maths::Matrix4::rotationY(m_Orientation.y);
-			modelMatrix *= Maths::Matrix4::rotationZ(m_Orientation.z);
-			modelMatrix *= Maths::Matrix4::translation(m_Position);
-			modelMatrix *= Maths::Matrix4::scale(m_Scale);
+		void Mesh::scale(float x, float y, float z)
+		{
+			scale(Maths::Vector3(x, y, z));
+		}
 
-			return modelMatrix;
+		void Mesh::scale(Maths::Vector3 scaleAmount)
+		{
+			m_ModelMatrix *= Maths::Matrix4::scale(scaleAmount);
+		}
+
+		void Mesh::translate(float x, float y, float z)
+		{
+			translate(Maths::Vector3(x, y, z));
+		}
+
+		void Mesh::translate(Maths::Vector3 translation)
+		{
+			m_ModelMatrix *= Maths::Matrix4::translation(translation);
+		}
+
+		void Mesh::rotate(float angleX, float angleY, float angleZ)
+		{
+			rotate(Maths::Vector3(angleX, angleY, angleZ));
+		}
+
+		void Mesh::rotate(Maths::Vector3 rotation)
+		{
+			m_ModelMatrix *= Maths::Matrix4::rotationX(rotation.x);
+			m_ModelMatrix *= Maths::Matrix4::rotationY(rotation.y);
+			m_ModelMatrix *= Maths::Matrix4::rotationZ(rotation.z);
+		}
+
+		const Maths::Matrix4 Mesh::getModelMatrix()
+		{
+			Maths::Matrix4 finalisedMatrix = Maths::Matrix4::identity();
+
+			finalisedMatrix *= Maths::Matrix4::rotationX(m_Orientation.x);
+			finalisedMatrix *= Maths::Matrix4::rotationY(m_Orientation.y);
+			finalisedMatrix *= Maths::Matrix4::rotationZ(m_Orientation.z);
+			finalisedMatrix *= m_ModelMatrix;
+
+			return finalisedMatrix;
 		}
 	}
 }
