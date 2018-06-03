@@ -40,7 +40,6 @@ namespace Somnium
 			}
 
 		protected:
-			std::queue<RenderableObject*> m_RenderQueue;
 			Camera m_Camera;
 			const Window& m_Window;
 		};

@@ -18,7 +18,6 @@ namespace Somnium
 			virtual void submitToQueue(RenderableObject* object);
 			void endMapping();
 			virtual void flushQueue();
-			
 
 		private:
 			void init();
@@ -27,6 +26,7 @@ namespace Somnium
 			GLuint m_VAO, m_VBO, m_IBO;
 			std::vector<GLushort> m_Indices;
 			Vertex* m_VertexDataBuffer;
+			unsigned int m_CurrentIndex;
 		};
 	}
 }

@@ -39,6 +39,12 @@
     <Filter Include="Source Files\Audio">
       <UniqueIdentifier>{6648a748-44ff-4b22-94f3-48845ea9d1a5}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\Graphics\Buffers">
+      <UniqueIdentifier>{31cb5eac-64a2-4a98-a6be-77b59ab57a9a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Graphics\Buffers">
+      <UniqueIdentifier>{1ef01b65-56a3-4b05-b855-c3dced55c165}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Maths\Vector3.h">
@@ -86,6 +92,15 @@
     <ClInclude Include="Graphics\BatchRenderer.h">
       <Filter>Header Files\Graphics</Filter>
     </ClInclude>
+    <ClInclude Include="Graphics\Buffers\Buffer.h">
+      <Filter>Header Files\Graphics\Buffers</Filter>
+    </ClInclude>
+    <ClInclude Include="Graphics\Buffers\IndexBuffer.h">
+      <Filter>Header Files\Graphics\Buffers</Filter>
+    </ClInclude>
+    <ClInclude Include="Graphics\Buffers\VertexArray.h">
+      <Filter>Header Files\Graphics\Buffers</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Main.cpp">
@@ -123,6 +138,15 @@
     </ClCompile>
     <ClCompile Include="Graphics\BatchRenderer.cpp">
       <Filter>Source Files\Graphics</Filter>
+    </ClCompile>
+    <ClCompile Include="Graphics\Buffers\Buffer.cpp">
+      <Filter>Source Files\Graphics\Buffers</Filter>
+    </ClCompile>
+    <ClCompile Include="Graphics\Buffers\IndexBuffer.cpp">
+      <Filter>Source Files\Graphics\Buffers</Filter>
+    </ClCompile>
+    <ClCompile Include="Graphics\Buffers\VertexArray.cpp">
+      <Filter>Source Files\Graphics\Buffers</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

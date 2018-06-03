@@ -1,45 +1,33 @@
 #include "BatchRenderer.h"
 
 #define MAX_VERTICES 1000000
+#define INDEX_AMOUNT MAX_VERTICES * 3
 
 namespace Somnium
 {
 	namespace Graphics
 	{
+
 		void BatchRenderer::flushQueue()
 		{
-			while (!m_RenderQueue.empty()) {
-				RenderableObject* object = m_RenderQueue.front();
-				m_RenderQueue.pop();
+			glBindVertexArray(m_VAO);
+			glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, m_IBO);
 
-				const std::vector<Mesh*> meshes = object->getMeshes();
+			glDrawElements(GL_TRIANGLES, m_Indices.size(), GL_UNSIGNED_SHORT, NULL);
 
-				for (Mesh* mesh : meshes)
-				{
-					mesh->bind();
-					mesh->getShader().enable();
+			glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, NULL);
+			glBindVertexArray(NULL);
 
-					mesh->getShader().setMatrix4("projectionMatrix", m_Camera.getProjection());
-					mesh->getShader().setMatrix4("viewMatrix", m_Camera.getView());
-					mesh->getShader().setMatrix4("modelMatrix", mesh->getModelMatrix());
-
-					glDrawElements(GL_LINE_LOOP, (GLsizei)mesh->getIBOSize(), GL_UNSIGNED_SHORT, nullptr);
-
-					mesh->getShader().disable();
-					mesh->unbind();
-				}
-			}
+			m_CurrentIndex = 0;
 		}
 
 		void BatchRenderer::init()
 		{
 			glGenVertexArrays(1, &m_VAO);
 			glGenBuffers(1, &m_VBO);
-			glGenBuffers(1, &m_IBO);
 
 			glBindVertexArray(m_VAO);
-			glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, m_IBO);
-			glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, m_IBO);
+			glBindBuffer(GL_ARRAY_BUFFER, m_VBO);
 
 			glBufferData(GL_ARRAY_BUFFER, MAX_VERTICES * sizeof(Vertex), NULL, GL_DYNAMIC_DRAW);
 
@@ -56,7 +44,7 @@ namespace Somnium
 
 			unsigned int offset = 0;
 
-			for(unsigned int i = 0; i < 100000; i += 6) //TODO: Make the number variable
+			for(unsigned int i = 0; i < INDEX_AMOUNT; i += 6) //TODO: Make the number variable
 			{
 				for(unsigned int ind = 0; ind < 2; ind++)
 					m_Indices.push_back(offset + ind);
@@ -66,7 +54,8 @@ namespace Somnium
 				offset += 4;
 			}
 
-			glBufferData(GL_ELEMENT_ARRAY_BUFFER, m_Indices.size() * sizeof(GLushort), m_Indices.data(), GL_DYNAMIC_DRAW);
+//			m_IBO = new IndexBuffer(glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, m_IBO));
+
 			glBindVertexArray(NULL);
 		}
 
@@ -78,18 +67,21 @@ namespace Somnium
 
 		void BatchRenderer::submitToQueue(RenderableObject* object)
 		{
-			Vertex vert = object->getMeshes().front()->getVertices()->front();
-			Maths::Vector3& pos = vert.position;
+			const Maths::Vector3& pos = object->getMeshes().front()->getVertices()->front().position;
 
-			if(m_VertexDataBuffer)
+			if (m_VertexDataBuffer) {
 				m_VertexDataBuffer->position = pos;
+				m_CurrentIndex++;
+			}
 
-			m_VertexDataBuffer++;
+			
+			m_VertexDataBuffer ++;
 		}
 
 		void BatchRenderer::endMapping()
 		{
 			glUnmapBuffer(GL_ARRAY_BUFFER);
+			glBindBuffer(GL_ARRAY_BUFFER, NULL);
 		}
 	}
 }

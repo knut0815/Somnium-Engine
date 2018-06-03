@@ -18,6 +18,9 @@ namespace Somnium
 				: Renderer(window, camera) {};
 			virtual void submitToQueue(RenderableObject* object) { m_RenderQueue.push(object); }
 			virtual void flushQueue();
+
+		private:
+			std::queue<RenderableObject*> m_RenderQueue;
 		};
 	}
 }

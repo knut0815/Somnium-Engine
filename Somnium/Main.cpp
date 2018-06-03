@@ -64,7 +64,7 @@ int main(int argc, char** argv) {
 	for(int i = 0; i < 1000; i++)
 		objects.push_back(new RenderableObject(new Mesh(monkeyMesh)));
 
-	BatchRenderer* renderer = new BatchRenderer(myWindow, mainCamera);
+	SerialRenderer* renderer = new SerialRenderer(myWindow, mainCamera);
 
 	for (RenderableObject* object : objects)
 	{
@@ -72,7 +72,7 @@ int main(int argc, char** argv) {
 		object->getMeshes().front()->translate((float)rand() / RAND_MAX * 10.0f, (float)rand() / RAND_MAX * 10.0f, (float)rand() / RAND_MAX * 10.0f);
 	}
 
-	renderer->beginMapping();
+	//renderer->beginMapping();
 
 	while (!myWindow.isClosed())
 	{
@@ -114,7 +114,7 @@ int main(int argc, char** argv) {
 
 	cout << "-----------------------------------" << endl;
 
-	renderer->endMapping();
+	//renderer->endMapping();
 
 	return 0;
 }
