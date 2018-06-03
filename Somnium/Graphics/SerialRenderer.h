@@ -10,15 +10,14 @@ namespace Somnium
 {
 	namespace Graphics
 	{
-		class SerialRenderer : virtual Renderer
+		class SerialRenderer : virtual public Renderer
 		{
 		/* Methods */
 		public:
 			SerialRenderer(const Window& window, const Camera camera) 
 				: Renderer(window, camera) {};
-			virtual void submitToQueue(RenderableObject* object) { m_RenderQueue.push(object); };
+			virtual void submitToQueue(RenderableObject* object) { m_RenderQueue.push(object); }
 			virtual void flushQueue();
-			virtual void updateCamera();
 		};
 	}
 }

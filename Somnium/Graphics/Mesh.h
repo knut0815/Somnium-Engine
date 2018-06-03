@@ -41,6 +41,7 @@ namespace Somnium
 			const inline size_t getIBOSize() const { return m_Indices.size(); }
 			inline Shader& getShader() const { return m_Shader; }
 			const Maths::Matrix4 getModelMatrix();
+			const std::vector<Vertex>* getVertices() { return &m_Vertices; }
 
 			void rotate(float xAngleOffset, float yAngleOffset, float zAngleOffset);
 			void rotate(Maths::Vector3 rotationOffset);

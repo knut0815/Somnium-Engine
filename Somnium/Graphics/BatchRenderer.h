@@ -6,7 +6,7 @@ namespace Somnium
 {
 	namespace Graphics
 	{
-		class BatchRenderer : virtual Renderer
+		class BatchRenderer : virtual public Renderer
 		{
 		public:
 			BatchRenderer(const Window& window, Camera camera)
@@ -14,10 +14,11 @@ namespace Somnium
 			{
 				init();
 			};
-			
-			virtual void flushQueue();
+			void beginMapping();
 			virtual void submitToQueue(RenderableObject* object);
-			virtual void updateCamera();
+			void endMapping();
+			virtual void flushQueue();
+			
 
 		private:
 			void init();
@@ -25,6 +26,7 @@ namespace Somnium
 		private:
 			GLuint m_VAO, m_VBO, m_IBO;
 			std::vector<GLushort> m_Indices;
+			Vertex* m_VertexDataBuffer;
 		};
 	}
 }

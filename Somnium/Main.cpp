@@ -57,20 +57,22 @@ int main(int argc, char** argv) {
 
     Shader* shader = new Shader("Graphics/Shaders/Basic/basic.vert", "Graphics/Shaders/Basic/basic.frag");
 	Mesh monkeyMesh = Mesh(Utilities::loadOBJ("Graphics/Objects/Monkey.obj", *shader));
-	monkeyMesh.translate(0,0,-5);
+	monkeyMesh.translate(0,0,-50);
 
 	std::vector<RenderableObject*> objects;
 
 	for(int i = 0; i < 1000; i++)
 		objects.push_back(new RenderableObject(new Mesh(monkeyMesh)));
 
-	SerialRenderer* renderer = new SerialRenderer(myWindow, mainCamera);
+	BatchRenderer* renderer = new BatchRenderer(myWindow, mainCamera);
 
 	for (RenderableObject* object : objects)
 	{
 		object->getMeshes().front()->scale(0.1f, 0.1f, 0.1f);
-		object->getMeshes().front()->translate((float)rand()/RAND_MAX * 10.0f, (float)rand() / RAND_MAX * 10.0f, (float)rand() / RAND_MAX * 10.0f);
+		object->getMeshes().front()->translate((float)rand() / RAND_MAX * 10.0f, (float)rand() / RAND_MAX * 10.0f, (float)rand() / RAND_MAX * 10.0f);
 	}
+
+	renderer->beginMapping();
 
 	while (!myWindow.isClosed())
 	{
@@ -111,6 +113,8 @@ int main(int argc, char** argv) {
 	}
 
 	cout << "-----------------------------------" << endl;
+
+	renderer->endMapping();
 
 	return 0;
 }

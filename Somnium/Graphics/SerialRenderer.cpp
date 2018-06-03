@@ -4,28 +4,6 @@ namespace Somnium
 {
 	namespace Graphics
 	{
-		void SerialRenderer::updateCamera()
-		{
-			if (m_Window.isKeyPressed(GLFW_KEY_LEFT) || m_Window.isKeyPressed(GLFW_KEY_A))
-				m_Camera.move(Maths::Vector3(-0.01f, 0, 0));
-			if (m_Window.isKeyPressed(GLFW_KEY_RIGHT) || m_Window.isKeyPressed(GLFW_KEY_D))
-				m_Camera.move(Maths::Vector3(0.01f, 0, 0));
-			if (m_Window.isKeyPressed(GLFW_KEY_UP) || m_Window.isKeyPressed(GLFW_KEY_W))
-			{
-				if (m_Window.isKeyPressed(GLFW_KEY_LEFT_CONTROL) || m_Window.isKeyPressed(GLFW_KEY_RIGHT_CONTROL))
-					m_Camera.move(Maths::Vector3(0, 0.01f, 0));
-				else
-					m_Camera.move(Maths::Vector3(0, 0, -0.01f));
-			}
-			if (m_Window.isKeyPressed(GLFW_KEY_DOWN) || m_Window.isKeyPressed(GLFW_KEY_S))
-			{
-				if (m_Window.isKeyPressed(GLFW_KEY_LEFT_CONTROL) || m_Window.isKeyPressed(GLFW_KEY_RIGHT_CONTROL))
-					m_Camera.move(Maths::Vector3(0, -0.01f, 0));
-				else
-					m_Camera.move(Maths::Vector3(0, 0, 0.01f));
-			}
-		}
-
 		void SerialRenderer::flushQueue()
 		{
 			while (!m_RenderQueue.empty()) {
@@ -37,7 +15,6 @@ namespace Somnium
 				for (Mesh* mesh : meshes)
 				{
 					mesh->bind();
-					
 					mesh->getShader().enable();
 					
 					mesh->getShader().setMatrix4("projectionMatrix", m_Camera.getProjection());
