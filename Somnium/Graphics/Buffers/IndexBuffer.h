@@ -12,8 +12,10 @@ namespace Somnium
 			{
 			public:
 				IndexBuffer(GLushort* indices, size_t numberOfIndices);
-				IndexBuffer(std::vector<GLushort> data, size_t count) { IndexBuffer(data.data(), count); }
-				IndexBuffer(std::vector<GLushort> data) { IndexBuffer(data.data(), data.size()); }
+				IndexBuffer(std::vector<GLushort> data, size_t count) 
+					: IndexBuffer(data.data(), count) {};
+				IndexBuffer(std::vector<GLushort> data)
+					: IndexBuffer(data.data(), data.size()) {};
 				
 				~IndexBuffer();
 

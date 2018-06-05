@@ -13,8 +13,10 @@ namespace Somnium
 			{
 			public:
 				VertexBuffer(GLfloat* data, size_t count, GLuint componentCount);
-				VertexBuffer(std::vector<GLfloat>* data, size_t count, GLuint componentCount) { VertexBuffer(data->data(), count, componentCount); };
-				VertexBuffer(std::vector<GLfloat>* data, GLuint componentCount) { VertexBuffer(data->data(), data->size(), componentCount); };
+				VertexBuffer(std::vector<GLfloat> data, size_t count, GLuint componentCount) 
+					: VertexBuffer(data.data(), count, componentCount) {};
+				VertexBuffer(std::vector<GLfloat> data, GLuint componentCount) 
+					: VertexBuffer(data.data(), data.size(), componentCount) {};
 				~VertexBuffer();
 
 				inline GLuint getComponentCount() const { return m_ComponentCount; }

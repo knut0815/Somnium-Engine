@@ -170,20 +170,20 @@ namespace Somnium {
 			for (int i = 0; i < normalIndices.size(); i++) normalIndices[i] -= 1;
 			for (int i = 0; i < uvIndices.size(); i++) uvIndices[i] -= 1;
 
-			std::vector<GLfloat>* data = new std::vector<GLfloat>();
+			std::vector<GLfloat> data = std::vector<GLfloat>();
 
 			for (Maths::Vector3 point : vertexPoints)
 			{
-				data->push_back(point.x);
-				data->push_back(point.y);
-				data->push_back(point.z);
+				data.push_back(point.x);
+				data.push_back(point.y);
+				data.push_back(point.z);
 			}
 
 			Graphics::Buffers::VertexBuffer* vbo = new Graphics::Buffers::VertexBuffer(data, vertexPoints.size(), 3);
 			Graphics::Buffers::VertexArray* vao = new Graphics::Buffers::VertexArray();
 			Graphics::Buffers::IndexBuffer* ibo = new Graphics::Buffers::IndexBuffer(vertexIndices);
 
-			vao->addBuffer(vbo, vertexPoints.size());
+			vao->addBuffer(vbo, SHADER_POSITION_INDEX);
 
 			return Graphics::Mesh(vao, ibo, textures, shader);
 		}

@@ -1,5 +1,7 @@
 #include "VertexArray.h"
 
+#include <iostream>
+
 namespace Somnium
 {
 	namespace Graphics
@@ -20,6 +22,7 @@ namespace Somnium
 				buffer->bind();
 
 				glEnableVertexAttribArray(index);
+
 				glVertexAttribPointer(index, buffer->getComponentCount(), GL_FLOAT, GL_FALSE, 0, 0);
 
 				buffer->unbind();
