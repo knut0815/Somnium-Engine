@@ -1,23 +1,30 @@
 #pragma once
 #include <glew.h>
+#include <vector>
 
-namespace LKREngine
+namespace Somnium
 {
 	namespace Graphics
 	{
-		class IndexBuffer
+		namespace Buffers
 		{
-		public:
-			IndexBuffer(GLushort*, GLsizei);
-			~IndexBuffer();
-			
-			inline GLuint GetCount() const { return m_Count; }
-			inline void Bind() const;
-			inline void Unbind() const;
+			class IndexBuffer
+			{
+			public:
+				IndexBuffer(GLushort* indices, size_t numberOfIndices);
+				IndexBuffer(std::vector<GLushort> data, size_t count) { IndexBuffer(data.data(), count); }
+				IndexBuffer(std::vector<GLushort> data) { IndexBuffer(data.data(), data.size()); }
+				
+				~IndexBuffer();
 
-		private:
-			GLuint m_BufferID;
-			GLuint m_Count;
-		};
+				inline GLuint getCount() const { return m_Count; }
+				inline void bind() const;
+				inline void unbind() const;
+
+			private:
+				GLuint m_BufferID;
+				GLuint m_Count;
+			};
+		}
 	}
 }

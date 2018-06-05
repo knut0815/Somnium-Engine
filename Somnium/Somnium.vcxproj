@@ -137,8 +137,9 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="Audio\AudioEngine.h" />
+    <ClInclude Include="Graphics\Buffers\BufferStructure.h" />
     <ClInclude Include="Graphics\BatchRenderer.h" />
-    <ClInclude Include="Graphics\Buffers\Buffer.h" />
+    <ClInclude Include="Graphics\Buffers\VertexBuffer.h" />
     <ClInclude Include="Graphics\Buffers\IndexBuffer.h" />
     <ClInclude Include="Graphics\Buffers\VertexArray.h" />
     <ClInclude Include="Graphics\Camera.h" />
@@ -156,8 +157,9 @@
     <ClInclude Include="Graphics\Window.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="Graphics\Buffers\BufferStructure.cpp" />
     <ClCompile Include="Graphics\BatchRenderer.cpp" />
-    <ClCompile Include="Graphics\Buffers\Buffer.cpp" />
+    <ClCompile Include="Graphics\Buffers\VertexBuffer.cpp" />
     <ClCompile Include="Graphics\Buffers\IndexBuffer.cpp" />
     <ClCompile Include="Graphics\Buffers\VertexArray.cpp" />
     <ClCompile Include="Graphics\Camera.cpp" />

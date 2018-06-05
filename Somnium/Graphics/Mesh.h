@@ -3,12 +3,10 @@
 #include <glew.h>
 #include "../Maths/Maths.h"
 #include "Shader.h"
+#include "Buffers/IndexBuffer.h"
+#include "Buffers/VertexArray.h"
 #include <vector>
 #include <string>
-
-#define SHADER_POSITION_INDEX 0
-#define SHADER_NORMAL_INDEX 1
-#define SHADER_TEXTURE_COORDINATE_INDEX 2
 
 namespace Somnium
 {
@@ -30,18 +28,14 @@ namespace Somnium
 		class Mesh 
 		{
 		public:
-			Mesh(std::vector<Vertex> vertices, std::vector<GLushort> indices, std::vector<Texture> textures, Shader& shader );
-			~Mesh();
+			Mesh(Buffers::VertexArray* vertexArray, Buffers::IndexBuffer* indexBuffer, std::vector<Texture> textures, Shader& shader);
+			~Mesh() { delete m_VAO; delete m_IBO; };
 
-			inline void bind() const { glBindVertexArray(m_VAO); }
-			inline void unbind() const { glBindVertexArray(0); }
-
-			inline bool structureExists() const { return !m_Vertices.empty() && !m_Indices.empty(); }
-			const inline GLuint getVAO() const { return m_VAO; }
-			const inline size_t getIBOSize() const { return m_Indices.size(); }
+			const inline Buffers::VertexArray* getVAO() const { return m_VAO; }
+			const inline Buffers::IndexBuffer* getIBO() const { return m_IBO; }
+			const inline size_t getIBOSize() const { return m_IBO->getCount(); }
 			inline Shader& getShader() const { return m_Shader; }
 			const Maths::Matrix4 getModelMatrix();
-			const std::vector<Vertex>* getVertices() { return &m_Vertices; }
 
 			void rotate(float xAngleOffset, float yAngleOffset, float zAngleOffset);
 			void rotate(Maths::Vector3 rotationOffset);
@@ -57,15 +51,11 @@ namespace Somnium
 			void translate(Maths::Vector3 offset);
 
 		private:
-			inline void init();
-
-		private:
-			GLuint m_VAO, m_VBO, m_IBO;
+			Buffers::VertexArray* m_VAO;
+			Buffers::IndexBuffer* m_IBO;
 
 			Shader& m_Shader;
 
-			const std::vector<Vertex> m_Vertices;
-			const std::vector<GLushort> m_Indices;
 			const std::vector<Texture> m_Textures;
 
 			Maths::Vector3 m_Orientation = Maths::Vector3(0, 0, 0);

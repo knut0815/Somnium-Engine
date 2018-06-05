@@ -3,28 +3,31 @@
 #include <vector>
 #include <glew.h>
 
-#include "Buffer.h"
+#include "VertexBuffer.h"
 
 using namespace std;
 
-namespace LKREngine
+namespace Somnium
 {
 	namespace Graphics
 	{
-		class VertexArray
+		namespace Buffers
 		{
-		public:
-			VertexArray();
-			~VertexArray();
+			class VertexArray
+			{
+			public:
+				VertexArray();
+				~VertexArray();
+	
+				void addBuffer(VertexBuffer* vertexBuffer, GLuint index);
 
-			void AddBuffer(Buffer*, GLuint);
-
-			inline void Bind() const;
-			inline void Unbind() const;
-
-		private:
-			GLuint m_ArrayID;
-			vector<Buffer*> m_Buffers;
-		};
+				inline void bind() const;
+				inline void unbind() const;
+	
+			private:
+				GLuint m_ArrayID;
+				vector<VertexBuffer*> m_Buffers;
+			};
+		}
 	}
 }

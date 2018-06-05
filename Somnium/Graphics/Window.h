@@ -36,6 +36,7 @@ namespace Somnium {
 			friend void keyCallback(GLFWwindow*, int, int, int, int);
 			friend void mouseButtonCallback(GLFWwindow*, int, int, int);
 			friend void cursorPositionCallback(GLFWwindow*, double, double);
+			friend void errorCallback(GLenum source, GLenum type, GLuint id, GLenum severity, GLsizei length, const GLchar* message, const void* userParam);
 
 		private:
 			friend struct GLFWwindow;

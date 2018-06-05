@@ -1,42 +1,35 @@
 #include "VertexArray.h"
 
-namespace LKREngine
+namespace Somnium
 {
 	namespace Graphics
 	{
-		VertexArray::VertexArray()
+		namespace Buffers
 		{
-			glGenVertexArrays(1, &m_ArrayID);
-		}
+			VertexArray::VertexArray() { glGenVertexArrays(1, &m_ArrayID); }
 
-		VertexArray::~VertexArray() 
-		{
-			for (Buffer* buffer : m_Buffers)
-				delete buffer;
+			VertexArray::~VertexArray()
+			{
+				for (VertexBuffer* buffer : m_Buffers) delete buffer;
+				glDeleteVertexArrays(1, &m_ArrayID);
+			}
 
-			glDeleteVertexArrays(1, &m_ArrayID);
-		}
+			void VertexArray::addBuffer(VertexBuffer* buffer, GLuint index)
+			{
+				bind();
+				buffer->bind();
 
-		void VertexArray::AddBuffer(Buffer* buffer, GLuint index) 
-		{
-			Bind();
-			buffer->Bind();
+				glEnableVertexAttribArray(index);
+				glVertexAttribPointer(index, buffer->getComponentCount(), GL_FLOAT, GL_FALSE, 0, 0);
 
-			glEnableVertexAttribArray(index);
-			glVertexAttribPointer(index, buffer->GetComponentCount(), GL_FLOAT, GL_FALSE, 0, 0);
-			
-			buffer->Unbind();
-			Unbind();
-		}
+				buffer->unbind();
+				unbind();
 
-		void VertexArray::Bind() const 
-		{
-			glBindVertexArray(m_ArrayID);
-		}
+				m_Buffers.push_back(buffer);
+			}
 
-		void VertexArray::Unbind() const
-		{
-			glBindVertexArray(0);
+			void VertexArray::bind()   const { glBindVertexArray(m_ArrayID); }
+			void VertexArray::unbind() const { glBindVertexArray(0); }
 		}
 	}
 }

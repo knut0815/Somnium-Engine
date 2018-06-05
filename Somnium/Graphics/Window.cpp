@@ -3,6 +3,8 @@
 
 using namespace std;
 
+#define ENABLE_DEBUG_MODE true
+
 namespace Somnium
 {
 	namespace Graphics
@@ -91,6 +93,16 @@ namespace Somnium
 			}
 
 			cout << glewGetString(GLEW_VERSION) << endl;
+			if (ENABLE_DEBUG_MODE)
+			{
+				glEnable(GL_DEBUG_OUTPUT);
+				glDebugMessageCallback(errorCallback, 0);
+#ifndef _WIN32
+				printf("\33[31m");
+#endif
+				printf("!-- DEBUG MODE ENABLED --!\r\n", 0x1B, 31);
+
+			}
 			cout << "-----------------------------------" << endl << endl;
 
 			return true;
@@ -125,9 +137,6 @@ namespace Somnium
 
 		void Window::update() const
 		{
-			if (GLenum error = glGetError() != GL_NO_ERROR)
-				cout << glewGetErrorString(error) << endl;
-
 			glfwSwapBuffers(m_Window);
 			glfwPollEvents();
 		}
@@ -163,6 +172,20 @@ namespace Somnium
 
 			currentWindow->m_MouseX = mX;
 			currentWindow->m_MouseY = mY;
+		}
+		void errorCallback(GLenum source, GLenum type, GLuint id, GLenum severity, GLsizei length, const GLchar * message, const void * userParam)
+		{
+
+#ifndef _WIN32
+			if(type == GL_DEBUG_TYPE_ERROR)
+				printf("\33[31m");
+#endif
+			fprintf(stderr, "GL CALLBACK: %s type = 0x%x, severity = 0x%x, message = %s\n",
+				(type == GL_DEBUG_TYPE_ERROR ? "** GL ERROR **" : ""),
+				type, severity, message);
+
+			if(type == GL_DEBUG_TYPE_ERROR)
+				cin.get();
 		}
 	}
 }

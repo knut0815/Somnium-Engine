@@ -7,6 +7,9 @@
 
 #include "../Graphics/Mesh.h"
 #include "../Graphics/Shader.h"
+#include "../Graphics/Buffers/VertexBuffer.h"
+#include "../Graphics/Buffers/VertexArray.h"
+#include "../Graphics/Buffers/IndexBuffer.h"
 
 #ifdef _WIN32
 	#define SSCANF sscanf_s
@@ -60,7 +63,7 @@ namespace Somnium {
 		{
 			ifstream file(filePath, ios::in);
 
-			std::vector<Graphics::Vertex> vertices;
+			std::vector<Maths::Vector3> vertexPoints;
             std::vector<Maths::Vector2> uvs;
             std::vector<Maths::Vector3> normals;
 			std::vector<Graphics::Texture> textures;
@@ -72,8 +75,9 @@ namespace Somnium {
 			if (!file.is_open())
 			{
 				cerr << "Could not load OBJ file " << filePath << endl;
-				//Return an empty Mesh object, which can then be checked for emptiness with Mesh.StructureExists();
-				return Graphics::Mesh(vertices, vertexIndices, textures, shader);
+				//Return an empty Mesh object
+
+				return Graphics::Mesh(new Graphics::Buffers::VertexArray, new Graphics::Buffers::IndexBuffer(nullptr, 0), textures, shader);
 			}
 
 			string line;
@@ -90,11 +94,11 @@ namespace Somnium {
 				//If the structure is a Vertex...
 				if (header == "v")
 				{
-					Graphics::Vertex newVert;
+					Maths::Vector3 newVert;
 
-					SSCANF(line.c_str(),"v %f %f %f\n", &newVert.position.x, &newVert.position.y, &newVert.position.z);
+					SSCANF(line.c_str(),"v %f %f %f\n", &newVert.x, &newVert.y, &newVert.z);
 
-					vertices.push_back(newVert);
+					vertexPoints.push_back(newVert);
 				}
 				//If the structure is an Object Name...
 				else if (header == "o")
@@ -122,7 +126,7 @@ namespace Somnium {
 				//If the structure is a Face...
 				else if (header == "f")
 				{
-					unsigned short vertexIndex, texCoordIndex, normalIndex;
+					unsigned int vertexIndex, texCoordIndex, normalIndex;
 					size_t end = values.find("\n");
 					string value;
 
@@ -166,7 +170,22 @@ namespace Somnium {
 			for (int i = 0; i < normalIndices.size(); i++) normalIndices[i] -= 1;
 			for (int i = 0; i < uvIndices.size(); i++) uvIndices[i] -= 1;
 
-			return Graphics::Mesh(vertices, vertexIndices, textures, shader);
+			std::vector<GLfloat>* data = new std::vector<GLfloat>();
+
+			for (Maths::Vector3 point : vertexPoints)
+			{
+				data->push_back(point.x);
+				data->push_back(point.y);
+				data->push_back(point.z);
+			}
+
+			Graphics::Buffers::VertexBuffer* vbo = new Graphics::Buffers::VertexBuffer(data, vertexPoints.size(), 3);
+			Graphics::Buffers::VertexArray* vao = new Graphics::Buffers::VertexArray();
+			Graphics::Buffers::IndexBuffer* ibo = new Graphics::Buffers::IndexBuffer(vertexIndices);
+
+			vao->addBuffer(vbo, vertexPoints.size());
+			
+			return Graphics::Mesh(vao, ibo, textures, shader);
 		}
 	}
 }

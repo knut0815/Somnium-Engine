@@ -67,10 +67,10 @@ namespace Somnium
 
 		void BatchRenderer::submitToQueue(RenderableObject* object)
 		{
-			const Maths::Vector3& pos = object->getMeshes().front()->getVertices()->front().position;
+
 
 			if (m_VertexDataBuffer) {
-				m_VertexDataBuffer->position = pos;
+				//TODO: Draw vertices
 				m_CurrentIndex++;
 			}
 

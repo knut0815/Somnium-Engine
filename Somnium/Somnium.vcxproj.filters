@@ -92,13 +92,16 @@
     <ClInclude Include="Graphics\BatchRenderer.h">
       <Filter>Header Files\Graphics</Filter>
     </ClInclude>
-    <ClInclude Include="Graphics\Buffers\Buffer.h">
-      <Filter>Header Files\Graphics\Buffers</Filter>
-    </ClInclude>
     <ClInclude Include="Graphics\Buffers\IndexBuffer.h">
       <Filter>Header Files\Graphics\Buffers</Filter>
     </ClInclude>
     <ClInclude Include="Graphics\Buffers\VertexArray.h">
+      <Filter>Header Files\Graphics\Buffers</Filter>
+    </ClInclude>
+    <ClInclude Include="Graphics\Buffers\VertexBuffer.h">
+      <Filter>Header Files\Graphics\Buffers</Filter>
+    </ClInclude>
+    <ClInclude Include="Graphics\Buffers\BufferStructure.h">
       <Filter>Header Files\Graphics\Buffers</Filter>
     </ClInclude>
   </ItemGroup>
@@ -139,13 +142,16 @@
     <ClCompile Include="Graphics\BatchRenderer.cpp">
       <Filter>Source Files\Graphics</Filter>
     </ClCompile>
-    <ClCompile Include="Graphics\Buffers\Buffer.cpp">
-      <Filter>Source Files\Graphics\Buffers</Filter>
-    </ClCompile>
     <ClCompile Include="Graphics\Buffers\IndexBuffer.cpp">
       <Filter>Source Files\Graphics\Buffers</Filter>
     </ClCompile>
     <ClCompile Include="Graphics\Buffers\VertexArray.cpp">
+      <Filter>Source Files\Graphics\Buffers</Filter>
+    </ClCompile>
+    <ClCompile Include="Graphics\Buffers\VertexBuffer.cpp">
+      <Filter>Source Files\Graphics\Buffers</Filter>
+    </ClCompile>
+    <ClCompile Include="Graphics\Buffers\BufferStructure.cpp">
       <Filter>Source Files\Graphics\Buffers</Filter>
     </ClCompile>
   </ItemGroup>

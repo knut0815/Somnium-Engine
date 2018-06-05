@@ -4,44 +4,10 @@ namespace Somnium
 {
 	namespace Graphics
 	{
-		Mesh::Mesh(std::vector<Vertex> vertices, std::vector<GLushort> indices, std::vector<Texture> textures, Shader& shader)
-			: m_Vertices(vertices), m_Indices(indices), m_Textures(textures), m_Shader(shader)
+		Mesh::Mesh(Buffers::VertexArray* vertexArray, Buffers::IndexBuffer* indexBuffer, std::vector<Texture> textures, Shader& shader)
+			: m_Textures(textures), m_Shader(shader), m_VAO(vertexArray), m_IBO(indexBuffer)
 		{
-			init(); /* Disabled whilst working on the batch renderer*/
-		}
-
-		Mesh::~Mesh()
-		{
-			if(m_VAO) glDeleteVertexArrays(1, &m_VAO);
-			if(m_VBO) glDeleteBuffers(1, &m_VBO);
-			if(m_IBO) glDeleteBuffers(1, &m_IBO);
-		}
-
-		inline void Mesh::init()
-		{
-			glGenVertexArrays(1, &m_VAO);
-			glGenBuffers(1, &m_VBO);
-			glGenBuffers(1, &m_IBO);
-
-			bind();
-
-			glBindBuffer(GL_ARRAY_BUFFER, m_VBO);
 			
-			glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, m_IBO);
-
-			glBufferData(GL_ARRAY_BUFFER, m_Vertices.size() * sizeof(Vertex), m_Vertices.data(), GL_STATIC_DRAW);
-			glBufferData(GL_ELEMENT_ARRAY_BUFFER, m_Indices.size() * sizeof(GLushort), m_Indices.data(), GL_STATIC_DRAW);
-
-			glVertexAttribPointer(SHADER_POSITION_INDEX, 3, GL_FLOAT, GL_FALSE, sizeof(Vertex), (GLvoid*)0);
-			glEnableVertexAttribArray(SHADER_POSITION_INDEX);
-
-			glVertexAttribPointer(SHADER_NORMAL_INDEX, 3, GL_FLOAT, GL_FALSE, sizeof(Vertex), (GLvoid*)offsetof(Vertex, normal));
-			glEnableVertexAttribArray(SHADER_NORMAL_INDEX);
-
-			glVertexAttribPointer(SHADER_TEXTURE_COORDINATE_INDEX, 2, GL_FLOAT, GL_FALSE, sizeof(Vertex), (void*)offsetof(Vertex, texCoords));
-            glEnableVertexAttribArray(SHADER_TEXTURE_COORDINATE_INDEX);
-
-			unbind();
 		}
 
 		void Mesh::scale(float uniformScale)
@@ -94,3 +60,4 @@ namespace Somnium
 		}
 	}
 }
+
