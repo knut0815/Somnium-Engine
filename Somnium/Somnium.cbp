@@ -150,8 +150,25 @@
 			<Add library="GL" />
 			<Add library="X11" />
 		</Linker>
+		<Unit filename="Graphics/BatchRenderer.cpp" />
+		<Unit filename="Graphics/BatchRenderer.h" />
+		<Unit filename="Graphics/Buffers/BufferStructure.cpp" />
+		<Unit filename="Graphics/Buffers/BufferStructure.h" />
+		<Unit filename="Graphics/Buffers/IndexBuffer.cpp" />
+		<Unit filename="Graphics/Buffers/IndexBuffer.h" />
+		<Unit filename="Graphics/Buffers/VertexArray.cpp" />
+		<Unit filename="Graphics/Buffers/VertexArray.h" />
+		<Unit filename="Graphics/Buffers/VertexBuffer.cpp" />
+		<Unit filename="Graphics/Buffers/VertexBuffer.h" />
+		<Unit filename="Graphics/Camera.cpp" />
+		<Unit filename="Graphics/Camera.h" />
 		<Unit filename="Graphics/Mesh.cpp" />
 		<Unit filename="Graphics/Mesh.h" />
+		<Unit filename="Graphics/RenderableObject.cpp" />
+		<Unit filename="Graphics/RenderableObject.h" />
+		<Unit filename="Graphics/Renderer.h" />
+		<Unit filename="Graphics/SerialRenderer.cpp" />
+		<Unit filename="Graphics/SerialRenderer.h" />
 		<Unit filename="Graphics/Shader.cpp" />
 		<Unit filename="Graphics/Shader.h" />
 		<Unit filename="Graphics/Window.cpp" />

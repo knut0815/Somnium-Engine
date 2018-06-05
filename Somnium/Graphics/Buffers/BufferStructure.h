@@ -1,6 +1,7 @@
 #pragma once
 
 #include <vector>
+#include <string>
 
 #define SHADER_POSITION_INDEX 0
 #define SHADER_NORMAL_INDEX 1

@@ -10,6 +10,7 @@ namespace Somnium
 	namespace Graphics
 	{
 		void resize(GLFWwindow*, int, int);
+		void errorCallback(GLenum source, GLenum type, GLuint id, GLenum severity, GLsizei length, const GLchar* message, const void* userParam);
 
 		Window::Window(const char* title, int width, int height)
 			:m_Title(title), m_Width(width), m_Height(height)
@@ -101,7 +102,9 @@ namespace Somnium
 				printf("\33[31m");
 #endif
 				printf("!-- DEBUG MODE ENABLED --!\r\n", 0x1B, 31);
-
+#ifndef _WIN32
+				printf("\33[37m");
+#endif
 			}
 			cout << "-----------------------------------" << endl << endl;
 
@@ -176,16 +179,20 @@ namespace Somnium
 		void errorCallback(GLenum source, GLenum type, GLuint id, GLenum severity, GLsizei length, const GLchar * message, const void * userParam)
 		{
 
+
 #ifndef _WIN32
-			if(type == GL_DEBUG_TYPE_ERROR)
-				printf("\33[31m");
+		static const char* errorFlag = "\33[31m** GL ERROR **\33[37m";
+#else
+        static const char* errorFlag = "** GL ERROR **";
 #endif
-			fprintf(stderr, "GL CALLBACK: %s type = 0x%x, severity = 0x%x, message = %s\n",
-				(type == GL_DEBUG_TYPE_ERROR ? "** GL ERROR **" : ""),
+			fprintf(stderr, "\r\nGL CALLBACK: %s type = 0x%x, severity = 0x%x, message = %s\r\n",
+				(type == GL_DEBUG_TYPE_ERROR ? errorFlag : ""),
 				type, severity, message);
 
 			if(type == GL_DEBUG_TYPE_ERROR)
 				cin.get();
+
+
 		}
 	}
 }

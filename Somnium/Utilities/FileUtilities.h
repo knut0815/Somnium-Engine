@@ -24,7 +24,7 @@ using namespace std;
 	Description: Manages the I/O and parsing of various model files into meshes and their mappings
 
 	@author Luke K. Rose
-	@version 0.2 21/05/2018newVert
+	@version 0.2 21/05/2018
 
 */
 
@@ -184,7 +184,7 @@ namespace Somnium {
 			Graphics::Buffers::IndexBuffer* ibo = new Graphics::Buffers::IndexBuffer(vertexIndices);
 
 			vao->addBuffer(vbo, vertexPoints.size());
-			
+
 			return Graphics::Mesh(vao, ibo, textures, shader);
 		}
 	}
