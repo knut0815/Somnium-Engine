@@ -1,87 +1,88 @@
 #include "BatchRenderer.h"
 
-#define MAX_VERTICES 1000000
+#include "Buffers/IndexBuffer.h"
+
+#define MAX_VERTICES 100000
 #define INDEX_AMOUNT MAX_VERTICES * 3
 
 namespace Somnium
 {
 	namespace Graphics
 	{
+		BatchRenderer::~BatchRenderer()
+		{
+			delete m_VAO;
+			delete m_VBO;
+			delete m_IBO;
+		}
 
 		void BatchRenderer::flushQueue()
 		{
-			glBindVertexArray(m_VAO);
-			glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, m_IBO);
+			m_VAO->bind();
+			m_IBO->bind();
 
-			glDrawElements(GL_TRIANGLES, m_Indices.size(), GL_UNSIGNED_SHORT, NULL);
+			m_VAO->draw(m_CurrentIndex);
 
-			glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, NULL);
-			glBindVertexArray(NULL);
+			m_IBO->unbind();
+			m_VAO->unbind();
 
 			m_CurrentIndex = 0;
 		}
 
 		void BatchRenderer::init()
 		{
-			glGenVertexArrays(1, &m_VAO);
-			glGenBuffers(1, &m_VBO);
+			m_VAO = new Buffers::VertexArray();
+			m_VBO = new Buffers::VertexBuffer(NULL, MAX_VERTICES * sizeof(GLfloat), 3, GL_DYNAMIC_DRAW);
 
-			glBindVertexArray(m_VAO);
-			glBindBuffer(GL_ARRAY_BUFFER, m_VBO);
+			m_VAO->addBuffer(m_VBO, SHADER_POSITION_INDEX);
 
-			glBufferData(GL_ARRAY_BUFFER, MAX_VERTICES * sizeof(Vertex), NULL, GL_DYNAMIC_DRAW);
-
-			glVertexAttribPointer(SHADER_POSITION_INDEX, 3, GL_FLOAT, GL_FALSE, sizeof(Vertex), (const GLvoid*)0);
-			glEnableVertexAttribArray(SHADER_POSITION_INDEX);
-
+			/*
 			glVertexAttribPointer(SHADER_NORMAL_INDEX, 3, GL_FLOAT, GL_FALSE, sizeof(Vertex), (const GLvoid*)offsetof(Vertex, normal));
 			glEnableVertexAttribArray(SHADER_NORMAL_INDEX);
 
 			glVertexAttribPointer(SHADER_TEXTURE_COORDINATE_INDEX, 2, GL_FLOAT, GL_FALSE, sizeof(Vertex), (const GLvoid*)offsetof(Vertex, texCoords));
 			glEnableVertexAttribArray(SHADER_TEXTURE_COORDINATE_INDEX);
-
-			glBindBuffer(GL_ARRAY_BUFFER, NULL);
+			*/
 
 			unsigned int offset = 0;
+
+			std::vector<GLushort> indices;
 
 			for(unsigned int i = 0; i < INDEX_AMOUNT; i += 6) //TODO: Make the number variable
 			{
 				for(unsigned int ind = 0; ind < 2; ind++)
-					m_Indices.push_back(offset + ind);
+					indices.push_back(offset + ind);
 				for (unsigned int ind = 2; ind <= 4; ind++)
-					m_Indices.push_back(offset + (ind % 4));
+					indices.push_back(offset + (ind % 4));
 				
 				offset += 4;
 			}
 
-//			m_IBO = new IndexBuffer(glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, m_IBO));
-
-			glBindVertexArray(NULL);
+			m_IBO = new Buffers::IndexBuffer(indices, INDEX_AMOUNT);
 		}
 
 		void BatchRenderer::beginMapping()
 		{
-			glBindBuffer(GL_ARRAY_BUFFER, m_VBO);
-			m_VertexDataBuffer = (Vertex*)glMapBuffer(GL_ARRAY_BUFFER, GL_WRITE_ONLY);
+			m_VBO->bind();
+			m_VertexDataBuffer = (GLfloat*)glMapBuffer(GL_ARRAY_BUFFER, GL_WRITE_ONLY);
 		}
 
 		void BatchRenderer::submitToQueue(RenderableObject* object)
 		{
+			const std::vector<GLfloat>& test = object->getMeshes().front()->getVertexData();
 
-
-			if (m_VertexDataBuffer) {
-				//TODO: Draw vertices
-				m_CurrentIndex++;
+			for (GLfloat vertex : test)
+			{
+				*(m_VertexDataBuffer++) = vertex;
 			}
 
-			
-			m_VertexDataBuffer ++;
+			m_CurrentIndex += test.size() / 3;
 		}
 
 		void BatchRenderer::endMapping()
 		{
 			glUnmapBuffer(GL_ARRAY_BUFFER);
-			glBindBuffer(GL_ARRAY_BUFFER, NULL);
+			m_VBO->unbind();
 		}
 	}
 }

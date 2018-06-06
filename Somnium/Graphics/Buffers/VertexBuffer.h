@@ -12,11 +12,11 @@ namespace Somnium
 			class VertexBuffer
 			{
 			public:
-				VertexBuffer(GLfloat* data, size_t count, GLuint componentCount);
-				VertexBuffer(std::vector<GLfloat> data, size_t count, GLuint componentCount) 
-					: VertexBuffer(data.data(), count, componentCount) {};
-				VertexBuffer(std::vector<GLfloat> data, GLuint componentCount) 
-					: VertexBuffer(data.data(), data.size(), componentCount) {};
+				VertexBuffer(GLfloat* data, size_t count, GLuint componentCount, GLuint drawMode = GL_STATIC_DRAW);
+				VertexBuffer(std::vector<GLfloat> data, size_t count, GLuint componentCount, GLuint drawMode = GL_STATIC_DRAW)
+					: VertexBuffer(data.data(), count, componentCount, drawMode) {};
+				VertexBuffer(std::vector<GLfloat> data, GLuint componentCount, GLuint drawMode = GL_STATIC_DRAW)
+					: VertexBuffer(data.data(), data.size(), componentCount, drawMode) {};
 				~VertexBuffer();
 
 				inline GLuint getComponentCount() const { return m_ComponentCount; }
@@ -25,6 +25,7 @@ namespace Somnium
 
 			private:
 				GLuint m_BufferID;
+				const GLuint m_DrawMode;
 				GLuint m_ComponentCount;
 				BufferStructure m_BufferStructure;
 			};

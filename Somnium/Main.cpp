@@ -48,8 +48,8 @@ int main(int argc, char** argv) {
 
 	cout << "---------RUNNING GAME LOOP---------" << endl;
 
-	//Camera mainCamera = Camera(Matrix4::orthographic(-myWindow.getAspectRatio() / 2.0f, myWindow.getAspectRatio() / 2.0f, -0.5f, 0.5f, 1.0f, 100.0f));
-	Camera mainCamera = Camera(Matrix4::perspective(30, (float)myWindow.getWidth() / myWindow.getHeight(), 0.1f, 100.0f));
+	Camera mainCamera = Camera(Matrix4::orthographic(-myWindow.getAspectRatio() / 2.0f, myWindow.getAspectRatio() / 2.0f, -0.5f, 0.5f, 1.0f, 100.0f));
+//	Camera mainCamera = Camera(Matrix4::perspective(30, (float)myWindow.getWidth() / myWindow.getHeight(), 0.1f, 100.0f));
 
 	Matrix4 view = Matrix4::identity();
 
@@ -61,18 +61,25 @@ int main(int argc, char** argv) {
 
 	std::vector<RenderableObject*> objects;
 
-	for(int i = 0; i < 1000; i++)
+	for(int i = 0; i < 100; i++)
 		objects.push_back(new RenderableObject(new Mesh(monkeyMesh)));
 
-	SerialRenderer* renderer = new SerialRenderer(myWindow, mainCamera);
+	BatchRenderer* renderer = new BatchRenderer(myWindow, mainCamera);
+	
+	shader->enable();
 
+	shader->setMatrix4("projectionMatrix", mainCamera.getProjection());
+	shader->setMatrix4("viewMatrix", mainCamera.getView());
+	
 	for (RenderableObject* object : objects)
 	{
 		object->getMeshes().front()->scale(0.1f, 0.1f, 0.1f);
-		object->getMeshes().front()->translate((float)rand() / RAND_MAX * 10.0f, (float)rand() / RAND_MAX * 10.0f, (float)rand() / RAND_MAX * 10.0f);
+		object->getMeshes().front()->translate((float)rand() / RAND_MAX * 0.1f, (float)rand() / RAND_MAX * 0.1f, (float)rand() / RAND_MAX * -1.0f);
+		
+		shader->setMatrix4("modelMatrix", object->getMeshes().front()->getModelMatrix());
 	}
 
-	//renderer->beginMapping();
+	
 
 	while (!myWindow.isClosed())
 	{
@@ -94,6 +101,8 @@ int main(int argc, char** argv) {
 
 		monkeyZPos += offset;
 
+		renderer->beginMapping();
+
 		for (RenderableObject* object : objects)
 		{
 			object->getMeshes().front()->translate(0, 0, offset);
@@ -104,7 +113,9 @@ int main(int argc, char** argv) {
 		renderer->updateCamera();
 
 		//3. Draw objects
+		renderer->endMapping();
 		renderer->flushQueue();
+
 
 		//4. Post Processing
 		myWindow.update();
@@ -114,7 +125,7 @@ int main(int argc, char** argv) {
 
 	cout << "-----------------------------------" << endl;
 
-	//renderer->endMapping();
+	
 
 	return 0;
 }

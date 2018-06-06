@@ -10,7 +10,8 @@ namespace Somnium
 {
 	namespace Graphics
 	{
-		class SerialRenderer : virtual public Renderer
+		class SerialRenderer 
+			: virtual public Renderer
 		{
 		/* Methods */
 		public:

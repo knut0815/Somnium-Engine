@@ -29,10 +29,15 @@ namespace Somnium
 		{
 		public:
 			Mesh(Buffers::VertexArray* vertexArray, Buffers::IndexBuffer* indexBuffer, std::vector<Texture> textures, Shader& shader);
+			Mesh(std::vector<GLfloat> vertexArray, std::vector<GLushort> indexBuffer, std::vector<Texture> textures, Shader& shader);
 			~Mesh() { delete m_VAO; delete m_IBO; };
 
 			const inline Buffers::VertexArray* getVAO() const { return m_VAO; }
 			const inline Buffers::IndexBuffer* getIBO() const { return m_IBO; }
+
+			const inline std::vector<GLfloat>& getVertexData() const { return m_VertexData; }
+			const inline std::vector<GLushort>& getIndexData() const { return m_IndexData; }
+
 			const inline size_t getIBOSize() const { return m_IBO->getCount(); }
 			inline Shader& getShader() const { return m_Shader; }
 			const Maths::Matrix4 getModelMatrix();
@@ -53,6 +58,9 @@ namespace Somnium
 		private:
 			Buffers::VertexArray* m_VAO;
 			Buffers::IndexBuffer* m_IBO;
+
+			std::vector<GLfloat> m_VertexData;
+			std::vector<GLushort> m_IndexData;
 
 			Shader& m_Shader;
 

@@ -31,6 +31,11 @@ namespace Somnium
 				m_Buffers.push_back(buffer);
 			}
 
+			void VertexArray::draw(unsigned int amount) const
+			{
+				glDrawElements(GL_LINE_LOOP, amount, GL_UNSIGNED_SHORT, nullptr);
+			}
+
 			void VertexArray::bind()   const { glBindVertexArray(m_ArrayID); }
 			void VertexArray::unbind() const { glBindVertexArray(0); }
 		}

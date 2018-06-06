@@ -1,6 +1,9 @@
 #pragma once
 
 #include "Renderer.h"
+#include "Buffers/IndexBuffer.h"
+#include "Buffers/VertexBuffer.h"
+#include "Buffers/VertexArray.h"
 
 namespace Somnium
 {
@@ -14,6 +17,8 @@ namespace Somnium
 			{
 				init();
 			};
+			~BatchRenderer();
+
 			void beginMapping();
 			virtual void submitToQueue(RenderableObject* object);
 			void endMapping();
@@ -23,9 +28,11 @@ namespace Somnium
 			void init();
 
 		private:
-			GLuint m_VAO, m_VBO, m_IBO;
-			std::vector<GLushort> m_Indices;
-			Vertex* m_VertexDataBuffer;
+			Buffers::VertexArray*  m_VAO;
+			Buffers::VertexBuffer* m_VBO;
+			Buffers::IndexBuffer* m_IBO;
+			
+			GLfloat* m_VertexDataBuffer;
 			unsigned int m_CurrentIndex;
 		};
 	}

@@ -3,7 +3,7 @@
 
 using namespace std;
 
-#define ENABLE_DEBUG_MODE true
+#define ENABLE_DEBUG_MODE false
 
 namespace Somnium
 {

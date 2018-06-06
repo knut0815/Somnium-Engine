@@ -23,7 +23,8 @@ namespace Somnium
 					mesh->getVAO()->bind();
 					mesh->getIBO()->bind();
 					
-					glDrawElements(GL_LINE_LOOP, (GLsizei)mesh->getIBOSize(), GL_UNSIGNED_SHORT, nullptr);
+					mesh->getVAO()->draw(mesh->getIBO()->getCount());
+					
 					mesh->getIBO()->unbind();
 					mesh->getVAO()->unbind();
 

@@ -21,6 +21,8 @@ namespace Somnium
 	
 				void addBuffer(VertexBuffer* vertexBuffer, GLuint index);
 
+				void draw(unsigned int count) const;
+
 				inline void bind() const;
 				inline void unbind() const;
 	

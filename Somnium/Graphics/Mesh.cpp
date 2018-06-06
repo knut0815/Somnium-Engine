@@ -10,6 +10,13 @@ namespace Somnium
 			
 		}
 
+		Mesh::Mesh(std::vector<GLfloat> vertexArray, std::vector<GLushort> indexBuffer, std::vector<Texture> textures, Shader& shader)
+			: m_Textures(textures), m_Shader(shader), m_VertexData(vertexArray), m_IndexData(indexBuffer)
+		{
+
+		}
+
+
 		void Mesh::scale(float uniformScale)
 		{
 			scale(Maths::Vector3(uniformScale));

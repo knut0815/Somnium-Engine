@@ -6,12 +6,12 @@ namespace Somnium
 	{
 		namespace Buffers
 		{
-		VertexBuffer::VertexBuffer(GLfloat* data, size_t dataPointCount, GLuint componentCount)
-			: m_ComponentCount(componentCount)
+		VertexBuffer::VertexBuffer(GLfloat* data, size_t dataPointCount, GLuint componentCount, GLuint drawMode)
+			: m_ComponentCount(componentCount), m_DrawMode(drawMode)
 		{
 			glGenBuffers(1, &m_BufferID);
 			bind();
-			glBufferData(GL_ARRAY_BUFFER, dataPointCount * componentCount * sizeof(GLfloat), data, GL_STATIC_DRAW);
+			glBufferData(GL_ARRAY_BUFFER, dataPointCount * componentCount * sizeof(GLfloat), data, m_DrawMode);
 			unbind();
 		}
 
