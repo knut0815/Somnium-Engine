@@ -10,7 +10,7 @@ namespace Somnium
 				RenderableObject* object = m_RenderQueue.front();
 				m_RenderQueue.pop();
 
-				const std::shared_ptr<Mesh> mesh = object->getMesh();
+				const Mesh* mesh = object->getMesh();
 
 					mesh->getShader().enable();
 					

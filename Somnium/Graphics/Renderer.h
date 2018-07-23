@@ -4,6 +4,7 @@
 #include "Camera.h"
 #include "RenderableObject.h"
 #include <queue>
+#include <iostream>
 
 namespace Somnium
 {
@@ -38,6 +39,21 @@ namespace Somnium
 						else
 							m_Camera.move(Maths::Vector3(0, 0, 0.01f));
 					}
+
+					static double prevXOff, prevYOff;
+					static double xOff = 0, yOff = 0;
+					
+					prevXOff = xOff;
+					prevYOff = yOff;
+					
+					m_Window.getMouseScroll(xOff, yOff);
+
+					if (prevYOff < yOff)
+						m_Camera.offsetFOV(1);
+					else if (prevYOff > yOff)
+						m_Camera.offsetFOV(-1);
+
+					cout << m_Camera.getFOV() << endl;
 			}
 
 		protected:

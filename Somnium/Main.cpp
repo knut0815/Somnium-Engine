@@ -49,7 +49,7 @@ int main(int argc, char** argv) {
 	cout << "---------RUNNING GAME LOOP---------" << endl;
 
 //	Camera mainCamera = Camera(Matrix4::orthographic(-myWindow.getAspectRatio() / 2.0f, myWindow.getAspectRatio() / 2.0f, -0.5f, 0.5f, 1.0f, 100.0f));
-	Camera mainCamera = Camera(Matrix4::perspective(30, (float)myWindow.getWidth() / myWindow.getHeight(), 0.1f, 100.0f));
+	Camera mainCamera = Camera(30, (float)myWindow.getWidth() / myWindow.getHeight(), 0.1f, 100.0f);
 
 	Matrix4 view = Matrix4::identity();
 
@@ -68,20 +68,21 @@ int main(int argc, char** argv) {
 	
 	shader->enable();
 
-	shader->setMatrix4("projectionMatrix", mainCamera.getProjection());
-	shader->setMatrix4("viewMatrix", mainCamera.getView());
+	
 	
 	for (RenderableObject* object : objects)
 	{
 		float scale = (float)rand() / RAND_MAX;
 		object->getMesh()->scale(scale, scale, scale);
-		object->getMesh()->translate((float)rand() / RAND_MAX * 5 * ((rand() % 2) ? 1 : -1), (float)rand() / RAND_MAX * 5 * ((rand() % 2) ? 1 : -1), (float)rand() / RAND_MAX * -1.0f);
+		object->getMesh()->translate((float)rand() / RAND_MAX * 10 * ((rand() % 2) ? 1 : -1), (float)rand() / RAND_MAX * 10 * ((rand() % 2) ? 1 : -1), (float)rand() / RAND_MAX * -1.0f);
 		
 		shader->setMatrix4("modelMatrix", object->getMesh()->getModelMatrix());
 	}
 
 	while (!myWindow.isClosed())
 	{
+		shader->setMatrix4("projectionMatrix", mainCamera.getProjection());
+		shader->setMatrix4("viewMatrix", mainCamera.getView());
 		myWindow.clear();
 
 		double x, y;

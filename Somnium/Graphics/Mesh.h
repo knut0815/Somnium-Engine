@@ -40,7 +40,7 @@ namespace Somnium
 
 			const inline size_t getIBOSize() const { return m_IBO->getCount(); }
 			inline Shader& getShader() const { return m_Shader; }
-			const Maths::Matrix4 getModelMatrix();
+			const Maths::Matrix4 getModelMatrix() const;
 
 			void rotate(float xAngleOffset, float yAngleOffset, float zAngleOffset);
 			void rotate(Maths::Vector3 rotationOffset);

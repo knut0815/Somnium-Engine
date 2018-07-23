@@ -17,14 +17,14 @@ namespace Somnium
 
 			~RenderableObject() {};
 
-			std::shared_ptr<Mesh> getMesh() { return m_Mesh; }
+			Mesh* getMesh() { return m_Mesh; }
 
 			inline const Maths::Vector3 getPosition() const { return m_Position;}
 
 			void update();
 
 		private:
-			std::shared_ptr<Mesh> m_Mesh;
+			Mesh* m_Mesh;
 			Maths::Vector3 m_Position;
 			Maths::Vector3 m_Scale;
 			Maths::Vector3 m_Orientation;

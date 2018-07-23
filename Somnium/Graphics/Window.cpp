@@ -32,6 +32,7 @@ namespace Somnium
 			glfwSetKeyCallback(m_Window, keyCallback);
 			glfwSetMouseButtonCallback(m_Window, mouseButtonCallback);
 			glfwSetCursorPosCallback(m_Window, cursorPositionCallback);
+			glfwSetScrollCallback(m_Window, mouseScrollCallback);
 
 			glfwSwapInterval(0);
 
@@ -133,6 +134,12 @@ namespace Somnium
 			y = m_MouseY;
 		}
 
+		void Window::getMouseScroll(double& xOffset, double& yOffset) const
+		{
+			xOffset = m_MouseScrollXOffset;
+			yOffset = m_MouseScrollYOffset;
+		}
+
 		void Window::clear() const
 		{
 			glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
@@ -168,7 +175,6 @@ namespace Somnium
 			currentWindow->m_MouseButtons[button] = action != GLFW_RELEASE;
 		}
 
-
 		void cursorPositionCallback(GLFWwindow* window, double mX, double mY)
 		{
 			Window* currentWindow = (Window*)glfwGetWindowUserPointer(window);
@@ -176,6 +182,16 @@ namespace Somnium
 			currentWindow->m_MouseX = mX;
 			currentWindow->m_MouseY = mY;
 		}
+
+		void mouseScrollCallback(GLFWwindow* window, double xOffset, double yOffset)
+		{
+			Window* currentWindow = (Window*)glfwGetWindowUserPointer(window);
+
+			currentWindow->m_MouseScrollXOffset += xOffset;
+			currentWindow->m_MouseScrollYOffset += yOffset;
+
+		}
+
 		void errorCallback(GLenum source, GLenum type, GLuint id, GLenum severity, GLsizei length, const GLchar * message, const void * userParam)
 		{
 

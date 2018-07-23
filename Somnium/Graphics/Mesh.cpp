@@ -54,7 +54,7 @@ namespace Somnium
 			m_ModelMatrix *= Maths::Matrix4::rotationZ(rotation.z);
 		}
 
-		const Maths::Matrix4 Mesh::getModelMatrix()
+		const Maths::Matrix4 Mesh::getModelMatrix() const
 		{
 			Maths::Matrix4 finalisedMatrix = Maths::Matrix4::identity();
 

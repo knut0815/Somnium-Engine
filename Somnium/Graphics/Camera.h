@@ -9,25 +9,31 @@ namespace Somnium
 		{
 		/* Methods */
 		public:
-			Camera(Maths::Matrix4 projection, Maths::Vector3 position = Maths::Vector3(0, 0, 0), Maths::Vector3 orientation = Maths::Vector3(0, 0, 0));
+			Camera::Camera(const float fieldOfView, const float aspectRatio, const float near = 0.1f, const float far = 0.1f, const bool orthographic = false, Maths::Vector3 position = Maths::Vector3(), Maths::Vector3 orientation = Maths::Vector3());
 			~Camera() {};
 
 			const Maths::Matrix4& getView() const { return m_View; };
-			const Maths::Matrix4& getProjection() const { return m_Projection;  }
+			const Maths::Matrix4& getProjection() const { return m_Projection; }
+			const float& getFOV() const { return m_FieldOfView; }
 
 			void lookAt();
 			void setOrientation(Maths::Vector3 &orientation) { m_Orientation = orientation; };
 			void setOrientation(const float &pitchAngle, float const &yawAngle, const float &rollAngle) { m_Orientation = Maths::Vector3(pitchAngle, yawAngle, rollAngle); };
+			void setFOV(const float fov);
 			void setPitch(float const &angle);
 			void setYaw(float const &angle);
 			void setRoll(float const &angle);
 
 			void setPosition();
+
+			void offsetFOV(const float offset) { setFOV(m_FieldOfView + offset); }
+
 			void move(Maths::Vector3 displacement);
 			
 
 		private:
 			void updateView();
+			void updateProjection();
 			Maths::Vector3 forward();
 			Maths::Vector3 right();
 
@@ -38,6 +44,9 @@ namespace Somnium
 			Maths::Matrix4 m_Projection;
 			Maths::Vector3 m_Position;
 			Maths::Vector3 m_Orientation;
+			float m_FieldOfView = 45.f, m_Near = 0.1f, m_Far = 100.f;
+			float m_AspectRatio;
+			bool m_Orthographic = false;
 
 			Maths::Matrix4 m_View; //The finalized representation of the camera's viewpoint
 		};
