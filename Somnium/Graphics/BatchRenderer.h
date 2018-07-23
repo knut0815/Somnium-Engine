@@ -33,6 +33,7 @@ namespace Somnium
 			Buffers::IndexBuffer* m_IBO;
 			
 			GLfloat* m_VertexDataBuffer;
+			unsigned int m_CurrentVertexCount = 0;
 			unsigned int m_CurrentIndex;
 		};
 	}

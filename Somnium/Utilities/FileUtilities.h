@@ -179,7 +179,7 @@ namespace Somnium {
 				data.push_back(point.z);
 			}
 
-			/*
+			
 			Graphics::Buffers::VertexBuffer* vbo = new Graphics::Buffers::VertexBuffer(data, vertexPoints.size(), 3);
 			Graphics::Buffers::VertexArray* vao = new Graphics::Buffers::VertexArray();
 			Graphics::Buffers::IndexBuffer* ibo = new Graphics::Buffers::IndexBuffer(vertexIndices);
@@ -187,9 +187,9 @@ namespace Somnium {
 			vao->addBuffer(vbo, SHADER_POSITION_INDEX);
 
 			return Graphics::Mesh(vao, ibo, textures, shader);
-			*/
+			
 
-			return Graphics::Mesh(data, vertexIndices, textures, shader);
+			//return Graphics::Mesh(data, vertexIndices, textures, shader);
 		}
 	}
 }

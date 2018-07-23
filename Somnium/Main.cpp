@@ -48,12 +48,10 @@ int main(int argc, char** argv) {
 
 	cout << "---------RUNNING GAME LOOP---------" << endl;
 
-	Camera mainCamera = Camera(Matrix4::orthographic(-myWindow.getAspectRatio() / 2.0f, myWindow.getAspectRatio() / 2.0f, -0.5f, 0.5f, 1.0f, 100.0f));
-//	Camera mainCamera = Camera(Matrix4::perspective(30, (float)myWindow.getWidth() / myWindow.getHeight(), 0.1f, 100.0f));
+//	Camera mainCamera = Camera(Matrix4::orthographic(-myWindow.getAspectRatio() / 2.0f, myWindow.getAspectRatio() / 2.0f, -0.5f, 0.5f, 1.0f, 100.0f));
+	Camera mainCamera = Camera(Matrix4::perspective(30, (float)myWindow.getWidth() / myWindow.getHeight(), 0.1f, 100.0f));
 
 	Matrix4 view = Matrix4::identity();
-
-	//Renderer renderer = new Renderer();
 
     Shader* shader = new Shader("Graphics/Shaders/Basic/basic.vert", "Graphics/Shaders/Basic/basic.frag");
 	Mesh monkeyMesh = Mesh(Utilities::loadOBJ("Graphics/Objects/Monkey.obj", *shader));
@@ -61,10 +59,12 @@ int main(int argc, char** argv) {
 
 	std::vector<RenderableObject*> objects;
 
+	Mesh* monkey = new Mesh(monkeyMesh);
+
 	for(int i = 0; i < 100; i++)
 		objects.push_back(new RenderableObject(new Mesh(monkeyMesh)));
 
-	BatchRenderer* renderer = new BatchRenderer(myWindow, mainCamera);
+	SerialRenderer* renderer = new SerialRenderer(myWindow, mainCamera);
 	
 	shader->enable();
 
@@ -73,13 +73,12 @@ int main(int argc, char** argv) {
 	
 	for (RenderableObject* object : objects)
 	{
-		object->getMeshes().front()->scale(0.1f, 0.1f, 0.1f);
-		object->getMeshes().front()->translate((float)rand() / RAND_MAX * 0.1f, (float)rand() / RAND_MAX * 0.1f, (float)rand() / RAND_MAX * -1.0f);
+		float scale = (float)rand() / RAND_MAX;
+		object->getMesh()->scale(scale, scale, scale);
+		object->getMesh()->translate((float)rand() / RAND_MAX * 5 * ((rand() % 2) ? 1 : -1), (float)rand() / RAND_MAX * 5 * ((rand() % 2) ? 1 : -1), (float)rand() / RAND_MAX * -1.0f);
 		
-		shader->setMatrix4("modelMatrix", object->getMeshes().front()->getModelMatrix());
+		shader->setMatrix4("modelMatrix", object->getMesh()->getModelMatrix());
 	}
-
-	
 
 	while (!myWindow.isClosed())
 	{
@@ -101,19 +100,19 @@ int main(int argc, char** argv) {
 
 		monkeyZPos += offset;
 
-		renderer->beginMapping();
+		//renderer->beginMapping();
 
 		for (RenderableObject* object : objects)
 		{
-			object->getMeshes().front()->translate(0, 0, offset);
-			object->getMeshes().front()->setOrientation(0.01f, 0.01f, 0.01f); //TODO: Setup a glPop/glPushMatrix() functionality system
+			object->getMesh()->translate(0, 0, offset);
+			object->getMesh()->setOrientation(0.01f, 0.01f, 0.01f); //TODO: Setup a glPop/glPushMatrix() functionality system
 			renderer->submitToQueue(object);
 		}
 
 		renderer->updateCamera();
 
 		//3. Draw objects
-		renderer->endMapping();
+		//renderer->endMapping();
 		renderer->flushQueue();
 
 

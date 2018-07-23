@@ -10,10 +10,8 @@ namespace Somnium
 				RenderableObject* object = m_RenderQueue.front();
 				m_RenderQueue.pop();
 
-				const std::vector<Mesh*> meshes = object->getMeshes();
+				const std::shared_ptr<Mesh> mesh = object->getMesh();
 
-				for (Mesh* mesh : meshes)
-				{
 					mesh->getShader().enable();
 					
 					mesh->getShader().setMatrix4("projectionMatrix", m_Camera.getProjection());
@@ -29,7 +27,6 @@ namespace Somnium
 					mesh->getVAO()->unbind();
 
 					mesh->getShader().disable();
-				}
 			}
 		}
 	}

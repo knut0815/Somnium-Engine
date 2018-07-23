@@ -1,6 +1,7 @@
 #include "BatchRenderer.h"
 
 #include "Buffers/IndexBuffer.h"
+#include <iostream>
 
 #define MAX_VERTICES 100000
 #define INDEX_AMOUNT MAX_VERTICES * 3
@@ -18,6 +19,8 @@ namespace Somnium
 
 		void BatchRenderer::flushQueue()
 		{
+			if (m_CurrentIndex == 0 || m_CurrentVertexCount == 0) return;
+
 			m_VAO->bind();
 			m_IBO->bind();
 
@@ -27,6 +30,7 @@ namespace Somnium
 			m_VAO->unbind();
 
 			m_CurrentIndex = 0;
+			m_CurrentVertexCount = 0;
 		}
 
 		void BatchRenderer::init()
@@ -68,14 +72,21 @@ namespace Somnium
 		}
 
 		void BatchRenderer::submitToQueue(RenderableObject* object)
-		{
-			const std::vector<GLfloat>& test = object->getMeshes().front()->getVertexData();
+		{	
+			const std::vector<GLfloat>& test = object->getMesh()->getVertexData();
+			
+			if (m_CurrentVertexCount + test.size() >= MAX_VERTICES)
+			{
+				cerr << "ERROR: BATCH FULL - CANNOT ADD MORE VERTICES!" << endl;
+				return; //Too many vertices
+			}
 
 			for (GLfloat vertex : test)
 			{
 				*(m_VertexDataBuffer++) = vertex;
 			}
 
+			m_CurrentVertexCount += test.size();
 			m_CurrentIndex += test.size() / 3;
 		}
 
