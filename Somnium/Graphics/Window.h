@@ -27,8 +27,8 @@ namespace Somnium {
 
 			bool isKeyPressed(unsigned int) const;
 			bool isMouseButtonPressed(unsigned int) const;
-			void getMousePosition(double& x, double& y) const;
-			void getMouseScroll(double& xOffset, double& yOffset) const;
+			void getMousePosition(int& x, int& y) const;
+			void getMouseScroll(int& xOffset, int& yOffset) const;
 
 			friend void resize(GLFWwindow*, int, int);
 

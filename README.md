@@ -18,7 +18,9 @@ A game engine focusing on breathtaking visuals, ultra-realistic audio and unpara
 |Graphics|[ShaderToy](http://shadertoy.com)|Shader Programming Examples|
 |Graphics|[Graphics Library Framework (GLFW)](http://www.glfw.org/)|Interacting with graphics hardware via OpenGL|
 |Graphics|[Graphics Library Extension Wrangler (GLEW)](http://glew.sourceforge.net/)|Assists with loading and performing OpenGL operations|
+|Graphics|[FreeType](https://www.freetype.org/)|UI Font Rendering Package|
 |Multimedia & I/O|[Simple DirectMedia Layer (SDL)](https://www.libsdl.org/)|Interacting with Audio, I/O and Graphics hardware|
+
 
 ## File Format References
 |File Type|File Extension|File Format Specification|

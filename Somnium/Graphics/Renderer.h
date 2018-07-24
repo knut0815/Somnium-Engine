@@ -42,13 +42,21 @@ namespace Somnium
 						m_Camera.move(Maths::Vector3(0, 0, 0.01f));
 				}
 
+				Maths::Vector3 cameraPos = m_Camera.getPosition();
+				Maths::Vector3 cameraDeg = m_Camera.getOrientation();
+
+				printf("CAMERA POSITION - X: %f, Y: %f Z: %f\r\n", -cameraPos.x, -cameraPos.y, cameraPos.z);
+				printf("CAMERA ORIENTATION - Pitch: %f, Yaw: %f Roll: %f\r\n", cameraDeg.x, -cameraDeg.y, cameraDeg.z);
+
 				//Process Mouse Input
 				/* Stage 1: Scroll Wheel */
 
-				static double prevXScrollOffset, prevYScrollOffset, xScrollOffset = 0, yScrollOffset = 0;
+				static int prevXScrollOffset, prevYScrollOffset, xScrollOffset = 0, yScrollOffset = 0;
 					
 				prevXScrollOffset = xScrollOffset;
 				prevYScrollOffset = yScrollOffset;
+
+				printf("SCROLL - X: %d, Y: %d\r\n", xScrollOffset, yScrollOffset);
 					
 				m_Window.getMouseScroll(xScrollOffset, yScrollOffset);
 
@@ -58,19 +66,22 @@ namespace Somnium
 					m_Camera.offsetFOV(-1);
 
 				/* Stage 2: X/Y Offset */
-				static double mouseX = 0, mouseY = 0, prevMouseX, prevMouseY, xOffset, yOffset;
+				static int mouseX = m_Window.getWidth() / 2, mouseY = m_Window.getHeight() / 2, prevMouseX, prevMouseY, xOffset, yOffset;
 				
 				prevMouseX = mouseX;
 				prevMouseY = mouseY;
 				
 				m_Window.getMousePosition(mouseX, mouseY);
+				printf("CURSOR POSITION - X: %d, Y: %d\r\n", mouseX, mouseY);
 
 				xOffset = mouseX - prevMouseX;
 				yOffset = prevMouseY - mouseY;
 
+				printf("CURSOR OFFSET - X: %d, Y: %d\r\n", xOffset, yOffset);
+
 				m_Camera.offsetOrientation(yOffset, xOffset);
 
-				cout << "X Offset: " << xOffset << " Y Offset: " << yOffset << endl;
+				m_Camera.clearUI();
 			}
 
 		protected:

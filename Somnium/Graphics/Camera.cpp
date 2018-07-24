@@ -7,6 +7,9 @@ namespace Somnium
 		Camera::Camera(const float fieldOfView, const float aspectRatio, const float near, const float far, const bool orthographic, Maths::Vector3 position, Maths::Vector3 orientation):
 			m_Position(position), m_Orientation(orientation), m_FieldOfView(fieldOfView), m_Near(near), m_Far(far), m_Orthographic(orthographic), m_AspectRatio(aspectRatio)
 		{
+			if (FT_Init_FreeType(&m_FreeType)) std::cerr << "ERROR: Could not initialise FreeType" << std::endl;
+			if (FT_New_Face(m_FreeType, "fonts/arial.ttf", 0, &m_Face)) std::cerr << "ERROR: FreeType Failed to load font" << std::endl;
+
 			updateProjection();
 			updateView();
 		}

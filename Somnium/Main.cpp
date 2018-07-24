@@ -85,7 +85,7 @@ int main(int argc, char** argv) {
 		shader->setMatrix4("viewMatrix", mainCamera.getView());
 		myWindow.clear();
 
-		double x, y;
+		int x, y;
 
 		//1. Process I/O
 		myWindow.getMousePosition(x, y);

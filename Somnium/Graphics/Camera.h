@@ -1,5 +1,8 @@
 #pragma once
 #include "../Maths/Maths.h"
+#include <iostream>
+#include <ft2build.h>
+#include FT_FREETYPE_H
 
 namespace Somnium
 {
@@ -15,6 +18,8 @@ namespace Somnium
 			const Maths::Matrix4& getView() const { return m_View; };
 			const Maths::Matrix4& getProjection() const { return m_Projection; }
 			const float& getFOV() const { return m_FieldOfView; }
+			const Maths::Vector3& getPosition() const { return m_Position; };
+			const Maths::Vector3& getOrientation() const { return m_Orientation; };
 
 			void lookAt();
 			void setOrientation(Maths::Vector3 &orientation) { m_Orientation = orientation; };
@@ -24,13 +29,17 @@ namespace Somnium
 			void setPitch(float const &angle);
 			void setYaw(float const &angle);
 			void setRoll(float const &angle);
-
 			void setPosition();
 
 			void offsetFOV(const float offset) { setFOV(m_FieldOfView + offset); }
 
 			void move(Maths::Vector3 displacement);
 			
+			/* UI Controls */
+
+			void drawUIText() {};
+			void drawUIGraphic() {};
+			void clearUI() {};
 
 		private:
 			void updateView();
@@ -53,6 +62,9 @@ namespace Somnium
 			bool m_Orthographic = false;
 
 			Maths::Matrix4 m_View; //The finalized representation of the camera's viewpoint
+
+			FT_Library m_FreeType;
+			FT_Face m_Face;
 		};
 	}
 }

@@ -97,10 +97,14 @@ namespace Somnium
 			}
 
 			cout << glewGetString(GLEW_VERSION) << endl;
+
+			/* DEBUG MODE */
+
 			if (ENABLE_DEBUG_MODE)
 			{
 				glEnable(GL_DEBUG_OUTPUT);
 				glDebugMessageCallback(errorCallback, 0);
+
 #ifndef _WIN32
 				printf("\33[31m");
 #endif
@@ -130,13 +134,13 @@ namespace Somnium
 			return m_MouseButtons[buttonCode];
 		}
 
-		void Window::getMousePosition(double& x, double& y) const
+		void Window::getMousePosition(int& x, int& y) const
 		{
 			x = m_MouseX;
 			y = m_MouseY;
 		}
 
-		void Window::getMouseScroll(double& xOffset, double& yOffset) const
+		void Window::getMouseScroll(int& xOffset, int& yOffset) const
 		{
 			xOffset = m_MouseScrollXOffset;
 			yOffset = m_MouseScrollYOffset;
