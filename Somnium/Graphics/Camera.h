@@ -9,7 +9,7 @@ namespace Somnium
 		{
 		/* Methods */
 		public:
-			Camera::Camera(const float fieldOfView, const float aspectRatio, const float near = 0.1f, const float far = 0.1f, const bool orthographic = false, Maths::Vector3 position = Maths::Vector3(), Maths::Vector3 orientation = Maths::Vector3());
+			Camera(const float fieldOfView, const float aspectRatio, const float near = 0.1f, const float far = 0.1f, const bool orthographic = false, Maths::Vector3 position = Maths::Vector3(), Maths::Vector3 orientation = Maths::Vector3());
 			~Camera() {};
 
 			const Maths::Matrix4& getView() const { return m_View; };
@@ -18,7 +18,8 @@ namespace Somnium
 
 			void lookAt();
 			void setOrientation(Maths::Vector3 &orientation) { m_Orientation = orientation; };
-			void setOrientation(const float &pitchAngle, float const &yawAngle, const float &rollAngle) { m_Orientation = Maths::Vector3(pitchAngle, yawAngle, rollAngle); };
+			void setOrientation(const float &pitchAngle, float const &yawAngle, const float &rollAngle = 0) { m_Orientation = Maths::Vector3(pitchAngle, yawAngle, rollAngle); }
+			void offsetOrientation(const float &pitchAngle, float const &yawAngle, const float &rollAngle = 0) { m_Orientation += Maths::Vector3(pitchAngle, yawAngle, rollAngle) * m_Sensitivity; updateView(); }
 			void setFOV(const float fov);
 			void setPitch(float const &angle);
 			void setYaw(float const &angle);
@@ -44,6 +45,9 @@ namespace Somnium
 			Maths::Matrix4 m_Projection;
 			Maths::Vector3 m_Position;
 			Maths::Vector3 m_Orientation;
+
+			float m_Sensitivity = 0.05f;
+
 			float m_FieldOfView = 45.f, m_Near = 0.1f, m_Far = 100.f;
 			float m_AspectRatio;
 			bool m_Orthographic = false;

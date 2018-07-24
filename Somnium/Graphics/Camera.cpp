@@ -13,7 +13,7 @@ namespace Somnium
 
 		void Camera::setFOV(const float fov)
 		{
-			if (fov >= 1.f && fov <= 90.f) m_FieldOfView = fov; 
+			if (fov >= 1.f && fov <= 45.f) m_FieldOfView = fov; 
 			updateProjection();
 		}
 
@@ -34,10 +34,11 @@ namespace Somnium
 
 		void Camera::updateView() 
 		{
-			m_View = Maths::Matrix4::rotationX(m_Orientation.x) *
+			m_View = Maths::Matrix4::translation(m_Position) * //TODO: Include orientation here
+			Maths::Matrix4::rotationX(m_Orientation.x) *
 				Maths::Matrix4::rotationY(m_Orientation.y) *
-				Maths::Matrix4::rotationZ(m_Orientation.z) *
-				Maths::Matrix4::translation(m_Position); //TODO: Include orientation here
+				Maths::Matrix4::rotationZ(m_Orientation.z);
+				
 		}
 	}
 }	

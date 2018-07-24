@@ -34,6 +34,8 @@ namespace Somnium
 			glfwSetCursorPosCallback(m_Window, cursorPositionCallback);
 			glfwSetScrollCallback(m_Window, mouseScrollCallback);
 
+			glfwSetInputMode(m_Window, GLFW_CURSOR, GLFW_CURSOR_DISABLED); //Allows for infinite cursor movement; necessary for camera rotation
+
 			glfwSwapInterval(0);
 
 			glFrontFace(GL_CCW);
