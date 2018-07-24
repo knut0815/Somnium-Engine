@@ -49,7 +49,7 @@ int main(int argc, char** argv) {
 	cout << "---------RUNNING GAME LOOP---------" << endl;
 
 //	Camera mainCamera = Camera(Matrix4::orthographic(-myWindow.getAspectRatio() / 2.0f, myWindow.getAspectRatio() / 2.0f, -0.5f, 0.5f, 1.0f, 100.0f));
-	Camera mainCamera = Camera(30, (float)myWindow.getWidth() / myWindow.getHeight(), 0.1f, 100.0f);
+	Camera mainCamera = Camera(myWindow.getFreeTypeInstance(), 30, (float)myWindow.getWidth() / myWindow.getHeight(), 0.1f, 100.0f);
 
 	Matrix4 view = Matrix4::identity();
 

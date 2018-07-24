@@ -2,6 +2,8 @@
 
 #include <glew.h>
 #include <glfw3.h>
+#include <ft2build.h>
+#include FT_FREETYPE_H
 
 namespace Somnium {
 	namespace Graphics {
@@ -24,6 +26,7 @@ namespace Somnium {
 			inline int getWidth(void) const { return m_Width; }
 			inline int getHeight(void) const { return m_Height; }
 			inline float getAspectRatio(void) const { return m_Width / (float)m_Height;  }
+			const inline FT_Library& getFreeTypeInstance() const { return m_FreeType; }
 
 			bool isKeyPressed(unsigned int) const;
 			bool isMouseButtonPressed(unsigned int) const;
@@ -44,6 +47,8 @@ namespace Somnium {
 
 		private:
 			friend struct GLFWwindow;
+
+			FT_Library m_FreeType;
 
 			const char *m_Title;
 			int m_Width, m_Height;

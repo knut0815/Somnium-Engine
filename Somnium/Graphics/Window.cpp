@@ -48,8 +48,8 @@ namespace Somnium
 
 		bool Window::init()
 		{
-			cout << "-------INITIALISING GRAPHICS-------" << endl;
-			cout << "GLFW\t";
+			cout << "------------INITIALISING GRAPHICS------------" << endl;
+			cout << " GLFW\t\t";
 
 			if (!glfwInit())
 			{
@@ -71,7 +71,7 @@ namespace Somnium
 
 			m_Window = glfwCreateWindow(m_Width, m_Height, m_Title, NULL, NULL);
 
-			cout << "OpenGL\t";
+			cout << " OpenGL\t\t";
 
 			if (!m_Window)
 			{
@@ -83,10 +83,10 @@ namespace Somnium
 			applySettings();
 
 			cout << glGetString(GL_VERSION) << endl;
-			cout << "GLSL\t" << glGetString(GL_SHADING_LANGUAGE_VERSION) << endl;
-			cout << "GPU\t" << glGetString(GL_RENDERER) << endl;
+			cout << " GLSL\t\t" << glGetString(GL_SHADING_LANGUAGE_VERSION) << endl;
+			cout << " GPU\t\t" << glGetString(GL_RENDERER) << endl;
 
-			cout << "GLEW\t";
+			cout << " GLEW\t\t";
 
 			glewExperimental = GL_TRUE;
 
@@ -97,6 +97,18 @@ namespace Somnium
 			}
 
 			cout << glewGetString(GLEW_VERSION) << endl;
+
+			cout << " FreeType\t";
+			if (FT_Init_FreeType(&m_FreeType))
+			{
+				std::cerr << "Could not initialise FreeType" << std::endl;
+				return false;
+			}
+
+			int ftMaj, ftMin, ftPatch;
+			FT_Library_Version(m_FreeType, &ftMaj, &ftMin, &ftPatch);
+
+			std::cout << ftMaj << "." << ftMin << " Patch " << ftPatch << endl;
 
 			/* DEBUG MODE */
 
@@ -113,7 +125,7 @@ namespace Somnium
 				printf("\33[37m");
 #endif
 			}
-			cout << "-----------------------------------" << endl << endl;
+			cout << "---------------------------------------------" << endl << endl;
 
 			return true;
 		}
