@@ -13,7 +13,7 @@ namespace Somnium
 		class Renderer
 		{
 		public:
-			Renderer(const Window& window, const Camera camera) 
+			Renderer(const Window& window, const Camera camera)
 				: m_Window(window), m_Camera(camera) {};
 
 			virtual void flushQueue() = 0;
@@ -45,19 +45,19 @@ namespace Somnium
 				Maths::Vector3 cameraPos = m_Camera.getPosition();
 				Maths::Vector3 cameraDeg = m_Camera.getOrientation();
 
-				printf("CAMERA POSITION - X: %f, Y: %f Z: %f\r\n", -cameraPos.x, -cameraPos.y, cameraPos.z);
-				printf("CAMERA ORIENTATION - Pitch: %f, Yaw: %f Roll: %f\r\n", cameraDeg.x, -cameraDeg.y, cameraDeg.z);
+				//printf("CAMERA POSITION - X: %f, Y: %f Z: %f\r\n", -cameraPos.x, -cameraPos.y, cameraPos.z);
+				//printf("CAMERA ORIENTATION - Pitch: %f, Yaw: %f Roll: %f\r\n", cameraDeg.x, -cameraDeg.y, cameraDeg.z);
 
 				//Process Mouse Input
 				/* Stage 1: Scroll Wheel */
 
 				static int prevXScrollOffset, prevYScrollOffset, xScrollOffset = 0, yScrollOffset = 0;
-					
+
 				prevXScrollOffset = xScrollOffset;
 				prevYScrollOffset = yScrollOffset;
 
-				printf("SCROLL - X: %d, Y: %d\r\n", xScrollOffset, yScrollOffset);
-					
+			//	printf("SCROLL - X: %d, Y: %d\r\n", xScrollOffset, yScrollOffset);
+
 				m_Window.getMouseScroll(xScrollOffset, yScrollOffset);
 
 				if (prevYScrollOffset < yScrollOffset)
@@ -67,17 +67,17 @@ namespace Somnium
 
 				/* Stage 2: X/Y Offset */
 				static int mouseX = m_Window.getWidth() / 2, mouseY = m_Window.getHeight() / 2, prevMouseX, prevMouseY, xOffset, yOffset;
-				
+
 				prevMouseX = mouseX;
 				prevMouseY = mouseY;
-				
+
 				m_Window.getMousePosition(mouseX, mouseY);
-				printf("CURSOR POSITION - X: %d, Y: %d\r\n", mouseX, mouseY);
+			//	printf("CURSOR POSITION - X: %d, Y: %d\r\n", mouseX, mouseY);
 
 				xOffset = mouseX - prevMouseX;
 				yOffset = prevMouseY - mouseY;
 
-				printf("CURSOR OFFSET - X: %d, Y: %d\r\n", xOffset, yOffset);
+			//	printf("CURSOR OFFSET - X: %d, Y: %d\r\n", xOffset, yOffset);
 
 				m_Camera.offsetOrientation(yOffset, xOffset);
 
