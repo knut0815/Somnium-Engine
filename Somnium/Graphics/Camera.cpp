@@ -4,16 +4,9 @@ namespace Somnium
 {
 	namespace Graphics
 	{
-		Camera::Camera(const FT_Library& ftLibrary, const float fieldOfView, const float aspectRatio, const float near, const float far, const bool orthographic, Maths::Vector3 position, Maths::Vector3 orientation):
-			m_Position(position), m_Orientation(orientation), m_FieldOfView(fieldOfView), m_Near(near), m_Far(far), m_Orthographic(orthographic), m_AspectRatio(aspectRatio), m_FreeType(ftLibrary)
+		Camera::Camera(const float fieldOfView, const float aspectRatio, const float near, const float far, const bool orthographic, Maths::Vector3 position, Maths::Vector3 orientation):
+			m_Position(position), m_Orientation(orientation), m_FieldOfView(fieldOfView), m_Near(near), m_Far(far), m_Orthographic(orthographic), m_AspectRatio(aspectRatio)
 		{
-			if (FT_New_Face(m_FreeType, "Fonts/arial.ttf", 0, &m_Face)) std::cerr << "ERROR: FreeType Failed to load font" << std::endl;
-            else
-                FT_Set_Pixel_Sizes(m_Face, 0, 48);
-
-           if(FT_Load_Char(m_Face, 'X', FT_LOAD_RENDER)) std::cerr << "ERROR: Failed to load Glyph" << std::endl;
-
-
 			updateProjection();
 			updateView();
 		}

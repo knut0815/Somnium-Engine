@@ -1,8 +1,6 @@
 #pragma once
 #include "../Maths/Maths.h"
 #include <iostream>
-#include <ft2build.h>
-#include FT_FREETYPE_H
 
 namespace Somnium
 {
@@ -12,7 +10,7 @@ namespace Somnium
 		{
 		/* Methods */
 		public:
-			Camera(const FT_Library& ftLibrary, const float fieldOfView, const float aspectRatio, const float near = 0.1f, const float far = 0.1f, const bool orthographic = false, Maths::Vector3 position = Maths::Vector3(), Maths::Vector3 orientation = Maths::Vector3());
+			Camera(const float fieldOfView, const float aspectRatio, const float near = 0.1f, const float far = 0.1f, const bool orthographic = false, Maths::Vector3 position = Maths::Vector3(), Maths::Vector3 orientation = Maths::Vector3());
 			~Camera() {};
 
 			const Maths::Matrix4& getView() const { return m_View; };
@@ -44,6 +42,7 @@ namespace Somnium
 		private:
 			void updateView();
 			void updateProjection();
+			inline void initialiseUI();
 			Maths::Vector3 forward();
 			Maths::Vector3 right();
 
@@ -55,8 +54,6 @@ namespace Somnium
 			Maths::Vector3 m_Position;
 			Maths::Vector3 m_Orientation;
 
-			const FT_Library m_FreeType;
-
 			float m_Sensitivity = 0.05f;
 
 			float m_FieldOfView = 45.f, m_Near = 0.1f, m_Far = 100.f;
@@ -64,8 +61,6 @@ namespace Somnium
 			bool m_Orthographic = false;
 
 			Maths::Matrix4 m_View; //The finalized representation of the camera's viewpoint
-
-			FT_Face m_Face;
 		};
 	}
 }

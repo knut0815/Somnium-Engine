@@ -30,9 +30,6 @@
     <Filter Include="Source Files\Maths">
       <UniqueIdentifier>{7c0051b2-9638-43cd-a181-eb2d42079baf}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Source Files\Graphics\Shaders">
-      <UniqueIdentifier>{9d46dd9b-786c-4988-8cd7-ee0a31b3b696}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Header Files\Audio">
       <UniqueIdentifier>{2b45acd4-1e23-4a00-8d3d-598abf2cc37d}</UniqueIdentifier>
     </Filter>
@@ -44,6 +41,18 @@
     </Filter>
     <Filter Include="Source Files\Graphics\Buffers">
       <UniqueIdentifier>{1ef01b65-56a3-4b05-b855-c3dced55c165}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Graphics\Renderers">
+      <UniqueIdentifier>{15c4383c-456e-4ed8-a984-2444e07290d4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Graphics\Renderers">
+      <UniqueIdentifier>{2343269d-18c0-4e3f-8f6a-b827b4d5f1e0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Graphics\UI">
+      <UniqueIdentifier>{4a9f6983-9ae6-4dca-9904-11b70caac62f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Graphics\UI">
+      <UniqueIdentifier>{5ea79a86-dde9-4d62-a037-a487fbb7239a}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -83,15 +92,6 @@
     <ClInclude Include="Graphics\Camera.h">
       <Filter>Header Files\Graphics</Filter>
     </ClInclude>
-    <ClInclude Include="Graphics\SerialRenderer.h">
-      <Filter>Header Files\Graphics</Filter>
-    </ClInclude>
-    <ClInclude Include="Graphics\Renderer.h">
-      <Filter>Header Files\Graphics</Filter>
-    </ClInclude>
-    <ClInclude Include="Graphics\BatchRenderer.h">
-      <Filter>Header Files\Graphics</Filter>
-    </ClInclude>
     <ClInclude Include="Graphics\Buffers\IndexBuffer.h">
       <Filter>Header Files\Graphics\Buffers</Filter>
     </ClInclude>
@@ -103,6 +103,21 @@
     </ClInclude>
     <ClInclude Include="Graphics\Buffers\BufferStructure.h">
       <Filter>Header Files\Graphics\Buffers</Filter>
+    </ClInclude>
+    <ClInclude Include="Graphics\Renderers\BatchRenderer.h">
+      <Filter>Header Files\Graphics\Renderers</Filter>
+    </ClInclude>
+    <ClInclude Include="Graphics\Renderers\Renderer.h">
+      <Filter>Header Files\Graphics\Renderers</Filter>
+    </ClInclude>
+    <ClInclude Include="Graphics\Renderers\SerialRenderer.h">
+      <Filter>Header Files\Graphics\Renderers</Filter>
+    </ClInclude>
+    <ClInclude Include="UIText.h">
+      <Filter>Header Files\Graphics\UI</Filter>
+    </ClInclude>
+    <ClInclude Include="Graphics\Font.h">
+      <Filter>Header Files\Graphics</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -136,12 +151,6 @@
     <ClCompile Include="Graphics\RenderableObject.cpp">
       <Filter>Source Files\Graphics</Filter>
     </ClCompile>
-    <ClCompile Include="Graphics\SerialRenderer.cpp">
-      <Filter>Source Files\Graphics</Filter>
-    </ClCompile>
-    <ClCompile Include="Graphics\BatchRenderer.cpp">
-      <Filter>Source Files\Graphics</Filter>
-    </ClCompile>
     <ClCompile Include="Graphics\Buffers\IndexBuffer.cpp">
       <Filter>Source Files\Graphics\Buffers</Filter>
     </ClCompile>
@@ -153,6 +162,18 @@
     </ClCompile>
     <ClCompile Include="Graphics\Buffers\BufferStructure.cpp">
       <Filter>Source Files\Graphics\Buffers</Filter>
+    </ClCompile>
+    <ClCompile Include="Graphics\Renderers\BatchRenderer.cpp">
+      <Filter>Source Files\Graphics\Renderers</Filter>
+    </ClCompile>
+    <ClCompile Include="Graphics\Renderers\SerialRenderer.cpp">
+      <Filter>Source Files\Graphics\Renderers</Filter>
+    </ClCompile>
+    <ClCompile Include="UIText.cpp">
+      <Filter>Source Files\Graphics\UI</Filter>
+    </ClCompile>
+    <ClCompile Include="Graphics\Font.cpp">
+      <Filter>Source Files\Graphics</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

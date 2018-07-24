@@ -108,7 +108,7 @@ namespace Somnium
 			int ftMaj, ftMin, ftPatch;
 			FT_Library_Version(m_FreeType, &ftMaj, &ftMin, &ftPatch);
 
-			std::cout << ftMaj << "." << ftMin << " Patch " << ftPatch << endl;
+			std::cout << ftMaj << "." << ftMin << "." << ftPatch << endl;
 
 			/* DEBUG MODE */
 
