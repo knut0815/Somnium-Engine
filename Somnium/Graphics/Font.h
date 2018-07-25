@@ -16,7 +16,7 @@ namespace Somnium
 			GLuint m_TextureID;
 			Maths::Vector2 m_Size;
 			Maths::Vector2 m_Bearing;
-			GLuint m_Advance;
+			FT_Pos m_Advance;
 		};
 
 		class Font
