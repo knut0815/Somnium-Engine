@@ -113,11 +113,17 @@
     <ClInclude Include="Graphics\Renderers\SerialRenderer.h">
       <Filter>Header Files\Graphics\Renderers</Filter>
     </ClInclude>
-    <ClInclude Include="UIText.h">
-      <Filter>Header Files\Graphics\UI</Filter>
-    </ClInclude>
     <ClInclude Include="Graphics\Font.h">
       <Filter>Header Files\Graphics</Filter>
+    </ClInclude>
+    <ClInclude Include="Graphics\UI\UIText.h">
+      <Filter>Header Files\Graphics\UI</Filter>
+    </ClInclude>
+    <ClInclude Include="Graphics\UI\UIObject.h">
+      <Filter>Header Files\Graphics\UI</Filter>
+    </ClInclude>
+    <ClInclude Include="Graphics\UI\UIImage.h">
+      <Filter>Header Files\Graphics\UI</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -169,11 +175,11 @@
     <ClCompile Include="Graphics\Renderers\SerialRenderer.cpp">
       <Filter>Source Files\Graphics\Renderers</Filter>
     </ClCompile>
-    <ClCompile Include="UIText.cpp">
-      <Filter>Source Files\Graphics\UI</Filter>
-    </ClCompile>
     <ClCompile Include="Graphics\Font.cpp">
       <Filter>Source Files\Graphics</Filter>
+    </ClCompile>
+    <ClCompile Include="Graphics\UI\UIText.cpp">
+      <Filter>Source Files\Graphics\UI</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

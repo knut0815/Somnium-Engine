@@ -1,5 +1,11 @@
 #include "Camera.h"
 
+#ifdef _WIN32
+	#define SPRINTF sprintf_s
+#else
+	#define SPRINTF sprintf
+#endif
+
 namespace Somnium
 {
 	namespace Graphics
@@ -7,6 +13,11 @@ namespace Somnium
 		Camera::Camera(const float fieldOfView, const float aspectRatio, const float near, const float far, const bool orthographic, Maths::Vector3 position, Maths::Vector3 orientation):
 			m_Position(position), m_Orientation(orientation), m_FieldOfView(fieldOfView), m_Near(near), m_Far(far), m_Orthographic(orthographic), m_AspectRatio(aspectRatio)
 		{
+#if ENABLE_DEBUG_CAMERA
+			m_UIObjects.push_back(&m_UICameraPosition);
+			m_UIObjects.push_back(&m_UICameraOrientation);
+			m_UIObjects.push_back(&m_UIFieldOfView);
+#endif
 			updateProjection();
 			updateView();
 		}
@@ -38,7 +49,22 @@ namespace Somnium
 			Maths::Matrix4::rotationX(m_Orientation.x) *
 				Maths::Matrix4::rotationY(m_Orientation.y) *
 				Maths::Matrix4::rotationZ(m_Orientation.z);
+		}
 
+		void Camera::updateUI()
+		{
+#if ENABLE_DEBUG_CAMERA
+			static char camPos[128], camRot[128], camFOV[128];
+			SPRINTF(camPos, "CAMERA POSITION - X: %f, Y: %f Z: %f\r\n", -m_Position.x, -m_Position.y, m_Position.z);
+			SPRINTF(camRot, "CAMERA ORIENTATION - Pitch: %f, Yaw: %f Roll: %f\r\n", m_Orientation.x, -m_Orientation.y, m_Orientation.z);
+			SPRINTF(camFOV, "CAMERA FIELD OF VIEW - %d\r\n", m_FieldOfView);
+			//printf("CURSOR POSITION - X: %d, Y: %d\r\n", mouseX, mouseY);
+			//printf("CURSOR OFFSET - X: %d, Y: %d\r\n", xOffset, yOffset);
+
+			m_UICameraPosition.setText(camPos);
+			m_UICameraOrientation.setText(camRot);
+			m_UIFieldOfView.setText(camFOV);
+#endif
 		}
 	}
 }

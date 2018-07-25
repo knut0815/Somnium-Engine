@@ -151,7 +151,9 @@
     <ClInclude Include="Graphics\RenderableObject.h" />
     <ClInclude Include="Graphics\Renderers\SerialRenderer.h" />
     <ClInclude Include="Graphics\Renderers\Renderer.h" />
-    <ClInclude Include="UIText.h" />
+    <ClInclude Include="Graphics\UI\UIText.h" />
+    <ClInclude Include="Graphics\UI\UIImage.h" />
+    <ClInclude Include="Graphics\UI\UIObject.h" />
     <ClInclude Include="Utilities\FileUtilities.h" />
     <ClInclude Include="Maths\Matrix4.h" />
     <ClInclude Include="Graphics\Shader.h" />
@@ -178,7 +180,7 @@
     <ClCompile Include="Graphics\Mesh.cpp" />
     <ClCompile Include="Graphics\Renderers\SerialRenderer.cpp" />
     <ClCompile Include="Graphics\RenderableObject.cpp" />
-    <ClCompile Include="UIText.cpp" />
+    <ClCompile Include="Graphics\UI\UIText.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

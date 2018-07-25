@@ -1,6 +1,12 @@
 #pragma once
+
+#define ENABLE_DEBUG_CAMERA true
+
 #include "../Maths/Maths.h"
-#include <iostream>
+#include "UI/UIObject.h"
+#include "UI/UIText.h"
+#include "UI/UIImage.h"
+#include <vector>
 
 namespace Somnium
 {
@@ -37,6 +43,7 @@ namespace Somnium
 
 			void drawUIText() {};
 			void drawUIGraphic() {};
+			void updateUI();
 			void clearUI() {};
 
 		private:
@@ -61,6 +68,14 @@ namespace Somnium
 			bool m_Orthographic = false;
 
 			Maths::Matrix4 m_View; //The finalized representation of the camera's viewpoint
+
+			std::vector<UI::UIObject*> m_UIObjects;
+
+#if ENABLE_DEBUG_CAMERA
+			UI::UIText m_UICameraPosition;
+			UI::UIText m_UICameraOrientation;
+			UI::UIText m_UIFieldOfView;
+#endif
 		};
 	}
 }
