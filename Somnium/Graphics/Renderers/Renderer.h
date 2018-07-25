@@ -74,7 +74,6 @@ namespace Somnium
 					yOffset = prevMouseY - mouseY;
 
 					m_Camera.offsetOrientation(yOffset, xOffset);
-
 					m_Camera.updateUI();
 				}
 

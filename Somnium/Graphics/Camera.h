@@ -6,7 +6,6 @@
 #include "UI/UIObject.h"
 #include "UI/UIText.h"
 #include "UI/UIImage.h"
-#include <vector>
 
 namespace Somnium
 {
@@ -40,16 +39,18 @@ namespace Somnium
 			void move(Maths::Vector3 displacement);
 			
 			/* UI Controls */
+			
+			void addUIObject(std::string key, UI::UIObject* object) { m_UIObjects.insert(std::pair<std::string, UI::UIObject*>(key, object)); }
+			void removeUIObject();
 
-			void drawUIText() {};
-			void drawUIGraphic() {};
 			void updateUI();
 			void clearUI() {};
 
 		private:
+			void drawUI();
+
 			void updateView();
 			void updateProjection();
-			inline void initialiseUI();
 			Maths::Vector3 forward();
 			Maths::Vector3 right();
 
@@ -63,19 +64,14 @@ namespace Somnium
 
 			float m_Sensitivity = 0.05f;
 
-			float m_FieldOfView = 45.f, m_Near = 0.1f, m_Far = 100.f;
+			float m_Near = 0.1f, m_Far = 100.f;
+			unsigned int m_FieldOfView = 45;
 			float m_AspectRatio;
 			bool m_Orthographic = false;
 
 			Maths::Matrix4 m_View; //The finalized representation of the camera's viewpoint
 
-			std::vector<UI::UIObject*> m_UIObjects;
-
-#if ENABLE_DEBUG_CAMERA
-			UI::UIText m_UICameraPosition;
-			UI::UIText m_UICameraOrientation;
-			UI::UIText m_UIFieldOfView;
-#endif
+			std::map<std::string, UI::UIObject*> m_UIObjects;
 		};
 	}
 }

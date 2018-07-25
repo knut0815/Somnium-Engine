@@ -13,14 +13,17 @@ namespace Somnium
 			{
 			public:
 				UIObject() {};
-				~UIObject() {};
+				virtual ~UIObject() {};
+
+				virtual void render() {};
 
 				void setShader(Shader* shader) { m_Shader = shader; }
 
-			private:
+			protected:
 				Maths::Vector2 m_Position;
 				float m_Rotation;
 				Shader *m_Shader;
+				GLuint m_VAO, m_VBO;
 			};
 		}
 	}

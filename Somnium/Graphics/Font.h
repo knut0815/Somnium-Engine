@@ -13,18 +13,19 @@ namespace Somnium
 	{
 		struct UICharacter
 		{
-			GLuint m_TextureID;
-			Maths::Vector2 m_Size;
-			Maths::Vector2 m_Bearing;
-			FT_Pos m_Advance;
+			GLuint textureID;
+			Maths::Vector2 size;
+			Maths::Vector2 bearing;
+			FT_Pos advance;
 		};
 
 		class Font
 		{
 		public:
 			Font(const char* fontFilepath, const FT_Library& freeTypeInstance);
-			~Font();
+			~Font() {};
 
+			const std::map<GLchar, UICharacter>& getCharacterMap() const { return m_CharacterMap;  }
 		private:
 			const FT_Library& m_FreeType;
 			FT_GlyphSlot m_GlyphSlot;

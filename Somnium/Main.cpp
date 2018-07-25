@@ -53,10 +53,19 @@ int main(int argc, char** argv) {
 	Camera mainCamera = Camera(30, (float)myWindow.getWidth() / myWindow.getHeight(), 0.1f, 100.0f);
 
 	Font* arial = new Font("Fonts/arial.ttf", myWindow.getFreeTypeInstance());
+	Shader* shader = new Shader("Graphics/Shaders/Basic/basic.vert", "Graphics/Shaders/Basic/basic.frag");
+	Shader* textShader = new Shader("Graphics/Shaders/Basic/basicText.vert", "Graphics/Shaders/Basic/basicText.frag");
+	textShader->enable();
+	textShader->setMatrix4("projection", Matrix4::orthographic(0, myWindow.getWidth(),0, myWindow.getHeight(), 1.0f, 100.0f));
+	
+#if ENABLE_DEBUG_CAMERA
+	mainCamera.addUIObject("CameraPosition", new UI::UIText("CAMERA POSITION", arial, Maths::Vector2(25, 25), textShader));
+	mainCamera.addUIObject("CameraOrientation", new UI::UIText("CAMERA ORIENTATION", arial, Maths::Vector2(1, 0), textShader));
+	mainCamera.addUIObject("FieldOfView", new UI::UIText("Field of View", arial, Maths::Vector2(2, 0), textShader));
+#endif
 
 	Matrix4 view = Matrix4::identity();
-
-    Shader* shader = new Shader("Graphics/Shaders/Basic/basic.vert", "Graphics/Shaders/Basic/basic.frag");
+	    
 	Mesh monkeyMesh = Mesh(Utilities::loadOBJ("Graphics/Objects/Monkey.obj", *shader));
 	monkeyMesh.translate(0,0,-50);
 
@@ -116,7 +125,7 @@ int main(int argc, char** argv) {
 		//3. Draw objects
 		//renderer->endMapping();
 		renderer->flushQueue();
-
+		mainCamera.updateUI();
 
 		//4. Post Processing
 		myWindow.update();
