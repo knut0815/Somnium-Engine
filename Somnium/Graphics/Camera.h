@@ -44,11 +44,10 @@ namespace Somnium
 			void removeUIObject();
 
 			void updateUI();
+			void drawUI();
 			void clearUI() {};
 
 		private:
-			void drawUI();
-
 			void updateView();
 			void updateProjection();
 			Maths::Vector3 forward();

@@ -27,9 +27,9 @@ namespace Somnium
 
 					mesh->getIBO()->unbind();
 					mesh->getVAO()->unbind();
-
-					mesh->getShader().disable();
 				}
+
+				m_Camera.drawUI();
 			}
 		}
 	}

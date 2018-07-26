@@ -50,20 +50,18 @@ namespace Somnium
 				*uiCamRot = m_UIObjects.at("CameraOrientation"),
 				*uiCamFOV = m_UIObjects.at("FieldOfView");
 
-			snprintf(buffer, 1024, "CAMERA POSITION - X: %f, Y: %f Z: %f", -m_Position.x, -m_Position.y, m_Position.z);
+			snprintf(buffer, 1024, "CAM POS [X: %f, Y: %f, Z: %f]", -m_Position.x, -m_Position.y, m_Position.z);
 			((UI::UIText*)uiCamPos)->setText(buffer);
 			
-			snprintf(buffer, 1024, "CAMERA ORIENTATION - Pitch: %f, Yaw: %f Roll: %f", m_Orientation.x, -m_Orientation.y, m_Orientation.z);
+			snprintf(buffer, 1024, "CAM ROT [P: %f, Y: %f, R: %f]", m_Orientation.x, -m_Orientation.y, m_Orientation.z);
 			((UI::UIText*)uiCamRot)->setText(buffer);
 
-			snprintf(buffer, 1024, "CAMERA FIELD OF VIEW - %d", m_FieldOfView);
+			snprintf(buffer, 1024, "CAM FOV [%d]", m_FieldOfView);
 			((UI::UIText*)uiCamFOV)->setText(buffer);
 			
 			//printf("CURSOR POSITION - X: %d, Y: %d\r\n", mouseX, mouseY);
 			//printf("CURSOR OFFSET - X: %d, Y: %d\r\n", xOffset, yOffset);
 #endif
-
-			drawUI();
 		}
 
 		void Camera::drawUI()

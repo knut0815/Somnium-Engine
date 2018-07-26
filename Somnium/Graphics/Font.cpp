@@ -64,7 +64,7 @@ namespace Somnium
 			glBindTexture(GL_TEXTURE_2D, 0);
 
 			FT_Done_Face(m_Face);
-			FT_Done_FreeType(m_FreeType);
+			//FT_Done_FreeType(m_FreeType);
 		}
 	}
 }

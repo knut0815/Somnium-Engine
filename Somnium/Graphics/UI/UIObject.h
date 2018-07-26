@@ -2,6 +2,8 @@
 
 #include "../../Maths/Vector2.h"
 #include "../../Graphics/Shader.h"
+#include "../Buffers/VertexArray.h"
+#include "../Buffers/VertexBuffer.h"
 
 namespace Somnium
 {
@@ -23,7 +25,8 @@ namespace Somnium
 				Maths::Vector2 m_Position;
 				float m_Rotation;
 				Shader *m_Shader;
-				GLuint m_VAO, m_VBO;
+				Buffers::VertexArray m_VAO;
+				Buffers::VertexBuffer m_VBO = Buffers::VertexBuffer(NULL, sizeof(GLfloat) * 6 * 4, 4, GL_DYNAMIC_DRAW);
 			};
 		}
 	}

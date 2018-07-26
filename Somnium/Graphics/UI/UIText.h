@@ -20,15 +20,13 @@ namespace Somnium
 					m_Position = position; 
 					m_Shader = shader; 
 
-					glGenVertexArrays(1, &m_VAO);
-					glGenBuffers(1, &m_VBO);
-					glBindVertexArray(m_VAO);
-					glBindBuffer(GL_ARRAY_BUFFER, m_VBO);
-					glBufferData(GL_ARRAY_BUFFER, sizeof(GLfloat) * 6 * 4, NULL, GL_DYNAMIC_DRAW);
-					glEnableVertexAttribArray(0);
-					glVertexAttribPointer(0, 4, GL_FLOAT, GL_FALSE, 4 * sizeof(GLfloat), 0);
-					glBindBuffer(GL_ARRAY_BUFFER, 0);
-					glBindVertexArray(0);
+					m_VAO.bind();
+					m_VBO.bind();
+					
+					m_VAO.addBuffer(&m_VBO, 0);
+					
+					m_VBO.unbind();
+					m_VAO.unbind();
 				}
 
 				~UIText() {};
@@ -39,7 +37,7 @@ namespace Somnium
 					m_Text.assign(text); 
 				};
 				void setFont(Font *font) { m_Font = font; };
-				void setSize(char *fontFilepath) {};
+				void setScale(float scale) { m_Scale = scale; }
 				
 				void setItalic(bool italic) {};
 				void setBold(bool bold) {};

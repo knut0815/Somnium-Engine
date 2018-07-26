@@ -56,12 +56,29 @@ int main(int argc, char** argv) {
 	Shader* shader = new Shader("Graphics/Shaders/Basic/basic.vert", "Graphics/Shaders/Basic/basic.frag");
 	Shader* textShader = new Shader("Graphics/Shaders/Basic/basicText.vert", "Graphics/Shaders/Basic/basicText.frag");
 	textShader->enable();
-	textShader->setMatrix4("projection", Matrix4::orthographic(0, myWindow.getWidth(),0, myWindow.getHeight(), 1.0f, 100.0f));
-	
+	textShader->setMatrix4("projection", Matrix4::orthographic(0, myWindow.getWidth(),0, myWindow.getHeight(), -1.0f, 100.0f));
+
 #if ENABLE_DEBUG_CAMERA
-	mainCamera.addUIObject("CameraPosition", new UI::UIText("CAMERA POSITION", arial, Maths::Vector2(25, 25), textShader));
-	mainCamera.addUIObject("CameraOrientation", new UI::UIText("CAMERA ORIENTATION", arial, Maths::Vector2(1, 0), textShader));
-	mainCamera.addUIObject("FieldOfView", new UI::UIText("Field of View", arial, Maths::Vector2(2, 0), textShader));
+	UI::UIText 
+		*camPos = new UI::UIText("CAM POS", arial, Maths::Vector2(0, myWindow.getHeight() - 25), textShader),
+		*camRot = new UI::UIText("CAM ROT", arial, Maths::Vector2(0, myWindow.getHeight() - 50), textShader),
+		*camFOV = new UI::UIText("CAM FOV", arial, Maths::Vector2(0, myWindow.getHeight() - 75), textShader),
+		*engName = new UI::UIText("SOMNIUM ENGINE", arial, Maths::Vector2(myWindow.getWidth() - 225, myWindow.getHeight() - 25), textShader),
+		*engVer = new UI::UIText("DEVELOPMENT BUILD", arial, Maths::Vector2(myWindow.getWidth() - 270, myWindow.getHeight() - 50), textShader);
+		
+
+	camPos->setScale(0.5f);
+	camRot->setScale(0.5f);
+	camFOV->setScale(0.5f);
+	engName->setScale(0.5f);
+	engVer->setScale(0.5f);
+
+	mainCamera.addUIObject("CameraPosition", camPos);
+	mainCamera.addUIObject("CameraOrientation", camRot);
+	mainCamera.addUIObject("FieldOfView", camFOV);
+
+	mainCamera.addUIObject("EngineName", engName);
+	mainCamera.addUIObject("EngineVersion", engVer);
 #endif
 
 	Matrix4 view = Matrix4::identity();
@@ -86,13 +103,11 @@ int main(int argc, char** argv) {
 		object->getMesh()->scale(scale, scale, scale);
 		object->getMesh()->translate((float)rand() / RAND_MAX * 10 * ((rand() % 2) ? 1 : -1), (float)rand() / RAND_MAX * 10 * ((rand() % 2) ? 1 : -1), (float)rand() / RAND_MAX * -1.0f);
 		
-		shader->setMatrix4("modelMatrix", object->getMesh()->getModelMatrix());
+	//	shader->setMatrix4("modelMatrix", object->getMesh()->getModelMatrix());
 	}
 
 	while (!myWindow.isClosed())
 	{
-		shader->setMatrix4("projectionMatrix", mainCamera.getProjection());
-		shader->setMatrix4("viewMatrix", mainCamera.getView());
 		myWindow.clear();
 
 		int x, y;
@@ -125,7 +140,6 @@ int main(int argc, char** argv) {
 		//3. Draw objects
 		//renderer->endMapping();
 		renderer->flushQueue();
-		mainCamera.updateUI();
 
 		//4. Post Processing
 		myWindow.update();
