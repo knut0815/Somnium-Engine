@@ -33,6 +33,7 @@ namespace Somnium
 			glfwSetMouseButtonCallback(m_Window, mouseButtonCallback);
 			glfwSetCursorPosCallback(m_Window, cursorPositionCallback);
 			glfwSetScrollCallback(m_Window, mouseScrollCallback);
+			
 
 			glfwSetInputMode(m_Window, GLFW_CURSOR, GLFW_CURSOR_DISABLED); //Allows for infinite cursor movement; necessary for camera rotation
 
@@ -71,7 +72,7 @@ namespace Somnium
                 glfwWindowHint(GLFW_OPENGL_FORWARD_COMPAT, GL_TRUE);
             #endif
 
-			m_Window = glfwCreateWindow(m_Width, m_Height, m_Title, NULL, NULL);
+			m_Window = glfwCreateWindow(m_Width, m_Height, m_Title, glfwGetPrimaryMonitor(), NULL);
 
 			cout << " OpenGL\t\t";
 
