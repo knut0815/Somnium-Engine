@@ -1,5 +1,6 @@
 #include <thread>
 #include <iostream>
+#include <set>
 #include "Graphics/Window.h"
 #include "Graphics/Shader.h"
 #include "Graphics/Mesh.h"
@@ -37,7 +38,11 @@ void calculateFPS()
 int main(int argc, char** argv) {
 	cout << "SOMNIUM by LUMACAL Software Group - Built " << __TIMESTAMP__ << endl << endl;
 
-	Window myWindow("Somnium Engine", 1920, 1080);
+	set<char*> flags = set<char*>();
+	for (int f = 0; f < argc; f++)
+		flags.insert(argv[f]);
+
+		Window myWindow("Somnium Engine", 1920, 1080, flags.find("-f") != flags.end() || flags.find("--fullscreen") != flags.end());
 	glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
     
     //Sound demo

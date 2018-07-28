@@ -12,8 +12,8 @@ namespace Somnium
 		void resize(GLFWwindow*, int, int);
 		void errorCallback(GLenum source, GLenum type, GLuint id, GLenum severity, GLsizei length, const GLchar* message, const void* userParam);
 
-		Window::Window(const char* title, int width, int height)
-			:m_Title(title), m_Width(width), m_Height(height)
+		Window::Window(const char* title, int width, int height, bool fullScreen)
+			:m_Title(title), m_Width(width), m_Height(height), m_FullScreen(fullScreen)
 		{
 			if (!init())
 				glfwTerminate();
@@ -72,7 +72,7 @@ namespace Somnium
                 glfwWindowHint(GLFW_OPENGL_FORWARD_COMPAT, GL_TRUE);
             #endif
 
-			m_Window = glfwCreateWindow(m_Width, m_Height, m_Title, glfwGetPrimaryMonitor(), NULL);
+			m_Window = glfwCreateWindow(m_Width, m_Height, m_Title, m_FullScreen ? glfwGetPrimaryMonitor() : NULL, NULL);
 
 			cout << " OpenGL\t\t";
 

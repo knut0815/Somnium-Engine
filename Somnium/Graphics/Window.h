@@ -15,7 +15,7 @@ namespace Somnium {
 		class Window
 		{
 		public:
-			Window(const char*, int, int);
+			Window(const char*, int, int, bool fullScreen);
 			~Window();
 
 			void clear(void)  const;
@@ -54,6 +54,7 @@ namespace Somnium {
 			int m_Width, m_Height;
 			GLFWwindow *m_Window = nullptr;
 
+			bool m_FullScreen;
 			bool m_Keys[GLFW_KEY_LAST] = { false };
 			bool m_MouseButtons[GLFW_MOUSE_BUTTON_LAST] = { false };
 			double m_MouseX = 0.0, m_MouseY = 0.0;
