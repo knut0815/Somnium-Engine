@@ -54,6 +54,12 @@
     <Filter Include="Source Files\Graphics\UI">
       <UniqueIdentifier>{5ea79a86-dde9-4d62-a037-a487fbb7239a}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\DebugTools">
+      <UniqueIdentifier>{8248a912-202f-4627-8688-f87c4bbcc374}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\DebugTools">
+      <UniqueIdentifier>{3c008723-0c2f-46c0-a535-ac42bc95e034}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Maths\Vector3.h">
@@ -125,6 +131,9 @@
     <ClInclude Include="Graphics\UI\UIImage.h">
       <Filter>Header Files\Graphics\UI</Filter>
     </ClInclude>
+    <ClInclude Include="DebugTools\NavigationGrid.h">
+      <Filter>Header Files\DebugTools</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Main.cpp">
@@ -180,6 +189,9 @@
     </ClCompile>
     <ClCompile Include="Graphics\UI\UIText.cpp">
       <Filter>Source Files\Graphics\UI</Filter>
+    </ClCompile>
+    <ClCompile Include="DebugTools\NavigationGrid.cpp">
+      <Filter>Source Files\DebugTools</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

@@ -62,7 +62,11 @@ namespace Somnium
 			m_Direction.y = sin(Maths::toRadians(m_Orientation.x));
 			m_Direction.z = cos(Maths::toRadians(m_Orientation.x)) * sin(Maths::toRadians(m_Orientation.y));
 
+			Maths::Vector3 right = m_Up * m_Front;
+			right = right.normalise();
 			m_Front = m_Direction.normalise();
+
+			m_Up = m_Front * right;
 
 			m_View = Maths::Matrix4::lookAt(m_Position, m_Position + m_Front, m_Up);
 		}
