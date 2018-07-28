@@ -26,22 +26,22 @@ namespace Somnium
 					//Process Keyboard input
 
 					if (m_Window.isKeyPressed(GLFW_KEY_LEFT) || m_Window.isKeyPressed(GLFW_KEY_A))
-						m_Camera.move(Maths::Vector3(-0.01f, 0, 0));
+						m_Camera.move(Camera::Direction::left);
 					if (m_Window.isKeyPressed(GLFW_KEY_RIGHT) || m_Window.isKeyPressed(GLFW_KEY_D))
-						m_Camera.move(Maths::Vector3(0.01f, 0, 0));
+						m_Camera.move(Camera::Direction::right);
 					if (m_Window.isKeyPressed(GLFW_KEY_UP) || m_Window.isKeyPressed(GLFW_KEY_W))
 					{
 						if (m_Window.isKeyPressed(GLFW_KEY_LEFT_CONTROL) || m_Window.isKeyPressed(GLFW_KEY_RIGHT_CONTROL))
-							m_Camera.move(Maths::Vector3(0, 0.01f, 0));
+							m_Camera.move(Camera::Direction::up);
 						else
-							m_Camera.move(Maths::Vector3(0, 0, -0.01f));
+							m_Camera.move(Camera::Direction::forward);
 					}
 					if (m_Window.isKeyPressed(GLFW_KEY_DOWN) || m_Window.isKeyPressed(GLFW_KEY_S))
 					{
 						if (m_Window.isKeyPressed(GLFW_KEY_LEFT_CONTROL) || m_Window.isKeyPressed(GLFW_KEY_RIGHT_CONTROL))
-							m_Camera.move(Maths::Vector3(0, -0.01f, 0));
+							m_Camera.move(Camera::Direction::down);
 						else
-							m_Camera.move(Maths::Vector3(0, 0, 0.01f));
+							m_Camera.move(Camera::Direction::backward);
 					}
 
 					Maths::Vector3 cameraPos = m_Camera.getPosition();
@@ -64,14 +64,14 @@ namespace Somnium
 
 					/* Stage 2: X/Y Offset */
 					static int mouseX = m_Window.getWidth() / 2, mouseY = m_Window.getHeight() / 2, prevMouseX, prevMouseY, xOffset, yOffset;
+					
+					m_Window.getMousePosition(mouseX, mouseY);
+
+					xOffset = mouseX - prevMouseX; //TODO: Some sort of axis inversion option
+					yOffset = mouseY - prevMouseY;
 
 					prevMouseX = mouseX;
 					prevMouseY = mouseY;
-
-					m_Window.getMousePosition(mouseX, mouseY);
-
-					xOffset = mouseX - prevMouseX;
-					yOffset = prevMouseY - mouseY;
 
 					m_Camera.offsetOrientation(yOffset, xOffset);
 					m_Camera.updateUI();

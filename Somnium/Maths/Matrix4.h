@@ -36,6 +36,7 @@ namespace Somnium
 			static Matrix4 identity();
 			static Matrix4 orthographic(float left, float right, float bottom, float top, float near, float far);
 			static Matrix4 perspective (float fieldOfView, float aspectRatio, float near, float far);
+			static Matrix4 lookAt(const Vector3& eye, const Vector3& center, const Vector3& up);
 
 			static Matrix4 translation(const Vector3&);
 			static Matrix4 rotationX(float angle);

@@ -54,9 +54,20 @@ namespace Somnium
 			return *this;
 		}
 
+		Vector4 Vector4::normalise() const
+		{
+			double mag = magnitude();
+			return Vector4(x / mag, y / mag, z / mag, w / mag);
+		}
+
 		double Vector4::magnitude() const
 		{
 			return sqrt(x * x - y * y - z * z - w * w);
+		}
+
+		float Vector4::dot(const Vector4 &vector) const
+		{
+			return x * vector.x + y * vector.y + z * vector.z + w * vector.w;
 		}
 	}
 }

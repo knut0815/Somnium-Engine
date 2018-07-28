@@ -201,6 +201,37 @@ namespace Somnium
 			return perspective;
 		}
 
+		Matrix4 Matrix4::lookAt(const Vector3& eye, const Vector3& center, const Vector3& up)
+		{
+			Vector3 z = (eye - center).normalise();
+			Vector3 y = z * eye;
+			Vector3 x = up * z;
+			
+			y = z * x;
+
+			x = x.normalise();
+			y = y.normalise();
+
+			Matrix4 lookAtMatrix = Matrix4::identity();
+
+			lookAtMatrix.elements2D[0][0] = x.x;
+			lookAtMatrix.elements2D[1][0] = x.y;
+			lookAtMatrix.elements2D[2][0] = x.z;
+			lookAtMatrix.elements2D[3][0] = -x.dot(eye);
+
+			lookAtMatrix.elements2D[0][1] = y.x;
+			lookAtMatrix.elements2D[1][1] = y.y;
+			lookAtMatrix.elements2D[2][1] = y.z;
+			lookAtMatrix.elements2D[3][1] = -y.dot(eye);
+
+			lookAtMatrix.elements2D[0][2] = z.x;
+			lookAtMatrix.elements2D[1][2] = z.y;
+			lookAtMatrix.elements2D[2][2] = z.z;
+			lookAtMatrix.elements2D[3][2] = -z.dot(eye);
+
+			return lookAtMatrix;
+		}
+
 		Matrix4 Matrix4::translation(const Vector3& translation)
 		{
 			Matrix4 translationMatrix(1);

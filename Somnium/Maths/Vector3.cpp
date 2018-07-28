@@ -48,13 +48,7 @@ namespace Somnium
 
 		Vector3& Vector3::operator*=(const Vector3& rhs)
 		{
-			float x1 = y * rhs.z - z * rhs.y,
-			      y1 = z * rhs.x - x * rhs.z,
-				  z1 = x * rhs.y - y * rhs.x;
-
-			x = x1; y = y1; z = z1;
-
-			return *this;
+			return *this = *this * rhs;
 		}
 
 		Vector3  Vector3::operator* (float scalar) const
@@ -71,9 +65,20 @@ namespace Somnium
 			return *this;
 		}
 
+		Vector3 Vector3::normalise() const
+		{
+			double mag = magnitude();
+			return Vector3(x / mag, y / mag, z / mag);
+		}
+
 		double Vector3::magnitude() const
 		{
 			return sqrt(x * x + y * y + z * z);
+		}
+
+		float Vector3::dot(const Vector3& vector) const
+		{
+			return x * vector.x + y * vector.y + z * vector.z;
 		}
 	}
 }

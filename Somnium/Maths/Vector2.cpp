@@ -42,8 +42,19 @@ namespace Somnium
 			return *this;
 		}
 
+		Vector2 Vector2::normalise() const
+		{
+			double mag = magnitude();
+			return Vector2(x / mag, y / mag);
+		}
+
 		double Vector2::magnitude() const {
 			return sqrt(x * x + y * y);
+		}
+
+		float Vector2::dot(const Vector2 &vector) const
+		{
+			return x * vector.x + y * vector.y;
 		}
 	}
 }

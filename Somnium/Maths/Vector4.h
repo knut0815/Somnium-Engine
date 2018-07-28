@@ -8,8 +8,6 @@ namespace Somnium
 		{
 			float x, y, z, w;
 
-			Vector4() = default;
-
 			Vector4(float x = 0, float y = 0, float z = 0, float w = 0)
 				: x(x), y(y), z(z), w(w) {};
 
@@ -26,6 +24,9 @@ namespace Somnium
 			//Multiplication Operators
 			Vector4  operator* (float) const;
 			Vector4& operator*=(float);
+
+			Vector4 normalise() const;
+			float dot(const Vector4 &vector) const;
 
 			double magnitude(void) const;
 		};

@@ -25,7 +25,12 @@ namespace Somnium
 			Vector2  operator* (float) const;
 			Vector2& operator*=(float);
 
+			Vector2 normalise() const;
+			float dot(const Vector2& vector) const;
+
 			double magnitude(void) const;
+
+			
 		};
 	}
 }

@@ -26,18 +26,45 @@ namespace Somnium
 			updateView();
 		}
 
+		void Camera::move(Direction direction, float distance)
+		{
+			switch (direction)
+			{
+			case Direction::forward:
+				m_Position += m_Front * distance;
+				break;
+			case Direction::backward:
+				m_Position -= m_Front * distance;
+				break;
+			case Direction::right:
+				m_Position += (m_Front * m_Up).normalise() * distance;
+				break;
+			case Direction::left:
+				m_Position -= (m_Front * m_Up).normalise() * distance;
+				break;
+			case Direction::up:
+				m_Position += m_Up * distance;
+				break;
+			case Direction::down:
+				m_Position -= m_Up * distance;
+				break;
+			}
+		}
+
 		void Camera::move(Maths::Vector3 displacement)
 		{
-			m_Position -= displacement; //We're not moving the camera Forward/Backward, we're moving the whole scene Backward/Forward, so have to negate the displacement
-			m_View *= Maths::Matrix4::translation(-displacement);
+			m_Position += displacement;
 		}
 
 		void Camera::updateView()
 		{
-			m_View = Maths::Matrix4::translation(m_Position) * //TODO: Include orientation here
-			Maths::Matrix4::rotationX(m_Orientation.x) *
-				Maths::Matrix4::rotationY(m_Orientation.y) *
-				Maths::Matrix4::rotationZ(m_Orientation.z);
+			m_Direction.x = cos(Maths::toRadians(m_Orientation.x)) * cos(Maths::toRadians(m_Orientation.y));
+			m_Direction.y = sin(Maths::toRadians(m_Orientation.x));
+			m_Direction.z = cos(Maths::toRadians(m_Orientation.x)) * sin(Maths::toRadians(m_Orientation.y));
+
+			m_Front = m_Direction.normalise();
+
+			m_View = Maths::Matrix4::lookAt(m_Position, m_Position + m_Front, m_Up);
 		}
 
 		void Camera::updateUI()

@@ -38,11 +38,11 @@ void calculateFPS()
 int main(int argc, char** argv) {
 	cout << "SOMNIUM by LUMACAL Software Group - Built " << __TIMESTAMP__ << endl << endl;
 
-	set<char*> flags = set<char*>();
+	std::set<std::string> flags = std::set<std::string>();
 	for (int f = 0; f < argc; f++)
 		flags.insert(argv[f]);
 
-		Window myWindow("Somnium Engine", 1920, 1080, flags.find("-f") != flags.end() || flags.find("--fullscreen") != flags.end());
+	Window myWindow("Somnium Engine", 1920, 1080, (flags.find("-f") != flags.end()) || (flags.find("--fullscreen") != flags.end()));
 	glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
     
     //Sound demo
@@ -55,7 +55,7 @@ int main(int argc, char** argv) {
 	cout << "---------RUNNING GAME LOOP---------" << endl;
 
 //	Camera mainCamera = Camera(Matrix4::orthographic(-myWindow.getAspectRatio() / 2.0f, myWindow.getAspectRatio() / 2.0f, -0.5f, 0.5f, 1.0f, 100.0f));
-	Camera mainCamera = Camera(30, (float)myWindow.getWidth() / myWindow.getHeight(), 0.1f, 100.0f);
+	Camera mainCamera = Camera(30, (float)myWindow.getWidth() / myWindow.getHeight(), 0.1f, 100.0f, false, Vector3(0,0,0), Vector3(180, 90, 0));
 
 	Font* arial = new Font("Fonts/arial.ttf", myWindow.getFreeTypeInstance());
 	Shader* shader = new Shader("Graphics/Shaders/Basic/basic.vert", "Graphics/Shaders/Basic/basic.frag");

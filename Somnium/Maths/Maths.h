@@ -10,7 +10,7 @@ namespace Somnium
 {
 	namespace Maths
 	{
-		static inline float toRadians(float degrees)
+		inline float toRadians(float degrees)
 		{
 			return degrees * (3.14159265358979323846f / 180.0f);
 		}
