@@ -20,16 +20,16 @@ using namespace Graphics;
 using namespace Maths;
 using namespace Audio;
 
-void calculateFPS()
+void calculateFPS(unsigned int &frameRate, float &timePerFrame)
 {
 	static double lastTime = glfwGetTime();
 	static int nbFrames = 0;
 
 	double currentTime = glfwGetTime();
 	nbFrames++;
-	if (currentTime - lastTime >= 1.0) { // If last printf() was more than 1 sec ago
-										 // printf and reset timer
-		printf("FPS %d, %f ms/frame\n", nbFrames, 1000.0 / double(nbFrames));
+	if (currentTime - lastTime >= 1.0) {
+		frameRate = nbFrames;
+		timePerFrame = 1000.0 / double(nbFrames);
 
 		nbFrames = 0;
 		lastTime += 1.0;
@@ -69,19 +69,20 @@ int main(int argc, char** argv) {
 	Shader* naviShader = new Shader("Graphics/Shaders/Debug/navigation.vert", "Graphics/Shaders/Debug/navigation.frag");
 	DebugTools::ReferenceGrid grid = DebugTools::ReferenceGrid(5, Maths::Vector3(10000), *naviShader);
 
-	UI::UIText 
-		*camPos = new UI::UIText("CAM POS", arial, Maths::Vector2(0, myWindow.getHeight() - 25), textShader),
-		*camRot = new UI::UIText("CAM ROT", arial, Maths::Vector2(0, myWindow.getHeight() - 50), textShader),
-		*camFOV = new UI::UIText("CAM FOV", arial, Maths::Vector2(0, myWindow.getHeight() - 75), textShader),
+	UI::UIText
+		*fpsCount = new UI::UIText("FPS", arial, Maths::Vector2(0, myWindow.getHeight() - 25), textShader),
+		*camPos = new UI::UIText("CAM POS", arial, Maths::Vector2(0, myWindow.getHeight() - 50), textShader),
+		*camRot = new UI::UIText("CAM ROT", arial, Maths::Vector2(0, myWindow.getHeight() - 75), textShader),
+		*camFOV = new UI::UIText("CAM FOV", arial, Maths::Vector2(0, myWindow.getHeight() - 100), textShader),
 		*engName = new UI::UIText("SOMNIUM ENGINE", arial, Maths::Vector2(myWindow.getWidth() - 225, myWindow.getHeight() - 25), textShader),
 		*engVer = new UI::UIText("DEVELOPMENT BUILD", arial, Maths::Vector2(myWindow.getWidth() - 270, myWindow.getHeight() - 50), textShader);
-		
 
 	camPos->setScale(0.5f);
 	camRot->setScale(0.5f);
 	camFOV->setScale(0.5f);
 	engName->setScale(0.5f);
 	engVer->setScale(0.5f);
+	fpsCount->setScale(0.5f);
 
 	mainCamera.addUIObject("CameraPosition", camPos);
 	mainCamera.addUIObject("CameraOrientation", camRot);
@@ -89,6 +90,7 @@ int main(int argc, char** argv) {
 
 	mainCamera.addUIObject("EngineName", engName);
 	mainCamera.addUIObject("EngineVersion", engVer);
+	mainCamera.addUIObject("FrameRate", fpsCount);
 #endif
 
 	Matrix4 view = Matrix4::identity();
@@ -124,7 +126,6 @@ int main(int argc, char** argv) {
 		myWindow.getMousePosition(x, y);
 
 		//2. Update objects
-		//shader.setVector2("light_position", Vector2((float)(x * 16.0f / myWindow.getWidth()), (float)(9.0f - y * 9.0f / myWindow.getHeight())));
 
 		static float monkeyZPos = 0;
 		static float offset = -0.001f;
@@ -159,7 +160,14 @@ int main(int argc, char** argv) {
 		//4. Post Processing
 		myWindow.update();
 
-		calculateFPS();
+		static unsigned int fps;
+		static float timePerFrame;
+		static char fpsUI[128];
+
+		snprintf(fpsUI, 128, "FPS %d (%f ms)", fps, timePerFrame);
+
+		calculateFPS(fps, timePerFrame);
+		fpsCount->setText(fpsUI);	
 	}
 
 	cout << "-----------------------------------" << endl;
