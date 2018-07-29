@@ -17,7 +17,7 @@ namespace Somnium
 			{
 				/* Methods */
 			public:
-				SerialRenderer(const Window& window, Camera& const camera)
+				SerialRenderer(const Window& window, Camera& camera)
 					: Renderer(window, camera) {};
 				virtual void submitToQueue(RenderableObject* object) { m_RenderQueue.push(object); }
 				virtual void flushQueue();
