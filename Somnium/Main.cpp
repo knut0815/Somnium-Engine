@@ -9,6 +9,7 @@
 #include "Graphics/RenderableObject.h"
 #include "Graphics/Camera.h"
 #include "Graphics/Font.h"
+#include "DebugTools/ReferenceGrid.h"
 
 #include "Audio/AudioEngine.h"
 #include "Utilities/FileUtilities.h"
@@ -55,15 +56,19 @@ int main(int argc, char** argv) {
 	cout << "---------RUNNING GAME LOOP---------" << endl;
 
 //	Camera mainCamera = Camera(Matrix4::orthographic(-myWindow.getAspectRatio() / 2.0f, myWindow.getAspectRatio() / 2.0f, -0.5f, 0.5f, 1.0f, 100.0f));
-	Camera mainCamera = Camera(30, (float)myWindow.getWidth() / myWindow.getHeight(), 0.1f, 100.0f, false, Vector3(0,0,0), Vector3(180, 90, 0));
+	Camera mainCamera = Camera(30, (float)myWindow.getWidth() / myWindow.getHeight(), 0.1f, 1000.0f, false, Vector3(0,0,0), Vector3(180, 90, 0));
 
 	Font* arial = new Font("Fonts/arial.ttf", myWindow.getFreeTypeInstance());
 	Shader* shader = new Shader("Graphics/Shaders/Basic/basic.vert", "Graphics/Shaders/Basic/basic.frag");
 	Shader* textShader = new Shader("Graphics/Shaders/Basic/basicText.vert", "Graphics/Shaders/Basic/basicText.frag");
+	
 	textShader->enable();
 	textShader->setMatrix4("projection", Matrix4::orthographic(0, myWindow.getWidth(),0, myWindow.getHeight(), -1.0f, 100.0f));
 
 #if ENABLE_DEBUG_CAMERA
+	Shader* naviShader = new Shader("Graphics/Shaders/Debug/navigation.vert", "Graphics/Shaders/Debug/navigation.frag");
+	DebugTools::ReferenceGrid grid = DebugTools::ReferenceGrid(5, Maths::Vector3(10000), *naviShader);
+
 	UI::UIText 
 		*camPos = new UI::UIText("CAM POS", arial, Maths::Vector2(0, myWindow.getHeight() - 25), textShader),
 		*camRot = new UI::UIText("CAM ROT", arial, Maths::Vector2(0, myWindow.getHeight() - 50), textShader),
@@ -107,8 +112,6 @@ int main(int argc, char** argv) {
 		float scale = (float)rand() / RAND_MAX;
 		object->getMesh()->scale(scale, scale, scale);
 		object->getMesh()->translate((float)rand() / RAND_MAX * 10 * ((rand() % 2) ? 1 : -1), (float)rand() / RAND_MAX * 10 * ((rand() % 2) ? 1 : -1), (float)rand() / RAND_MAX * -1.0f);
-		
-	//	shader->setMatrix4("modelMatrix", object->getMesh()->getModelMatrix());
 	}
 
 	while (!myWindow.isClosed())
@@ -145,6 +148,14 @@ int main(int argc, char** argv) {
 		//3. Draw objects
 		//renderer->endMapping();
 		renderer->flushQueue();
+
+#if ENABLE_DEBUG_CAMERA
+		naviShader->enable();
+		naviShader->setMatrix4("projectionMatrix", mainCamera.getProjection());
+		naviShader->setMatrix4("viewMatrix", mainCamera.getView());
+		naviShader->setMatrix4("modelMatrix", Maths::Matrix4::identity());
+		grid.draw();
+#endif
 
 		//4. Post Processing
 		myWindow.update();

@@ -18,8 +18,9 @@ namespace Somnium
 			~RenderableObject() {};
 
 			Mesh* getMesh() { return m_Mesh; }
+			void  setMesh(Mesh *mesh) { m_Mesh = mesh; }
 
-			inline const Maths::Vector3 getPosition() const { return m_Position;}
+			inline const Maths::Vector3 getPosition() const { return m_Position; }
 
 			void update();
 

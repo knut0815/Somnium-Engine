@@ -154,7 +154,7 @@
     <ClInclude Include="Graphics\UI\UIText.h" />
     <ClInclude Include="Graphics\UI\UIImage.h" />
     <ClInclude Include="Graphics\UI\UIObject.h" />
-    <ClInclude Include="DebugTools\NavigationGrid.h" />
+    <ClInclude Include="DebugTools\ReferenceGrid.h" />
     <ClInclude Include="Utilities\FileUtilities.h" />
     <ClInclude Include="Maths\Matrix4.h" />
     <ClInclude Include="Graphics\Shader.h" />
@@ -182,7 +182,7 @@
     <ClCompile Include="Graphics\Renderers\SerialRenderer.cpp" />
     <ClCompile Include="Graphics\RenderableObject.cpp" />
     <ClCompile Include="Graphics\UI\UIText.cpp" />
-    <ClCompile Include="DebugTools\NavigationGrid.cpp" />
+    <ClCompile Include="DebugTools\ReferenceGrid.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

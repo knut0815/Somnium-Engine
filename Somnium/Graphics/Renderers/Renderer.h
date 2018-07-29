@@ -15,7 +15,7 @@ namespace Somnium
 			class Renderer
 			{
 			public:
-				Renderer(const Window& window, const Camera camera)
+				Renderer(const Window& window, Camera& const camera)
 					: m_Window(window), m_Camera(camera) {};
 
 				virtual void flushQueue() = 0;
@@ -78,7 +78,7 @@ namespace Somnium
 				}
 
 			protected:
-				Camera m_Camera;
+				Camera& m_Camera;
 				const Window& m_Window;
 			};
 		}

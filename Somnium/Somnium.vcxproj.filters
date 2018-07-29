@@ -131,7 +131,7 @@
     <ClInclude Include="Graphics\UI\UIImage.h">
       <Filter>Header Files\Graphics\UI</Filter>
     </ClInclude>
-    <ClInclude Include="DebugTools\NavigationGrid.h">
+    <ClInclude Include="DebugTools\ReferenceGrid.h">
       <Filter>Header Files\DebugTools</Filter>
     </ClInclude>
   </ItemGroup>
@@ -190,7 +190,7 @@
     <ClCompile Include="Graphics\UI\UIText.cpp">
       <Filter>Source Files\Graphics\UI</Filter>
     </ClCompile>
-    <ClCompile Include="DebugTools\NavigationGrid.cpp">
+    <ClCompile Include="DebugTools\ReferenceGrid.cpp">
       <Filter>Source Files\DebugTools</Filter>
     </ClCompile>
   </ItemGroup>
