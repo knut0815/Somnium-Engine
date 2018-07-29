@@ -100,7 +100,7 @@ int main(int argc, char** argv) {
 
 	Mesh* monkey = new Mesh(monkeyMesh);
 
-	for(int i = 0; i < 100; i++)
+	for(int i = 0; i < 250; i++)
 		objects.push_back(new RenderableObject(new Mesh(monkeyMesh)));
 
 	Renderers::SerialRenderer* renderer = new Renderers::SerialRenderer(myWindow, mainCamera);
@@ -153,7 +153,6 @@ int main(int argc, char** argv) {
 		naviShader->enable();
 		naviShader->setMatrix4("projectionMatrix", mainCamera.getProjection());
 		naviShader->setMatrix4("viewMatrix", mainCamera.getView());
-		naviShader->setMatrix4("modelMatrix", Maths::Matrix4::identity());
 		grid.draw();
 #endif
 

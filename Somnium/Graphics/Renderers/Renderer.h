@@ -63,7 +63,7 @@ namespace Somnium
 						m_Camera.offsetFOV(-1);
 
 					/* Stage 2: X/Y Offset */
-					static int mouseX = m_Window.getWidth() / 2, mouseY = m_Window.getHeight() / 2, prevMouseX, prevMouseY, xOffset, yOffset;
+					static int mouseX = m_Window.getWidth() / 2, mouseY = m_Window.getHeight() / 2, prevMouseX = m_Window.getWidth() / 2, prevMouseY = m_Window.getHeight() / 2, xOffset, yOffset;
 					
 					m_Window.getMousePosition(mouseX, mouseY);
 
