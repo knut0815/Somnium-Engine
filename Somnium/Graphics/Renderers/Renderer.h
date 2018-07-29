@@ -44,6 +44,12 @@ namespace Somnium
 							m_Camera.move(Camera::Direction::backward);
 					}
 
+					if(m_Window.isKeyPressed(GLFW_KEY_LEFT_SHIFT))
+						m_Camera.setSpeedMultiplier(3);
+					else
+						m_Camera.setSpeedMultiplier(1);
+						
+
 					Maths::Vector3 cameraPos = m_Camera.getPosition();
 					Maths::Vector3 cameraDeg = m_Camera.getOrientation();
 

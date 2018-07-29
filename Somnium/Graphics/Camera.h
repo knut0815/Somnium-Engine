@@ -39,10 +39,11 @@ namespace Somnium
 			void setYaw(float const &angle);
 			void setRoll(float const &angle);
 			void setPosition();
+			void setSpeedMultiplier(float multiplier) { m_Speed = m_BaseSpeed * multiplier; }
 
 			void offsetFOV(const float offset) { setFOV(m_FieldOfView + offset); }
 
-			void move(Direction direction) { move(direction, 0.01f); }
+			void move(Direction direction) { move(direction, 0.01f * m_Speed); }
 			void move(Direction direction, float offset);
 			void move(Maths::Vector3 displacement);
 			
@@ -72,12 +73,13 @@ namespace Somnium
 				m_Front = Maths::Vector3(0, 0, -1);
 
 			unsigned int m_FieldOfView = 45;
-			float 
-				m_AspectRatio, 
-				m_Near = 0.1f, 
-				m_Far = 100.f, 
-				m_Sensitivity = 0.05f, 
-				m_Speed = 0.05f;
+			float
+				m_AspectRatio,
+				m_Near = 0.1f,
+				m_Far = 100.f,
+				m_Sensitivity = 0.05f,
+				m_BaseSpeed = 1,
+				m_Speed = m_BaseSpeed;
 			bool m_Orthographic = false;
 
 			Maths::Matrix4 m_View; //The finalized representation of the camera's viewpoint
