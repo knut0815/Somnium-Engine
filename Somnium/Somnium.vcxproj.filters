@@ -134,6 +134,9 @@
     <ClInclude Include="DebugTools\ReferenceGrid.h">
       <Filter>Header Files\DebugTools</Filter>
     </ClInclude>
+    <ClInclude Include="Maths\Quaternion.h">
+      <Filter>Header Files\Maths</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Main.cpp">
@@ -192,6 +195,9 @@
     </ClCompile>
     <ClCompile Include="DebugTools\ReferenceGrid.cpp">
       <Filter>Source Files\DebugTools</Filter>
+    </ClCompile>
+    <ClCompile Include="Maths\Quaternion.cpp">
+      <Filter>Source Files\Maths</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

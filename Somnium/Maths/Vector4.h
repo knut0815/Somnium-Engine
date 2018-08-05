@@ -25,6 +25,10 @@ namespace Somnium
 			Vector4  operator* (float) const;
 			Vector4& operator*=(float);
 
+			//Division Operators
+			Vector4  operator/ (float) const;
+			Vector4& operator/=(float);
+
 			Vector4 normalise() const;
 			float dot(const Vector4 &vector) const;
 

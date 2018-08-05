@@ -80,5 +80,10 @@ namespace Somnium
 		{
 			return x * vector.x + y * vector.y + z * vector.z;
 		}
+
+		float Vector3::dot(const Vector3& vector1, const Vector3& vector2)
+		{
+			return vector1.dot(vector2);
+		}
 	}
 }

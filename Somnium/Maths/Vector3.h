@@ -36,6 +36,7 @@ namespace Somnium
 
 			Vector3 normalise() const;
 			float dot(const Vector3 &vector) const;
+			static float Vector3::dot(const Vector3& vector1, const Vector3& vector2);
 
 			double magnitude(void) const;
 		};
