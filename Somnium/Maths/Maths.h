@@ -17,8 +17,8 @@ namespace Somnium
 
 		template<
 			typename Type = typename std::enable_if<std::is_arithmetic<Type>::value, Type>::type,
-			typename T1 = typename std::enable_if<std::is_arithmetic<Type>::value, Type>::type,
-			typename T2 = typename std::enable_if<std::is_arithmetic<Type>::value, Type>::type
+			typename T1 = typename std::enable_if<std::is_arithmetic<T1>::value, T1>::type,
+			typename T2 = typename std::enable_if<std::is_arithmetic<T2>::value, T2>::type
 		>
 		inline Type clamp(const Type &value, const T1 &min, const T2 &max)
 		{
