@@ -1,7 +1,5 @@
 #pragma once
-#include "Vector3.h"
-#include "Vector4.h"
-#include <math.h>
+#include "Maths.h"
 
 namespace Somnium
 {
@@ -10,35 +8,48 @@ namespace Somnium
 		struct Quaternion
 		{
 		public :
-			union Data{
+			union
+			{
 				Vector4 vw = Vector4();
 				struct {
 					Vector3 v;
 					float w;
 				};
+			};
 
-				Data() { vw = Vector4(); }
-				~Data() {};
-			} data;
+			Quaternion(float x = 0, float y = 0, float z = 0, float w = 1) { vw = Vector4(x, y, z, w); }
 
-			Quaternion(float x, float y, float z, float w)
+			Quaternion(Vector3 newV, float newW = 1)
 			{
-				data.vw = Vector4(x, y, z, w);
+				v = newV;
+				w = newW;
 			}
 
-			Quaternion(Vector3 v, float w)
-			{
-				data.v = v;
-				data.w = w;
-			}
+			Quaternion(Vector4 newVW ) { vw = newVW; }
 
-			Quaternion(Vector4 vw)
-			{
-				data.vw = vw;
-			}
+			~Quaternion() { };
 
 			Quaternion &operator+=(const Quaternion &rhs);
+			Quaternion operator+  (const Quaternion &rhs) const;
+			Quaternion &operator+=(const float &scalar);
+			Quaternion operator+  (const float &scalar) const;
+
 			Quaternion &operator-=(const Quaternion &rhs);
+			Quaternion operator-  (const Quaternion &rhs) const;
+			Quaternion &operator-=(const float &scalar);
+			Quaternion operator-  (const float &scalar) const;
+			
+			Quaternion &operator*=(const Quaternion &rhs);
+			Quaternion &operator* (const float &scalar) const;
+
+			//TODO: Make operators global in order to have 2 way operator overloading
+
+			Quaternion &operator/=(const Quaternion &rhs);
+			Quaternion &operator/ (const float &scalar) const;
+
+			float slerp(const Quaternion &quaternion1, const Quaternion &quaternion2, float t) const;
+
+			Matrix4 toTransformationMatrix() const;
 
 			inline float dot(const Quaternion &quaternion);
 			static inline float dot(const Quaternion &quaternion1, const Quaternion &quaternion2);
