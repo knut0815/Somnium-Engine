@@ -1,7 +1,7 @@
 CC := clang++
 OSXLDFLAGS:= -framework OpenGL -lm -l glfw -l GLEW -L ./Dependencies/portaudio/lib -l portaudio -L
 LDFLAGS:= -l GL -lm -l glfw -l GLEW -l freetype -L ./Dependencies/portaudio/lib 
-CPPFLAGS := -Wall -g -std=c++11 -Wextra `pkg-config --cflags glfw3 glew portaudio freetype2`
+CPPFLAGS := -Wall -g -std=c++11 -Wextra `pkg-config --cflags glfw3 glew freetype2`
 CXXFLAGS:=  -I Dependencies/GLEW/include -I Dependencies/GLFW/include -I Dependencies/portsf/include -I Dependencies/freetype/include
 SRC_DIR:=.
 OBJ_DIR:=Objects

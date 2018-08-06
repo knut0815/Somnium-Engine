@@ -41,7 +41,7 @@ namespace Somnium
 		Quaternion &Quaternion::operator-=(const float &scalar)
 		{
 
-			return Quaternion();
+			return *this;
 		}
 
 		Quaternion Quaternion::operator-(const float &scalar) const
@@ -53,7 +53,7 @@ namespace Somnium
 		Quaternion &Quaternion::operator*=(const Quaternion &rhs)
 		{
 
-			return Quaternion();
+			return *this;
 		}
 
 		Quaternion Quaternion::operator* (const float &scalar) const
@@ -65,10 +65,10 @@ namespace Somnium
 		Quaternion &Quaternion::operator/=(const Quaternion &rhs)
 		{
 
-			return Quaternion();
+			return *this;
 		}
 
-		Quaternion &Quaternion::operator/ (const float &scalar) const
+		Quaternion Quaternion::operator/ (const float &scalar) const
 		{
 
 			return Quaternion();
@@ -78,7 +78,7 @@ namespace Somnium
 		{
 			Matrix4 transformationMatrix = Matrix4::identity();
 
-			float 
+			float
 				xSq = vw.x * vw.x,
 				ySq = vw.y * vw.y,
 				zSq = vw.z * vw.z,

@@ -166,9 +166,9 @@ namespace Somnium {
 
 			//TODO: Normal coordinate loading
 
-			for (int i = 0; i < vertexIndices.size(); i++) vertexIndices[i] -= 1;
-			for (int i = 0; i < normalIndices.size(); i++) normalIndices[i] -= 1;
-			for (int i = 0; i < uvIndices.size(); i++) uvIndices[i] -= 1;
+			for (unsigned long i = 0; i < vertexIndices.size(); i++) vertexIndices[i] -= 1;
+			for (unsigned long i = 0; i < normalIndices.size(); i++) normalIndices[i] -= 1;
+			for (unsigned long i = 0; i < uvIndices.size(); i++) uvIndices[i] -= 1;
 
 			std::vector<GLfloat> data = std::vector<GLfloat>();
 

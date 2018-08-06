@@ -150,6 +150,953 @@
 			<Add library="GL" />
 			<Add library="X11" />
 		</Linker>
+		<Unit filename="Audio/AudioEngine.cpp" />
+		<Unit filename="Audio/AudioEngine.h" />
+		<Unit filename="DebugTools/ReferenceGrid.cpp" />
+		<Unit filename="DebugTools/ReferenceGrid.h" />
+		<Unit filename="Dependencies/GLEW/include/eglew.h" />
+		<Unit filename="Dependencies/GLEW/include/glew.h" />
+		<Unit filename="Dependencies/GLEW/include/glxew.h" />
+		<Unit filename="Dependencies/GLEW/include/wglew.h" />
+		<Unit filename="Dependencies/GLFW/include/glfw3.h" />
+		<Unit filename="Dependencies/GLFW/include/glfw3native.h" />
+		<Unit filename="Dependencies/freetype/builds/amiga/include/config/ftconfig.h" />
+		<Unit filename="Dependencies/freetype/builds/amiga/include/config/ftmodule.h" />
+		<Unit filename="Dependencies/freetype/builds/amiga/src/base/ftdebug.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="Dependencies/freetype/builds/amiga/src/base/ftsystem.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="Dependencies/freetype/builds/atari/ATARI.H" />
+		<Unit filename="Dependencies/freetype/builds/mac/ftmac.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="Dependencies/freetype/builds/unix/ftsystem.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="Dependencies/freetype/builds/vms/ftconfig.h" />
+		<Unit filename="Dependencies/freetype/builds/vms/ftsystem.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="Dependencies/freetype/builds/wince/ftdebug.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="Dependencies/freetype/builds/windows/ftdebug.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="Dependencies/freetype/devel/ft2build.h" />
+		<Unit filename="Dependencies/freetype/devel/ftoption.h" />
+		<Unit filename="Dependencies/freetype/include/freetype/config/ftconfig.h" />
+		<Unit filename="Dependencies/freetype/include/freetype/config/ftheader.h" />
+		<Unit filename="Dependencies/freetype/include/freetype/config/ftmodule.h" />
+		<Unit filename="Dependencies/freetype/include/freetype/config/ftoption.h" />
+		<Unit filename="Dependencies/freetype/include/freetype/config/ftstdlib.h" />
+		<Unit filename="Dependencies/freetype/include/freetype/freetype.h" />
+		<Unit filename="Dependencies/freetype/include/freetype/ftadvanc.h" />
+		<Unit filename="Dependencies/freetype/include/freetype/ftbbox.h" />
+		<Unit filename="Dependencies/freetype/include/freetype/ftbdf.h" />
+		<Unit filename="Dependencies/freetype/include/freetype/ftbitmap.h" />
+		<Unit filename="Dependencies/freetype/include/freetype/ftbzip2.h" />
+		<Unit filename="Dependencies/freetype/include/freetype/ftcache.h" />
+		<Unit filename="Dependencies/freetype/include/freetype/ftchapters.h" />
+		<Unit filename="Dependencies/freetype/include/freetype/ftcid.h" />
+		<Unit filename="Dependencies/freetype/include/freetype/ftdriver.h" />
+		<Unit filename="Dependencies/freetype/include/freetype/fterrdef.h" />
+		<Unit filename="Dependencies/freetype/include/freetype/fterrors.h" />
+		<Unit filename="Dependencies/freetype/include/freetype/ftfntfmt.h" />
+		<Unit filename="Dependencies/freetype/include/freetype/ftgasp.h" />
+		<Unit filename="Dependencies/freetype/include/freetype/ftglyph.h" />
+		<Unit filename="Dependencies/freetype/include/freetype/ftgxval.h" />
+		<Unit filename="Dependencies/freetype/include/freetype/ftgzip.h" />
+		<Unit filename="Dependencies/freetype/include/freetype/ftimage.h" />
+		<Unit filename="Dependencies/freetype/include/freetype/ftincrem.h" />
+		<Unit filename="Dependencies/freetype/include/freetype/ftlcdfil.h" />
+		<Unit filename="Dependencies/freetype/include/freetype/ftlist.h" />
+		<Unit filename="Dependencies/freetype/include/freetype/ftlzw.h" />
+		<Unit filename="Dependencies/freetype/include/freetype/ftmac.h" />
+		<Unit filename="Dependencies/freetype/include/freetype/ftmm.h" />
+		<Unit filename="Dependencies/freetype/include/freetype/ftmodapi.h" />
+		<Unit filename="Dependencies/freetype/include/freetype/ftmoderr.h" />
+		<Unit filename="Dependencies/freetype/include/freetype/ftotval.h" />
+		<Unit filename="Dependencies/freetype/include/freetype/ftoutln.h" />
+		<Unit filename="Dependencies/freetype/include/freetype/ftparams.h" />
+		<Unit filename="Dependencies/freetype/include/freetype/ftpfr.h" />
+		<Unit filename="Dependencies/freetype/include/freetype/ftrender.h" />
+		<Unit filename="Dependencies/freetype/include/freetype/ftsizes.h" />
+		<Unit filename="Dependencies/freetype/include/freetype/ftsnames.h" />
+		<Unit filename="Dependencies/freetype/include/freetype/ftstroke.h" />
+		<Unit filename="Dependencies/freetype/include/freetype/ftsynth.h" />
+		<Unit filename="Dependencies/freetype/include/freetype/ftsystem.h" />
+		<Unit filename="Dependencies/freetype/include/freetype/fttrigon.h" />
+		<Unit filename="Dependencies/freetype/include/freetype/fttypes.h" />
+		<Unit filename="Dependencies/freetype/include/freetype/ftwinfnt.h" />
+		<Unit filename="Dependencies/freetype/include/freetype/internal/autohint.h" />
+		<Unit filename="Dependencies/freetype/include/freetype/internal/cffotypes.h" />
+		<Unit filename="Dependencies/freetype/include/freetype/internal/cfftypes.h" />
+		<Unit filename="Dependencies/freetype/include/freetype/internal/ftcalc.h" />
+		<Unit filename="Dependencies/freetype/include/freetype/internal/ftdebug.h" />
+		<Unit filename="Dependencies/freetype/include/freetype/internal/ftdrv.h" />
+		<Unit filename="Dependencies/freetype/include/freetype/internal/ftgloadr.h" />
+		<Unit filename="Dependencies/freetype/include/freetype/internal/fthash.h" />
+		<Unit filename="Dependencies/freetype/include/freetype/internal/ftmemory.h" />
+		<Unit filename="Dependencies/freetype/include/freetype/internal/ftobjs.h" />
+		<Unit filename="Dependencies/freetype/include/freetype/internal/ftpic.h" />
+		<Unit filename="Dependencies/freetype/include/freetype/internal/ftpsprop.h" />
+		<Unit filename="Dependencies/freetype/include/freetype/internal/ftrfork.h" />
+		<Unit filename="Dependencies/freetype/include/freetype/internal/ftserv.h" />
+		<Unit filename="Dependencies/freetype/include/freetype/internal/ftstream.h" />
+		<Unit filename="Dependencies/freetype/include/freetype/internal/fttrace.h" />
+		<Unit filename="Dependencies/freetype/include/freetype/internal/ftvalid.h" />
+		<Unit filename="Dependencies/freetype/include/freetype/internal/internal.h" />
+		<Unit filename="Dependencies/freetype/include/freetype/internal/psaux.h" />
+		<Unit filename="Dependencies/freetype/include/freetype/internal/pshints.h" />
+		<Unit filename="Dependencies/freetype/include/freetype/internal/services/svbdf.h" />
+		<Unit filename="Dependencies/freetype/include/freetype/internal/services/svcfftl.h" />
+		<Unit filename="Dependencies/freetype/include/freetype/internal/services/svcid.h" />
+		<Unit filename="Dependencies/freetype/include/freetype/internal/services/svfntfmt.h" />
+		<Unit filename="Dependencies/freetype/include/freetype/internal/services/svgldict.h" />
+		<Unit filename="Dependencies/freetype/include/freetype/internal/services/svgxval.h" />
+		<Unit filename="Dependencies/freetype/include/freetype/internal/services/svkern.h" />
+		<Unit filename="Dependencies/freetype/include/freetype/internal/services/svmetric.h" />
+		<Unit filename="Dependencies/freetype/include/freetype/internal/services/svmm.h" />
+		<Unit filename="Dependencies/freetype/include/freetype/internal/services/svotval.h" />
+		<Unit filename="Dependencies/freetype/include/freetype/internal/services/svpfr.h" />
+		<Unit filename="Dependencies/freetype/include/freetype/internal/services/svpostnm.h" />
+		<Unit filename="Dependencies/freetype/include/freetype/internal/services/svprop.h" />
+		<Unit filename="Dependencies/freetype/include/freetype/internal/services/svpscmap.h" />
+		<Unit filename="Dependencies/freetype/include/freetype/internal/services/svpsinfo.h" />
+		<Unit filename="Dependencies/freetype/include/freetype/internal/services/svsfnt.h" />
+		<Unit filename="Dependencies/freetype/include/freetype/internal/services/svttcmap.h" />
+		<Unit filename="Dependencies/freetype/include/freetype/internal/services/svtteng.h" />
+		<Unit filename="Dependencies/freetype/include/freetype/internal/services/svttglyf.h" />
+		<Unit filename="Dependencies/freetype/include/freetype/internal/services/svwinfnt.h" />
+		<Unit filename="Dependencies/freetype/include/freetype/internal/sfnt.h" />
+		<Unit filename="Dependencies/freetype/include/freetype/internal/t1types.h" />
+		<Unit filename="Dependencies/freetype/include/freetype/internal/tttypes.h" />
+		<Unit filename="Dependencies/freetype/include/freetype/t1tables.h" />
+		<Unit filename="Dependencies/freetype/include/freetype/ttnameid.h" />
+		<Unit filename="Dependencies/freetype/include/freetype/tttables.h" />
+		<Unit filename="Dependencies/freetype/include/freetype/tttags.h" />
+		<Unit filename="Dependencies/freetype/include/ft2build.h" />
+		<Unit filename="Dependencies/freetype/objs/x64/ftver.res" />
+		<Unit filename="Dependencies/freetype/src/autofit/afangles.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="Dependencies/freetype/src/autofit/afangles.h" />
+		<Unit filename="Dependencies/freetype/src/autofit/afblue.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="Dependencies/freetype/src/autofit/afblue.h" />
+		<Unit filename="Dependencies/freetype/src/autofit/afcjk.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="Dependencies/freetype/src/autofit/afcjk.h" />
+		<Unit filename="Dependencies/freetype/src/autofit/afcover.h" />
+		<Unit filename="Dependencies/freetype/src/autofit/afdummy.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="Dependencies/freetype/src/autofit/afdummy.h" />
+		<Unit filename="Dependencies/freetype/src/autofit/aferrors.h" />
+		<Unit filename="Dependencies/freetype/src/autofit/afglobal.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="Dependencies/freetype/src/autofit/afglobal.h" />
+		<Unit filename="Dependencies/freetype/src/autofit/afhints.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="Dependencies/freetype/src/autofit/afhints.h" />
+		<Unit filename="Dependencies/freetype/src/autofit/afindic.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="Dependencies/freetype/src/autofit/afindic.h" />
+		<Unit filename="Dependencies/freetype/src/autofit/aflatin.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="Dependencies/freetype/src/autofit/aflatin.h" />
+		<Unit filename="Dependencies/freetype/src/autofit/aflatin2.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="Dependencies/freetype/src/autofit/aflatin2.h" />
+		<Unit filename="Dependencies/freetype/src/autofit/afloader.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="Dependencies/freetype/src/autofit/afloader.h" />
+		<Unit filename="Dependencies/freetype/src/autofit/afmodule.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="Dependencies/freetype/src/autofit/afmodule.h" />
+		<Unit filename="Dependencies/freetype/src/autofit/afpic.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="Dependencies/freetype/src/autofit/afpic.h" />
+		<Unit filename="Dependencies/freetype/src/autofit/afranges.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="Dependencies/freetype/src/autofit/afranges.h" />
+		<Unit filename="Dependencies/freetype/src/autofit/afscript.h" />
+		<Unit filename="Dependencies/freetype/src/autofit/afshaper.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="Dependencies/freetype/src/autofit/afshaper.h" />
+		<Unit filename="Dependencies/freetype/src/autofit/afstyles.h" />
+		<Unit filename="Dependencies/freetype/src/autofit/aftypes.h" />
+		<Unit filename="Dependencies/freetype/src/autofit/afwarp.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="Dependencies/freetype/src/autofit/afwarp.h" />
+		<Unit filename="Dependencies/freetype/src/autofit/afwrtsys.h" />
+		<Unit filename="Dependencies/freetype/src/autofit/autofit.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="Dependencies/freetype/src/base/basepic.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="Dependencies/freetype/src/base/basepic.h" />
+		<Unit filename="Dependencies/freetype/src/base/ftadvanc.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="Dependencies/freetype/src/base/ftapi.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="Dependencies/freetype/src/base/ftbase.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="Dependencies/freetype/src/base/ftbase.h" />
+		<Unit filename="Dependencies/freetype/src/base/ftbbox.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="Dependencies/freetype/src/base/ftbdf.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="Dependencies/freetype/src/base/ftbitmap.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="Dependencies/freetype/src/base/ftcalc.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="Dependencies/freetype/src/base/ftcid.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="Dependencies/freetype/src/base/ftdbgmem.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="Dependencies/freetype/src/base/ftdebug.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="Dependencies/freetype/src/base/ftfntfmt.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="Dependencies/freetype/src/base/ftfstype.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="Dependencies/freetype/src/base/ftgasp.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="Dependencies/freetype/src/base/ftgloadr.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="Dependencies/freetype/src/base/ftglyph.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="Dependencies/freetype/src/base/ftgxval.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="Dependencies/freetype/src/base/fthash.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="Dependencies/freetype/src/base/ftinit.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="Dependencies/freetype/src/base/ftlcdfil.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="Dependencies/freetype/src/base/ftmac.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="Dependencies/freetype/src/base/ftmm.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="Dependencies/freetype/src/base/ftobjs.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="Dependencies/freetype/src/base/ftotval.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="Dependencies/freetype/src/base/ftoutln.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="Dependencies/freetype/src/base/ftpatent.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="Dependencies/freetype/src/base/ftpfr.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="Dependencies/freetype/src/base/ftpic.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="Dependencies/freetype/src/base/ftpsprop.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="Dependencies/freetype/src/base/ftrfork.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="Dependencies/freetype/src/base/ftsnames.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="Dependencies/freetype/src/base/ftstream.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="Dependencies/freetype/src/base/ftstroke.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="Dependencies/freetype/src/base/ftsynth.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="Dependencies/freetype/src/base/ftsystem.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="Dependencies/freetype/src/base/fttrigon.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="Dependencies/freetype/src/base/fttype1.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="Dependencies/freetype/src/base/ftutil.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="Dependencies/freetype/src/base/ftver.rc" />
+		<Unit filename="Dependencies/freetype/src/base/ftwinfnt.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="Dependencies/freetype/src/base/md5.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="Dependencies/freetype/src/base/md5.h" />
+		<Unit filename="Dependencies/freetype/src/bdf/bdf.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="Dependencies/freetype/src/bdf/bdf.h" />
+		<Unit filename="Dependencies/freetype/src/bdf/bdfdrivr.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="Dependencies/freetype/src/bdf/bdfdrivr.h" />
+		<Unit filename="Dependencies/freetype/src/bdf/bdferror.h" />
+		<Unit filename="Dependencies/freetype/src/bdf/bdflib.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="Dependencies/freetype/src/bzip2/ftbzip2.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="Dependencies/freetype/src/cache/ftcache.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="Dependencies/freetype/src/cache/ftcbasic.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="Dependencies/freetype/src/cache/ftccache.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="Dependencies/freetype/src/cache/ftccache.h" />
+		<Unit filename="Dependencies/freetype/src/cache/ftccback.h" />
+		<Unit filename="Dependencies/freetype/src/cache/ftccmap.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="Dependencies/freetype/src/cache/ftcerror.h" />
+		<Unit filename="Dependencies/freetype/src/cache/ftcglyph.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="Dependencies/freetype/src/cache/ftcglyph.h" />
+		<Unit filename="Dependencies/freetype/src/cache/ftcimage.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="Dependencies/freetype/src/cache/ftcimage.h" />
+		<Unit filename="Dependencies/freetype/src/cache/ftcmanag.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="Dependencies/freetype/src/cache/ftcmanag.h" />
+		<Unit filename="Dependencies/freetype/src/cache/ftcmru.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="Dependencies/freetype/src/cache/ftcmru.h" />
+		<Unit filename="Dependencies/freetype/src/cache/ftcsbits.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="Dependencies/freetype/src/cache/ftcsbits.h" />
+		<Unit filename="Dependencies/freetype/src/cff/cff.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="Dependencies/freetype/src/cff/cffcmap.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="Dependencies/freetype/src/cff/cffcmap.h" />
+		<Unit filename="Dependencies/freetype/src/cff/cffdrivr.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="Dependencies/freetype/src/cff/cffdrivr.h" />
+		<Unit filename="Dependencies/freetype/src/cff/cfferrs.h" />
+		<Unit filename="Dependencies/freetype/src/cff/cffgload.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="Dependencies/freetype/src/cff/cffgload.h" />
+		<Unit filename="Dependencies/freetype/src/cff/cffload.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="Dependencies/freetype/src/cff/cffload.h" />
+		<Unit filename="Dependencies/freetype/src/cff/cffobjs.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="Dependencies/freetype/src/cff/cffobjs.h" />
+		<Unit filename="Dependencies/freetype/src/cff/cffparse.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="Dependencies/freetype/src/cff/cffparse.h" />
+		<Unit filename="Dependencies/freetype/src/cff/cffpic.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="Dependencies/freetype/src/cff/cffpic.h" />
+		<Unit filename="Dependencies/freetype/src/cff/cfftoken.h" />
+		<Unit filename="Dependencies/freetype/src/cid/ciderrs.h" />
+		<Unit filename="Dependencies/freetype/src/cid/cidgload.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="Dependencies/freetype/src/cid/cidgload.h" />
+		<Unit filename="Dependencies/freetype/src/cid/cidload.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="Dependencies/freetype/src/cid/cidload.h" />
+		<Unit filename="Dependencies/freetype/src/cid/cidobjs.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="Dependencies/freetype/src/cid/cidobjs.h" />
+		<Unit filename="Dependencies/freetype/src/cid/cidparse.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="Dependencies/freetype/src/cid/cidparse.h" />
+		<Unit filename="Dependencies/freetype/src/cid/cidriver.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="Dependencies/freetype/src/cid/cidriver.h" />
+		<Unit filename="Dependencies/freetype/src/cid/cidtoken.h" />
+		<Unit filename="Dependencies/freetype/src/cid/type1cid.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="Dependencies/freetype/src/gxvalid/gxvalid.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="Dependencies/freetype/src/gxvalid/gxvalid.h" />
+		<Unit filename="Dependencies/freetype/src/gxvalid/gxvbsln.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="Dependencies/freetype/src/gxvalid/gxvcommn.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="Dependencies/freetype/src/gxvalid/gxvcommn.h" />
+		<Unit filename="Dependencies/freetype/src/gxvalid/gxverror.h" />
+		<Unit filename="Dependencies/freetype/src/gxvalid/gxvfeat.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="Dependencies/freetype/src/gxvalid/gxvfeat.h" />
+		<Unit filename="Dependencies/freetype/src/gxvalid/gxvfgen.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="Dependencies/freetype/src/gxvalid/gxvjust.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="Dependencies/freetype/src/gxvalid/gxvkern.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="Dependencies/freetype/src/gxvalid/gxvlcar.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="Dependencies/freetype/src/gxvalid/gxvmod.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="Dependencies/freetype/src/gxvalid/gxvmod.h" />
+		<Unit filename="Dependencies/freetype/src/gxvalid/gxvmort.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="Dependencies/freetype/src/gxvalid/gxvmort.h" />
+		<Unit filename="Dependencies/freetype/src/gxvalid/gxvmort0.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="Dependencies/freetype/src/gxvalid/gxvmort1.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="Dependencies/freetype/src/gxvalid/gxvmort2.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="Dependencies/freetype/src/gxvalid/gxvmort4.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="Dependencies/freetype/src/gxvalid/gxvmort5.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="Dependencies/freetype/src/gxvalid/gxvmorx.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="Dependencies/freetype/src/gxvalid/gxvmorx.h" />
+		<Unit filename="Dependencies/freetype/src/gxvalid/gxvmorx0.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="Dependencies/freetype/src/gxvalid/gxvmorx1.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="Dependencies/freetype/src/gxvalid/gxvmorx2.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="Dependencies/freetype/src/gxvalid/gxvmorx4.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="Dependencies/freetype/src/gxvalid/gxvmorx5.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="Dependencies/freetype/src/gxvalid/gxvopbd.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="Dependencies/freetype/src/gxvalid/gxvprop.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="Dependencies/freetype/src/gxvalid/gxvtrak.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="Dependencies/freetype/src/gzip/adler32.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="Dependencies/freetype/src/gzip/ftgzip.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="Dependencies/freetype/src/gzip/ftzconf.h" />
+		<Unit filename="Dependencies/freetype/src/gzip/infblock.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="Dependencies/freetype/src/gzip/infblock.h" />
+		<Unit filename="Dependencies/freetype/src/gzip/infcodes.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="Dependencies/freetype/src/gzip/infcodes.h" />
+		<Unit filename="Dependencies/freetype/src/gzip/inffixed.h" />
+		<Unit filename="Dependencies/freetype/src/gzip/inflate.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="Dependencies/freetype/src/gzip/inftrees.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="Dependencies/freetype/src/gzip/inftrees.h" />
+		<Unit filename="Dependencies/freetype/src/gzip/infutil.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="Dependencies/freetype/src/gzip/infutil.h" />
+		<Unit filename="Dependencies/freetype/src/gzip/zlib.h" />
+		<Unit filename="Dependencies/freetype/src/gzip/zutil.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="Dependencies/freetype/src/gzip/zutil.h" />
+		<Unit filename="Dependencies/freetype/src/lzw/ftlzw.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="Dependencies/freetype/src/lzw/ftzopen.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="Dependencies/freetype/src/lzw/ftzopen.h" />
+		<Unit filename="Dependencies/freetype/src/otvalid/otvalid.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="Dependencies/freetype/src/otvalid/otvalid.h" />
+		<Unit filename="Dependencies/freetype/src/otvalid/otvbase.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="Dependencies/freetype/src/otvalid/otvcommn.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="Dependencies/freetype/src/otvalid/otvcommn.h" />
+		<Unit filename="Dependencies/freetype/src/otvalid/otverror.h" />
+		<Unit filename="Dependencies/freetype/src/otvalid/otvgdef.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="Dependencies/freetype/src/otvalid/otvgpos.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="Dependencies/freetype/src/otvalid/otvgpos.h" />
+		<Unit filename="Dependencies/freetype/src/otvalid/otvgsub.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="Dependencies/freetype/src/otvalid/otvjstf.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="Dependencies/freetype/src/otvalid/otvmath.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="Dependencies/freetype/src/otvalid/otvmod.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="Dependencies/freetype/src/otvalid/otvmod.h" />
+		<Unit filename="Dependencies/freetype/src/pcf/pcf.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="Dependencies/freetype/src/pcf/pcf.h" />
+		<Unit filename="Dependencies/freetype/src/pcf/pcfdrivr.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="Dependencies/freetype/src/pcf/pcfdrivr.h" />
+		<Unit filename="Dependencies/freetype/src/pcf/pcferror.h" />
+		<Unit filename="Dependencies/freetype/src/pcf/pcfread.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="Dependencies/freetype/src/pcf/pcfread.h" />
+		<Unit filename="Dependencies/freetype/src/pcf/pcfutil.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="Dependencies/freetype/src/pcf/pcfutil.h" />
+		<Unit filename="Dependencies/freetype/src/pfr/pfr.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="Dependencies/freetype/src/pfr/pfrcmap.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="Dependencies/freetype/src/pfr/pfrcmap.h" />
+		<Unit filename="Dependencies/freetype/src/pfr/pfrdrivr.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="Dependencies/freetype/src/pfr/pfrdrivr.h" />
+		<Unit filename="Dependencies/freetype/src/pfr/pfrerror.h" />
+		<Unit filename="Dependencies/freetype/src/pfr/pfrgload.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="Dependencies/freetype/src/pfr/pfrgload.h" />
+		<Unit filename="Dependencies/freetype/src/pfr/pfrload.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="Dependencies/freetype/src/pfr/pfrload.h" />
+		<Unit filename="Dependencies/freetype/src/pfr/pfrobjs.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="Dependencies/freetype/src/pfr/pfrobjs.h" />
+		<Unit filename="Dependencies/freetype/src/pfr/pfrsbit.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="Dependencies/freetype/src/pfr/pfrsbit.h" />
+		<Unit filename="Dependencies/freetype/src/pfr/pfrtypes.h" />
+		<Unit filename="Dependencies/freetype/src/psaux/afmparse.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="Dependencies/freetype/src/psaux/afmparse.h" />
+		<Unit filename="Dependencies/freetype/src/psaux/cffdecode.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="Dependencies/freetype/src/psaux/cffdecode.h" />
+		<Unit filename="Dependencies/freetype/src/psaux/psarrst.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="Dependencies/freetype/src/psaux/psarrst.h" />
+		<Unit filename="Dependencies/freetype/src/psaux/psaux.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="Dependencies/freetype/src/psaux/psauxerr.h" />
+		<Unit filename="Dependencies/freetype/src/psaux/psauxmod.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="Dependencies/freetype/src/psaux/psauxmod.h" />
+		<Unit filename="Dependencies/freetype/src/psaux/psblues.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="Dependencies/freetype/src/psaux/psblues.h" />
+		<Unit filename="Dependencies/freetype/src/psaux/psconv.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="Dependencies/freetype/src/psaux/psconv.h" />
+		<Unit filename="Dependencies/freetype/src/psaux/pserror.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="Dependencies/freetype/src/psaux/pserror.h" />
+		<Unit filename="Dependencies/freetype/src/psaux/psfixed.h" />
+		<Unit filename="Dependencies/freetype/src/psaux/psfont.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="Dependencies/freetype/src/psaux/psfont.h" />
+		<Unit filename="Dependencies/freetype/src/psaux/psft.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="Dependencies/freetype/src/psaux/psft.h" />
+		<Unit filename="Dependencies/freetype/src/psaux/psglue.h" />
+		<Unit filename="Dependencies/freetype/src/psaux/pshints.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="Dependencies/freetype/src/psaux/pshints.h" />
+		<Unit filename="Dependencies/freetype/src/psaux/psintrp.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="Dependencies/freetype/src/psaux/psintrp.h" />
+		<Unit filename="Dependencies/freetype/src/psaux/psobjs.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="Dependencies/freetype/src/psaux/psobjs.h" />
+		<Unit filename="Dependencies/freetype/src/psaux/psread.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="Dependencies/freetype/src/psaux/psread.h" />
+		<Unit filename="Dependencies/freetype/src/psaux/psstack.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="Dependencies/freetype/src/psaux/psstack.h" />
+		<Unit filename="Dependencies/freetype/src/psaux/pstypes.h" />
+		<Unit filename="Dependencies/freetype/src/psaux/t1cmap.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="Dependencies/freetype/src/psaux/t1cmap.h" />
+		<Unit filename="Dependencies/freetype/src/psaux/t1decode.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="Dependencies/freetype/src/psaux/t1decode.h" />
+		<Unit filename="Dependencies/freetype/src/pshinter/pshalgo.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="Dependencies/freetype/src/pshinter/pshalgo.h" />
+		<Unit filename="Dependencies/freetype/src/pshinter/pshglob.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="Dependencies/freetype/src/pshinter/pshglob.h" />
+		<Unit filename="Dependencies/freetype/src/pshinter/pshinter.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="Dependencies/freetype/src/pshinter/pshmod.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="Dependencies/freetype/src/pshinter/pshmod.h" />
+		<Unit filename="Dependencies/freetype/src/pshinter/pshnterr.h" />
+		<Unit filename="Dependencies/freetype/src/pshinter/pshpic.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="Dependencies/freetype/src/pshinter/pshpic.h" />
+		<Unit filename="Dependencies/freetype/src/pshinter/pshrec.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="Dependencies/freetype/src/pshinter/pshrec.h" />
+		<Unit filename="Dependencies/freetype/src/psnames/psmodule.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="Dependencies/freetype/src/psnames/psmodule.h" />
+		<Unit filename="Dependencies/freetype/src/psnames/psnamerr.h" />
+		<Unit filename="Dependencies/freetype/src/psnames/psnames.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="Dependencies/freetype/src/psnames/pspic.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="Dependencies/freetype/src/psnames/pspic.h" />
+		<Unit filename="Dependencies/freetype/src/psnames/pstables.h" />
+		<Unit filename="Dependencies/freetype/src/raster/ftmisc.h" />
+		<Unit filename="Dependencies/freetype/src/raster/ftraster.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="Dependencies/freetype/src/raster/ftraster.h" />
+		<Unit filename="Dependencies/freetype/src/raster/ftrend1.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="Dependencies/freetype/src/raster/ftrend1.h" />
+		<Unit filename="Dependencies/freetype/src/raster/raster.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="Dependencies/freetype/src/raster/rasterrs.h" />
+		<Unit filename="Dependencies/freetype/src/raster/rastpic.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="Dependencies/freetype/src/raster/rastpic.h" />
+		<Unit filename="Dependencies/freetype/src/sfnt/pngshim.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="Dependencies/freetype/src/sfnt/pngshim.h" />
+		<Unit filename="Dependencies/freetype/src/sfnt/sfdriver.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="Dependencies/freetype/src/sfnt/sfdriver.h" />
+		<Unit filename="Dependencies/freetype/src/sfnt/sferrors.h" />
+		<Unit filename="Dependencies/freetype/src/sfnt/sfnt.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="Dependencies/freetype/src/sfnt/sfntpic.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="Dependencies/freetype/src/sfnt/sfntpic.h" />
+		<Unit filename="Dependencies/freetype/src/sfnt/sfobjs.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="Dependencies/freetype/src/sfnt/sfobjs.h" />
+		<Unit filename="Dependencies/freetype/src/sfnt/ttbdf.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="Dependencies/freetype/src/sfnt/ttbdf.h" />
+		<Unit filename="Dependencies/freetype/src/sfnt/ttcmap.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="Dependencies/freetype/src/sfnt/ttcmap.h" />
+		<Unit filename="Dependencies/freetype/src/sfnt/ttcmapc.h" />
+		<Unit filename="Dependencies/freetype/src/sfnt/ttkern.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="Dependencies/freetype/src/sfnt/ttkern.h" />
+		<Unit filename="Dependencies/freetype/src/sfnt/ttload.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="Dependencies/freetype/src/sfnt/ttload.h" />
+		<Unit filename="Dependencies/freetype/src/sfnt/ttmtx.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="Dependencies/freetype/src/sfnt/ttmtx.h" />
+		<Unit filename="Dependencies/freetype/src/sfnt/ttpost.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="Dependencies/freetype/src/sfnt/ttpost.h" />
+		<Unit filename="Dependencies/freetype/src/sfnt/ttsbit.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="Dependencies/freetype/src/sfnt/ttsbit.h" />
+		<Unit filename="Dependencies/freetype/src/smooth/ftgrays.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="Dependencies/freetype/src/smooth/ftgrays.h" />
+		<Unit filename="Dependencies/freetype/src/smooth/ftsmerrs.h" />
+		<Unit filename="Dependencies/freetype/src/smooth/ftsmooth.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="Dependencies/freetype/src/smooth/ftsmooth.h" />
+		<Unit filename="Dependencies/freetype/src/smooth/ftspic.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="Dependencies/freetype/src/smooth/ftspic.h" />
+		<Unit filename="Dependencies/freetype/src/smooth/smooth.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="Dependencies/freetype/src/tools/apinames.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="Dependencies/freetype/src/tools/ftfuzzer/ftfuzzer.cc" />
+		<Unit filename="Dependencies/freetype/src/tools/ftfuzzer/ftmutator.cc" />
+		<Unit filename="Dependencies/freetype/src/tools/ftfuzzer/rasterfuzzer.cc" />
+		<Unit filename="Dependencies/freetype/src/tools/ftfuzzer/runinput.cc" />
+		<Unit filename="Dependencies/freetype/src/tools/ftrandom/ftrandom.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="Dependencies/freetype/src/tools/test_afm.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="Dependencies/freetype/src/tools/test_bbox.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="Dependencies/freetype/src/tools/test_trig.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="Dependencies/freetype/src/truetype/truetype.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="Dependencies/freetype/src/truetype/ttdriver.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="Dependencies/freetype/src/truetype/ttdriver.h" />
+		<Unit filename="Dependencies/freetype/src/truetype/tterrors.h" />
+		<Unit filename="Dependencies/freetype/src/truetype/ttgload.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="Dependencies/freetype/src/truetype/ttgload.h" />
+		<Unit filename="Dependencies/freetype/src/truetype/ttgxvar.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="Dependencies/freetype/src/truetype/ttgxvar.h" />
+		<Unit filename="Dependencies/freetype/src/truetype/ttinterp.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="Dependencies/freetype/src/truetype/ttinterp.h" />
+		<Unit filename="Dependencies/freetype/src/truetype/ttobjs.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="Dependencies/freetype/src/truetype/ttobjs.h" />
+		<Unit filename="Dependencies/freetype/src/truetype/ttpic.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="Dependencies/freetype/src/truetype/ttpic.h" />
+		<Unit filename="Dependencies/freetype/src/truetype/ttpload.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="Dependencies/freetype/src/truetype/ttpload.h" />
+		<Unit filename="Dependencies/freetype/src/truetype/ttsubpix.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="Dependencies/freetype/src/truetype/ttsubpix.h" />
+		<Unit filename="Dependencies/freetype/src/type1/t1afm.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="Dependencies/freetype/src/type1/t1afm.h" />
+		<Unit filename="Dependencies/freetype/src/type1/t1driver.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="Dependencies/freetype/src/type1/t1driver.h" />
+		<Unit filename="Dependencies/freetype/src/type1/t1errors.h" />
+		<Unit filename="Dependencies/freetype/src/type1/t1gload.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="Dependencies/freetype/src/type1/t1gload.h" />
+		<Unit filename="Dependencies/freetype/src/type1/t1load.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="Dependencies/freetype/src/type1/t1load.h" />
+		<Unit filename="Dependencies/freetype/src/type1/t1objs.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="Dependencies/freetype/src/type1/t1objs.h" />
+		<Unit filename="Dependencies/freetype/src/type1/t1parse.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="Dependencies/freetype/src/type1/t1parse.h" />
+		<Unit filename="Dependencies/freetype/src/type1/t1tokens.h" />
+		<Unit filename="Dependencies/freetype/src/type1/type1.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="Dependencies/freetype/src/type42/t42drivr.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="Dependencies/freetype/src/type42/t42drivr.h" />
+		<Unit filename="Dependencies/freetype/src/type42/t42error.h" />
+		<Unit filename="Dependencies/freetype/src/type42/t42objs.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="Dependencies/freetype/src/type42/t42objs.h" />
+		<Unit filename="Dependencies/freetype/src/type42/t42parse.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="Dependencies/freetype/src/type42/t42parse.h" />
+		<Unit filename="Dependencies/freetype/src/type42/t42types.h" />
+		<Unit filename="Dependencies/freetype/src/type42/type42.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="Dependencies/freetype/src/winfonts/fnterrs.h" />
+		<Unit filename="Dependencies/freetype/src/winfonts/winfnt.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="Dependencies/freetype/src/winfonts/winfnt.h" />
+		<Unit filename="Dependencies/portAudio/include/pa_mac_core.h" />
+		<Unit filename="Dependencies/portAudio/include/portaudio.h" />
+		<Unit filename="Dependencies/portAudio/include/portaudiocpp/AutoSystem.hxx" />
+		<Unit filename="Dependencies/portAudio/include/portaudiocpp/BlockingStream.hxx" />
+		<Unit filename="Dependencies/portAudio/include/portaudiocpp/CFunCallbackStream.hxx" />
+		<Unit filename="Dependencies/portAudio/include/portaudiocpp/CallbackInterface.hxx" />
+		<Unit filename="Dependencies/portAudio/include/portaudiocpp/CallbackStream.hxx" />
+		<Unit filename="Dependencies/portAudio/include/portaudiocpp/CppFunCallbackStream.hxx" />
+		<Unit filename="Dependencies/portAudio/include/portaudiocpp/Device.hxx" />
+		<Unit filename="Dependencies/portAudio/include/portaudiocpp/DirectionSpecificStreamParameters.hxx" />
+		<Unit filename="Dependencies/portAudio/include/portaudiocpp/Exception.hxx" />
+		<Unit filename="Dependencies/portAudio/include/portaudiocpp/HostApi.hxx" />
+		<Unit filename="Dependencies/portAudio/include/portaudiocpp/InterfaceCallbackStream.hxx" />
+		<Unit filename="Dependencies/portAudio/include/portaudiocpp/MemFunCallbackStream.hxx" />
+		<Unit filename="Dependencies/portAudio/include/portaudiocpp/PortAudioCpp.hxx" />
+		<Unit filename="Dependencies/portAudio/include/portaudiocpp/SampleDataFormat.hxx" />
+		<Unit filename="Dependencies/portAudio/include/portaudiocpp/Stream.hxx" />
+		<Unit filename="Dependencies/portAudio/include/portaudiocpp/StreamParameters.hxx" />
+		<Unit filename="Dependencies/portAudio/include/portaudiocpp/System.hxx" />
+		<Unit filename="Dependencies/portAudio/include/portaudiocpp/SystemDeviceIterator.hxx" />
+		<Unit filename="Dependencies/portAudio/include/portaudiocpp/SystemHostApiIterator.hxx" />
+		<Unit filename="Dependencies/portsf/include/ieee80.h" />
+		<Unit filename="Dependencies/portsf/include/portsf.h" />
+		<Unit filename="Dependencies/tinyAudioLibrary/include/tinyAudioLib.h" />
 		<Unit filename="Graphics/BatchRenderer.cpp" />
 		<Unit filename="Graphics/BatchRenderer.h" />
 		<Unit filename="Graphics/Buffers/BufferStructure.cpp" />
@@ -162,15 +1109,26 @@
 		<Unit filename="Graphics/Buffers/VertexBuffer.h" />
 		<Unit filename="Graphics/Camera.cpp" />
 		<Unit filename="Graphics/Camera.h" />
+		<Unit filename="Graphics/Font.cpp" />
+		<Unit filename="Graphics/Font.h" />
 		<Unit filename="Graphics/Mesh.cpp" />
 		<Unit filename="Graphics/Mesh.h" />
 		<Unit filename="Graphics/RenderableObject.cpp" />
 		<Unit filename="Graphics/RenderableObject.h" />
 		<Unit filename="Graphics/Renderer.h" />
+		<Unit filename="Graphics/Renderers/BatchRenderer.cpp" />
+		<Unit filename="Graphics/Renderers/BatchRenderer.h" />
+		<Unit filename="Graphics/Renderers/Renderer.h" />
+		<Unit filename="Graphics/Renderers/SerialRenderer.cpp" />
+		<Unit filename="Graphics/Renderers/SerialRenderer.h" />
 		<Unit filename="Graphics/SerialRenderer.cpp" />
 		<Unit filename="Graphics/SerialRenderer.h" />
 		<Unit filename="Graphics/Shader.cpp" />
 		<Unit filename="Graphics/Shader.h" />
+		<Unit filename="Graphics/UI/UIImage.h" />
+		<Unit filename="Graphics/UI/UIObject.h" />
+		<Unit filename="Graphics/UI/UIText.cpp" />
+		<Unit filename="Graphics/UI/UIText.h" />
 		<Unit filename="Graphics/Window.cpp" />
 		<Unit filename="Graphics/Window.h" />
 		<Unit filename="Main.cpp" />
@@ -183,6 +1141,26 @@
 		<Unit filename="Maths/Vector3.h" />
 		<Unit filename="Maths/Vector4.cpp" />
 		<Unit filename="Maths/Vector4.h" />
+		<Unit filename="Objects/Audio/AudioEngine.d" />
+		<Unit filename="Objects/DebugTools/ReferenceGrid.d" />
+		<Unit filename="Objects/Graphics/Buffers/BufferStructure.d" />
+		<Unit filename="Objects/Graphics/Buffers/IndexBuffer.d" />
+		<Unit filename="Objects/Graphics/Buffers/VertexArray.d" />
+		<Unit filename="Objects/Graphics/Buffers/VertexBuffer.d" />
+		<Unit filename="Objects/Graphics/Camera.d" />
+		<Unit filename="Objects/Graphics/Font.d" />
+		<Unit filename="Objects/Graphics/Mesh.d" />
+		<Unit filename="Objects/Graphics/RenderableObject.d" />
+		<Unit filename="Objects/Graphics/Renderers/BatchRenderer.d" />
+		<Unit filename="Objects/Graphics/Renderers/SerialRenderer.d" />
+		<Unit filename="Objects/Graphics/Shader.d" />
+		<Unit filename="Objects/Graphics/UI/UIText.d" />
+		<Unit filename="Objects/Graphics/Window.d" />
+		<Unit filename="Objects/Main.d" />
+		<Unit filename="Objects/Maths/Matrix4.d" />
+		<Unit filename="Objects/Maths/Vector2.d" />
+		<Unit filename="Objects/Maths/Vector3.d" />
+		<Unit filename="Objects/Maths/Vector4.d" />
 		<Unit filename="Utilities/FileUtilities.h" />
 		<Extensions>
 			<envvars />

@@ -15,7 +15,7 @@ namespace Somnium
 			{
 			public:
 				UIText(std::string text, Font* font, Maths::Vector2 position, Shader* shader)
-					: m_Text(text), m_Font(font)
+					: m_Font(font), m_Text(text)
 				{
 					m_Position = position; 
 					m_Shader = shader; 
@@ -39,8 +39,8 @@ namespace Somnium
 				void setFont(Font *font) { m_Font = font; };
 				void setScale(float scale) { m_Scale = scale; }
 				
-				void setItalic(bool italic) {};
-				void setBold(bool bold) {};
+				void setItalic(bool italic) { m_Italic = italic; }
+				void setBold(bool bold) { m_Bold = bold; }
 
 			private:
 				bool m_Italic = false, m_Bold = false;

@@ -38,7 +38,7 @@ namespace Somnium
 			const inline std::vector<GLfloat>& getVertexData() const { return m_VertexData; }
 			const inline std::vector<GLushort>& getIndexData() const { return m_IndexData; }
 
-			const inline size_t getIBOSize() const { return m_IBO->getCount(); }
+			inline size_t getIBOSize() const { return m_IBO->getCount(); }
 			inline Shader& getShader() const { return m_Shader; }
 			const Maths::Matrix4 getModelMatrix() const;
 

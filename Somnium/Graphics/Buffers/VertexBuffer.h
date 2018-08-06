@@ -20,8 +20,8 @@ namespace Somnium
 				~VertexBuffer();
 
 				inline GLuint getComponentCount() const { return m_ComponentCount; }
-				inline void bind() const;
-				inline void unbind() const;
+				inline void bind() const { glBindBuffer(GL_ARRAY_BUFFER, m_BufferID); }
+				inline void unbind() const { glBindBuffer(GL_ARRAY_BUFFER, 0); }
 
 			private:
 				GLuint m_BufferID;

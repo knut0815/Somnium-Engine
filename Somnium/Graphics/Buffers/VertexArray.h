@@ -23,8 +23,8 @@ namespace Somnium
 
 				void draw(unsigned int count) const;
 
-				inline void bind() const;
-				inline void unbind() const;
+				inline void bind() const { glBindVertexArray(m_ArrayID); }
+				inline void unbind() const { glBindVertexArray(0); }
 	
 			private:
 				GLuint m_ArrayID;

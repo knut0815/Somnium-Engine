@@ -35,9 +35,6 @@ namespace Somnium
 			{
 				glDrawElements(GL_TRIANGLES, amount, GL_UNSIGNED_SHORT, nullptr);
 			}
-
-			void VertexArray::bind()   const { glBindVertexArray(m_ArrayID); }
-			void VertexArray::unbind() const { glBindVertexArray(0); }
 		}
 	}
 }
