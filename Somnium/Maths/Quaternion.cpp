@@ -1,4 +1,5 @@
 #include "Quaternion.h"
+#include <algorithm>
 
 namespace Somnium
 {
@@ -10,10 +11,67 @@ namespace Somnium
 			return *this;
 		}
 
+		Quaternion Quaternion::operator+(const Quaternion &rhs) const
+		{
+			return Quaternion(vw + rhs.vw);
+		}
+
+		Quaternion &Quaternion::operator+=(const float &scalar)
+		{
+			vw += scalar;
+			return *this;
+		}
+
+		Quaternion Quaternion::operator+(const float &scalar) const
+		{
+			return Quaternion(vw + scalar);
+		}
+
 		Quaternion& Quaternion::operator-=(const Quaternion &rhs)
 		{
 			vw -= rhs.vw;
 			return *this;
+		}
+
+		Quaternion Quaternion::operator-(const Quaternion &rhs) const
+		{
+			return Quaternion(vw - rhs.vw);
+		}
+
+		Quaternion &Quaternion::operator-=(const float &scalar)
+		{
+
+			return Quaternion();
+		}
+
+		Quaternion Quaternion::operator-(const float &scalar) const
+		{
+
+			return Quaternion();
+		}
+
+		Quaternion &Quaternion::operator*=(const Quaternion &rhs)
+		{
+
+			return Quaternion();
+		}
+
+		Quaternion Quaternion::operator* (const float &scalar) const
+		{
+
+			return Quaternion();
+		}
+
+		Quaternion &Quaternion::operator/=(const Quaternion &rhs)
+		{
+
+			return Quaternion();
+		}
+
+		Quaternion &Quaternion::operator/ (const float &scalar) const
+		{
+
+			return Quaternion();
 		}
 
 		Matrix4 Quaternion::toTransformationMatrix() const
@@ -46,11 +104,18 @@ namespace Somnium
 			return Matrix4();
 		}
 
-		float Quaternion::slerp(const Quaternion &quaternion1, const Quaternion &quaternion2, float t) const
+		Quaternion Quaternion::slerp(const Quaternion &quaternion1, const Quaternion &quaternion2, float t) const
 		{
 			float cosineTheta = dot(quaternion1, quaternion2);
 			if (cosineTheta > .9995f)
-				return normalise(quaternion1 * (1 - t) + quaternion2 * t);
+				return normalise((1 - t) * quaternion1 + t * quaternion2);
+			else
+			{
+				float theta = acos(clamp(cosineTheta, -1, 1));
+				float thetaT = theta * t;
+				Quaternion qperp = normalise(quaternion2 - quaternion1 * cosineTheta);
+				return quaternion1 * cos(thetaT) + qperp * sin(thetaT);
+			}
 		}
 
 		inline float Quaternion::dot(const Quaternion &quaternion)
@@ -58,7 +123,7 @@ namespace Somnium
 			return dot(*this, quaternion);
 		}
 
-		inline float dot(const Quaternion &quaternion1, const Quaternion &quaternion2)
+		inline float Quaternion::dot(const Quaternion & quaternion1, const Quaternion & quaternion2)
 		{
 			return Vector3::dot(quaternion1.v, quaternion2.v) + quaternion1.w * quaternion2.w;
 		}

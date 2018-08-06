@@ -33,28 +33,45 @@ namespace Somnium
 			Quaternion operator+  (const Quaternion &rhs) const;
 			Quaternion &operator+=(const float &scalar);
 			Quaternion operator+  (const float &scalar) const;
-
+			
 			Quaternion &operator-=(const Quaternion &rhs);
 			Quaternion operator-  (const Quaternion &rhs) const;
 			Quaternion &operator-=(const float &scalar);
 			Quaternion operator-  (const float &scalar) const;
 			
 			Quaternion &operator*=(const Quaternion &rhs);
-			Quaternion &operator* (const float &scalar) const;
-
+			Quaternion operator*  (const float &scalar) const;
+			
 			//TODO: Make operators global in order to have 2 way operator overloading
 
 			Quaternion &operator/=(const Quaternion &rhs);
 			Quaternion &operator/ (const float &scalar) const;
 
-			float slerp(const Quaternion &quaternion1, const Quaternion &quaternion2, float t) const;
+			Quaternion slerp(const Quaternion &quaternion1, const Quaternion &quaternion2, float t) const;
 
 			Matrix4 toTransformationMatrix() const;
 
 			inline float dot(const Quaternion &quaternion);
 			static inline float dot(const Quaternion &quaternion1, const Quaternion &quaternion2);
 
-			inline Quaternion normalise(const Quaternion &quaternion);
+			static inline Quaternion normalise(const Quaternion &quaternion);
+
+			//TODO: Animation functions and variables
 		};
+
+		Quaternion &operator- (float scalar, Quaternion quaternion)
+		{
+			return Quaternion(quaternion.vw - scalar);
+		}
+
+		Quaternion &operator+ (float scalar, Quaternion quaternion)
+		{
+			return Quaternion(quaternion.vw + scalar);
+		}
+
+		Quaternion &operator* (float scalar, Quaternion quaternion)
+		{
+			return Quaternion(quaternion.vw * scalar);
+		}
 	}
 }
