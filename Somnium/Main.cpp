@@ -50,7 +50,7 @@ int main(int argc, char** argv) {
 
 	Window myWindow("Somnium Engine", 1920, 1080, (flags.find("-f") != flags.end()) || (flags.find("--fullscreen") != flags.end()));
 	glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
-    
+
     //Sound demo
     //AudioEngine au;
     //thread at{&AudioEngine::playSound, this, "Synth1.wav"};
@@ -66,7 +66,7 @@ int main(int argc, char** argv) {
 	Font* arial = new Font("Fonts/arial.ttf", myWindow.getFreeTypeInstance());
 	Shader* shader = new Shader("Graphics/Shaders/Basic/basic.vert", "Graphics/Shaders/Basic/basic.frag");
 	Shader* textShader = new Shader("Graphics/Shaders/Basic/basicText.vert", "Graphics/Shaders/Basic/basicText.frag");
-	
+
 	textShader->enable();
 	textShader->setMatrix4("projection", Matrix4::orthographic(0, myWindow.getWidth(),0, myWindow.getHeight(), -1.0f, 100.0f));
 
@@ -99,7 +99,7 @@ int main(int argc, char** argv) {
 #endif
 
 	Matrix4 view = Matrix4::identity();
-	    
+
 	Mesh monkeyMesh = Mesh(Utilities::loadOBJ("Graphics/Objects/Monkey.obj", *shader));
 	monkeyMesh.translate(0,0,-50);
 
@@ -111,9 +111,9 @@ int main(int argc, char** argv) {
 		objects.push_back(new RenderableObject(new Mesh(monkeyMesh)));
 
 	Renderers::SerialRenderer* renderer = new Renderers::SerialRenderer(myWindow, mainCamera);
-	
+
 	shader->enable();
-	
+
 	for (RenderableObject* object : objects)
 	{
 		float scale = (float)rand() / RAND_MAX;
@@ -172,9 +172,10 @@ int main(int argc, char** argv) {
 		snprintf(fpsUI, 128, "FPS %d (%f ms)", fps, timePerFrame);
 
 		calculateFPS(fps, timePerFrame);
-		fpsCount->setText(fpsUI);	
-
+		fpsCount->setText(fpsUI);
+#ifdef WEB_BUILD
 		emscripten_set_main_loop_arg(, , false, true);
+#endif
 	}
 
 	cout << "-----------------------------------" << endl;
