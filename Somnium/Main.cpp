@@ -41,6 +41,13 @@ void calculateFPS(unsigned int &frameRate, float &timePerFrame)
 	}
 }
 
+#ifdef WEB_BUILD
+static void startMain(void *mainFunction)
+{
+	(*(function<void()>*)mainFunction)();
+}
+#endif
+
 int main(int argc, char** argv) {
 	cout << "SOMNIUM by LUMACAL Software Group - Built " << __TIMESTAMP__ << endl << endl;
 
@@ -121,8 +128,12 @@ int main(int argc, char** argv) {
 		object->getMesh()->translate((float)rand() / RAND_MAX * 10 * ((rand() % 2) ? 1 : -1), (float)rand() / RAND_MAX * 10 * ((rand() % 2) ? 1 : -1), (float)rand() / RAND_MAX * -1.0f);
 	}
 
+#ifdef WEB_BUILD
+	function<void()> webMain = [&]() {
+#else
 	while (!myWindow.isClosed())
 	{
+#endif
 		myWindow.clear();
 
 		int x, y;
@@ -173,10 +184,12 @@ int main(int argc, char** argv) {
 
 		calculateFPS(fps, timePerFrame);
 		fpsCount->setText(fpsUI);
-#ifdef WEB_BUILD
-		emscripten_set_main_loop_arg(, , false, true);
-#endif
+#ifdef WEB_SUILD
+	};
+	emscripten_set_main_loop_arg(startMain, &webMain, false, true);
+#else
 	}
+#endif
 
 	cout << "-----------------------------------" << endl;
 
