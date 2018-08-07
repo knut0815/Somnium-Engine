@@ -1,7 +1,12 @@
 #pragma once
 
 #include <vector>
-#include <glew.h>
+#ifdef WEB_BUILD 
+	#define GLFW_INCLUDE_ES3
+	#include <GLFW/glfw3.h>
+#else 
+	#include <glew.h> 
+#endif
 
 #include "VertexBuffer.h"
 

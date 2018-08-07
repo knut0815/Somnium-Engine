@@ -1,7 +1,11 @@
 #pragma once
 
 #include "../Maths/Vector2.h"
-#include <glew.h>
+#ifdef WEB_BUILD 
+	#define GLFW_INCLUDE_ES3
+#else 
+	#include <glew.h> 
+#endif
 #include <glfw3.h>
 #include <map>
 #include <ft2build.h>

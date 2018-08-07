@@ -91,6 +91,7 @@ namespace Somnium
 
 			cout << " GLEW\t\t";
 
+#ifndef WEB_BUILD
 			glewExperimental = GL_TRUE;
 
 			if (glewInit() != GLEW_OK) //Must be after the ContextCurrent call
@@ -100,6 +101,9 @@ namespace Somnium
 			}
 
 			cout << glewGetString(GLEW_VERSION) << endl;
+#else
+			cout << " DISABLED! (EMSCRIPTEN WEB BUILD)";
+#endif
 
 			cout << " FreeType\t";
 			if (FT_Init_FreeType(&m_FreeType))

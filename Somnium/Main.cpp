@@ -1,6 +1,11 @@
 #include <thread>
 #include <iostream>
 #include <set>
+
+#ifdef WEB_BUILD
+	#include <emscripten.h>
+#endif
+
 #include "Graphics/Window.h"
 #include "Graphics/Shader.h"
 #include "Graphics/Mesh.h"
@@ -168,6 +173,8 @@ int main(int argc, char** argv) {
 
 		calculateFPS(fps, timePerFrame);
 		fpsCount->setText(fpsUI);	
+
+		emscripten_set_main_loop_arg(, , false, true);
 	}
 
 	cout << "-----------------------------------" << endl;
