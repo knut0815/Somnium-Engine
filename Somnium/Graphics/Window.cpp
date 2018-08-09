@@ -3,14 +3,14 @@
 
 using namespace std;
 
-#define ENABLE_DEBUG_MODE false
-
 namespace Somnium
 {
 	namespace Graphics
 	{
 		void resize(GLFWwindow*, int, int);
+#ifdef DEBUG_MODE
 		void errorCallback(GLenum source, GLenum type, GLuint id, GLenum severity, GLsizei length, const GLchar* message, const void* userParam);
+#endif
 
 		Window::Window(const char* title, int width, int height, bool fullScreen)
 			:m_Title(title), m_Width(width), m_Height(height), m_FullScreen(fullScreen)
@@ -44,7 +44,7 @@ namespace Somnium
 			glEnable(GL_CULL_FACE);
 			glEnable(GL_DEPTH_TEST);
 			glDepthFunc(GL_LESS);
-			glEnable(GL_FRAMEBUFFER_SRGB);
+//			glEnable(GL_FRAMEBUFFER_SRGB);
 			glEnable(GL_BLEND);
 			glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 		}
@@ -119,19 +119,18 @@ namespace Somnium
 
 			/* DEBUG MODE */
 
-			if (ENABLE_DEBUG_MODE)
-			{
+#ifdef DEBUG_MODE
 				glEnable(GL_DEBUG_OUTPUT);
 				glDebugMessageCallback(errorCallback, 0);
 
-#ifndef _WIN32
+	#ifndef _WIN32
 				printf("\33[31m");
-#endif
+	#endif
 				printf("!-- DEBUG MODE ENABLED --!\r\n", 0x1B, 31);
-#ifndef _WIN32
+	#ifndef _WIN32
 				printf("\33[37m");
+	#endif
 #endif
-			}
 			cout << "---------------------------------------------" << endl << endl;
 
 			return true;
@@ -217,23 +216,21 @@ namespace Somnium
 
 		}
 
+#ifdef DEBUG_MODE
 		void errorCallback(GLenum source, GLenum type, GLuint id, GLenum severity, GLsizei length, const GLchar * message, const void * userParam)
 		{
-
-
-#ifndef _WIN32
-		static const char* errorFlag = "\33[31m** GL ERROR **\33[37m";
-#else
-        static const char* errorFlag = "** GL ERROR **";
-#endif
+	#ifndef _WIN32
+			static const char* errorFlag = "\33[31m** GL ERROR **\33[37m";
+	#else
+        		static const char* errorFlag = "** GL ERROR **";
+	#endif
 			fprintf(stderr, "\r\nGL CALLBACK: %s type = 0x%x, severity = 0x%x, message = %s\r\n",
 				(type == GL_DEBUG_TYPE_ERROR ? errorFlag : ""),
 				type, severity, message);
 
 			if(type == GL_DEBUG_TYPE_ERROR)
 				cin.get();
-
-
 		}
+#endif
 	}
 }

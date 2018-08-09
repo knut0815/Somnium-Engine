@@ -7,6 +7,16 @@
 #endif
 #include "../Maths/Maths.h"
 
+#ifdef WEB_BUILD
+	#define CHAR char
+	#define UINT unsigned int
+	#define INT int
+#else
+	#define CHAR GLchar
+	#define UINT GLuint
+	#define INT GLint
+#endif
+
 namespace Somnium {
 	namespace Graphics {
 		class Shader
@@ -15,24 +25,24 @@ namespace Somnium {
 			Shader(const char* vertexFilePath, const char* fragmentFilePath);
 			~Shader();
 
-			void setInt(const GLchar*, int value);
-			void setFloat(const GLchar*, float value);
-			void setVector2(const GLchar*, const Maths::Vector2&);
-			void setVector3(const GLchar*, const Maths::Vector3&);
-			void setVector4(const GLchar*, const Maths::Vector4&);
-			void setMatrix4(const GLchar*, const Maths::Matrix4&);
+			void setInt(const CHAR*, int value);
+			void setFloat(const CHAR*, float value);
+			void setVector2(const CHAR*, const Maths::Vector2&);
+			void setVector3(const CHAR*, const Maths::Vector3&);
+			void setVector4(const CHAR*, const Maths::Vector4&);
+			void setMatrix4(const CHAR*, const Maths::Matrix4&);
 
 			void enable() const;
 			void disable() const;
 
-            GLuint getID() const { return m_ShaderID; };
+			UINT getID() const { return m_ShaderID; };
 
 		private:
-			GLuint load();
-			GLint getUniformLocation(const GLchar*);
+			UINT load();
+			INT getUniformLocation(const CHAR*);
 
 		private:
-			GLuint m_ShaderID;
+			UINT m_ShaderID;
 			const char *m_VertexFilePath, *m_FragmentFilePath;
 		};
 	}

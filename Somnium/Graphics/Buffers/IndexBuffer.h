@@ -25,8 +25,8 @@ namespace Somnium
 				~IndexBuffer();
 
 				inline GLuint getCount() const { return m_Count; }
-				inline void bind() const;
-				inline void unbind() const;
+			inline void bind()   const { glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, m_BufferID); }
+			inline void unbind() const { glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0); }
 
 			private:
 				GLuint m_BufferID;

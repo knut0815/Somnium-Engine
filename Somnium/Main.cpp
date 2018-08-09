@@ -184,11 +184,9 @@ int main(int argc, char** argv) {
 
 		calculateFPS(fps, timePerFrame);
 		fpsCount->setText(fpsUI);
-#ifdef WEB_SUILD
 	};
+#ifdef WEB_SUILD
 	emscripten_set_main_loop_arg(startMain, &webMain, false, true);
-#else
-	}
 #endif
 
 	cout << "-----------------------------------" << endl;

@@ -70,7 +70,11 @@ namespace Somnium
 			void BatchRenderer::beginMapping()
 			{
 				m_VBO->bind();
+#ifndef WEB_BUILD
 				m_VertexDataBuffer = (GLfloat*)glMapBuffer(GL_ARRAY_BUFFER, GL_WRITE_ONLY);
+#else
+				//TODO: glSubData version
+#endif
 			}
 
 			void BatchRenderer::submitToQueue(RenderableObject* object)

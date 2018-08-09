@@ -1,16 +1,18 @@
 CC := clang++
-WEBCC := emcc -O2
+WEBCC := emcc -O3 --memory-init-file 0 -DWEB_BUILD -s FULL_ES3=1 -s USE_GLFW=3 -s USE_FREETYPE=1
 OSXLDFLAGS:= -framework OpenGL -lm -l glfw -l GLEW -L ./Dependencies/portaudio/lib -l portaudio
 LDFLAGS:= -l GL -lm -l glfw -l GLEW -l freetype -L ./Dependencies/portaudio/lib 
-CPPFLAGS := -Wall -g -std=c++11 -Wextra `pkg-config --cflags glfw3 glew freetype2`
+CPPFLAGS := -Wall -g -std=c++11
+PKGFLAGS := -Wextra `pkg-config --cflags glfw3 glew freetype2`
 CXXFLAGS:=  -I Dependencies/GLEW/include -I Dependencies/GLFW/include -I Dependencies/portsf/include -I Dependencies/freetype/include
+WEBFLAGS:=  -I Dependencies/GLEW/include -I Dependencies/GLFW/include -I Dependencies/portsf/include
 SRC_DIR:=.
 OBJ_DIR:=Objects
 OBJ_DIR_WEB:=Objects
 SUB_DIRS := $(shell find $(SRC_DIR) -type d | sed 's|^./||; s|\.||')
 TARGET := SOMNIUM_BUILD
 TARGETOSX := SOMNIUMOSX
-TARGETWEB := SOMNIUM_web.js
+TARGETWEB := SOMNIUM_web.html
 
 SRCS := $(shell find $(SRC_DIR) -name "*.cpp")
 OBJS:=$(patsubst %.cpp,$(OBJ_DIR)/%.o,$(SRCS))
@@ -37,21 +39,21 @@ $(TARGETOSX):$(OBJS)
 	$(CC) $(OBJS) -o $(TARGET) $(OSXLDFLAGS)
 
 $(TARGETWEB):$(WEBOBJS)
-	$(WEBCC) $(WEBOBJS) -o $(TARGET).js $(LDFLAGS)
+	$(WEBCC) $(WEBOBJS) -o $(TARGET).html
 
 $(TARGET):$(OBJS)
 	$(CC) $(OBJS) -o $(TARGET) $(LDFLAGS)
 
 $(OBJ_DIR)/%.o:%.cpp
-	$(CC) $(CPPFLAGS) $< -c -o $@ $(CXXFLAGS)
+	$(CC) $(CPPFLAGS) $(PKGFLAGS) $< -c -o $@ $(CXXFLAGS)
 
 $(OBJ_DIR)/%.bc:%.cpp
-	$(WEBCC) $(CPPFLAGS) $< -c -o $@ $(CXXFLAGS)
+	$(WEBCC) $(CPPFLAGS) $< -o $@ $(WEBFLAGS)
 
 CXXFLAGS += -MMD 
 -include $(OBJS:.o=.d)
 
 
 clean:
-	rm SOMNIUM_BUILD.* &
+	rm SOMNIUM_BUILD* &
 	rm -r $(OBJ_DIR)
