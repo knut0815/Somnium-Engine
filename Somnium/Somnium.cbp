@@ -1097,7 +1097,6 @@
 		<Unit filename="Dependencies/portsf/include/ieee80.h" />
 		<Unit filename="Dependencies/portsf/include/portsf.h" />
 		<Unit filename="Dependencies/tinyAudioLibrary/include/tinyAudioLib.h" />
-		<Unit filename="Graphics/BatchRenderer.cpp" />
 		<Unit filename="Graphics/BatchRenderer.h" />
 		<Unit filename="Graphics/Buffers/BufferStructure.cpp" />
 		<Unit filename="Graphics/Buffers/BufferStructure.h" />
@@ -1121,7 +1120,6 @@
 		<Unit filename="Graphics/Renderers/Renderer.h" />
 		<Unit filename="Graphics/Renderers/SerialRenderer.cpp" />
 		<Unit filename="Graphics/Renderers/SerialRenderer.h" />
-		<Unit filename="Graphics/SerialRenderer.cpp" />
 		<Unit filename="Graphics/SerialRenderer.h" />
 		<Unit filename="Graphics/Shader.cpp" />
 		<Unit filename="Graphics/Shader.h" />

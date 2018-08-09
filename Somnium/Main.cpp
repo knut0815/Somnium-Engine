@@ -70,15 +70,15 @@ int main(int argc, char** argv) {
 //	Camera mainCamera = Camera(Matrix4::orthographic(-myWindow.getAspectRatio() / 2.0f, myWindow.getAspectRatio() / 2.0f, -0.5f, 0.5f, 1.0f, 100.0f));
 	Camera mainCamera = Camera(30, (float)myWindow.getWidth() / myWindow.getHeight(), 0.1f, 1000.0f, false, Vector3(0,0,0), Vector3(180, 90, 0));
 
-	Font* arial = new Font("Fonts/arial.ttf", myWindow.getFreeTypeInstance());
-	Shader* shader = new Shader("Graphics/Shaders/Basic/basic.vert", "Graphics/Shaders/Basic/basic.frag");
-	Shader* textShader = new Shader("Graphics/Shaders/Basic/basicText.vert", "Graphics/Shaders/Basic/basicText.frag");
+	Font* arial = new Font("Resources/Graphics/Fonts/arial.ttf", myWindow.getFreeTypeInstance());
+	Shader* shader = new Shader("Resources/Graphics/Shaders/Basic/basic.vert", "Resources/Graphics/Shaders/Basic/basic.frag");
+	Shader* textShader = new Shader("Resources/Graphics/Shaders/Basic/basicText.vert", "Resources/Graphics/Shaders/Basic/basicText.frag");
 
 	textShader->enable();
 	textShader->setMatrix4("projection", Matrix4::orthographic(0, myWindow.getWidth(),0, myWindow.getHeight(), -1.0f, 100.0f));
 
 #if ENABLE_DEBUG_CAMERA
-	Shader* naviShader = new Shader("Graphics/Shaders/Debug/navigation.vert", "Graphics/Shaders/Debug/navigation.frag");
+	Shader* naviShader = new Shader("Resources/Graphics/Shaders/Debug/navigation.vert", "Resources/Graphics/Shaders/Debug/navigation.frag");
 	DebugTools::ReferenceGrid grid = DebugTools::ReferenceGrid(5, Maths::Vector3(10000), *naviShader);
 
 	UI::UIText
@@ -107,7 +107,7 @@ int main(int argc, char** argv) {
 
 	Matrix4 view = Matrix4::identity();
 
-	Mesh monkeyMesh = Mesh(Utilities::loadOBJ("Graphics/Objects/Monkey.obj", *shader));
+	Mesh monkeyMesh = Mesh(Utilities::loadOBJ("Resources/Graphics/Objects/Monkey.obj", *shader));
 	monkeyMesh.translate(0,0,-50);
 
 	std::vector<RenderableObject*> objects;

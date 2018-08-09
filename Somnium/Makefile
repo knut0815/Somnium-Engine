@@ -39,7 +39,7 @@ $(TARGETOSX):$(OBJS)
 	$(CC) $(OBJS) -o $(TARGET) $(OSXLDFLAGS)
 
 $(TARGETWEB):$(WEBOBJS)
-	$(WEBCC) $(WEBOBJS) -o $(TARGET).html
+	$(WEBCC) $(WEBOBJS) -o $(TARGET).html --preload-file Resources
 
 $(TARGET):$(OBJS)
 	$(CC) $(OBJS) -o $(TARGET) $(LDFLAGS)
