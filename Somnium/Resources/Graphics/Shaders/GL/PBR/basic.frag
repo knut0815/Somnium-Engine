@@ -3,6 +3,7 @@ out vec4 FragColor;
 in vec2 TexCoords;
 in vec3 WorldPos;
 in vec3 Normal;
+in vec3 VertPos;
 
 // material parameters
 uniform vec3  albedo;
@@ -61,7 +62,7 @@ void main()
     }   
   
     vec3 ambient = vec3(0.03) * albedo * ao;
-    vec3 color = ambient + Lo;
+    vec3 color = ambient + Lo * VertPos;
 	
     color = color / (color + vec3(1.0));
     color = pow(color, vec3(1.0/2.2));  
