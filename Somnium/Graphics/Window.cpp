@@ -102,9 +102,8 @@ namespace Somnium
 
 			cout << glewGetString(GLEW_VERSION) << endl;
 #else
-			cout << " DISABLED! (EMSCRIPTEN WEB BUILD)";
+			cout << "DISABLED (EMSCRIPTEN WEB BUILD)" << endl;
 #endif
-
 			cout << " FreeType\t";
 			if (FT_Init_FreeType(&m_FreeType))
 			{
@@ -115,7 +114,8 @@ namespace Somnium
 			int ftMaj, ftMin, ftPatch;
 			FT_Library_Version(m_FreeType, &ftMaj, &ftMin, &ftPatch);
 
-			std::cout << ftMaj << "." << ftMin << "." << ftPatch << endl;
+			cout << ftMaj << "." << ftMin << "." << ftPatch << endl;
+			cout << endl;
 
 			/* DEBUG MODE */
 
@@ -123,14 +123,21 @@ namespace Somnium
 				glEnable(GL_DEBUG_OUTPUT);
 				glDebugMessageCallback(errorCallback, 0);
 
-	#ifndef _WIN32
-				printf("\33[31m");
-	#endif
-				printf("!-- DEBUG MODE ENABLED --!\r\n", 0x1B, 31);
-	#ifndef _WIN32
-				printf("\33[37m");
+	#if defined(__unix__) || defined(unix) || defined(__unix)
+				printf("\33[31m!-- DEBUG MODE ENABLED --!\33[0m\r\n");
+	#else
+				printf("!-- DEBUG MODE ENABLED --!\r\n");
 	#endif
 #endif
+
+#ifdef ENABLE_DEBUG_CAMERA
+	#if defined(__unix__) || defined(unix) || defined(__unix)
+				printf("\33[31m!-- DEBUG CAMERA ENABLED --!\33[0m\r\n");
+	#else	
+				printf("!-- DEBUG CAMERA ENABLED --!\r\n");
+	#endif
+#endif
+
 			cout << "---------------------------------------------" << endl << endl;
 
 			return true;

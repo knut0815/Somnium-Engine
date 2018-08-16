@@ -6,8 +6,6 @@
 	#include <emscripten.h>
 #endif
 
-#define DEBUG_MODE
-
 #include "Graphics/Window.h"
 #include "Graphics/Shader.h"
 #include "Graphics/Mesh.h"
@@ -74,7 +72,7 @@ int main(int argc, char** argv) {
 
 	Font* arial = new Font("Resources/Graphics/Fonts/arial.ttf", myWindow.getFreeTypeInstance());
 	Shader* shader = new Shader("Resources/Graphics/Shaders/PBR/basic.vert", "Resources/Graphics/Shaders/PBR/basic.frag");
-	Shader* textShader = new Shader("Resources/Graphics/Shaders/Basic/basicText.vert", "Resources/Graphics/Shaders/Basic/basicText.frag");
+	Shader* textShader = new Shader("Resources/Graphics/Shaders/GL/Basic/basicText.vert", "Resources/Graphics/Shaders/GL/Basic/basicText.frag");
 
 	shader->enable();
 	shader->setVector3("albedo", Maths::Vector3(0.5, 0, 0));
@@ -93,11 +91,27 @@ int main(int argc, char** argv) {
 	shader->setVector3("lightColors[3]", Maths::Vector3(300.0f, 300.0f, 300.0f));
 	shader->setVector3("lightColors[4]", Maths::Vector3(300.0f, 300.0f, 300.0f));
 
+/*
+#ifdef WEB_BUILD
+	Shader* shader = new Shader("Resources/Graphics/Shaders/GLES/Basic/basic.vert", "Resources/Graphics/Shaders/GLES/Basic/basic.frag");
+	Shader* textShader = new Shader("Resources/Graphics/Shaders/GLES/Basic/basicText.vert", "Resources/Graphics/Shaders/GLES/Basic/basicText.frag");
+
+#else
+	Shader* shader = new Shader("Resources/Graphics/Shaders/GL/Basic/basic.vert", "Resources/Graphics/Shaders/GL/Basic/basic.frag");
+	Shader* textShader = new Shader("Resources/Graphics/Shaders/GL/Basic/basicText.vert", "Resources/Graphics/Shaders/GL/Basic/basicText.frag");
+
+#endif
+*/
+
 	textShader->enable();
 	textShader->setMatrix4("projection", Matrix4::orthographic(0, myWindow.getWidth(),0, myWindow.getHeight(), -1.0f, 100.0f));
 
-#if ENABLE_DEBUG_CAMERA
-	Shader* naviShader = new Shader("Resources/Graphics/Shaders/Debug/navigation.vert", "Resources/Graphics/Shaders/Debug/navigation.frag");
+#ifdef ENABLE_DEBUG_CAMERA
+	#ifdef WEB_BUILD
+		Shader* naviShader = new Shader("Resources/Graphics/Shaders/GLES/Debug/navigation.vert", "Resources/Graphics/Shaders/GLES/Debug/navigation.frag");	
+	#else
+		Shader* naviShader = new Shader("Resources/Graphics/Shaders/GL/Debug/navigation.vert", "Resources/Graphics/Shaders/GL/Debug/navigation.frag");
+	#endif
 	DebugTools::ReferenceGrid grid = DebugTools::ReferenceGrid(5, Maths::Vector3(10000), *naviShader);
 
 	UI::UIText
@@ -185,7 +199,7 @@ int main(int argc, char** argv) {
 		//renderer->endMapping();
 		renderer->flushQueue();
 
-#if ENABLE_DEBUG_CAMERA
+#ifdef ENABLE_DEBUG_CAMERA
 		naviShader->enable();
 		naviShader->setMatrix4("projectionMatrix", mainCamera.getProjection());
 		naviShader->setMatrix4("viewMatrix", mainCamera.getView());
@@ -194,7 +208,7 @@ int main(int argc, char** argv) {
 
 		//4. Post Processing
 		myWindow.update();
-
+#ifdef ENABLE_DEBUG_CAMERA
 		static unsigned int fps;
 		static float timePerFrame;
 		static char fpsUI[128];
@@ -203,8 +217,9 @@ int main(int argc, char** argv) {
 
 		calculateFPS(fps, timePerFrame);
 		fpsCount->setText(fpsUI);
+#endif
 	};
-#ifdef WEB_SUILD
+#ifdef WEB_BUILD
 	emscripten_set_main_loop_arg(startMain, &webMain, false, true);
 #endif
 
