@@ -1,5 +1,5 @@
-CC := clang++
-WEBCC := emcc -O3 --memory-init-file 0 -DWEB_BUILD -s FULL_ES3=1 -s USE_GLFW=3 -s USE_FREETYPE=1
+CC := clang++ -DENABLE_DEBUG_CAMERA
+WEBCC := emcc -O3 --memory-init-file 0 -DENABLE_DEBUG_CAMERA -DWEB_BUILD -s FULL_ES3=1 -s USE_GLFW=3 -s USE_FREETYPE=1 
 OSXLDFLAGS:= -framework OpenGL -lm -l glfw -l GLEW -L ./Dependencies/portaudio/lib -l portaudio
 LDFLAGS:= -l GL -lm -l glfw -l GLEW -l freetype -L ./Dependencies/portaudio/lib 
 CPPFLAGS := -Wall -g -std=c++11

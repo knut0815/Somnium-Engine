@@ -69,7 +69,7 @@ namespace Somnium
 
 		void Camera::updateUI()
 		{
-#if ENABLE_DEBUG_CAMERA
+#ifdef ENABLE_DEBUG_CAMERA
 			char buffer[1024];
 
 			static UI::UIObject

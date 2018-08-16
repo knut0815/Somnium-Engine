@@ -70,15 +70,25 @@ int main(int argc, char** argv) {
 //	Camera mainCamera = Camera(Matrix4::orthographic(-myWindow.getAspectRatio() / 2.0f, myWindow.getAspectRatio() / 2.0f, -0.5f, 0.5f, 1.0f, 100.0f));
 	Camera mainCamera = Camera(30, (float)myWindow.getWidth() / myWindow.getHeight(), 0.1f, 1000.0f, false, Vector3(0,0,0), Vector3(180, 90, 0));
 
-	Font* arial = new Font("Resources/Graphics/Fonts/arial.ttf", myWindow.getFreeTypeInstance());
-	Shader* shader = new Shader("Resources/Graphics/Shaders/Basic/basic.vert", "Resources/Graphics/Shaders/Basic/basic.frag");
-	Shader* textShader = new Shader("Resources/Graphics/Shaders/Basic/basicText.vert", "Resources/Graphics/Shaders/Basic/basicText.frag");
+	Font* arial = new Font("Resources/Graphics/Fonts/arial.ttf" , myWindow.getFreeTypeInstance());
+#ifdef WEB_BUILD
+	Shader* shader = new Shader("Resources/Graphics/Shaders/GLES/Basic/basic.vert", "Resources/Graphics/Shaders/GLES/Basic/basic.frag");
+	Shader* textShader = new Shader("Resources/Graphics/Shaders/GLES/Basic/basicText.vert", "Resources/Graphics/Shaders/GLES/Basic/basicText.frag");
 
+#else
+	Shader* shader = new Shader("Resources/Graphics/Shaders/GL/Basic/basic.vert", "Resources/Graphics/Shaders/GL/Basic/basic.frag");
+	Shader* textShader = new Shader("Resources/Graphics/Shaders/GL/Basic/basicText.vert", "Resources/Graphics/Shaders/GL/Basic/basicText.frag");
+
+#endif
 	textShader->enable();
 	textShader->setMatrix4("projection", Matrix4::orthographic(0, myWindow.getWidth(),0, myWindow.getHeight(), -1.0f, 100.0f));
 
-#if ENABLE_DEBUG_CAMERA
-	Shader* naviShader = new Shader("Resources/Graphics/Shaders/Debug/navigation.vert", "Resources/Graphics/Shaders/Debug/navigation.frag");
+#ifdef ENABLE_DEBUG_CAMERA
+	#ifdef WEB_BUILD
+		Shader* naviShader = new Shader("Resources/Graphics/Shaders/GLES/Debug/navigation.vert", "Resources/Graphics/Shaders/GLES/Debug/navigation.frag");	
+	#else
+		Shader* naviShader = new Shader("Resources/Graphics/Shaders/GL/Debug/navigation.vert", "Resources/Graphics/Shaders/GL/Debug/navigation.frag");
+	#endif
 	DebugTools::ReferenceGrid grid = DebugTools::ReferenceGrid(5, Maths::Vector3(10000), *naviShader);
 
 	UI::UIText
@@ -166,7 +176,7 @@ int main(int argc, char** argv) {
 		//renderer->endMapping();
 		renderer->flushQueue();
 
-#if ENABLE_DEBUG_CAMERA
+#ifdef ENABLE_DEBUG_CAMERA
 		naviShader->enable();
 		naviShader->setMatrix4("projectionMatrix", mainCamera.getProjection());
 		naviShader->setMatrix4("viewMatrix", mainCamera.getView());
@@ -175,7 +185,7 @@ int main(int argc, char** argv) {
 
 		//4. Post Processing
 		myWindow.update();
-
+#ifdef ENABLE_DEBUG_CAMERA
 		static unsigned int fps;
 		static float timePerFrame;
 		static char fpsUI[128];
@@ -184,8 +194,9 @@ int main(int argc, char** argv) {
 
 		calculateFPS(fps, timePerFrame);
 		fpsCount->setText(fpsUI);
+#endif
 	};
-#ifdef WEB_SUILD
+#ifdef WEB_BUILD
 	emscripten_set_main_loop_arg(startMain, &webMain, false, true);
 #endif
 

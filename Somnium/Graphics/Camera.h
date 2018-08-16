@@ -1,7 +1,5 @@
 #pragma once
 
-#define ENABLE_DEBUG_CAMERA true
-
 #include "../Maths/Maths.h"
 #include "UI/UIObject.h"
 #include "UI/UIText.h"
