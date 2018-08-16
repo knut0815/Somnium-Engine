@@ -164,26 +164,42 @@ namespace Somnium {
 
 			file.close();
 
-			//TODO: Normal coordinate loading
-
 			for (unsigned long i = 0; i < vertexIndices.size(); i++) vertexIndices[i] -= 1;
-			for (unsigned long i = 0; i < normalIndices.size(); i++) normalIndices[i] -= 1;
-			for (unsigned long i = 0; i < uvIndices.size(); i++) uvIndices[i] -= 1;
 
-			std::vector<GLfloat> data = std::vector<GLfloat>();
+			std::vector<GLfloat> vertexData = std::vector<GLfloat>();
+			std::vector<GLfloat> normalData = std::vector<GLfloat>();
+			std::vector<GLfloat> uvData = std::vector<GLfloat>();
 
 			for (Maths::Vector3 point : vertexPoints)
 			{
-				data.push_back(point.x);
-				data.push_back(point.y);
-				data.push_back(point.z);
+				vertexData.push_back(point.x);
+				vertexData.push_back(point.y);
+				vertexData.push_back(point.z);
 			}
 
-			Graphics::Buffers::VertexBuffer* vbo = new Graphics::Buffers::VertexBuffer(data, vertexPoints.size(), 3);
+			for (Maths::Vector3 point : normals)
+			{
+				normalData.push_back(point.x);
+				normalData.push_back(point.y);
+				normalData.push_back(point.z);
+			}
+
+			for (Maths::Vector2 point : uvs)
+			{
+				uvData.push_back(point.x);
+				uvData.push_back(point.y);
+			}
+
+			Graphics::Buffers::VertexBuffer* vbo = new Graphics::Buffers::VertexBuffer(vertexData, vertexPoints.size(), 3);
+			Graphics::Buffers::VertexBuffer* nbo = new Graphics::Buffers::VertexBuffer(normalData, normals.size(), 3);
+			Graphics::Buffers::VertexBuffer* uvbo = new Graphics::Buffers::VertexBuffer(uvData, uvs.size(), 2);
+
 			Graphics::Buffers::VertexArray* vao = new Graphics::Buffers::VertexArray();
 			Graphics::Buffers::IndexBuffer* ibo = new Graphics::Buffers::IndexBuffer(vertexIndices);
 
 			vao->addBuffer(vbo, SHADER_POSITION_INDEX);
+			vao->addBuffer(nbo, SHADER_NORMAL_INDEX);
+			vao->addBuffer(uvbo, SHADER_TEXTURE_COORDINATE_INDEX);
 
 			return Graphics::Mesh(vao, ibo, textures, shader);
 			

@@ -6,6 +6,8 @@
 	#include <emscripten.h>
 #endif
 
+#define DEBUG_MODE
+
 #include "Graphics/Window.h"
 #include "Graphics/Shader.h"
 #include "Graphics/Mesh.h"
@@ -71,8 +73,25 @@ int main(int argc, char** argv) {
 	Camera mainCamera = Camera(30, (float)myWindow.getWidth() / myWindow.getHeight(), 0.1f, 1000.0f, false, Vector3(0,0,0), Vector3(180, 90, 0));
 
 	Font* arial = new Font("Resources/Graphics/Fonts/arial.ttf", myWindow.getFreeTypeInstance());
-	Shader* shader = new Shader("Resources/Graphics/Shaders/Basic/basic.vert", "Resources/Graphics/Shaders/Basic/basic.frag");
+	Shader* shader = new Shader("Resources/Graphics/Shaders/PBR/basic.vert", "Resources/Graphics/Shaders/PBR/basic.frag");
 	Shader* textShader = new Shader("Resources/Graphics/Shaders/Basic/basicText.vert", "Resources/Graphics/Shaders/Basic/basicText.frag");
+
+	shader->enable();
+	shader->setVector3("albedo", Maths::Vector3(0.5, 0, 0));
+	shader->setFloat("ao", 1);
+
+	shader->setFloat("metallic", 1);
+	shader->setFloat("roughness", 0.1f);
+
+	shader->setVector3("lightPositions[1]", Maths::Vector3(-10.0f, 10.0f, 10.0f));
+	shader->setVector3("lightPositions[2]", Maths::Vector3(10.0f, 10.0f, 10.0f));
+	shader->setVector3("lightPositions[3]", Maths::Vector3(-10.0f, -10.0f, 10.0f));
+	shader->setVector3("lightPositions[4]", Maths::Vector3(10.0f, -10.0f, 10.0f));
+
+	shader->setVector3("lightColors[1]", Maths::Vector3(300.0f, 300.0f, 300.0f));
+	shader->setVector3("lightColors[2]", Maths::Vector3(300.0f, 300.0f, 300.0f));
+	shader->setVector3("lightColors[3]", Maths::Vector3(300.0f, 300.0f, 300.0f));
+	shader->setVector3("lightColors[4]", Maths::Vector3(300.0f, 300.0f, 300.0f));
 
 	textShader->enable();
 	textShader->setMatrix4("projection", Matrix4::orthographic(0, myWindow.getWidth(),0, myWindow.getHeight(), -1.0f, 100.0f));
