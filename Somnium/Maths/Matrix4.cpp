@@ -74,7 +74,7 @@ namespace Somnium
 			float elem = 0;
 			rhs.transpose();
 
-#ifdef _WIN32
+#if defined(_WIN32) && !defined(WEB_BUILD)
 			concurrency::parallel_for(0, 4, 1, [&](unsigned int r) {
 				for (unsigned int c = 0; c < 4; c++) {
 					elem = 0;
@@ -161,7 +161,7 @@ namespace Somnium
 			float elem = 0;
 			rhs.transpose();
 
-#ifdef _WIN32
+#if defined(_WIN32) && !defined(WEB_BUILD)
 			concurrency::parallel_for(0, 4, 1, [&](unsigned int r) {
 				for (unsigned int c = 0; c < 4; c++) {
 					elem = 0;
