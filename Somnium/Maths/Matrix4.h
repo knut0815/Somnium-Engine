@@ -19,7 +19,7 @@ namespace Somnium
 			Matrix4& operator+=(const Matrix4&);
 			Matrix4& operator-=(const Matrix4&);
 			Matrix4& operator*=(Matrix4&);
-			//Matrix4& operator*=(const Matrix4&);
+			Matrix4& operator*=(const Matrix4&);
 
 			Matrix4& operator+=(const int&);
 			Matrix4& operator-=(const int&);
@@ -37,6 +37,7 @@ namespace Somnium
 			friend Matrix4 operator+(const Matrix4&, const Matrix4&);
 			friend Matrix4 operator-(const Matrix4&, const Matrix4&);
 			friend Matrix4 operator*(Matrix4&, Matrix4&);
+			friend Matrix4 operator*(const Matrix4&, const Matrix4&);
 		
 			friend Matrix4 operator+(const Matrix4&, const int&);
 			friend Matrix4 operator-(const Matrix4&, const int&);

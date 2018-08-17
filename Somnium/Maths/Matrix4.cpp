@@ -63,6 +63,11 @@ namespace Somnium
 			return temp;
 		}
 
+		Matrix4& Matrix4::operator*=(const Matrix4& rhs)
+		{
+			return *this *= const_cast<Matrix4&>(rhs);
+		}
+
 		Matrix4& Matrix4::operator*=(Matrix4& rhs)
 		{
 			Matrix4 temp;
@@ -143,6 +148,11 @@ namespace Somnium
 				temp.elements[i] = lhs.elements[i] - rhs.elements[i];
 
 			return temp;
+		}
+
+		Matrix4 operator*(const Matrix4& lhs, const Matrix4& rhs)
+		{
+			return const_cast<Matrix4&>(lhs) * const_cast<Matrix4&>(rhs);
 		}
 
 		Matrix4 operator*(Matrix4& lhs, Matrix4& rhs)
