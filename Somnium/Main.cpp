@@ -71,8 +71,16 @@ int main(int argc, char** argv) {
 	Camera mainCamera = Camera(30, (float)myWindow.getWidth() / myWindow.getHeight(), 0.1f, 1000.0f, false, Vector3(0,0,0), Vector3(180, 90, 0));
 
 	Font* arial = new Font("Resources/Graphics/Fonts/arial.ttf", myWindow.getFreeTypeInstance());
+
+#ifdef WEB_BUILD
+	Shader* shader = new Shader("Resources/Graphics/Shaders/GLES/PBR/basic.vert", "Resources/Graphics/Shaders/GLES/PBR/basic.frag");
+	Shader* textShader = new Shader("Resources/Graphics/Shaders/GLES/Basic/basicText.vert", "Resources/Graphics/Shaders/GLES/Basic/basicText.frag");
+
+#else
 	Shader* shader = new Shader("Resources/Graphics/Shaders/GL/PBR/basic.vert", "Resources/Graphics/Shaders/GL/PBR/basic.frag");
 	Shader* textShader = new Shader("Resources/Graphics/Shaders/GL/Basic/basicText.vert", "Resources/Graphics/Shaders/GL/Basic/basicText.frag");
+
+#endif
 	
 	shader->enable();
 	shader->setVector3("albedo", Maths::Vector3(1, 1, 1));
@@ -90,18 +98,6 @@ int main(int argc, char** argv) {
 	shader->setVector3("lightColors[3]", Maths::Vector3(300.0f, 300.0f, 300.0f));
 	shader->setVector3("lightColors[4]", Maths::Vector3(300.0f, 300.0f, 300.0f));
 	shader->setVector3("lightColors[5]", Maths::Vector3(500.0f, 500.0f, 500.0f));
-	
-/*
-#ifdef WEB_BUILD
-	Shader* shader = new Shader("Resources/Graphics/Shaders/GLES/Basic/basic.vert", "Resources/Graphics/Shaders/GLES/Basic/basic.frag");
-	Shader* textShader = new Shader("Resources/Graphics/Shaders/GLES/Basic/basicText.vert", "Resources/Graphics/Shaders/GLES/Basic/basicText.frag");
-
-#else
-	Shader* shader = new Shader("Resources/Graphics/Shaders/GL/Basic/basic.vert", "Resources/Graphics/Shaders/GL/Basic/basic.frag");
-	Shader* textShader = new Shader("Resources/Graphics/Shaders/GL/Basic/basicText.vert", "Resources/Graphics/Shaders/GL/Basic/basicText.frag");
-
-#endif
-*/
 
 	textShader->enable();
 	textShader->setMatrix4("projection", Matrix4::orthographic(0, myWindow.getWidth(),0, myWindow.getHeight(), -1.0f, 100.0f));
