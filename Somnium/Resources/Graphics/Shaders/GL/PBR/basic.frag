@@ -28,13 +28,11 @@ void main()
 {		
     vec3 N = normalize(Normal);
     vec3 V = normalize(camPos - WorldPos);
-
-    vec3 F0 = vec3(0.04); 
-    F0 = mix(F0, albedo, metallic);
+    vec3 F0 = mix(vec3(0.04), albedo, metallic);
 	           
     // reflectance equation
     vec3 Lo = vec3(0.0);
-    for(int i = 0; i < 4; ++i) 
+    for(int i = 0; i < 5; ++i) 
     {
         // calculate per-light radiance
         vec3 L = normalize(lightPositions[i] - WorldPos);

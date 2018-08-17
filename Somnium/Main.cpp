@@ -75,8 +75,8 @@ int main(int argc, char** argv) {
 	Shader* textShader = new Shader("Resources/Graphics/Shaders/GL/Basic/basicText.vert", "Resources/Graphics/Shaders/GL/Basic/basicText.frag");
 	
 	shader->enable();
-	shader->setVector3("albedo", Maths::Vector3(.5f, .5f, .5f));
-	shader->setFloat("ao", 0.1);
+	shader->setVector3("albedo", Maths::Vector3(1, 1, 1));
+	shader->setFloat("ao", 0.01);
 	
 	shader->setFloat("metallic", 0.9f);
 	shader->setFloat("roughness", 0.1f);
@@ -90,6 +90,7 @@ int main(int argc, char** argv) {
 	shader->setVector3("lightColors[2]", Maths::Vector3(300.0f, 300.0f, 300.0f));
 	shader->setVector3("lightColors[3]", Maths::Vector3(300.0f, 300.0f, 300.0f));
 	shader->setVector3("lightColors[4]", Maths::Vector3(300.0f, 300.0f, 300.0f));
+	shader->setVector3("lightColors[5]", Maths::Vector3(500.0f, 500.0f, 500.0f));
 	
 /*
 #ifdef WEB_BUILD
@@ -207,6 +208,9 @@ int main(int argc, char** argv) {
 		naviShader->setMatrix4("viewMatrix", mainCamera.getView());
 		grid.draw();
 #endif
+
+		shader->enable();
+		shader->setVector3("lightPositions[5]", mainCamera.getPosition());
 
 		//4. Post Processing
 		myWindow.update();
