@@ -72,7 +72,6 @@ namespace Somnium
 			const std::vector<Texture> m_Textures;
 
 			Maths::Vector3 m_Orientation = Maths::Vector3(0, 0, 0);
-
 			Maths::Matrix4 m_ModelMatrix = Maths::Matrix4::identity();
 		};
 	}

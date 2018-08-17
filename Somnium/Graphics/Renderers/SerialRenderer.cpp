@@ -20,6 +20,8 @@ namespace Somnium
 					mesh->getShader().setMatrix4("projectionMatrix", m_Camera.getProjection());
 					mesh->getShader().setMatrix4("viewMatrix", m_Camera.getView());
 					mesh->getShader().setMatrix4("modelMatrix", mesh->getModelMatrix());
+					mesh->getShader().setVector3("CamPos", m_Camera.getPosition());
+
 
 					mesh->getVAO()->bind();
 					mesh->getIBO()->bind();

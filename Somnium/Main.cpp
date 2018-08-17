@@ -62,8 +62,8 @@ int main(int argc, char** argv) {
     //AudioEngine au;
     //thread at{&AudioEngine::playSound, this, "Synth1.wav"};
     //at.join();
-  //  AudioEngine au;
-   // au.playSound("Synth1.wav");
+	//AudioEngine au;
+    //au.playSound("Synth1.wav");
 
 	cout << "---------RUNNING GAME LOOP---------" << endl;
 
@@ -77,7 +77,6 @@ int main(int argc, char** argv) {
 	shader->enable();
 	shader->setVector3("albedo", Maths::Vector3(1, 1, 1));
 	shader->setFloat("ao", 0.01);
-	
 	shader->setFloat("metallic", 0.9f);
 	shader->setFloat("roughness", 0.1f);
 
@@ -143,8 +142,6 @@ int main(int argc, char** argv) {
 
 	Mesh monkeyMesh = Mesh(Utilities::loadOBJ("Resources/Graphics/Objects/Monkey.obj", *shader));
 	monkeyMesh.translate(0,0,-50);
-
-	shader->setVector3("CamPos", mainCamera.getPosition());
 
 	std::vector<RenderableObject*> objects;
 

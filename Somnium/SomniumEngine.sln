@@ -3,9 +3,12 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.26228.4
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "SOMNIUM", "Somnium.vcxproj", "{CF4C0206-39E3-4DE4-ABFE-A464E80C3C7A}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "SomniumEngine", "Somnium.vcxproj", "{CF4C0206-39E3-4DE4-ABFE-A464E80C3C7A}"
 EndProject
 Global
+	GlobalSection(Performance) = preSolution
+		HasPerformanceSessions = true
+	EndGlobalSection
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|x64 = Debug|x64
 		Debug|x86 = Debug|x86
@@ -24,5 +27,8 @@ Global
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {1DF0618E-375A-4C95-82AE-C5DD6E47B045}
 	EndGlobalSection
 EndGlobal

@@ -55,16 +55,12 @@ namespace Somnium
 		}
 
 		const Maths::Matrix4 Mesh::getModelMatrix() const
-		{
-			Maths::Matrix4 finalisedMatrix = Maths::Matrix4::identity();
-
-			finalisedMatrix *= Maths::Matrix4::rotationX(m_Orientation.x);
-			finalisedMatrix *= Maths::Matrix4::rotationY(m_Orientation.y);
-			finalisedMatrix *= Maths::Matrix4::rotationZ(m_Orientation.z);
-			finalisedMatrix *= m_ModelMatrix;
-
-			return finalisedMatrix;
+		{	
+			return 
+			  Maths::Matrix4::rotationX(m_Orientation.x)
+			* Maths::Matrix4::rotationY(m_Orientation.y)
+			* Maths::Matrix4::rotationZ(m_Orientation.z)
+			* const_cast<Maths::Matrix4&>(m_ModelMatrix);
 		}
 	}
 }
-

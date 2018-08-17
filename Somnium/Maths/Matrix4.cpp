@@ -1,6 +1,8 @@
 #include "Matrix4.h"
 
-#include <iostream>
+#ifdef _WIN32
+	#include <ppl.h>
+#endif
 
 namespace Somnium
 {
@@ -52,15 +54,42 @@ namespace Somnium
 			return *this;
 		}
 
-		Matrix4& Matrix4::operator*=(const Matrix4& rhs)
+		Matrix4 Matrix4::transpose(const Matrix4& mat)
+		{
+			Matrix4 temp = mat;
+			for (unsigned int i = 0; i < 4; i++)
+				for (unsigned int j = i + 1; j < 4; j++)
+					std::swap(temp.elements2D[i][j], temp.elements2D[j][i]);
+			return temp;
+		}
+
+		Matrix4& Matrix4::operator*=(Matrix4& rhs)
 		{
 			Matrix4 temp;
-			for (int r = 0; r < 4; r++)
-				for (int c = 0; c < 4; c++)
-					for (int e = 0; e < 4; e++)
-						temp.elements2D[r][c] += elements2D[r][e] * rhs.elements2D[e][c];
-			*this = temp;
+			float elem = 0;
+			rhs.transpose();
 
+#ifdef _WIN32
+			concurrency::parallel_for(0, 4, 1, [&](unsigned int r) {
+				for (unsigned int c = 0; c < 4; c++) {
+					elem = 0;
+					for (unsigned int e = 0; e < 4; e++)
+						elem += elements2D[r][e] * rhs.elements2D[c][e];
+					temp.elements2D[r][c] = elem;
+				}
+			});
+#else
+			for (unsigned int r = 0; r < 4; r++)
+				for (unsigned int c = 0; c < 4; c++) {
+					elem = 0;
+					for (unsigned int e = 0; e < 4; e++)
+						elem += elements2D[r][e] * rhs.elements2D[c][e];
+					temp.elements2D[r][c] = elem;
+				}
+#endif
+			rhs.transpose();
+			*this = temp;
+			
 			return *this;
 		}
 
@@ -116,14 +145,31 @@ namespace Somnium
 			return temp;
 		}
 
-		Matrix4 operator* (const Matrix4& lhs, const Matrix4& rhs)
+		Matrix4 operator*(Matrix4& lhs, Matrix4& rhs)
 		{
 			Matrix4 temp;
+			float elem = 0;
+			rhs.transpose();
 
-			for (int r = 0; r < 4; r++)
-				for (int c = 0; c < 4; c++)
-					for (int e = 0; e < 4; e++)
-						temp.elements2D[r][c] += lhs.elements2D[r][e] * rhs.elements2D[e][c];
+#ifdef _WIN32
+			concurrency::parallel_for(0, 4, 1, [&](unsigned int r) {
+				for (unsigned int c = 0; c < 4; c++) {
+					elem = 0;
+					for (unsigned int e = 0; e < 4; e++)
+						elem += lhs.elements2D[r][e] * rhs.elements2D[c][e];
+					temp.elements2D[r][c] = elem;
+				}
+			});
+#else
+			for (unsigned int r = 0; r < 4; r++)
+				for (unsigned int c = 0; c < 4; c++) {
+					elem = 0;
+					for (unsigned int e = 0; e < 4; e++)
+						elem += lhs.elements2D[r][e] * rhs.elements2D[c][e];
+					temp.elements2D[r][c] = elem;
+				}
+#endif
+			rhs.transpose();
 
 			return temp;
 		}
