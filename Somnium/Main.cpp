@@ -93,11 +93,11 @@ int main(int argc, char** argv) {
 	shader->setVector3("lightPositions[3]", Maths::Vector3(-10.0f, -10.0f, 10.0f));
 	shader->setVector3("lightPositions[4]", Maths::Vector3(10.0f, -10.0f, 10.0f));
 
-	shader->setVector3("lightColors[1]", Maths::Vector3(300.0f, 300.0f, 300.0f));
-	shader->setVector3("lightColors[2]", Maths::Vector3(300.0f, 300.0f, 300.0f));
-	shader->setVector3("lightColors[3]", Maths::Vector3(300.0f, 300.0f, 300.0f));
-	shader->setVector3("lightColors[4]", Maths::Vector3(300.0f, 300.0f, 300.0f));
-	shader->setVector3("lightColors[5]", Maths::Vector3(500.0f, 500.0f, 500.0f));
+	shader->setVector3("lightColors[1]", Maths::Vector3(1000.0f, 1000.0f, 1000.0f));
+	shader->setVector3("lightColors[2]", Maths::Vector3(1000.0f, 1000.0f, 1000.0f));
+	shader->setVector3("lightColors[3]", Maths::Vector3(1000.0f, 1000.0f, 1000.0f));
+	shader->setVector3("lightColors[4]", Maths::Vector3(1000.0f, 1000.0f, 1000.0f));
+	shader->setVector3("lightColors[5]", Maths::Vector3(1000.0f, 1000.0f, 1000.0f));
 
 	textShader->enable();
 	textShader->setMatrix4("projection", Matrix4::orthographic(0, myWindow.getWidth(),0, myWindow.getHeight(), -1.0f, 100.0f));
@@ -203,7 +203,7 @@ int main(int argc, char** argv) {
 #endif
 
 		shader->enable();
-		shader->setVector3("lightPositions[5]", mainCamera.getPosition());
+		shader->setVector3("lightPositions[1]", mainCamera.getPosition());
 
 		//4. Post Processing
 		myWindow.update();

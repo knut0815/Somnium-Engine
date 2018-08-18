@@ -34,6 +34,8 @@
 
 # Visual Studio Files
 *.opendb
+*.vspx
+*.psess
 
 # LaTeX Files
 *.aux
