@@ -49,9 +49,14 @@ namespace Somnium
 			glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 		}
 
+		void printDebugTitle(std::string title)
+		{
+			cout << "----------[ " + title + " ]-----------" << endl;
+		}
+
 		bool Window::init()
 		{
-			cout << "------------INITIALISING GRAPHICS------------" << endl;
+			printDebugTitle("INITIALISING GRAPHICS");
 			cout << " GLFW\t\t";
 
 			if (!glfwInit())
@@ -65,12 +70,12 @@ namespace Somnium
 			glfwWindowHint(GLFW_DOUBLEBUFFER, GLFW_TRUE);
 			glfwWindowHint(GLFW_SAMPLES, 4);
 
-			#ifdef __APPLE__
+#ifdef __APPLE__
                 glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3);
                 glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 2);
                 glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
                 glfwWindowHint(GLFW_OPENGL_FORWARD_COMPAT, GL_TRUE);
-            #endif
+#endif
 
 			m_Window = glfwCreateWindow(m_Width, m_Height, m_Title, m_FullScreen ? glfwGetPrimaryMonitor() : NULL, NULL);
 
@@ -119,26 +124,23 @@ namespace Somnium
 
 			/* DEBUG MODE */
 
+#if !defined(WEB_BUILD) && (defined(__unix__) || defined(unix) || defined(__unix))
+				printf("\33[31m");
+#endif
 #ifdef DEBUG_MODE
 				glEnable(GL_DEBUG_OUTPUT);
 				glDebugMessageCallback(errorCallback, 0);
-
-	#if defined(__unix__) || defined(unix) || defined(__unix)
-				printf("\33[31m!-- DEBUG MODE ENABLED --!\33[0m\r\n");
-	#else
-				printf("!-- DEBUG MODE ENABLED --!\r\n");
-	#endif
+				printDebugTitle("DEBUG MODE ENABLED");
 #endif
 
 #ifdef ENABLE_DEBUG_CAMERA
-	#if defined(__unix__) || defined(unix) || defined(__unix)
-				printf("\33[31m!-- DEBUG CAMERA ENABLED --!\33[0m\r\n");
-	#else	
-				printf("!-- DEBUG CAMERA ENABLED --!\r\n");
-	#endif
+				printDebugTitle("DEBUG CAMERA ENABLED");
+#endif
+#if !defined(WEB_BUILD) && (defined(__unix__) || defined(unix) || defined(__unix))
+				printf("\33[0m");
 #endif
 
-			cout << "---------------------------------------------" << endl << endl;
+			cout << "-----------------------------------------------" << endl << endl;
 
 			return true;
 		}

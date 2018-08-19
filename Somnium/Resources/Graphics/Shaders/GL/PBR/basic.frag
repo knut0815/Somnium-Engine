@@ -1,5 +1,4 @@
 #version 330 core
-out vec4 FragColor;
 in vec2 TexCoords;
 in vec3 WorldPos;
 in vec3 Normal;
@@ -12,8 +11,8 @@ uniform float roughness;
 uniform float ao;
 
 // lights
-uniform vec3 lightPositions[4];
-uniform vec3 lightColors[4];
+uniform vec3 lightPositions[5];
+uniform vec3 lightColors[5];
 
 uniform vec3 camPos;
 
@@ -37,8 +36,8 @@ void main()
         // calculate per-light radiance
         vec3 L = normalize(lightPositions[i] - WorldPos);
         vec3 H = normalize(V + L);
-        float distance    = length(lightPositions[i] - WorldPos);
-        float attenuation = 1.0 / (distance * distance);
+        float dist    = length(lightPositions[i] - WorldPos);
+        float attenuation = 1.0 / (dist * dist);
         vec3 radiance     = lightColors[i] * attenuation;        
         
         // cook-torrance brdf
@@ -65,7 +64,7 @@ void main()
     color = color / (color + vec3(1.0));
     color = pow(color, vec3(1.0/2.2));  
    
-    FragColor = vec4(color, 1.0);
+    gl_FragColor = vec4(color, 1.0);
 }
 	
 vec3 fresnelSchlick(float cosTheta, vec3 F0)

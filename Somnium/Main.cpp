@@ -76,10 +76,15 @@ int main(int argc, char** argv) {
 	Shader* shader = new Shader("Resources/Graphics/Shaders/GLES/PBR/basic.vert", "Resources/Graphics/Shaders/GLES/PBR/basic.frag");
 	Shader* textShader = new Shader("Resources/Graphics/Shaders/GLES/Basic/basicText.vert", "Resources/Graphics/Shaders/GLES/Basic/basicText.frag");
 
+	#ifdef ENABLE_DEBUG_CAMERA
+		Shader* naviShader = new Shader("Resources/Graphics/Shaders/GLES/Debug/navigation.vert", "Resources/Graphics/Shaders/GLES/Debug/navigation.frag");
+	#endif
 #else
 	Shader* shader = new Shader("Resources/Graphics/Shaders/GL/PBR/basic.vert", "Resources/Graphics/Shaders/GL/PBR/basic.frag");
 	Shader* textShader = new Shader("Resources/Graphics/Shaders/GL/Basic/basicText.vert", "Resources/Graphics/Shaders/GL/Basic/basicText.frag");
-
+	#ifdef ENABLE_DEBUG_CAMERA
+		Shader* naviShader = new Shader("Resources/Graphics/Shaders/GL/Debug/navigation.vert", "Resources/Graphics/Shaders/GL/Debug/navigation.frag");
+	#endif
 #endif
 	
 	shader->enable();
@@ -97,17 +102,11 @@ int main(int argc, char** argv) {
 	shader->setVector3("lightColors[2]", Maths::Vector3(300.0f, 300.0f, 300.0f));
 	shader->setVector3("lightColors[3]", Maths::Vector3(300.0f, 300.0f, 300.0f));
 	shader->setVector3("lightColors[4]", Maths::Vector3(300.0f, 300.0f, 300.0f));
-	shader->setVector3("lightColors[5]", Maths::Vector3(500.0f, 500.0f, 500.0f));
+	shader->setVector3("lightColors[5]", Maths::Vector3(1000.0f, 1000.0f, 1000.0f));
 
 	textShader->enable();
 	textShader->setMatrix4("projection", Matrix4::orthographic(0, myWindow.getWidth(),0, myWindow.getHeight(), -1.0f, 100.0f));
 
-#ifdef ENABLE_DEBUG_CAMERA
-	#ifdef WEB_BUILD
-		Shader* naviShader = new Shader("Resources/Graphics/Shaders/GLES/Debug/navigation.vert", "Resources/Graphics/Shaders/GLES/Debug/navigation.frag");	
-	#else
-		Shader* naviShader = new Shader("Resources/Graphics/Shaders/GL/Debug/navigation.vert", "Resources/Graphics/Shaders/GL/Debug/navigation.frag");
-	#endif
 	DebugTools::ReferenceGrid grid = DebugTools::ReferenceGrid(5, Maths::Vector3(10000), *naviShader);
 
 	UI::UIText
@@ -128,11 +127,9 @@ int main(int argc, char** argv) {
 	mainCamera.addUIObject("CameraPosition", camPos);
 	mainCamera.addUIObject("CameraOrientation", camRot);
 	mainCamera.addUIObject("FieldOfView", camFOV);
-
 	mainCamera.addUIObject("EngineName", engName);
 	mainCamera.addUIObject("EngineVersion", engVer);
 	mainCamera.addUIObject("FrameRate", fpsCount);
-#endif
 
 	Matrix4 view = Matrix4::identity();
 
@@ -141,14 +138,10 @@ int main(int argc, char** argv) {
 
 	std::vector<RenderableObject*> objects;
 
-	Mesh* monkey = new Mesh(monkeyMesh);
-
 	for(int i = 0; i < 250; i++)
 		objects.push_back(new RenderableObject(new Mesh(monkeyMesh)));
 
 	Renderers::SerialRenderer* renderer = new Renderers::SerialRenderer(myWindow, mainCamera);
-
-	shader->enable();
 
 	for (RenderableObject* object : objects)
 	{
@@ -189,7 +182,12 @@ int main(int argc, char** argv) {
 			renderer->submitToQueue(object);
 		}
 
+
+
 		renderer->updateCamera();
+
+		shader->enable();
+				shader->setVector3("lightPositions[5]", mainCamera.getPosition());
 
 		//3. Draw objects
 		//renderer->endMapping();
@@ -202,8 +200,7 @@ int main(int argc, char** argv) {
 		grid.draw();
 #endif
 
-		shader->enable();
-		shader->setVector3("lightPositions[5]", mainCamera.getPosition());
+
 
 		//4. Post Processing
 		myWindow.update();

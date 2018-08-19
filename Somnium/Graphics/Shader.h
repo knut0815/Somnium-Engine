@@ -1,5 +1,9 @@
 #pragma once
 
+#define SHADER_POSITION_INDEX 0
+#define SHADER_NORMAL_INDEX 1
+#define SHADER_TEXTURE_COORDINATE_INDEX 2
+
 #ifdef WEB_BUILD 
 	#define GLFW_INCLUDE_ES3
 #else 

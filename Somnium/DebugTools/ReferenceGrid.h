@@ -21,7 +21,7 @@ namespace Somnium
 				m_VAO.bind();
 				m_VBO->bind();
 
-				m_VAO.addBuffer(m_VBO, 0);
+				m_VAO.addBuffer(m_VBO, SHADER_POSITION_INDEX);
 
 				m_VBO->unbind();
 				m_VAO.unbind();

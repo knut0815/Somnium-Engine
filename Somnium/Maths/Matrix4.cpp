@@ -1,6 +1,6 @@
 #include "Matrix4.h"
 
-#ifdef _WIN32
+#if defined(_WIN32) && !defined(WEB_BUILD)
 	#include <ppl.h>
 #endif
 

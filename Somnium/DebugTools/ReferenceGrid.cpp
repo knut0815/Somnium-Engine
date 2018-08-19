@@ -9,20 +9,9 @@ namespace Somnium
 			m_Shader.enable();
 			m_VAO.bind();
 
-			Maths::Matrix4 m_ModelMatrix = Maths::Matrix4::identity();
-			m_ModelMatrix *= Maths::Matrix4::translation(Maths::Vector3(0, 0, 0));
-
-			Maths::Matrix4 finalisedMatrix = Maths::Matrix4::identity();
-
-			finalisedMatrix *= Maths::Matrix4::rotationX(0);
-			finalisedMatrix *= Maths::Matrix4::rotationY(0);
-			finalisedMatrix *= Maths::Matrix4::rotationZ(0);
-			finalisedMatrix *= m_ModelMatrix;
-
-			glDrawArrays(GL_LINES,0, m_VertexData.size());
+			glDrawArrays(GL_LINE_LOOP, 0, m_VertexData.size());
 
 			m_VAO.unbind();
-			m_Shader.disable();
 		}
 
 		void ReferenceGrid::setGridSize(float size)
@@ -62,7 +51,7 @@ namespace Somnium
 				m_VertexData.push_back(point.z);
 			}
 
-			m_VBO = new Graphics::Buffers::VertexBuffer(m_VertexData, vertexPoints.size(),3);
+			m_VBO = new Graphics::Buffers::VertexBuffer(m_VertexData, vertexPoints.size(), 3);
 		}
 	}
 }
