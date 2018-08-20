@@ -200,7 +200,8 @@ int main(int argc, char** argv) {
 		grid.draw();
 #endif
 
-
+		shader->enable();
+		shader->setVector3("lightPositions[5]", mainCamera.getPosition());
 
 		//4. Post Processing
 		myWindow.update();

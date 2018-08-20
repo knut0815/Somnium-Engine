@@ -74,16 +74,6 @@ namespace Somnium
 			float elem = 0;
 			rhs.transpose();
 
-#if defined(_WIN32) && !defined(WEB_BUILD)
-			concurrency::parallel_for(0, 4, 1, [&](unsigned int r) {
-				for (unsigned int c = 0; c < 4; c++) {
-					elem = 0;
-					for (unsigned int e = 0; e < 4; e++)
-						elem += elements2D[r][e] * rhs.elements2D[c][e];
-					temp.elements2D[r][c] = elem;
-				}
-			});
-#else
 			for (unsigned int r = 0; r < 4; r++)
 				for (unsigned int c = 0; c < 4; c++) {
 					elem = 0;
@@ -91,7 +81,7 @@ namespace Somnium
 						elem += elements2D[r][e] * rhs.elements2D[c][e];
 					temp.elements2D[r][c] = elem;
 				}
-#endif
+
 			rhs.transpose();
 			*this = temp;
 			
@@ -161,16 +151,6 @@ namespace Somnium
 			float elem = 0;
 			rhs.transpose();
 
-#if defined(_WIN32) && !defined(WEB_BUILD)
-			concurrency::parallel_for(0, 4, 1, [&](unsigned int r) {
-				for (unsigned int c = 0; c < 4; c++) {
-					elem = 0;
-					for (unsigned int e = 0; e < 4; e++)
-						elem += lhs.elements2D[r][e] * rhs.elements2D[c][e];
-					temp.elements2D[r][c] = elem;
-				}
-			});
-#else
 			for (unsigned int r = 0; r < 4; r++)
 				for (unsigned int c = 0; c < 4; c++) {
 					elem = 0;
@@ -178,7 +158,7 @@ namespace Somnium
 						elem += lhs.elements2D[r][e] * rhs.elements2D[c][e];
 					temp.elements2D[r][c] = elem;
 				}
-#endif
+
 			rhs.transpose();
 
 			return temp;
