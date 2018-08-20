@@ -35,7 +35,7 @@ void main()
     // reflectance equation
     vec3 Lo = vec3(0.0);
 
-    for(int i = 0; i < 5; ++i) 
+    for(int i = 0; i <= 5; i++) 
     {
         // calculate per-light radiance
         vec3 L = normalize(lightPositions[i] - worldPos);

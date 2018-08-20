@@ -77,7 +77,7 @@ namespace Somnium
 				*uiCamRot = m_UIObjects.at("CameraOrientation"),
 				*uiCamFOV = m_UIObjects.at("FieldOfView");
 
-			snprintf(buffer, 1024, "CAM POS [X: %f, Y: %f, Z: %f]", -m_Position.x, -m_Position.y, m_Position.z);
+			snprintf(buffer, 1024, "CAM POS [X: %f, Y: %f, Z: %f]", m_Position.x, m_Position.y, m_Position.z);
 			((UI::UIText*)uiCamPos)->setText(buffer);
 			
 			snprintf(buffer, 1024, "CAM ROT [P: %d, Y: %d, R: %d]", (int)(360 + m_Orientation.x) % 360, (int)(360 + -m_Orientation.y) % 360, (int)(360 + m_Orientation.z) % 360);

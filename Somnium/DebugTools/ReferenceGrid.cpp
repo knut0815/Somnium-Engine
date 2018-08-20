@@ -9,7 +9,7 @@ namespace Somnium
 			m_Shader.enable();
 			m_VAO.bind();
 
-			glDrawArrays(GL_LINE_LOOP, 0, m_VertexData.size());
+			glDrawArrays(GL_LINES, 0, m_VertexData.size());
 
 			m_VAO.unbind();
 		}
