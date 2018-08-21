@@ -16,11 +16,11 @@ namespace Somnium
 			Camera(const float fieldOfView, const float aspectRatio, const float near = 0.1f, const float far = 0.1f, const bool orthographic = false, Maths::Vector3 position = Maths::Vector3(), Maths::Vector3 orientation = Maths::Vector3());
 			~Camera() {};
 
-			static const enum Direction{ forward, backward, left, right, up, down };
+			enum Direction{ forward, backward, left, right, up, down };
 
 			const Maths::Matrix4& getView() const { return m_View; };
 			const Maths::Matrix4& getProjection() const { return m_Projection; }
-			const float& getFOV() const { return m_FieldOfView; }
+			float getFOV() const { return m_FieldOfView; }
 			const Maths::Vector3& getPosition() const { return m_Position; };
 			const Maths::Vector3& getOrientation() const { return m_Orientation; };
 

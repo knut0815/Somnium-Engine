@@ -5,17 +5,10 @@ namespace Somnium
 	namespace Graphics
 	{
 		Mesh::Mesh(Buffers::VertexArray* vertexArray, Buffers::IndexBuffer* indexBuffer, std::vector<Texture> textures, Shader& shader)
-			: m_Textures(textures), m_Shader(shader), m_VAO(vertexArray), m_IBO(indexBuffer)
+			: m_VAO(vertexArray), m_IBO(indexBuffer), m_Shader(shader), m_Textures(textures)
 		{
 			
 		}
-
-		Mesh::Mesh(std::vector<GLfloat> vertexArray, std::vector<GLushort> indexBuffer, std::vector<Texture> textures, Shader& shader)
-			: m_Textures(textures), m_Shader(shader), m_VertexData(vertexArray), m_IndexData(indexBuffer)
-		{
-
-		}
-
 
 		void Mesh::scale(float uniformScale)
 		{

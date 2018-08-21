@@ -22,7 +22,7 @@ namespace Somnium
 				~BufferStructure() {};
 
 			private:
-				unsigned int m_BufferSize;
+				unsigned int m_BufferSize = 0;
 				std::vector<BufferItem> m_Structure;
 			};
 		}

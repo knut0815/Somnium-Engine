@@ -33,7 +33,6 @@ namespace Somnium
 			const std::map<GLchar, UICharacter>& getCharacterMap() const { return m_CharacterMap;  }
 		private:
 			const FT_Library& m_FreeType;
-			FT_GlyphSlot m_GlyphSlot;
 			FT_Face m_Face;
 			std::map<GLchar, UICharacter> m_CharacterMap;
 		};

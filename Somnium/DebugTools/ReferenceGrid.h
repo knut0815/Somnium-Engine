@@ -14,7 +14,7 @@ namespace Somnium
 		{
 		public:
 			ReferenceGrid(float divisionSize, Maths::Vector3 gridSize, Graphics::Shader& shader)
-				: m_DivisionSize(divisionSize), m_GridSize(gridSize), m_Shader(shader)
+				: m_DivisionSize(divisionSize), m_Shader(shader), m_GridSize(gridSize)
 			{
 				init();
 
