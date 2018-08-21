@@ -25,14 +25,25 @@ using namespace Graphics;
 using namespace Maths;
 using namespace Audio;
 
+const unsigned int frameRateLimit = 60;
+
+void pauseDrawing(unsigned int elapsed)
+{
+	double  sleep = ((1000000.0 / frameRateLimit) - elapsed) / 1000000.0,
+			start = glfwGetTime();
+
+	while ((glfwGetTime() - start) < sleep);
+
+}
+
 void calculateFPS(unsigned int &frameRate, float &timePerFrame)
 {
 	static double lastTime = glfwGetTime();
 	static int nbFrames = 0;
 
-	double currentTime = glfwGetTime();
 	nbFrames++;
-	if (currentTime - lastTime >= 1.0) {
+
+	if (glfwGetTime() - lastTime >= 1.0) {
 		frameRate = nbFrames;
 		timePerFrame = 1000.0 / double(nbFrames);
 
@@ -156,6 +167,8 @@ int main(int argc, char** argv) {
 	while (!myWindow.isClosed())
 	{
 #endif
+		double startTime = glfwGetTime();
+
 		myWindow.clear();
 
 		int x, y;
@@ -207,6 +220,9 @@ int main(int argc, char** argv) {
 
 		calculateFPS(fps, timePerFrame);
 		fpsCount->setText(fpsUI);
+
+		if(frameRateLimit > 0)
+			pauseDrawing(glfwGetTime() - startTime);
 #endif
 	};
 #ifdef WEB_BUILD
