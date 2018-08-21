@@ -202,9 +202,6 @@ namespace Somnium {
 			vao->addBuffer(uvbo, SHADER_TEXTURE_COORDINATE_INDEX);
 
 			return Graphics::Mesh(vao, ibo, textures, shader);
-			
-
-			//return Graphics::Mesh(data, vertexIndices, textures, shader);
 		}
 	}
 }

@@ -33,7 +33,6 @@ void pauseDrawing(unsigned int elapsed)
 			start = glfwGetTime();
 
 	while ((glfwGetTime() - start) < sleep);
-
 }
 
 void calculateFPS(unsigned int &frameRate, float &timePerFrame)

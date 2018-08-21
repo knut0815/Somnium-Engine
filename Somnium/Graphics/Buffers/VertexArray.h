@@ -1,13 +1,7 @@
 #pragma once
 
 #include <vector>
-#ifdef WEB_BUILD 
-	#define GLFW_INCLUDE_ES3
-	#include <GLFW/glfw3.h>
-#else 
-	#include <glew.h> 
-#endif
-
+#include "Buffer.h"
 #include "VertexBuffer.h"
 
 using namespace std;
@@ -19,6 +13,7 @@ namespace Somnium
 		namespace Buffers
 		{
 			class VertexArray
+			: public Buffer
 			{
 			public:
 				VertexArray();

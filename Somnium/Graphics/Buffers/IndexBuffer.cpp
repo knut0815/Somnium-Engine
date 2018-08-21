@@ -14,8 +14,6 @@ namespace Somnium
 				glBufferData(GL_ELEMENT_ARRAY_BUFFER, count * sizeof(GLushort), data, GL_STATIC_DRAW);
 				unbind();
 			}
-
-			IndexBuffer::~IndexBuffer() { glDeleteBuffers(1, &m_BufferID); }
 		}
 	}
 }

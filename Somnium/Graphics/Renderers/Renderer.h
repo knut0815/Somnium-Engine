@@ -16,7 +16,9 @@ namespace Somnium
 			{
 			public:
 				Renderer(const Window& window, Camera& camera)
-					: m_Window(window), m_Camera(camera) {};
+					: m_Camera(camera), m_Window(window) {};
+
+				virtual ~Renderer() {};
 
 				virtual void flushQueue() = 0;
 

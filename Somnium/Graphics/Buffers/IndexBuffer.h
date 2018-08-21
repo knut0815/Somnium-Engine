@@ -1,10 +1,6 @@
 #pragma once
-#ifdef WEB_BUILD 
-	#define GLFW_INCLUDE_ES3
-	#include <GLFW/glfw3.h>
-#else 
-	#include <glew.h> 
-#endif
+
+#include "Buffer.h"
 #include <vector>
 
 namespace Somnium
@@ -14,6 +10,7 @@ namespace Somnium
 		namespace Buffers
 		{
 			class IndexBuffer
+				: public Buffer
 			{
 			public:
 				IndexBuffer(GLushort* indices, size_t numberOfIndices);
@@ -22,7 +19,7 @@ namespace Somnium
 				IndexBuffer(std::vector<GLushort> data)
 					: IndexBuffer(data.data(), data.size()) {};
 				
-				~IndexBuffer();
+				~IndexBuffer() { glDeleteBuffers(1, &m_BufferID); }
 
 				inline GLuint getCount() const { return m_Count; }
 			inline void bind()   const { glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, m_BufferID); }

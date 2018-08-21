@@ -1,12 +1,9 @@
 #pragma once
-#ifdef WEB_BUILD 
-	#define GLFW_INCLUDE_ES3
-	#include <GLFW/glfw3.h>
-#else 
-	#include <glew.h> 
-#endif
-#include <vector>
+
+#include "Buffer.h"
 #include "BufferStructure.h"
+
+#include <vector>
 
 namespace Somnium
 {
@@ -15,6 +12,7 @@ namespace Somnium
 		namespace Buffers
 		{
 			class VertexBuffer
+					: public Buffer
 			{
 			public:
 				VertexBuffer(GLfloat* data, size_t count, GLuint componentCount, GLuint drawMode = GL_STATIC_DRAW);
