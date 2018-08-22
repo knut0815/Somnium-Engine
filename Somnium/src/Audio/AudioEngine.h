@@ -1,4 +1,4 @@
-#include "../Dependencies/portAudio/include/portaudio.h"
+#include <portaudio.h>
 
 namespace Somnium
 {

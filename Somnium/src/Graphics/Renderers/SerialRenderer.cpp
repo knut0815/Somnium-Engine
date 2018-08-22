@@ -9,7 +9,7 @@ namespace Somnium
 		{
 			void SerialRenderer::flushQueue()
 			{
-				//m_FrameBuffers[0].bind();
+				//m_FrameBuffer.bind();
 
 				while (!m_RenderQueue.empty()) {
 					RenderableObject* object = m_RenderQueue.front();
@@ -33,8 +33,8 @@ namespace Somnium
 					mesh->getVAO()->unbind();
 				}
 
-				//m_FrameBuffers[0].unbind();
-				//m_FrameBuffers[0].draw();
+				//m_FrameBuffer.draw();
+				//m_FrameBuffer.unbind();
 
 				m_Camera.drawUI();
 			}

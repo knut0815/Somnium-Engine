@@ -26,7 +26,7 @@ namespace Somnium
 			private:
 				std::queue<RenderableObject*> m_RenderQueue;
 				Shader blurShader = Shader("Resources/Graphics/Shaders/GL/Basic/passthrough.vert", "Resources/Graphics/Shaders/GL/Post-Processing/gaussianBlur.frag");
-				Buffers::FrameBuffer m_FrameBuffers[2];
+				Buffers::FrameBuffer m_FrameBuffer = Buffers::FrameBuffer(2);
 			};
 		}
 	}

@@ -1,5 +1,7 @@
 #include "FrameBuffer.h"
 
+#include <iostream>
+
 namespace Somnium
 {
 	namespace Graphics
@@ -7,7 +9,7 @@ namespace Somnium
 		namespace Buffers
 		{
 			FrameBuffer::FrameBuffer(unsigned int noOfColourBuffers)
-			: m_NoOfColourBuffers(noOfColourBuffers), m_Attachments(new GLuint[m_NoOfColourBuffers])
+			: m_NoOfColourBuffers(noOfColourBuffers)
 			{
 				glGenFramebuffers(1, &m_BufferID);
 
@@ -26,21 +28,21 @@ namespace Somnium
 					glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);
 					glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE);
 
-					m_Attachments[i] = GL_COLOR_ATTACHMENT0 + i;
+					m_Attachments.push_back(GL_COLOR_ATTACHMENT0 + i);
 
-					glFramebufferTexture2D(GL_FRAMEBUFFER, m_Attachments[i], GL_TEXTURE_2D, colourBuffers[i], 0);
+					glFramebufferTexture2D(GL_FRAMEBUFFER, m_Attachments.at(i), GL_TEXTURE_2D, colourBuffers[i], 0);
 				}
+				int status = glCheckFramebufferStatus(GL_FRAMEBUFFER);
+
+				if(status != GL_FRAMEBUFFER_COMPLETE)
+				       std::cerr << "FRAMEBUFFER ERROR: " << status << std::endl;
 
 				unbind();
 			}
 
 			void FrameBuffer::draw() const
 			{
-				bind();
-
-				glDrawBuffers(m_NoOfColourBuffers, m_Attachments);
-
-				unbind();
+				glDrawBuffers(m_NoOfColourBuffers, m_Attachments.data());
 			}
 		}
 	}

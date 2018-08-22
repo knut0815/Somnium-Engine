@@ -2,6 +2,8 @@
 
 #include "Buffer.h"
 
+#include <vector>
+
 namespace Somnium
 {
 	namespace Graphics
@@ -13,7 +15,7 @@ namespace Somnium
 					  {
 				public:
 					FrameBuffer(unsigned int noOfColourBuffers = 1);
-					virtual ~FrameBuffer() { glDeleteFramebuffers(1, &m_BufferID); delete[] m_Attachments;}
+					virtual ~FrameBuffer() { glDeleteFramebuffers(1, &m_BufferID); }
 
 					void draw() const;
 
@@ -23,7 +25,7 @@ namespace Somnium
 				private:
 					GLuint m_BufferID = 0;
 					GLuint const m_NoOfColourBuffers;
-					GLuint* const m_Attachments;
+					std::vector<GLuint> m_Attachments;
 			};
 		}
 	}
