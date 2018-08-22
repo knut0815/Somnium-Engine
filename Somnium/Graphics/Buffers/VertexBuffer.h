@@ -27,7 +27,7 @@ namespace Somnium
 				inline void unbind() const { glBindBuffer(GL_ARRAY_BUFFER, 0); }
 
 			private:
-				GLuint m_BufferID;
+				GLuint m_BufferID = 0;
 				const GLuint m_DrawMode;
 				GLuint m_ComponentCount;
 				BufferStructure m_BufferStructure;

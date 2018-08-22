@@ -26,8 +26,8 @@ namespace Somnium
 			inline void unbind() const { glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0); }
 
 			private:
-				GLuint m_BufferID;
-				GLuint m_Count;
+				GLuint m_BufferID = 0;
+				GLuint m_Count = 0;
 			};
 		}
 	}

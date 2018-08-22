@@ -27,7 +27,7 @@ namespace Somnium
 				inline void unbind() const { glBindVertexArray(0); }
 	
 			private:
-				GLuint m_ArrayID;
+				GLuint m_ArrayID = 0;
 				vector<VertexBuffer*> m_Buffers;
 			};
 		}
