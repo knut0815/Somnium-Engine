@@ -4,8 +4,8 @@ OSXLDFLAGS:= -framework OpenGL -lm -l glfw -l GLEW -L Dependencies/portaudio/lib
 LDFLAGS:= -l GL -lm -l glfw -l GLEW -l freetype -L Dependencies/portaudio/lib 
 CPPFLAGS := -Wall -g -std=c++11
 PKGFLAGS := -Wextra `pkg-config --cflags glfw3 glew freetype2`
-CXXFLAGS:=  -I Dependencies/GLEW/include -I Dependencies/GLFW/include -I Dependencies/portsf/include -I Dependencies/freetype/include
-WEBFLAGS:=  -I Dependencies/GLEW/include -I Dependencies/GLFW/include -I Dependencies/portsf/include
+CXXFLAGS:=  -I Dependencies/GLEW/include -I Dependencies/GLFW/include -I Dependencies/portsf/include -I Dependencies/portaudio/include -I Dependencies/freetype/include
+WEBFLAGS:=  -I Dependencies/GLEW/include -I Dependencies/GLFW/include -I Dependencies/portsf/include -I Dependencies/portaudio/include
 SRC_DIR:=.
 OBJ_DIR:=Objects
 OBJ_DIR_WEB:=Objects
