@@ -9,6 +9,8 @@ namespace Somnium
 		{
 			void SerialRenderer::flushQueue()
 			{
+				//m_FrameBuffers[0].bind();
+
 				while (!m_RenderQueue.empty()) {
 					RenderableObject* object = m_RenderQueue.front();
 					m_RenderQueue.pop();
@@ -30,6 +32,9 @@ namespace Somnium
 					mesh->getIBO()->unbind();
 					mesh->getVAO()->unbind();
 				}
+
+				//m_FrameBuffers[0].unbind();
+				//m_FrameBuffers[0].draw();
 
 				m_Camera.drawUI();
 			}

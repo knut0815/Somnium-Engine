@@ -5,6 +5,7 @@
 #include "../Camera.h"
 #include "../Window.h"
 #include "Renderer.h"
+#include "../Buffers/FrameBuffer.h"
 
 namespace Somnium
 {
@@ -24,6 +25,8 @@ namespace Somnium
 
 			private:
 				std::queue<RenderableObject*> m_RenderQueue;
+				Shader blurShader = Shader("Resources/Graphics/Shaders/GL/Basic/passthrough.vert", "Resources/Graphics/Shaders/GL/Post-Processing/gaussianBlur.frag");
+				Buffers::FrameBuffer m_FrameBuffers[2];
 			};
 		}
 	}
