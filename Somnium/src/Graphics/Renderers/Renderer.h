@@ -20,9 +20,9 @@ namespace Somnium
 
 				virtual ~Renderer() {};
 
-				virtual void flushQueue() = 0;
-
 				virtual void submitToQueue(RenderableObject* object) = 0;
+				virtual void render(bool flushQueue = false) = 0;
+
 				void updateCamera()
 				{
 					//Process Keyboard input
@@ -82,7 +82,6 @@ namespace Somnium
 					prevMouseY = mouseY;
 
 					m_Camera.offsetOrientation(yOffset, xOffset);
-					m_Camera.updateUI();
 				}
 
 			protected:

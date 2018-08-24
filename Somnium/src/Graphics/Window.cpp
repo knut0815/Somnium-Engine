@@ -12,7 +12,7 @@ namespace Somnium
 		void errorCallback(GLenum source, GLenum type, GLuint id, GLenum severity, GLsizei length, const GLchar* message, const void* userParam);
 #endif
 
-		Window::Window(const char* title, int width, int height, bool fullScreen)
+		Window::Window(const char* title, unsigned int width, unsigned int height, bool fullScreen)
 			:m_Title(title), m_Width(width), m_Height(height), m_FullScreen(fullScreen)
 		{
 			if (!init())
@@ -44,7 +44,6 @@ namespace Somnium
 			glEnable(GL_CULL_FACE);
 			glEnable(GL_DEPTH_TEST);
 			glDepthFunc(GL_LESS);
-//			glEnable(GL_FRAMEBUFFER_SRGB);
 			glEnable(GL_BLEND);
 			glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 		}
@@ -124,9 +123,6 @@ namespace Somnium
 
 			/* DEBUG MODE */
 
-#if !defined(WEB_BUILD) && (defined(__unix__) || defined(unix) || defined(__unix))
-				printf("\33[31m");
-#endif
 #ifdef DEBUG_MODE
 				glEnable(GL_DEBUG_OUTPUT);
 				glDebugMessageCallback(errorCallback, 0);
@@ -135,9 +131,6 @@ namespace Somnium
 
 #ifdef ENABLE_DEBUG_CAMERA
 				printDebugTitle("DEBUG CAMERA ENABLED");
-#endif
-#if !defined(WEB_BUILD) && (defined(__unix__) || defined(unix) || defined(__unix))
-				printf("\33[0m");
 #endif
 
 			cout << "-----------------------------------------------" << endl << endl;
@@ -175,6 +168,7 @@ namespace Somnium
 
 		void Window::clear() const
 		{
+			glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
 			glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 		}
 

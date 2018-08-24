@@ -9,8 +9,10 @@
 #include <ft2build.h>
 #include FT_FREETYPE_H
 
-namespace Somnium {
-	namespace Graphics {
+namespace Somnium
+{
+	namespace Graphics
+	{
 		extern void keyCallback(GLFWwindow*, int, int, int, int);
 		extern void mouseButtonCallback(GLFWwindow*, int, int, int);
 		extern void cursorPositionCallback(GLFWwindow*, double, double);
@@ -19,7 +21,7 @@ namespace Somnium {
 		class Window
 		{
 		public:
-			Window(const char*, int, int, bool fullScreen);
+			Window(const char*, unsigned int, unsigned int, bool fullScreen);
 			~Window();
 
 			void clear(void)  const;
@@ -55,7 +57,7 @@ namespace Somnium {
 			FT_Library m_FreeType;
 
 			const char *m_Title;
-			int m_Width, m_Height;
+			unsigned int m_Width, m_Height;
 			GLFWwindow *m_Window = nullptr;
 
 			bool m_FullScreen;

@@ -85,14 +85,13 @@ namespace Somnium
 
 			snprintf(buffer, 1024, "CAM FOV [%d]", m_FieldOfView);
 			((UI::UIText*)uiCamFOV)->setText(buffer);
-			
-			//printf("CURSOR POSITION - X: %d, Y: %d\r\n", mouseX, mouseY);
-			//printf("CURSOR OFFSET - X: %d, Y: %d\r\n", xOffset, yOffset);
 #endif
 		}
 
 		void Camera::drawUI()
 		{
+			if(m_UIObjects.empty()) return;
+
 			std::map<std::string, UI::UIObject*>::iterator it;
 
 			for (it = m_UIObjects.begin(); it != m_UIObjects.end(); it++)

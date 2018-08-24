@@ -66,7 +66,8 @@ int main(int argc, char** argv) {
 		flags.insert(argv[f]);
 
 	Window myWindow("Somnium Engine", 1920, 1080, (flags.find("-f") != flags.end()) || (flags.find("--fullscreen") != flags.end()));
-	glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
+
+	Buffers::FrameBuffer::setWindow(&myWindow);
 
     //Sound demo
     //AudioEngine au;
@@ -81,6 +82,11 @@ int main(int argc, char** argv) {
 	Camera mainCamera = Camera(30, (float)myWindow.getWidth() / myWindow.getHeight(), 0.1f, 1000.0f, false, Vector3(0,0,0), Vector3(180, 90, 0));
 
 	Font* arial = new Font("Resources/Graphics/Fonts/arial.ttf", myWindow.getFreeTypeInstance());
+
+	Shader blurShader = Shader("Resources/Graphics/Shaders/GL/Basic/passthrough2D.vert", "Resources/Graphics/Shaders/GL/Post-Processing/gaussianBlur.frag");
+	Shader bloomShader = Shader("Resources/Graphics/Shaders/GL/Basic/passthrough2D.vert", "Resources/Graphics/Shaders/GL/Post-Processing/bloom.frag");
+	Shader screenShader = Shader("Resources/Graphics/Shaders/GL/Basic/texture2D.vert", "Resources/Graphics/Shaders/GL/Basic/texture2D.frag");
+	Shader brightFilter = Shader("Resources/Graphics/Shaders/GL/Basic/passthrough2D.vert","Resources/Graphics/Shaders/GL/Post-Processing/Filters/brightnessFilter.frag");
 
 #ifdef WEB_BUILD
 	Shader* shader = new Shader("Resources/Graphics/Shaders/GLES/PBR/basic.vert", "Resources/Graphics/Shaders/GLES/PBR/basic.frag");
@@ -108,15 +114,20 @@ int main(int argc, char** argv) {
 	shader->setVector3("lightPositions[2]", Maths::Vector3(-10.0f, -10.0f, 10.0f));
 	shader->setVector3("lightPositions[3]", Maths::Vector3(10.0f, -10.0f, 10.0f));
 
-	shader->setVector3("lightColors[0]", Maths::Vector3(300.0f, 300.0f, 300.0f));
-	shader->setVector3("lightColors[1]", Maths::Vector3(300.0f, 300.0f, 300.0f));
-	shader->setVector3("lightColors[2]", Maths::Vector3(300.0f, 300.0f, 300.0f));
-	shader->setVector3("lightColors[3]", Maths::Vector3(300.0f, 300.0f, 300.0f));
+	shader->setVector3("lightColors[0]", Maths::Vector3(3000.0f, 3000.0f, 3000.0f));
+	shader->setVector3("lightColors[1]", Maths::Vector3(3000.0f, 3000.0f, 3000.0f));
+	shader->setVector3("lightColors[2]", Maths::Vector3(3000.0f, 3000.0f, 3000.0f));
+	shader->setVector3("lightColors[3]", Maths::Vector3(3000.0f, 3000.0f, 3000.0f));
 	shader->setVector3("lightColors[4]", Maths::Vector3(100.0f, 100.0f, 100.0f));
 
 	textShader->enable();
-	textShader->setMatrix4("projection", Matrix4::orthographic(0, myWindow.getWidth(),0, myWindow.getHeight(), -1.0f, 100.0f));
+	textShader->setMatrix4("projection", mainCamera.getProjection());
+	screenShader.setMatrix4("projection", mainCamera.getProjection());
+	//blurShader.setMatrix4("projection", mainCamera.getProjection());
 
+	Buffers::FrameBuffer frameBuffer[3] = { Buffers::FrameBuffer(1) };
+
+#ifdef ENABLE_DEBUG_CAMERA
 	DebugTools::ReferenceGrid grid = DebugTools::ReferenceGrid(5, Maths::Vector3(10000), *naviShader);
 
 	UI::UIText
@@ -140,6 +151,27 @@ int main(int argc, char** argv) {
 	mainCamera.addUIObject("EngineName", engName);
 	mainCamera.addUIObject("EngineVersion", engVer);
 	mainCamera.addUIObject("FrameRate", fpsCount);
+#endif
+
+	static float screen[] = {
+					-1.0f, -1.0f,
+					1.0f, -1.0f,
+					1.0f, 1.0f,
+					-1.0f, 1.0f
+			};
+
+	static float screenTexCoords[] = {
+						0, 0,
+						1, 0,
+						1, 1,
+						0, 1
+				};
+
+	Buffers::VertexArray screenVAO = Buffers::VertexArray();
+	Buffers::IndexBuffer screenIBO = Buffers::IndexBuffer( {0, 1, 2, 2, 3, 0} );
+
+	screenVAO.addBuffer(new Buffers::VertexBuffer(screen, 4, 2, GL_STATIC_DRAW), SHADER_POSITION_INDEX);
+	screenVAO.addBuffer(new Buffers::VertexBuffer(screenTexCoords, 4, 2, GL_STATIC_DRAW), SHADER_TEXTURE_COORDINATE_INDEX);
 
 	Matrix4 view = Matrix4::identity();
 
@@ -166,6 +198,7 @@ int main(int argc, char** argv) {
 	while (!myWindow.isClosed())
 	{
 #endif
+
 		double startTime = glfwGetTime();
 
 		myWindow.clear();
@@ -199,18 +232,77 @@ int main(int argc, char** argv) {
 		shader->setVector3("lightPositions[4]", mainCamera.getPosition());
 		//3. Draw objects
 		//renderer->endMapping();
-		renderer->flushQueue();
+
+		frameBuffer[0].bind();
+
+		glClearColor(0.f,0.f,0.f,1.0f);
+		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+
+
+		renderer->render(true);
+
+		//DO POST PROCESSING
+		glDisable(GL_DEPTH_TEST);
+
+		screenVAO.bind();
+		screenIBO.bind();
+
+		brightFilter.enable();
+		glBindTexture(GL_TEXTURE_2D, frameBuffer[0].getColourTexture());
+		frameBuffer[1].bind();
+		glClearColor(0.f,0.f,0.f,1.f);
+		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+
+
+		screenVAO.draw(screenIBO.getCount());
+		frameBuffer[1].draw();
+
+		blurShader.enable();
+		bool horz = true;
+
+		for(unsigned int i = 0; i < 10; i++){
+			blurShader.setInt("horizontal", horz);
+			frameBuffer[(!horz) + 1].bind();
+
+			//glClearColor(0.f,0.f,0.f,1.0f);
+			//glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+
+
+			glBindTexture(GL_TEXTURE_2D, frameBuffer[(!horz) + 1].getColourTexture());
+
+			screenVAO.draw(screenIBO.getCount());
+
+			//frameBuffer[horz + 1].draw();
+			horz = !horz;
+		}
+
+		frameBuffer[1].unbind();
+
+		bloomShader.enable();
+		bloomShader.setInt("original", 0);
+		bloomShader.setInt("blurred", 1);
+		bloomShader.setFloat("exposure", 1);
+
+		glActiveTexture(GL_TEXTURE0);
+		glBindTexture(GL_TEXTURE_2D, frameBuffer[0].getColourTexture());
+
+		glActiveTexture(GL_TEXTURE1);
+		glBindTexture(GL_TEXTURE_2D, frameBuffer[!horz + 1].getColourTexture());
+
+		screenVAO.draw(screenIBO.getCount());
+
+		screenIBO.unbind();
+		screenVAO.unbind();
+
+		glEnable(GL_DEPTH_TEST);
+	//	renderer->render(true);
 
 #ifdef ENABLE_DEBUG_CAMERA
 		naviShader->enable();
 		naviShader->setMatrix4("projectionMatrix", mainCamera.getProjection());
 		naviShader->setMatrix4("viewMatrix", mainCamera.getView());
 		grid.draw();
-#endif
 
-		//4. Post Processing
-		myWindow.update();
-#ifdef ENABLE_DEBUG_CAMERA
 		static unsigned int fps;
 		static float timePerFrame;
 		static char fpsUI[128];
@@ -219,10 +311,16 @@ int main(int argc, char** argv) {
 
 		calculateFPS(fps, timePerFrame);
 		fpsCount->setText(fpsUI);
+#endif
+
+		//4. Post Processing
+		mainCamera.updateUI();
+		mainCamera.drawUI();
+		myWindow.update();
 
 		if(frameRateLimit > 0)
 			pauseDrawing(glfwGetTime() - startTime);
-#endif
+
 	};
 #ifdef WEB_BUILD
 	emscripten_set_main_loop_arg(startMain, &webMain, false, true);

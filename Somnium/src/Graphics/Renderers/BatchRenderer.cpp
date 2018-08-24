@@ -19,7 +19,7 @@ namespace Somnium
 				delete m_IBO;
 			}
 
-			void BatchRenderer::flushQueue()
+			void BatchRenderer::render(bool flushQueue)
 			{
 				if (m_CurrentIndex == 0 || m_CurrentVertexCount == 0) return;
 

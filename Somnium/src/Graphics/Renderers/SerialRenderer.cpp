@@ -7,9 +7,10 @@ namespace Somnium
 	{
 		namespace Renderers
 		{
-			void SerialRenderer::flushQueue()
+			void SerialRenderer::render(bool flushQueue)
 			{
-				//m_FrameBuffer.bind();
+				std::queue<RenderableObject*> tempQueue;
+				if(!flushQueue)	tempQueue = m_RenderQueue;
 
 				while (!m_RenderQueue.empty()) {
 					RenderableObject* object = m_RenderQueue.front();
@@ -33,10 +34,7 @@ namespace Somnium
 					mesh->getVAO()->unbind();
 				}
 
-				//m_FrameBuffer.draw();
-				//m_FrameBuffer.unbind();
-
-				m_Camera.drawUI();
+				if(!flushQueue)	m_RenderQueue = tempQueue;
 			}
 		}
 	}

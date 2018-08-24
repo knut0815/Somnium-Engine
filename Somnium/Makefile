@@ -1,11 +1,11 @@
-CC := clang++ -DENABLE_DEBUG_CAMERA
-WEBCC := emcc -O3 --memory-init-file 0 -DENABLE_DEBUG_CAMERA -DWEB_BUILD -s FULL_ES3=1 -s USE_GLFW=3 -s USE_FREETYPE=1 
-OSXLDFLAGS:= -framework OpenGL -lm -l glfw -l GLEW -L Dependencies/portaudio/lib -l portaudio
-LDFLAGS:= -l GL -lm -l glfw -l GLEW -l freetype -L Dependencies/portaudio/lib 
+CC := clang++ -DDEBUG_MODE
+WEBCC := emcc -O3 --memory-init-file 0 -DWEB_BUILD -s FULL_ES3=1 -s USE_GLFW=3 -s USE_FREETYPE=1 
+OSXLDFLAGS:= -framework OpenGL -lm -l glfw -l GLEW -L Dependencies/portAudio/lib -l portaudio
+LDFLAGS:= -l GL -lm -l glfw -l GLEW -l freetype -L Dependencies/portAudio/lib 
 CPPFLAGS := -Wall -g -std=c++11
 PKGFLAGS := -Wextra `pkg-config --cflags glfw3 glew freetype2`
-CXXFLAGS:=  -I Dependencies/GLEW/include -I Dependencies/GLFW/include -I Dependencies/portsf/include -I Dependencies/portaudio/include -I Dependencies/freetype/include
-WEBFLAGS:=  -I Dependencies/GLEW/include -I Dependencies/GLFW/include -I Dependencies/portsf/include -I Dependencies/portaudio/include
+CXXFLAGS:=  -I Dependencies/GLEW/include -I Dependencies/GLFW/include -I Dependencies/portsf/include -I Dependencies/portAudio/include -I Dependencies/freetype/include
+WEBFLAGS:=  -I Dependencies/GLEW/include -I Dependencies/GLFW/include -I Dependencies/portsf/include -I Dependencies/portAudio/include
 SRC_DIR:=.
 OBJ_DIR:=Objects
 OBJ_DIR_WEB:=Objects

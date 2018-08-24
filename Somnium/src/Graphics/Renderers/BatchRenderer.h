@@ -24,7 +24,7 @@ namespace Somnium
 				void beginMapping();
 				virtual void submitToQueue(RenderableObject* object);
 				void endMapping();
-				virtual void flushQueue();
+				virtual void render(bool flushQueue = false);
 
 			private:
 				void init();
