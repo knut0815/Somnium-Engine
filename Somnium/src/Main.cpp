@@ -1,4 +1,3 @@
-#include <thread>
 #include <iostream>
 #include <set>
 
@@ -6,50 +5,26 @@
 	#include <emscripten.h>
 #endif
 
+#include "Audio/AudioEngine.h"
+
 #include "Graphics/Window.h"
-#include "Graphics/Shader.h"
+#include "Graphics/Shaders/Shader.h"
 #include "Graphics/Mesh.h"
 #include "Graphics/Renderers/BatchRenderer.h"
 #include "Graphics/Renderers/SerialRenderer.h"
 #include "Graphics/RenderableObject.h"
 #include "Graphics/Camera.h"
 #include "Graphics/Font.h"
-#include "DebugTools/ReferenceGrid.h"
 
-#include "Audio/AudioEngine.h"
 #include "Utilities/FileUtilities.h"
+#include "Utilities/FrameRateUtilities.h"
+#include "Utilities/DebugTools/ReferenceGrid.h"
+#include "Utilities/DebugUtilities.h"
 
-using namespace std;
 using namespace Somnium;
 using namespace Graphics;
 using namespace Maths;
 using namespace Audio;
-
-const unsigned int frameRateLimit = 60;
-
-void pauseDrawing(unsigned int elapsed)
-{
-	double  sleep = ((1000000.0 / frameRateLimit) - elapsed) / 1000000.0,
-			start = glfwGetTime();
-
-	while ((glfwGetTime() - start) < sleep);
-}
-
-void calculateFPS(unsigned int &frameRate, float &timePerFrame)
-{
-	static double lastTime = glfwGetTime();
-	static int nbFrames = 0;
-
-	nbFrames++;
-
-	if (glfwGetTime() - lastTime >= 1.0) {
-		frameRate = nbFrames;
-		timePerFrame = 1000.0 / double(nbFrames);
-
-		nbFrames = 0;
-		lastTime += 1.0;
-	}
-}
 
 #ifdef WEB_BUILD
 static void startMain(void *mainFunction)
@@ -59,52 +34,41 @@ static void startMain(void *mainFunction)
 #endif
 
 int main(int argc, char** argv) {
-	cout << "SOMNIUM by LUMACAL Software Group - Built " << __TIMESTAMP__ << endl << endl;
+	Utilities::Debug::printWelcomeMessage();
 
 	std::set<std::string> flags = std::set<std::string>();
-	for (int f = 0; f < argc; f++)
-		flags.insert(argv[f]);
+	for (int f = 0; f < argc; f++) flags.insert(argv[f]);
 
 	Window myWindow("Somnium Engine", 1920, 1080, (flags.find("-f") != flags.end()) || (flags.find("--fullscreen") != flags.end()));
 
 	Buffers::FrameBuffer::setWindow(&myWindow);
 
-    //Sound demo
-    //AudioEngine au;
-    //thread at{&AudioEngine::playSound, this, "Synth1.wav"};
-    //at.join();
-	//AudioEngine au;
-    //au.playSound("Synth1.wav");
-
-	cout << "---------RUNNING GAME LOOP---------" << endl;
-
-//	Camera mainCamera = Camera(Matrix4::orthographic(-myWindow.getAspectRatio() / 2.0f, myWindow.getAspectRatio() / 2.0f, -0.5f, 0.5f, 1.0f, 100.0f));
 	Camera mainCamera = Camera(30, (float)myWindow.getWidth() / myWindow.getHeight(), 0.1f, 1000.0f, false, Vector3(0,0,0), Vector3(180, 90, 0));
 
 	Font* arial = new Font("Resources/Graphics/Fonts/arial.ttf", myWindow.getFreeTypeInstance());
 
-	Shader blurShader = Shader("Resources/Graphics/Shaders/GL/Basic/passthrough2D.vert", "Resources/Graphics/Shaders/GL/Post-Processing/gaussianBlur.frag");
-	Shader bloomShader = Shader("Resources/Graphics/Shaders/GL/Basic/passthrough2D.vert", "Resources/Graphics/Shaders/GL/Post-Processing/bloom.frag");
-	Shader screenShader = Shader("Resources/Graphics/Shaders/GL/Basic/texture2D.vert", "Resources/Graphics/Shaders/GL/Basic/texture2D.frag");
-	Shader brightFilter = Shader("Resources/Graphics/Shaders/GL/Basic/passthrough2D.vert","Resources/Graphics/Shaders/GL/Post-Processing/Filters/brightnessFilter.frag");
+	Shaders::Shader blurShader = Shaders::Shader("Resources/Graphics/Shaders/GL/Basic/passthrough2D.vert", "Resources/Graphics/Shaders/GL/Post-Processing/gaussianBlur.frag");
+	Shaders::Shader bloomShader = Shaders::Shader("Resources/Graphics/Shaders/GL/Basic/passthrough2D.vert", "Resources/Graphics/Shaders/GL/Post-Processing/bloom.frag");
+	Shaders::Shader screenShader = Shaders::Shader("Resources/Graphics/Shaders/GL/Basic/texture2D.vert", "Resources/Graphics/Shaders/GL/Basic/texture2D.frag");
+	Shaders::Shader brightFilter = Shaders::Shader("Resources/Graphics/Shaders/GL/Basic/passthrough2D.vert","Resources/Graphics/Shaders/GL/Post-Processing/Filters/brightnessFilter.frag");
 
 #ifdef WEB_BUILD
-	Shader* shader = new Shader("Resources/Graphics/Shaders/GLES/PBR/basic.vert", "Resources/Graphics/Shaders/GLES/PBR/basic.frag");
-	Shader* textShader = new Shader("Resources/Graphics/Shaders/GLES/Basic/basicText.vert", "Resources/Graphics/Shaders/GLES/Basic/basicText.frag");
+	Shaders::Shader* shader = new Shaders::Shader("Resources/Graphics/Shaders/GLES/PBR/basic.vert", "Resources/Graphics/Shaders/GLES/PBR/basic.frag");
+	Shaders::Shader* textShader = new Shaders::Shader("Resources/Graphics/Shaders/GLES/Basic/basicText.vert", "Resources/Graphics/Shaders/GLES/Basic/basicText.frag");
 
 	#ifdef ENABLE_DEBUG_CAMERA
-		Shader* naviShader = new Shader("Resources/Graphics/Shaders/GLES/Debug/navigation.vert", "Resources/Graphics/Shaders/GLES/Debug/navigation.frag");
+		Shaders::Shader* naviShader = new Shaders::Shader("Resources/Graphics/Shaders/GLES/Debug/navigation.vert", "Resources/Graphics/Shaders/GLES/Debug/navigation.frag");
 	#endif
 #else
-	Shader* shader = new Shader("Resources/Graphics/Shaders/GL/PBR/basic.vert", "Resources/Graphics/Shaders/GL/PBR/basic.frag");
-	Shader* textShader = new Shader("Resources/Graphics/Shaders/GL/Basic/basicText.vert", "Resources/Graphics/Shaders/GL/Basic/basicText.frag");
+	Shaders::Shader* shader = new Shaders::Shader("Resources/Graphics/Shaders/GL/PBR/basic.vert", "Resources/Graphics/Shaders/GL/PBR/basic.frag");
+	Shaders::Shader* textShader = new Shaders::Shader("Resources/Graphics/Shaders/GL/Basic/basicText.vert", "Resources/Graphics/Shaders/GL/Basic/basicText.frag");
 	#ifdef ENABLE_DEBUG_CAMERA
-		Shader* naviShader = new Shader("Resources/Graphics/Shaders/GL/Debug/navigation.vert", "Resources/Graphics/Shaders/GL/Debug/navigation.frag");
+		Shaders::Shader* naviShader = new Shaders::Shader("Resources/Graphics/Shaders/GL/Debug/navigation.vert", "Resources/Graphics/Shaders/GL/Debug/navigation.frag");
 	#endif
 #endif
 	
-		textShader->enable();
-		textShader->setMatrix4("projection", Matrix4::orthographic(0, myWindow.getWidth(), 0, myWindow.getHeight(), -1.0f, 100.0f));
+	textShader->enable();
+	textShader->setMatrix4("projection", Matrix4::orthographic(0, myWindow.getWidth(), 0, myWindow.getHeight(), -1.0f, 100.0f));
 
 	shader->enable();
 	shader->setVector3("albedo", Maths::Vector3(1, 1, 1));
@@ -117,38 +81,18 @@ int main(int argc, char** argv) {
 	shader->setVector3("lightPositions[2]", Maths::Vector3(-10.0f, -10.0f, 10.0f));
 	shader->setVector3("lightPositions[3]", Maths::Vector3(10.0f, -10.0f, 10.0f));
 
-	shader->setVector3("lightColors[0]", Maths::Vector3(3000.0f, 3000.0f, 3000.0f));
-	shader->setVector3("lightColors[1]", Maths::Vector3(3000.0f, 3000.0f, 3000.0f));
-	shader->setVector3("lightColors[2]", Maths::Vector3(3000.0f, 3000.0f, 3000.0f));
-	shader->setVector3("lightColors[3]", Maths::Vector3(3000.0f, 3000.0f, 3000.0f));
-	shader->setVector3("lightColors[4]", Maths::Vector3(100.0f, 100.0f, 100.0f));
+	char buff[256];
+	for (unsigned int i = 0; i < 5; i++)
+	{
+		sprintf(buff, "lightColors[%d]", i);
+		shader->setVector3(buff, Maths::Vector3(3000.0f, 3000.0f, 3000.0f));
+	}
 
 	Buffers::FrameBuffer frameBuffer[3] = { Buffers::FrameBuffer(1) };
 
 #ifdef ENABLE_DEBUG_CAMERA
-	DebugTools::ReferenceGrid grid = DebugTools::ReferenceGrid(5, Maths::Vector3(10000), *naviShader);
-
-	UI::UIText
-		*fpsCount = new UI::UIText("FPS", arial, Maths::Vector2(0, myWindow.getHeight() - 25), textShader),
-		*camPos = new UI::UIText("CAM POS", arial, Maths::Vector2(0, myWindow.getHeight() - 50), textShader),
-		*camRot = new UI::UIText("CAM ROT", arial, Maths::Vector2(0, myWindow.getHeight() - 75), textShader),
-		*camFOV = new UI::UIText("CAM FOV", arial, Maths::Vector2(0, myWindow.getHeight() - 100), textShader),
-		*engName = new UI::UIText("SOMNIUM ENGINE", arial, Maths::Vector2(myWindow.getWidth() - 225, myWindow.getHeight() - 25), textShader),
-		*engVer = new UI::UIText("DEVELOPMENT BUILD", arial, Maths::Vector2(myWindow.getWidth() - 270, myWindow.getHeight() - 50), textShader);
-
-	camPos->setScale(0.5f);
-	camRot->setScale(0.5f);
-	camFOV->setScale(0.5f);
-	engName->setScale(0.5f);
-	engVer->setScale(0.5f);
-	fpsCount->setScale(0.5f);
-
-	mainCamera.addUIObject("CameraPosition", camPos);
-	mainCamera.addUIObject("CameraOrientation", camRot);
-	mainCamera.addUIObject("FieldOfView", camFOV);
-	mainCamera.addUIObject("EngineName", engName);
-	mainCamera.addUIObject("EngineVersion", engVer);
-	mainCamera.addUIObject("FrameRate", fpsCount);
+	Utilities::Debug::initialiseDebugCamera(myWindow.getWidth(), myWindow.getHeight(), &mainCamera, arial, textShader);
+	Utilities::Debug::initialiseReferenceGrid(naviShader, 5, Maths::Vector3(10000));
 #endif
 
 	static float screen[] = {
@@ -173,7 +117,7 @@ int main(int argc, char** argv) {
 
 	Matrix4 view = Matrix4::identity();
 
-	Mesh monkeyMesh = Mesh(Utilities::loadOBJ("Resources/Graphics/Objects/Monkey.obj", *shader));
+	Mesh monkeyMesh = Mesh(Utilities::File::loadOBJ("Resources/Graphics/Objects/Monkey.obj", *shader));
 	monkeyMesh.translate(0,0,-50);
 
 	std::vector<RenderableObject*> objects;
@@ -190,14 +134,15 @@ int main(int argc, char** argv) {
 		object->getMesh()->translate((float)rand() / RAND_MAX * 10 * ((rand() % 2) ? 1 : -1), (float)rand() / RAND_MAX * 10 * ((rand() % 2) ? 1 : -1), (float)rand() / RAND_MAX * -1.0f);
 	}
 
+	cout << "---------RUNNING GAME LOOP---------" << endl;
+
 #ifdef WEB_BUILD
 	function<void()> webMain = [&]() {
 #else
 	while (!myWindow.isClosed())
 	{
 #endif
-
-		double startTime = glfwGetTime();
+		Utilities::FrameRate::startFrameCounting();
 
 		myWindow.clear();
 
@@ -230,11 +175,11 @@ int main(int argc, char** argv) {
 		shader->setVector3("lightPositions[4]", mainCamera.getPosition());
 		//3. Draw objects
 		//renderer->endMapping();
-		
-		frameBuffer[0].bind();
 
-		glClearColor(0.f,0.f,0.f,1.0f);
-		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+		for(unsigned int i = 0; i < sizeof(frameBuffer) / sizeof(Buffers::FrameBuffer); i++)
+			frameBuffer[i].clear();
+
+		frameBuffer[0].bind();
 
 		renderer->render(true);
 		
@@ -247,14 +192,7 @@ int main(int argc, char** argv) {
 		brightFilter.enable();
 		glBindTexture(GL_TEXTURE_2D, frameBuffer[0].getColourTexture());
 		
-		frameBuffer[2].bind();
-		glClearColor(0.f, 0.f, 0.f, 1.f);
-		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-		
 		frameBuffer[1].bind();
-		glClearColor(0.f,0.f,0.f,1.f);
-		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-
 
 		screenVAO.draw(screenIBO.getCount());
 		frameBuffer[1].draw();
@@ -280,11 +218,8 @@ int main(int argc, char** argv) {
 		bloomShader.setInt("blurred", 2);
 		bloomShader.setFloat("exposure", 1);
 
-		glActiveTexture(GL_TEXTURE1);
-		glBindTexture(GL_TEXTURE_2D, frameBuffer[0].getColourTexture());
-
-		glActiveTexture(GL_TEXTURE2);
-		glBindTexture(GL_TEXTURE_2D, frameBuffer[!horz + 1].getColourTexture());
+		frameBuffer[0].bindColourTexture(0, GL_TEXTURE1);
+		frameBuffer[!horz + 1].bindColourTexture(0, GL_TEXTURE2);
 
 		glActiveTexture(GL_TEXTURE0);
 
@@ -300,19 +235,9 @@ int main(int argc, char** argv) {
 	//	renderer->render(true);
 
 #ifdef ENABLE_DEBUG_CAMERA
-		naviShader->enable();
-		naviShader->setMatrix4("projectionMatrix", mainCamera.getProjection());
-		naviShader->setMatrix4("viewMatrix", mainCamera.getView());
-		grid.draw();
-
-		static unsigned int fps;
-		static float timePerFrame;
-		static char fpsUI[128];
-
-		snprintf(fpsUI, 128, "FPS %d (%f ms)", fps, timePerFrame);
-
-		calculateFPS(fps, timePerFrame);
-		fpsCount->setText(fpsUI);
+		Utilities::FrameRate::update();
+		Utilities::Debug::drawReferenceGrid();
+		Utilities::Debug::updateDebugCamera();
 #endif
 
 		//4. Post Processing
@@ -320,8 +245,7 @@ int main(int argc, char** argv) {
 		mainCamera.drawUI();
 		myWindow.update();
 
-		if(frameRateLimit > 0)
-			pauseDrawing(glfwGetTime() - startTime);
+		Utilities::FrameRate::limitFrameRate();
 	};
 #ifdef WEB_BUILD
 	emscripten_set_main_loop_arg(startMain, &webMain, false, true);

@@ -3,7 +3,7 @@
 #include <vector>
 #include <iostream>
 
-#include "../Utilities/FileUtilities.h"
+#include "../../Utilities/FileUtilities.h"
 
 using namespace std;
 using namespace Somnium;
@@ -12,7 +12,8 @@ using namespace Maths;
 
 namespace Somnium {
 	namespace Graphics {
-
+		namespace Shaders
+		{
 		Shader::Shader(const char* vertexFilePath, const char* fragmentFilePath)
 			:m_VertexFilePath(vertexFilePath), m_FragmentFilePath(fragmentFilePath)
 		{
@@ -31,8 +32,8 @@ namespace Somnium {
 			GLuint vertexShader		= glCreateShader(GL_VERTEX_SHADER);
 			GLuint fragmentShader	= glCreateShader(GL_FRAGMENT_SHADER);
 
-			string vertexSource		= readFile(m_VertexFilePath);
-			string fragmentSource	= readFile(m_FragmentFilePath);
+			string vertexSource		= File::readFile(m_VertexFilePath);
+			string fragmentSource	= File::readFile(m_FragmentFilePath);
 
 			GLuint shaders[2]		= { vertexShader, fragmentShader };
 
@@ -119,5 +120,6 @@ namespace Somnium {
 		{
 			glUseProgram(0);
 		}
+	}
 	}
 }

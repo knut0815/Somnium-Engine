@@ -14,7 +14,7 @@ namespace Somnium
 			class UIText : public UIObject
 			{
 			public:
-				UIText(std::string text, Font* font, Maths::Vector2 position, Shader* shader)
+				UIText(std::string text, Font* font, Maths::Vector2 position, Shaders::Shader* shader)
 					: m_Font(font), m_Text(text)
 				{
 					m_Position = position; 

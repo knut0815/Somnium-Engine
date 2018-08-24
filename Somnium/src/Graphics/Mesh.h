@@ -7,7 +7,7 @@
 	#include <glew.h> 
 #endif
 #include "../Maths/Maths.h"
-#include "Shader.h"
+#include "Shaders/Shader.h"
 #include "Buffers/IndexBuffer.h"
 #include "Buffers/VertexArray.h"
 #include <vector>
@@ -33,8 +33,8 @@ namespace Somnium
 		class Mesh 
 		{
 		public:
-			Mesh(Buffers::VertexArray* vertexArray, Buffers::IndexBuffer* indexBuffer, std::vector<Texture> textures, Shader& shader);
-			Mesh(std::vector<GLfloat> vertexArray, std::vector<GLushort> indexBuffer, std::vector<Texture> textures, Shader& shader);
+			Mesh(Buffers::VertexArray* vertexArray, Buffers::IndexBuffer* indexBuffer, std::vector<Texture> textures, Shaders::Shader& shader);
+			Mesh(std::vector<GLfloat> vertexArray, std::vector<GLushort> indexBuffer, std::vector<Texture> textures, Shaders::Shader& shader);
 			~Mesh() { delete m_VAO; delete m_IBO; };
 
 			const inline Buffers::VertexArray* getVAO() const { return m_VAO; }
@@ -44,7 +44,7 @@ namespace Somnium
 			const inline std::vector<GLushort>& getIndexData() const { return m_IndexData; }
 
 			inline size_t getIBOSize() const { return m_IBO->getCount(); }
-			inline Shader& getShader() const { return m_Shader; }
+			inline Shaders::Shader& getShader() const { return m_Shader; }
 			const Maths::Matrix4 getModelMatrix() const;
 
 			void rotate(float xAngleOffset, float yAngleOffset, float zAngleOffset);
@@ -67,7 +67,7 @@ namespace Somnium
 			std::vector<GLfloat> m_VertexData;
 			std::vector<GLushort> m_IndexData;
 
-			Shader& m_Shader;
+			Shaders::Shader& m_Shader;
 
 			const std::vector<Texture> m_Textures;
 

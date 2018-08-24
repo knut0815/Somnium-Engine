@@ -9,7 +9,7 @@
 #else 
 	#include <glew.h> 
 #endif
-#include "../Maths/Maths.h"
+#include "../../Maths/Maths.h"
 
 #ifdef WEB_BUILD
 	#define CHAR char
@@ -23,6 +23,8 @@
 
 namespace Somnium {
 	namespace Graphics {
+		namespace Shaders
+		{
 		class Shader
 		{
 		public:
@@ -50,4 +52,5 @@ namespace Somnium {
 			const char *m_VertexFilePath, *m_FragmentFilePath;
 		};
 	}
+}
 }

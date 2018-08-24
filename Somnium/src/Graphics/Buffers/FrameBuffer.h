@@ -38,6 +38,28 @@ namespace Somnium
 						glViewport(0, 0, s_Window->getWidth(), s_Window->getHeight());
 					}
 
+					inline void clear() const
+					{
+						bind();
+
+						glClearColor(0.f, 0.f, 0.f, 1.f);
+						glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+
+						unbind();
+					}
+
+					inline void bindColourTexture(const unsigned int& colourAttachment, const GLenum& activeTexture) const
+					{
+						glActiveTexture(activeTexture);
+						glBindTexture(GL_TEXTURE_2D, m_ColourBuffers[colourAttachment]);
+					}
+
+					inline void bindDepthTexture(GLenum& activeTexture) const
+					{
+						glActiveTexture(activeTexture);
+						glBindTexture(GL_TEXTURE_2D, m_DepthTexture);
+					}
+
 					GLuint getColourTexture(unsigned int index = 0) const { return index < m_NoOfColourBuffers ? m_ColourBuffers[index] : 0; }
 					GLuint getDepthTexture() const { return m_DepthTexture; }
 

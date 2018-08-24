@@ -1,7 +1,7 @@
 #pragma once
 
 #include "../../Maths/Vector2.h"
-#include "../../Graphics/Shader.h"
+#include "../../Graphics/Shaders/Shader.h"
 #include "../Buffers/VertexArray.h"
 #include "../Buffers/VertexBuffer.h"
 
@@ -19,12 +19,12 @@ namespace Somnium
 
 				virtual void render() {};
 
-				void setShader(Shader* shader) { m_Shader = shader; }
+				void setShader(Shaders::Shader* shader) { m_Shader = shader; }
 
 			protected:
 				Maths::Vector2 m_Position;
 				float m_Rotation;
-				Shader *m_Shader;
+				Shaders::Shader *m_Shader;
 				Buffers::VertexArray m_VAO;
 				Buffers::VertexBuffer m_VBO = Buffers::VertexBuffer(NULL, sizeof(GLfloat) * 6 * 4, 4, GL_DYNAMIC_DRAW);
 			};
