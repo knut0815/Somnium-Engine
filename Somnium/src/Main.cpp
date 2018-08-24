@@ -103,6 +103,9 @@ int main(int argc, char** argv) {
 	#endif
 #endif
 	
+		textShader->enable();
+		textShader->setMatrix4("projection", Matrix4::orthographic(0, myWindow.getWidth(), 0, myWindow.getHeight(), -1.0f, 100.0f));
+
 	shader->enable();
 	shader->setVector3("albedo", Maths::Vector3(1, 1, 1));
 	shader->setFloat("ao", 0.01);
@@ -119,11 +122,6 @@ int main(int argc, char** argv) {
 	shader->setVector3("lightColors[2]", Maths::Vector3(3000.0f, 3000.0f, 3000.0f));
 	shader->setVector3("lightColors[3]", Maths::Vector3(3000.0f, 3000.0f, 3000.0f));
 	shader->setVector3("lightColors[4]", Maths::Vector3(100.0f, 100.0f, 100.0f));
-
-	textShader->enable();
-	textShader->setMatrix4("projection", mainCamera.getProjection());
-	screenShader.setMatrix4("projection", mainCamera.getProjection());
-	//blurShader.setMatrix4("projection", mainCamera.getProjection());
 
 	Buffers::FrameBuffer frameBuffer[3] = { Buffers::FrameBuffer(1) };
 
@@ -232,15 +230,14 @@ int main(int argc, char** argv) {
 		shader->setVector3("lightPositions[4]", mainCamera.getPosition());
 		//3. Draw objects
 		//renderer->endMapping();
-
+		
 		frameBuffer[0].bind();
 
 		glClearColor(0.f,0.f,0.f,1.0f);
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
-
 		renderer->render(true);
-
+		
 		//DO POST PROCESSING
 		glDisable(GL_DEPTH_TEST);
 
@@ -249,6 +246,11 @@ int main(int argc, char** argv) {
 
 		brightFilter.enable();
 		glBindTexture(GL_TEXTURE_2D, frameBuffer[0].getColourTexture());
+		
+		frameBuffer[2].bind();
+		glClearColor(0.f, 0.f, 0.f, 1.f);
+		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+		
 		frameBuffer[1].bind();
 		glClearColor(0.f,0.f,0.f,1.f);
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
@@ -260,34 +262,31 @@ int main(int argc, char** argv) {
 		blurShader.enable();
 		bool horz = true;
 
-		for(unsigned int i = 0; i < 10; i++){
+		for(unsigned int i = 0; i < 25; i++){
 			blurShader.setInt("horizontal", horz);
-			frameBuffer[(!horz) + 1].bind();
-
-			//glClearColor(0.f,0.f,0.f,1.0f);
-			//glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-
+			frameBuffer[horz + 1].bind();
 
 			glBindTexture(GL_TEXTURE_2D, frameBuffer[(!horz) + 1].getColourTexture());
 
 			screenVAO.draw(screenIBO.getCount());
 
-			//frameBuffer[horz + 1].draw();
 			horz = !horz;
 		}
 
 		frameBuffer[1].unbind();
 
 		bloomShader.enable();
-		bloomShader.setInt("original", 0);
-		bloomShader.setInt("blurred", 1);
+		bloomShader.setInt("original", 1);
+		bloomShader.setInt("blurred", 2);
 		bloomShader.setFloat("exposure", 1);
 
-		glActiveTexture(GL_TEXTURE0);
+		glActiveTexture(GL_TEXTURE1);
 		glBindTexture(GL_TEXTURE_2D, frameBuffer[0].getColourTexture());
 
-		glActiveTexture(GL_TEXTURE1);
+		glActiveTexture(GL_TEXTURE2);
 		glBindTexture(GL_TEXTURE_2D, frameBuffer[!horz + 1].getColourTexture());
+
+		glActiveTexture(GL_TEXTURE0);
 
 		screenVAO.draw(screenIBO.getCount());
 
@@ -295,6 +294,9 @@ int main(int argc, char** argv) {
 		screenVAO.unbind();
 
 		glEnable(GL_DEPTH_TEST);
+
+		glBindTexture(GL_TEXTURE_2D, 0);
+		//renderer->clear();
 	//	renderer->render(true);
 
 #ifdef ENABLE_DEBUG_CAMERA
@@ -320,7 +322,6 @@ int main(int argc, char** argv) {
 
 		if(frameRateLimit > 0)
 			pauseDrawing(glfwGetTime() - startTime);
-
 	};
 #ifdef WEB_BUILD
 	emscripten_set_main_loop_arg(startMain, &webMain, false, true);

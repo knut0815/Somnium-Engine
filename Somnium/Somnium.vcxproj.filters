@@ -62,142 +62,157 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Maths\Vector3.h">
+    <ClInclude Include="src\Maths\Vector3.h">
       <Filter>Header Files\Maths</Filter>
     </ClInclude>
-    <ClInclude Include="Maths\Vector4.h">
+    <ClInclude Include="src\Maths\Vector4.h">
       <Filter>Header Files\Maths</Filter>
     </ClInclude>
-    <ClInclude Include="Maths\Vector2.h">
+    <ClInclude Include="src\Maths\Vector2.h">
       <Filter>Header Files\Maths</Filter>
     </ClInclude>
-    <ClInclude Include="Maths\Matrix4.h">
+    <ClInclude Include="src\Maths\Matrix4.h">
       <Filter>Header Files\Maths</Filter>
     </ClInclude>
-    <ClInclude Include="Graphics\Window.h">
+    <ClInclude Include="src\Graphics\Window.h">
       <Filter>Header Files\Graphics</Filter>
     </ClInclude>
-    <ClInclude Include="Graphics\Shader.h">
+    <ClInclude Include="src\Graphics\Shader.h">
       <Filter>Header Files\Graphics</Filter>
     </ClInclude>
-    <ClInclude Include="Utilities\FileUtilities.h">
+    <ClInclude Include="src\Utilities\FileUtilities.h">
       <Filter>Header Files\Utilities</Filter>
     </ClInclude>
-    <ClInclude Include="Maths\Maths.h">
+    <ClInclude Include="src\Maths\Maths.h">
       <Filter>Header Files\Maths</Filter>
     </ClInclude>
-    <ClInclude Include="Graphics\Mesh.h">
+    <ClInclude Include="src\Graphics\Mesh.h">
       <Filter>Header Files\Graphics</Filter>
     </ClInclude>
-    <ClInclude Include="Audio\AudioEngine.h">
+    <ClInclude Include="src\Audio\AudioEngine.h">
       <Filter>Header Files\Audio</Filter>
     </ClInclude>
-    <ClInclude Include="Graphics\RenderableObject.h">
+    <ClInclude Include="src\Graphics\RenderableObject.h">
       <Filter>Header Files\Graphics</Filter>
     </ClInclude>
-    <ClInclude Include="Graphics\Camera.h">
+    <ClInclude Include="src\Graphics\Camera.h">
       <Filter>Header Files\Graphics</Filter>
     </ClInclude>
-    <ClInclude Include="Graphics\Buffers\IndexBuffer.h">
+    <ClInclude Include="src\Graphics\Buffers\IndexBuffer.h">
       <Filter>Header Files\Graphics\Buffers</Filter>
     </ClInclude>
-    <ClInclude Include="Graphics\Buffers\VertexArray.h">
+    <ClInclude Include="src\Graphics\Buffers\VertexArray.h">
       <Filter>Header Files\Graphics\Buffers</Filter>
     </ClInclude>
-    <ClInclude Include="Graphics\Buffers\VertexBuffer.h">
+    <ClInclude Include="src\Graphics\Buffers\VertexBuffer.h">
       <Filter>Header Files\Graphics\Buffers</Filter>
     </ClInclude>
-    <ClInclude Include="Graphics\Buffers\BufferStructure.h">
+    <ClInclude Include="src\Graphics\Buffers\BufferStructure.h">
       <Filter>Header Files\Graphics\Buffers</Filter>
     </ClInclude>
-    <ClInclude Include="Graphics\Renderers\BatchRenderer.h">
+    <ClInclude Include="src\Graphics\Renderers\BatchRenderer.h">
       <Filter>Header Files\Graphics\Renderers</Filter>
     </ClInclude>
-    <ClInclude Include="Graphics\Renderers\Renderer.h">
+    <ClInclude Include="src\Graphics\Renderers\Renderer.h">
       <Filter>Header Files\Graphics\Renderers</Filter>
     </ClInclude>
-    <ClInclude Include="Graphics\Renderers\SerialRenderer.h">
+    <ClInclude Include="src\Graphics\Renderers\SerialRenderer.h">
       <Filter>Header Files\Graphics\Renderers</Filter>
     </ClInclude>
-    <ClInclude Include="Graphics\Font.h">
+    <ClInclude Include="src\Graphics\Font.h">
       <Filter>Header Files\Graphics</Filter>
     </ClInclude>
-    <ClInclude Include="Graphics\UI\UIText.h">
+    <ClInclude Include="src\Graphics\UI\UIText.h">
       <Filter>Header Files\Graphics\UI</Filter>
     </ClInclude>
-    <ClInclude Include="Graphics\UI\UIObject.h">
+    <ClInclude Include="src\Graphics\UI\UIObject.h">
       <Filter>Header Files\Graphics\UI</Filter>
     </ClInclude>
-    <ClInclude Include="Graphics\UI\UIImage.h">
+    <ClInclude Include="src\Graphics\UI\UIImage.h">
       <Filter>Header Files\Graphics\UI</Filter>
     </ClInclude>
-    <ClInclude Include="DebugTools\ReferenceGrid.h">
+    <ClInclude Include="src\DebugTools\ReferenceGrid.h">
       <Filter>Header Files\DebugTools</Filter>
     </ClInclude>
-    <ClInclude Include="Maths\Quaternion.h">
+    <ClInclude Include="src\Maths\Quaternion.h">
       <Filter>Header Files\Maths</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Graphics\Buffers\Buffer.h">
+      <Filter>Header Files\Graphics\Buffers</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Graphics\Buffers\FrameBuffer.h">
+      <Filter>Header Files\Graphics\Buffers</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Graphics\Buffers\RenderBuffer.h">
+      <Filter>Header Files\Graphics\Buffers</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="Main.cpp">
+    <ClCompile Include="src\Main.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Maths\Vector2.cpp">
+    <ClCompile Include="src\Maths\Vector2.cpp">
       <Filter>Source Files\Maths</Filter>
     </ClCompile>
-    <ClCompile Include="Graphics\Shader.cpp">
+    <ClCompile Include="src\Graphics\Shader.cpp">
       <Filter>Source Files\Graphics</Filter>
     </ClCompile>
-    <ClCompile Include="Graphics\Window.cpp">
+    <ClCompile Include="src\Graphics\Window.cpp">
       <Filter>Source Files\Graphics</Filter>
     </ClCompile>
-    <ClCompile Include="Maths\Vector3.cpp">
+    <ClCompile Include="src\Maths\Vector3.cpp">
       <Filter>Source Files\Maths</Filter>
     </ClCompile>
-    <ClCompile Include="Maths\Vector4.cpp">
+    <ClCompile Include="src\Maths\Vector4.cpp">
       <Filter>Source Files\Maths</Filter>
     </ClCompile>
-    <ClCompile Include="Maths\Matrix4.cpp">
+    <ClCompile Include="src\Maths\Matrix4.cpp">
       <Filter>Source Files\Maths</Filter>
     </ClCompile>
-    <ClCompile Include="Graphics\Mesh.cpp">
+    <ClCompile Include="src\Graphics\Mesh.cpp">
       <Filter>Source Files\Graphics</Filter>
     </ClCompile>
-    <ClCompile Include="Graphics\Camera.cpp">
+    <ClCompile Include="src\Graphics\Camera.cpp">
       <Filter>Source Files\Graphics</Filter>
     </ClCompile>
-    <ClCompile Include="Graphics\RenderableObject.cpp">
+    <ClCompile Include="src\Graphics\RenderableObject.cpp">
       <Filter>Source Files\Graphics</Filter>
     </ClCompile>
-    <ClCompile Include="Graphics\Buffers\IndexBuffer.cpp">
+    <ClCompile Include="src\Graphics\Buffers\IndexBuffer.cpp">
       <Filter>Source Files\Graphics\Buffers</Filter>
     </ClCompile>
-    <ClCompile Include="Graphics\Buffers\VertexArray.cpp">
+    <ClCompile Include="src\Graphics\Buffers\VertexArray.cpp">
       <Filter>Source Files\Graphics\Buffers</Filter>
     </ClCompile>
-    <ClCompile Include="Graphics\Buffers\VertexBuffer.cpp">
+    <ClCompile Include="src\Graphics\Buffers\VertexBuffer.cpp">
       <Filter>Source Files\Graphics\Buffers</Filter>
     </ClCompile>
-    <ClCompile Include="Graphics\Buffers\BufferStructure.cpp">
+    <ClCompile Include="src\Graphics\Buffers\BufferStructure.cpp">
       <Filter>Source Files\Graphics\Buffers</Filter>
     </ClCompile>
-    <ClCompile Include="Graphics\Renderers\BatchRenderer.cpp">
+    <ClCompile Include="src\Graphics\Renderers\BatchRenderer.cpp">
       <Filter>Source Files\Graphics\Renderers</Filter>
     </ClCompile>
-    <ClCompile Include="Graphics\Renderers\SerialRenderer.cpp">
+    <ClCompile Include="src\Graphics\Renderers\SerialRenderer.cpp">
       <Filter>Source Files\Graphics\Renderers</Filter>
     </ClCompile>
-    <ClCompile Include="Graphics\Font.cpp">
+    <ClCompile Include="src\Graphics\Font.cpp">
       <Filter>Source Files\Graphics</Filter>
     </ClCompile>
-    <ClCompile Include="Graphics\UI\UIText.cpp">
+    <ClCompile Include="src\Graphics\UI\UIText.cpp">
       <Filter>Source Files\Graphics\UI</Filter>
     </ClCompile>
-    <ClCompile Include="DebugTools\ReferenceGrid.cpp">
+    <ClCompile Include="src\DebugTools\ReferenceGrid.cpp">
       <Filter>Source Files\DebugTools</Filter>
     </ClCompile>
-    <ClCompile Include="Maths\Quaternion.cpp">
+    <ClCompile Include="src\Maths\Quaternion.cpp">
       <Filter>Source Files\Maths</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Graphics\Buffers\FrameBuffer.cpp">
+      <Filter>Source Files\Graphics\Buffers</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Graphics\Buffers\RenderBuffer.cpp">
+      <Filter>Source Files\Graphics\Buffers</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

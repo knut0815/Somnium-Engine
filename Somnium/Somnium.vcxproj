@@ -136,7 +136,7 @@
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <SDLCheck>true</SDLCheck>
       <AdditionalIncludeDirectories>$(SolutionDir)Dependencies\freetype\include\freetype;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
-      <PreprocessorDefinitions>GLEW_STATIC;DEBUG_MODE;ENABLE_DEBUG_CAMERA;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>GLEW_STATIC;%(PreprocessorDefinitions)</PreprocessorDefinitions>
     </ClCompile>
     <Link>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
@@ -146,53 +146,58 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClInclude Include="Audio\AudioEngine.h" />
-    <ClInclude Include="Graphics\Font.h" />
-    <ClInclude Include="Graphics\Buffers\BufferStructure.h" />
-    <ClInclude Include="Graphics\Renderers\BatchRenderer.h" />
-    <ClInclude Include="Graphics\Buffers\VertexBuffer.h" />
-    <ClInclude Include="Graphics\Buffers\IndexBuffer.h" />
-    <ClInclude Include="Graphics\Buffers\VertexArray.h" />
-    <ClInclude Include="Graphics\Camera.h" />
-    <ClInclude Include="Maths\Maths.h" />
-    <ClInclude Include="Graphics\Mesh.h" />
-    <ClInclude Include="Graphics\RenderableObject.h" />
-    <ClInclude Include="Graphics\Renderers\SerialRenderer.h" />
-    <ClInclude Include="Graphics\Renderers\Renderer.h" />
-    <ClInclude Include="Graphics\UI\UIText.h" />
-    <ClInclude Include="Graphics\UI\UIImage.h" />
-    <ClInclude Include="Graphics\UI\UIObject.h" />
-    <ClInclude Include="DebugTools\ReferenceGrid.h" />
-    <ClInclude Include="Maths\Quaternion.h" />
-    <ClInclude Include="Utilities\FileUtilities.h" />
-    <ClInclude Include="Maths\Matrix4.h" />
-    <ClInclude Include="Graphics\Shader.h" />
-    <ClInclude Include="Maths\Vector2.h" />
-    <ClInclude Include="Maths\Vector3.h" />
-    <ClInclude Include="Maths\Vector4.h" />
-    <ClInclude Include="Graphics\Window.h" />
+    <ClInclude Include="src\Audio\AudioEngine.h" />
+    <ClInclude Include="src\Graphics\Buffers\Buffer.h" />
+    <ClInclude Include="src\Graphics\Buffers\FrameBuffer.h" />
+    <ClInclude Include="src\Graphics\Buffers\RenderBuffer.h" />
+    <ClInclude Include="src\Graphics\Font.h" />
+    <ClInclude Include="src\Graphics\Buffers\BufferStructure.h" />
+    <ClInclude Include="src\Graphics\Renderers\BatchRenderer.h" />
+    <ClInclude Include="src\Graphics\Buffers\VertexBuffer.h" />
+    <ClInclude Include="src\Graphics\Buffers\IndexBuffer.h" />
+    <ClInclude Include="src\Graphics\Buffers\VertexArray.h" />
+    <ClInclude Include="src\Graphics\Camera.h" />
+    <ClInclude Include="src\Maths\Maths.h" />
+    <ClInclude Include="src\Graphics\Mesh.h" />
+    <ClInclude Include="src\Graphics\RenderableObject.h" />
+    <ClInclude Include="src\Graphics\Renderers\SerialRenderer.h" />
+    <ClInclude Include="src\Graphics\Renderers\Renderer.h" />
+    <ClInclude Include="src\Graphics\UI\UIText.h" />
+    <ClInclude Include="src\Graphics\UI\UIImage.h" />
+    <ClInclude Include="src\Graphics\UI\UIObject.h" />
+    <ClInclude Include="src\DebugTools\ReferenceGrid.h" />
+    <ClInclude Include="src\Maths\Quaternion.h" />
+    <ClInclude Include="src\Utilities\FileUtilities.h" />
+    <ClInclude Include="src\Maths\Matrix4.h" />
+    <ClInclude Include="src\Graphics\Shader.h" />
+    <ClInclude Include="src\Maths\Vector2.h" />
+    <ClInclude Include="src\Maths\Vector3.h" />
+    <ClInclude Include="src\Maths\Vector4.h" />
+    <ClInclude Include="src\Graphics\Window.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="Graphics\Font.cpp" />
-    <ClCompile Include="Graphics\Buffers\BufferStructure.cpp" />
-    <ClCompile Include="Graphics\Renderers\BatchRenderer.cpp" />
-    <ClCompile Include="Graphics\Buffers\VertexBuffer.cpp" />
-    <ClCompile Include="Graphics\Buffers\IndexBuffer.cpp" />
-    <ClCompile Include="Graphics\Buffers\VertexArray.cpp" />
-    <ClCompile Include="Graphics\Camera.cpp" />
-    <ClCompile Include="Main.cpp" />
-    <ClCompile Include="Graphics\Shader.cpp" />
-    <ClCompile Include="Maths\Vector2.cpp" />
-    <ClCompile Include="Graphics\Window.cpp" />
-    <ClCompile Include="Maths\Vector3.cpp" />
-    <ClCompile Include="Maths\Vector4.cpp" />
-    <ClCompile Include="Maths\Matrix4.cpp" />
-    <ClCompile Include="Graphics\Mesh.cpp" />
-    <ClCompile Include="Graphics\Renderers\SerialRenderer.cpp" />
-    <ClCompile Include="Graphics\RenderableObject.cpp" />
-    <ClCompile Include="Graphics\UI\UIText.cpp" />
-    <ClCompile Include="DebugTools\ReferenceGrid.cpp" />
-    <ClCompile Include="Maths\Quaternion.cpp" />
+    <ClCompile Include="src\Graphics\Buffers\FrameBuffer.cpp" />
+    <ClCompile Include="src\Graphics\Buffers\RenderBuffer.cpp" />
+    <ClCompile Include="src\Graphics\Font.cpp" />
+    <ClCompile Include="src\Graphics\Buffers\BufferStructure.cpp" />
+    <ClCompile Include="src\Graphics\Renderers\BatchRenderer.cpp" />
+    <ClCompile Include="src\Graphics\Buffers\VertexBuffer.cpp" />
+    <ClCompile Include="src\Graphics\Buffers\IndexBuffer.cpp" />
+    <ClCompile Include="src\Graphics\Buffers\VertexArray.cpp" />
+    <ClCompile Include="src\Graphics\Camera.cpp" />
+    <ClCompile Include="src\Main.cpp" />
+    <ClCompile Include="src\Graphics\Shader.cpp" />
+    <ClCompile Include="src\Maths\Vector2.cpp" />
+    <ClCompile Include="src\Graphics\Window.cpp" />
+    <ClCompile Include="src\Maths\Vector3.cpp" />
+    <ClCompile Include="src\Maths\Vector4.cpp" />
+    <ClCompile Include="src\Maths\Matrix4.cpp" />
+    <ClCompile Include="src\Graphics\Mesh.cpp" />
+    <ClCompile Include="src\Graphics\Renderers\SerialRenderer.cpp" />
+    <ClCompile Include="src\Graphics\RenderableObject.cpp" />
+    <ClCompile Include="src\Graphics\UI\UIText.cpp" />
+    <ClCompile Include="src\DebugTools\ReferenceGrid.cpp" />
+    <ClCompile Include="src\Maths\Quaternion.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

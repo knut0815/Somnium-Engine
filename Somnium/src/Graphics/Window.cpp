@@ -48,7 +48,7 @@ namespace Somnium
 			glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 		}
 
-		void printDebugTitle(std::string title)
+		void Window::printDebugTitle(std::string title)
 		{
 			cout << "----------[ " + title + " ]-----------" << endl;
 		}

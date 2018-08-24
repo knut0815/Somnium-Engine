@@ -9,6 +9,8 @@
 #include <ft2build.h>
 #include FT_FREETYPE_H
 
+#include <string>
+
 namespace Somnium
 {
 	namespace Graphics
@@ -44,6 +46,8 @@ namespace Somnium
 		private:
 			void applySettings();
 			bool init(void);
+
+			void printDebugTitle(std::string title);
 
 			friend void keyCallback(GLFWwindow*, int, int, int, int);
 			friend void mouseButtonCallback(GLFWwindow*, int, int, int);
