@@ -17,7 +17,7 @@ namespace Somnium
 					  {
 				public:
 					FrameBuffer(unsigned int noOfColourBuffers = 1, bool enableDepthBuffer = true, unsigned int startXCoord = 0, unsigned int startYCoord = 0, unsigned int endXCoord = s_Window->getWidth(), unsigned int endYCoord = s_Window->getHeight());
-					virtual ~FrameBuffer()
+					~FrameBuffer()
 					{
 						glDeleteFramebuffers(1, &m_BufferID);
 						glDeleteTextures(m_NoOfColourBuffers, m_ColourBuffers);
@@ -48,16 +48,18 @@ namespace Somnium
 						unbind();
 					}
 
-					inline void bindColourTexture(const unsigned int& colourAttachment, const GLenum& activeTexture) const
+					inline void bindColourTexture(const unsigned int& textureSlot = 0, const unsigned int& colourAttachment = 0) const
 					{
-						glActiveTexture(activeTexture);
+						glActiveTexture(GL_TEXTURE0 + textureSlot);
 						glBindTexture(GL_TEXTURE_2D, m_ColourBuffers[colourAttachment]);
+						glActiveTexture(GL_TEXTURE0);
 					}
 
-					inline void bindDepthTexture(GLenum& activeTexture) const
+					inline void bindDepthTexture(const unsigned int& textureSlot = 0) const
 					{
-						glActiveTexture(activeTexture);
+						glActiveTexture(GL_TEXTURE0 + textureSlot);
 						glBindTexture(GL_TEXTURE_2D, m_DepthTexture);
+						glActiveTexture(GL_TEXTURE0);
 					}
 
 					GLuint getColourTexture(unsigned int index = 0) const { return index < m_NoOfColourBuffers ? m_ColourBuffers[index] : 0; }

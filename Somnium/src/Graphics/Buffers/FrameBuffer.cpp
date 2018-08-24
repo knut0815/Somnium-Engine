@@ -8,7 +8,7 @@ namespace Somnium
 	{
 		namespace Buffers
 		{
-			Window const * FrameBuffer::s_Window;
+			Window const* FrameBuffer::s_Window;
 
 			void FrameBuffer::setWindow(Window const * window) { s_Window = window; }
 

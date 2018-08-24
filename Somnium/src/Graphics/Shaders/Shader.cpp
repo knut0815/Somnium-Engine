@@ -10,8 +10,10 @@ using namespace Somnium;
 using namespace Utilities;
 using namespace Maths;
 
-namespace Somnium {
-	namespace Graphics {
+namespace Somnium
+{
+	namespace Graphics
+	{
 		namespace Shaders
 		{
 		Shader::Shader(const char* vertexFilePath, const char* fragmentFilePath)
@@ -31,14 +33,16 @@ namespace Somnium {
 			GLuint program			= glCreateProgram();
 			GLuint vertexShader		= glCreateShader(GL_VERTEX_SHADER);
 			GLuint fragmentShader	= glCreateShader(GL_FRAGMENT_SHADER);
-
 			string vertexSource		= File::readFile(m_VertexFilePath);
 			string fragmentSource	= File::readFile(m_FragmentFilePath);
 
 			GLuint shaders[2]		= { vertexShader, fragmentShader };
 
-			if (vertexSource.empty() || fragmentSource.empty())
+			if (vertexSource.empty() || fragmentSource.empty()){
+				cerr << "ERROR LOADING SHADER" << endl;
 				return 0;
+			}
+
 
 			const char * const vs	= vertexSource.c_str();
 			const char * const fs	= fragmentSource.c_str();

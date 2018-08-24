@@ -16,6 +16,11 @@
 #include "Graphics/Camera.h"
 #include "Graphics/Font.h"
 
+#include "Graphics/PostProcessing/PostProcessor.h"
+#include "Graphics/PostProcessing/GaussianBlur.h"
+#include "Graphics/PostProcessing/BrightFilter.h"
+#include "Graphics/PostProcessing/Bloom.h"
+
 #include "Utilities/FileUtilities.h"
 #include "Utilities/FrameRateUtilities.h"
 #include "Utilities/DebugTools/ReferenceGrid.h"
@@ -43,14 +48,10 @@ int main(int argc, char** argv) {
 
 	Buffers::FrameBuffer::setWindow(&myWindow);
 
+	PostProcessing::PostProcessor::initialise();
 	Camera mainCamera = Camera(30, (float)myWindow.getWidth() / myWindow.getHeight(), 0.1f, 1000.0f, false, Vector3(0,0,0), Vector3(180, 90, 0));
 
 	Font* arial = new Font("Resources/Graphics/Fonts/arial.ttf", myWindow.getFreeTypeInstance());
-
-	Shaders::Shader blurShader = Shaders::Shader("Resources/Graphics/Shaders/GL/Basic/passthrough2D.vert", "Resources/Graphics/Shaders/GL/Post-Processing/gaussianBlur.frag");
-	Shaders::Shader bloomShader = Shaders::Shader("Resources/Graphics/Shaders/GL/Basic/passthrough2D.vert", "Resources/Graphics/Shaders/GL/Post-Processing/bloom.frag");
-	Shaders::Shader screenShader = Shaders::Shader("Resources/Graphics/Shaders/GL/Basic/texture2D.vert", "Resources/Graphics/Shaders/GL/Basic/texture2D.frag");
-	Shaders::Shader brightFilter = Shaders::Shader("Resources/Graphics/Shaders/GL/Basic/passthrough2D.vert","Resources/Graphics/Shaders/GL/Post-Processing/Filters/brightnessFilter.frag");
 
 #ifdef WEB_BUILD
 	Shaders::Shader* shader = new Shaders::Shader("Resources/Graphics/Shaders/GLES/PBR/basic.vert", "Resources/Graphics/Shaders/GLES/PBR/basic.frag");
@@ -88,32 +89,12 @@ int main(int argc, char** argv) {
 		shader->setVector3(buff, Maths::Vector3(3000.0f, 3000.0f, 3000.0f));
 	}
 
-	Buffers::FrameBuffer frameBuffer[3] = { Buffers::FrameBuffer(1) };
+	Buffers::FrameBuffer frameBuffer;
 
 #ifdef ENABLE_DEBUG_CAMERA
 	Utilities::Debug::initialiseDebugCamera(myWindow.getWidth(), myWindow.getHeight(), &mainCamera, arial, textShader);
 	Utilities::Debug::initialiseReferenceGrid(naviShader, 5, Maths::Vector3(10000));
 #endif
-
-	static float screen[] = {
-					-1.0f, -1.0f,
-					1.0f, -1.0f,
-					1.0f, 1.0f,
-					-1.0f, 1.0f
-			};
-
-	static float screenTexCoords[] = {
-						0, 0,
-						1, 0,
-						1, 1,
-						0, 1
-				};
-
-	Buffers::VertexArray screenVAO = Buffers::VertexArray();
-	Buffers::IndexBuffer screenIBO = Buffers::IndexBuffer( {0, 1, 2, 2, 3, 0} );
-
-	screenVAO.addBuffer(new Buffers::VertexBuffer(screen, 4, 2, GL_STATIC_DRAW), SHADER_POSITION_INDEX);
-	screenVAO.addBuffer(new Buffers::VertexBuffer(screenTexCoords, 4, 2, GL_STATIC_DRAW), SHADER_TEXTURE_COORDINATE_INDEX);
 
 	Matrix4 view = Matrix4::identity();
 
@@ -175,61 +156,25 @@ int main(int argc, char** argv) {
 		shader->setVector3("lightPositions[4]", mainCamera.getPosition());
 		//3. Draw objects
 		//renderer->endMapping();
-
-		for(unsigned int i = 0; i < sizeof(frameBuffer) / sizeof(Buffers::FrameBuffer); i++)
-			frameBuffer[i].clear();
-
-		frameBuffer[0].bind();
+		frameBuffer.clear();
+		frameBuffer.bind();
 
 		renderer->render(true);
-		
-		//DO POST PROCESSING
+
+		frameBuffer.draw();
+		frameBuffer.unbind();
 		glDisable(GL_DEPTH_TEST);
+		//DO POST PROCESSING
 
-		screenVAO.bind();
-		screenIBO.bind();
+		//Graphics::PostProcessing::BrightFilter::getInstance().Process(&frameBuffer);
+		Graphics::PostProcessing::GaussianBlur::getInstance().Process(&frameBuffer);
+		//Graphics::PostProcessing::Bloom::getInstance().Process(&frameBuffer);
 
-		brightFilter.enable();
-		glBindTexture(GL_TEXTURE_2D, frameBuffer[0].getColourTexture());
-		
-		frameBuffer[1].bind();
+		frameBuffer.bindColourTexture();
 
-		screenVAO.draw(screenIBO.getCount());
-		frameBuffer[1].draw();
-
-		blurShader.enable();
-		bool horz = true;
-
-		for(unsigned int i = 0; i < 25; i++){
-			blurShader.setInt("horizontal", horz);
-			frameBuffer[horz + 1].bind();
-
-			glBindTexture(GL_TEXTURE_2D, frameBuffer[(!horz) + 1].getColourTexture());
-
-			screenVAO.draw(screenIBO.getCount());
-
-			horz = !horz;
-		}
-
-		frameBuffer[1].unbind();
-
-		bloomShader.enable();
-		bloomShader.setInt("original", 1);
-		bloomShader.setInt("blurred", 2);
-		bloomShader.setFloat("exposure", 1);
-
-		frameBuffer[0].bindColourTexture(0, GL_TEXTURE1);
-		frameBuffer[!horz + 1].bindColourTexture(0, GL_TEXTURE2);
-
-		glActiveTexture(GL_TEXTURE0);
-
-		screenVAO.draw(screenIBO.getCount());
-
-		screenIBO.unbind();
-		screenVAO.unbind();
+		Graphics::PostProcessing::PostProcessor::drawScreen();
 
 		glEnable(GL_DEPTH_TEST);
-
 		glBindTexture(GL_TEXTURE_2D, 0);
 		//renderer->clear();
 	//	renderer->render(true);
