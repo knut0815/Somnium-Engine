@@ -14,14 +14,18 @@ namespace Somnium
 				public:
 					virtual ~Bloom();
 
-					static PostProcessingUnit& getInstance()
+					static PostProcessingUnit* const getInstance()
 					{
 						static Bloom instance;
 
-						if(s_Shader == nullptr)
+						if(s_Shader == nullptr){
 							 s_Shader = new Shaders::Shader("Resources/Graphics/Shaders/GL/Basic/passthrough2D.vert", "Resources/Graphics/Shaders/GL/Post-Processing/bloom.frag");
+							 s_Shader->setInt("original", 1);
+							 s_Shader->setInt("blurred", 2);
+							 s_Shader->setFloat("exposure", 1);
+						}
 
-						return instance;
+						return &instance;
 					}
 
 					void Process(Buffers::FrameBuffer* toProcess);

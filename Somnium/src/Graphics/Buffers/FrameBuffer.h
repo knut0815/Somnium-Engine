@@ -17,7 +17,7 @@ namespace Somnium
 					  {
 				public:
 					FrameBuffer(unsigned int noOfColourBuffers = 1, bool enableDepthBuffer = true, unsigned int startXCoord = 0, unsigned int startYCoord = 0, unsigned int endXCoord = s_Window->getWidth(), unsigned int endYCoord = s_Window->getHeight());
-					~FrameBuffer()
+					virtual ~FrameBuffer()
 					{
 						glDeleteFramebuffers(1, &m_BufferID);
 						glDeleteTextures(m_NoOfColourBuffers, m_ColourBuffers);

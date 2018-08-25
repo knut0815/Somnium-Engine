@@ -12,14 +12,14 @@ namespace Somnium
 				: public PostProcessingUnit
 				{
 					public:
-						static PostProcessingUnit& getInstance()
+						static PostProcessingUnit* const getInstance()
 						{
 							static GaussianBlur instance;
 
 							if(s_Shader == nullptr)
 								s_Shader = new Shaders::Shader("Resources/Graphics/Shaders/GL/Basic/passthrough2D.vert", "Resources/Graphics/Shaders/GL/Post-Processing/gaussianBlur.frag");
 
-							return instance;
+							return &instance;
 						}
 
 						~GaussianBlur();

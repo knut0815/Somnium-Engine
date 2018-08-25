@@ -2,6 +2,8 @@
 #include "PostProcessor.h"
 #include "../Shaders/Shader.h"
 #include "../Buffers/FrameBuffer.h"
+#include "BrightFilter.h"
+#include "GaussianBlur.h"
 
 namespace Somnium
 {
@@ -13,9 +15,7 @@ namespace Somnium
 
 			Bloom::Bloom()
 			{
-				s_Shader->setInt("original", 1);
-				s_Shader->setInt("blurred", 2);
-				s_Shader->setFloat("exposure", 1);
+
 			}
 
 			Bloom::~Bloom()
@@ -25,18 +25,27 @@ namespace Somnium
 
 			void Bloom::Process(Buffers::FrameBuffer* toProcess)
 			{
-				Buffers::FrameBuffer fbo;
-				fbo.bind();
+				static Buffers::FrameBuffer blurred, bloom;
 
-				toProcess->bindColourTexture(1,0);
-				toProcess->bindColourTexture(2,1);
+				blurred.bind();
 
+				toProcess->bindColourTexture();
 				Graphics::PostProcessing::PostProcessor::drawScreen();
+
+				BrightFilter::getInstance()->Process(&blurred);
+				GaussianBlur::getInstance()->Process(&blurred);
+
+				bloom.bind();
+				toProcess->bindColourTexture(1);
+				blurred.bindColourTexture(2);
+				Graphics::PostProcessing::PostProcessor::drawScreen(s_Shader);
 
 				toProcess->bind();
-				fbo.bindColourTexture();
+				bloom.bindColourTexture();
 				Graphics::PostProcessing::PostProcessor::drawScreen();
+
 				toProcess->unbind();
+
 			}
 		}
 	}

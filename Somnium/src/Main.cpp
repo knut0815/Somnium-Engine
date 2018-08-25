@@ -82,7 +82,7 @@ int main(int argc, char** argv) {
 	shader->setVector3("lightPositions[2]", Maths::Vector3(-10.0f, -10.0f, 10.0f));
 	shader->setVector3("lightPositions[3]", Maths::Vector3(10.0f, -10.0f, 10.0f));
 
-	char buff[256];
+	char buff[24];
 	for (unsigned int i = 0; i < 5; i++)
 	{
 		sprintf(buff, "lightColors[%d]", i);
@@ -163,18 +163,16 @@ int main(int argc, char** argv) {
 
 		frameBuffer.draw();
 		frameBuffer.unbind();
-		glDisable(GL_DEPTH_TEST);
-		//DO POST PROCESSING
 
-		//Graphics::PostProcessing::BrightFilter::getInstance().Process(&frameBuffer);
-		Graphics::PostProcessing::GaussianBlur::getInstance().Process(&frameBuffer);
-		//Graphics::PostProcessing::Bloom::getInstance().Process(&frameBuffer);
+		//DO POST PROCESSING
+		PostProcessing::PostProcessor::submitToQueue(Graphics::PostProcessing::Bloom::getInstance());
+
+		PostProcessing::PostProcessor::process(&frameBuffer);
 
 		frameBuffer.bindColourTexture();
 
 		Graphics::PostProcessing::PostProcessor::drawScreen();
 
-		glEnable(GL_DEPTH_TEST);
 		glBindTexture(GL_TEXTURE_2D, 0);
 		//renderer->clear();
 	//	renderer->render(true);

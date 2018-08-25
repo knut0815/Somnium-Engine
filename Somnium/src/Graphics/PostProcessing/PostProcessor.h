@@ -27,14 +27,16 @@ namespace Somnium
 					virtual ~PostProcessor();
 
 					static void drawScreen(Shaders::Shader* shader = s_ScreenShader);
+					static inline void submitToQueue(PostProcessingUnit* const ppu) { PostProcessor::m_PostProcessingUnits.push(ppu); }
+					static void process(Buffers::FrameBuffer* fbo);
+				private:
+
+					static void start() { glDisable(GL_DEPTH_TEST); };
+
+					static void end() { glEnable(GL_DEPTH_TEST); }
 
 				private:
-					void start() { glDisable(GL_DEPTH_TEST); };
-					void process();
-					void end() { glEnable(GL_DEPTH_TEST); }
-
-				private:
-					std::queue<PostProcessingUnit*> m_PostProcessingUnits;
+					static std::queue<PostProcessingUnit*> m_PostProcessingUnits;
 
 					static Shaders::Shader* s_ScreenShader;
 					static Buffers::VertexArray* s_ScreenVAO;

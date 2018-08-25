@@ -10,6 +10,7 @@ namespace Somnium
 			Graphics::Buffers::IndexBuffer* PostProcessor::s_ScreenIBO = nullptr;
 			Graphics::Shaders::Shader* PostProcessor::s_ScreenShader = nullptr;
 			bool PostProcessor::s_Initialised = false;
+			std::queue<PostProcessingUnit*> PostProcessor::m_PostProcessingUnits;
 
 			void PostProcessor::initialise()
 			{
@@ -63,13 +64,13 @@ namespace Somnium
 				s_ScreenVAO->unbind();
 			}
 
-			void PostProcessor::process()
+			void PostProcessor::process(Buffers::FrameBuffer* fbo)
 			{
 				start();
 
 				while(!m_PostProcessingUnits.empty())
 				{
-					//m_PostProcessingUnits.front()-enable();
+					m_PostProcessingUnits.front()->Process(fbo);
 
 					m_PostProcessingUnits.pop();
 				}
