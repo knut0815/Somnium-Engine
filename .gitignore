@@ -52,6 +52,9 @@
 *.layout
 *.user
 
+# Performance Profiling
+perf.data
+
 # Directories
 /.vs
 */bin
