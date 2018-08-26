@@ -19,7 +19,7 @@ namespace Somnium
 						static Bloom instance;
 
 						if(s_Shader == nullptr){
-							 s_Shader = new Shaders::Shader("Resources/Graphics/Shaders/GL/Basic/passthrough2D.vert", "Resources/Graphics/Shaders/GL/Post-Processing/bloom.frag");
+							 s_Shader = new Shaders::Shader("Resources/Graphics/Shaders/Basic/passthrough2D.vs", "Resources/Graphics/Shaders/Post-Processing/bloom.fs");
 							 s_Shader->setInt("original", 1);
 							 s_Shader->setInt("blurred", 2);
 							 s_Shader->setFloat("exposure", 1);

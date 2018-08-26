@@ -18,7 +18,7 @@ namespace Somnium
 
 				s_ScreenVAO = new Buffers::VertexArray();
 				s_ScreenIBO = new Buffers::IndexBuffer( {0, 1, 2, 2, 3, 0} );
-				s_ScreenShader = new Graphics::Shaders::Shader("Resources/Graphics/Shaders/GL/Basic/texture2D.vert", "Resources/Graphics/Shaders/GL/Basic/texture2D.frag");
+				s_ScreenShader = new Graphics::Shaders::Shader("Resources/Graphics/Shaders/Basic/texture2D.vs", "Resources/Graphics/Shaders/Basic/texture2D.fs");
 
 				float screen[] = {
 								-1.0f, -1.0f,

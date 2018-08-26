@@ -53,7 +53,7 @@
 *.user
 
 # Directories
-*.vs
+/.vs
 */bin
 /Objects
 */Debug

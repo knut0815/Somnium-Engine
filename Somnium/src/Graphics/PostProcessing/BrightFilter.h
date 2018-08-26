@@ -17,7 +17,7 @@ namespace Somnium
 					static BrightFilter instance;
 
 					if (s_Shader == nullptr)
-						 s_Shader = new Shaders::Shader("Resources/Graphics/Shaders/GL/Basic/passthrough2D.vert","Resources/Graphics/Shaders/GL/Post-Processing/Filters/brightnessFilter.frag");
+						 s_Shader = new Shaders::Shader("Resources/Graphics/Shaders/Basic/passthrough2D.vs","Resources/Graphics/Shaders/Post-Processing/Filters/brightnessFilter.fs");
 
 					return &instance;
 				}

@@ -14,7 +14,6 @@ namespace Somnium
 	{
 		namespace FrameRate
 		{
-			const unsigned int frameRateLimit = 60;
 			double startTime = 0;
 			unsigned int fps;
 			float timePerFrame;
@@ -22,7 +21,7 @@ namespace Somnium
 
 			void startFrameCounting() { startTime = glfwGetTime(); }
 
-			void pauseDrawing(unsigned int elapsed)
+			void pauseDrawing(const unsigned int& elapsed, const unsigned int& frameRateLimit)
 			{
 				double  sleep = ((1000000.0 / frameRateLimit) - elapsed) / 1000000.0,
 						start = glfwGetTime();
@@ -46,10 +45,10 @@ namespace Somnium
 				}
 			}
 
-			void limitFrameRate()
+			void limitFrameRate(const unsigned int& frameRateLimit)
 			{
 				if(frameRateLimit > 0)
-					pauseDrawing(glfwGetTime() - startTime);
+					pauseDrawing(glfwGetTime() - startTime, frameRateLimit);
 			}
 
 			void update()

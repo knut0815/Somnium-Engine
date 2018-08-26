@@ -53,20 +53,12 @@ int main(int argc, char** argv) {
 
 	Font* arial = new Font("Resources/Graphics/Fonts/arial.ttf", myWindow.getFreeTypeInstance());
 
-#ifdef WEB_BUILD
-	Shaders::Shader* shader = new Shaders::Shader("Resources/Graphics/Shaders/GLES/PBR/basic.vert", "Resources/Graphics/Shaders/GLES/PBR/basic.frag");
-	Shaders::Shader* textShader = new Shaders::Shader("Resources/Graphics/Shaders/GLES/Basic/basicText.vert", "Resources/Graphics/Shaders/GLES/Basic/basicText.frag");
+	Shaders::Shader* shader = new Shaders::Shader("Resources/Graphics/Shaders/PBR/basic.vs", "Resources/Graphics/Shaders/PBR/basic.fs");
+	Shaders::Shader* textShader = new Shaders::Shader("Resources/Graphics/Shaders/Basic/basicText.vs", "Resources/Graphics/Shaders/Basic/basicText.fs");
 
 	#ifdef ENABLE_DEBUG_CAMERA
-		Shaders::Shader* naviShader = new Shaders::Shader("Resources/Graphics/Shaders/GLES/Debug/navigation.vert", "Resources/Graphics/Shaders/GLES/Debug/navigation.frag");
+		Shaders::Shader* naviShader = new Shaders::Shader("Resources/Graphics/Shaders/Debug/navigation.vs", "Resources/Graphics/Shaders/Debug/navigation.fs");
 	#endif
-#else
-	Shaders::Shader* shader = new Shaders::Shader("Resources/Graphics/Shaders/GL/PBR/basic.vert", "Resources/Graphics/Shaders/GL/PBR/basic.frag");
-	Shaders::Shader* textShader = new Shaders::Shader("Resources/Graphics/Shaders/GL/Basic/basicText.vert", "Resources/Graphics/Shaders/GL/Basic/basicText.frag");
-	#ifdef ENABLE_DEBUG_CAMERA
-		Shaders::Shader* naviShader = new Shaders::Shader("Resources/Graphics/Shaders/GL/Debug/navigation.vert", "Resources/Graphics/Shaders/GL/Debug/navigation.frag");
-	#endif
-#endif
 	
 	textShader->enable();
 	textShader->setMatrix4("projection", Matrix4::orthographic(0, myWindow.getWidth(), 0, myWindow.getHeight(), -1.0f, 100.0f));
@@ -161,7 +153,6 @@ int main(int argc, char** argv) {
 
 		renderer->render(true);
 
-		frameBuffer.draw();
 		frameBuffer.unbind();
 
 		//DO POST PROCESSING
@@ -173,12 +164,8 @@ int main(int argc, char** argv) {
 
 		Graphics::PostProcessing::PostProcessor::drawScreen();
 
-		glBindTexture(GL_TEXTURE_2D, 0);
-		//renderer->clear();
-	//	renderer->render(true);
-
-#ifdef ENABLE_DEBUG_CAMERA
 		Utilities::FrameRate::update();
+#ifdef ENABLE_DEBUG_CAMERA
 		Utilities::Debug::drawReferenceGrid();
 		Utilities::Debug::updateDebugCamera();
 #endif
@@ -188,7 +175,7 @@ int main(int argc, char** argv) {
 		mainCamera.drawUI();
 		myWindow.update();
 
-		Utilities::FrameRate::limitFrameRate();
+		Utilities::FrameRate::limitFrameRate(60);
 	};
 #ifdef WEB_BUILD
 	emscripten_set_main_loop_arg(startMain, &webMain, false, true);

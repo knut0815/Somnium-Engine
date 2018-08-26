@@ -33,9 +33,13 @@ namespace Somnium
 			GLuint program			= glCreateProgram();
 			GLuint vertexShader		= glCreateShader(GL_VERTEX_SHADER);
 			GLuint fragmentShader	= glCreateShader(GL_FRAGMENT_SHADER);
+#ifdef WEB_BUILD
+			string vertexSource		= File::readFile((string(m_VertexFilePath) + string("es")).c_str());
+			string fragmentSource	= File::readFile((string(m_FragmentFilePath) + string("es")).c_str());
+#else
 			string vertexSource		= File::readFile(m_VertexFilePath);
 			string fragmentSource	= File::readFile(m_FragmentFilePath);
-
+#endif
 			GLuint shaders[2]		= { vertexShader, fragmentShader };
 
 			if (vertexSource.empty() || fragmentSource.empty()){

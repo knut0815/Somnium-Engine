@@ -45,7 +45,6 @@ namespace Somnium
 				Graphics::PostProcessing::PostProcessor::drawScreen();
 
 				toProcess->unbind();
-
 			}
 		}
 	}
