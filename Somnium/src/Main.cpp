@@ -17,9 +17,8 @@
 #include "Graphics/Font.h"
 
 #include "Graphics/PostProcessing/PostProcessor.h"
-#include "Graphics/PostProcessing/GaussianBlur.h"
-#include "Graphics/PostProcessing/BrightFilter.h"
-#include "Graphics/PostProcessing/Bloom.h"
+#include "Graphics/PostProcessing/Lighting/Bloom.h"
+#include "Graphics/PostProcessing/Filter/Greyscale.h"
 
 #include "Utilities/FileUtilities.h"
 #include "Utilities/FrameRateUtilities.h"
@@ -156,7 +155,8 @@ int main(int argc, char** argv) {
 		frameBuffer.unbind();
 
 		//DO POST PROCESSING
-		PostProcessing::PostProcessor::submitToQueue(Graphics::PostProcessing::Bloom::getInstance());
+		PostProcessing::PostProcessor::submitToQueue(Graphics::PostProcessing::Lighting::Bloom::getInstance());
+		PostProcessing::PostProcessor::submitToQueue(Graphics::PostProcessing::Filter::Greyscale::getInstance());
 
 		PostProcessing::PostProcessor::process(&frameBuffer);
 

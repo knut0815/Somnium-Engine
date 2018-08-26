@@ -1,15 +1,17 @@
 #include "Bloom.h"
-#include "PostProcessor.h"
-#include "../Shaders/Shader.h"
-#include "../Buffers/FrameBuffer.h"
-#include "BrightFilter.h"
-#include "GaussianBlur.h"
+#include "../PostProcessor.h"
+#include "../../Shaders/Shader.h"
+#include "../../Buffers/FrameBuffer.h"
+#include "../Filter/BrightFilter.h"
+#include "../Distortion/GaussianBlur.h"
 
 namespace Somnium
 {
 	namespace Graphics
 	{
 		namespace PostProcessing
+		{
+		namespace Lighting
 		{
 			Shaders::Shader* Bloom::s_Shader = nullptr;
 
@@ -32,8 +34,8 @@ namespace Somnium
 				toProcess->bindColourTexture();
 				Graphics::PostProcessing::PostProcessor::drawScreen();
 
-				BrightFilter::getInstance()->Process(&blurred);
-				GaussianBlur::getInstance()->Process(&blurred);
+				Filter::BrightFilter::getInstance()->Process(&blurred);
+				Distortion::GaussianBlur::getInstance()->Process(&blurred);
 
 				bloom.bind();
 				toProcess->bindColourTexture(1);
@@ -45,6 +47,7 @@ namespace Somnium
 				Graphics::PostProcessing::PostProcessor::drawScreen();
 
 				toProcess->unbind();
+			}
 			}
 		}
 	}

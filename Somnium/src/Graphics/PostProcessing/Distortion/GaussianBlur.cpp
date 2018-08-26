@@ -1,13 +1,15 @@
 #include "GaussianBlur.h"
-#include "PostProcessor.h"
-#include "../Shaders/Shader.h"
-#include "../Buffers/FrameBuffer.h"
+#include "../PostProcessor.h"
+#include "../../Shaders/Shader.h"
+#include "../../Buffers/FrameBuffer.h"
 
 namespace Somnium
 {
 	namespace Graphics
 	{
 		namespace PostProcessing
+		{
+		namespace Distortion
 		{
 				Shaders::Shader* GaussianBlur::s_Shader = nullptr;
 
@@ -45,4 +47,5 @@ namespace Somnium
 				}
 		}
 	}
+}
 }

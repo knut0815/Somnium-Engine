@@ -1,6 +1,7 @@
 #pragma once
 
-#include "PostProcessingUnit.h"
+#include "../PostProcessingUnit.h"
+#include "../../Shaders/Shader.h"
 
 namespace Somnium
 {
@@ -8,13 +9,15 @@ namespace Somnium
 	{
 		namespace PostProcessing
 		{
+		namespace Lighting
+		{
 			class Bloom
 			: public PostProcessingUnit
 			{
 				public:
 					virtual ~Bloom();
 
-					static PostProcessingUnit* const getInstance()
+					static PostProcessingUnit* getInstance()
 					{
 						static Bloom instance;
 
@@ -38,4 +41,5 @@ namespace Somnium
 
 		}
 	}
+}
 }

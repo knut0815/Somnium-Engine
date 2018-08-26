@@ -27,7 +27,7 @@ namespace Somnium
 					virtual ~PostProcessor();
 
 					static void drawScreen(Shaders::Shader* shader = s_ScreenShader);
-					static inline void submitToQueue(PostProcessingUnit* const ppu) { PostProcessor::m_PostProcessingUnits.push(ppu); }
+					static inline void submitToQueue(PostProcessingUnit*  ppu) { PostProcessor::m_PostProcessingUnits.push(ppu); }
 					static void process(Buffers::FrameBuffer* fbo);
 				private:
 
@@ -43,7 +43,6 @@ namespace Somnium
 					static Buffers::IndexBuffer* s_ScreenIBO;
 					static bool s_Initialised;
 			};
-
 		}
 	}
 }

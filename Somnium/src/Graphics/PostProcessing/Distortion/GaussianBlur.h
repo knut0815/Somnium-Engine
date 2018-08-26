@@ -1,6 +1,7 @@
 #pragma once
 
-#include "PostProcessingUnit.h"
+#include "../PostProcessingUnit.h"
+#include "../../Shaders/Shader.h"
 
 namespace Somnium
 {
@@ -8,11 +9,13 @@ namespace Somnium
 	{
 		namespace PostProcessing
 			{
+		namespace Distortion
+		{
 				class GaussianBlur
 				: public PostProcessingUnit
 				{
 					public:
-						static PostProcessingUnit* const getInstance()
+						static PostProcessingUnit*  getInstance()
 						{
 							static GaussianBlur instance;
 
@@ -34,4 +37,5 @@ namespace Somnium
 				};
 		}
 	}
+}
 }
