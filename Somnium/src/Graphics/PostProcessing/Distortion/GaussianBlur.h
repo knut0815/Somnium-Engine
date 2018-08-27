@@ -25,12 +25,12 @@ namespace Somnium
 							return &instance;
 						}
 
-						~GaussianBlur();
+						virtual ~GaussianBlur() {};
 
 						void Process(Buffers::FrameBuffer* toProcess);
 
 					private:
-						GaussianBlur();
+						GaussianBlur() {};
 
 					private:
 						static Shaders::Shader* s_Shader;

@@ -1,4 +1,5 @@
 #include "PostProcessor.h"
+#include "Filter.h"
 
 namespace Somnium
 {
@@ -15,6 +16,7 @@ namespace Somnium
 			void PostProcessor::initialise()
 			{
 				if (s_Initialised) return;
+				Filter::initialise();
 
 				s_ScreenVAO = new Buffers::VertexArray();
 				s_ScreenIBO = new Buffers::IndexBuffer( {0, 1, 2, 2, 3, 0} );

@@ -15,7 +15,7 @@ namespace Somnium
 			: public PostProcessingUnit
 			{
 				public:
-					virtual ~Bloom();
+					virtual ~Bloom() {};
 
 					static PostProcessingUnit* getInstance()
 					{
@@ -33,7 +33,7 @@ namespace Somnium
 
 					void Process(Buffers::FrameBuffer* toProcess);
 				private:
-					Bloom();
+					Bloom() {};
 
 				private:
 					static Shaders::Shader* s_Shader;

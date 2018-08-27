@@ -18,7 +18,7 @@
 
 #include "Graphics/PostProcessing/PostProcessor.h"
 #include "Graphics/PostProcessing/Lighting/Bloom.h"
-#include "Graphics/PostProcessing/Filter/Greyscale.h"
+#include "Graphics/PostProcessing/Filter.h"
 
 #include "Utilities/FileUtilities.h"
 #include "Utilities/FrameRateUtilities.h"
@@ -156,7 +156,7 @@ int main(int argc, char** argv) {
 
 		//DO POST PROCESSING
 		PostProcessing::PostProcessor::submitToQueue(Graphics::PostProcessing::Lighting::Bloom::getInstance());
-		PostProcessing::PostProcessor::submitToQueue(Graphics::PostProcessing::Filter::Greyscale::getInstance());
+		PostProcessing::PostProcessor::submitToQueue(Graphics::PostProcessing::Filter::sepia);
 
 		PostProcessing::PostProcessor::process(&frameBuffer);
 

@@ -13,14 +13,6 @@ namespace Somnium
 		{
 				Shaders::Shader* GaussianBlur::s_Shader = nullptr;
 
-				GaussianBlur::GaussianBlur()
-				{
-
-				}
-
-				GaussianBlur::~GaussianBlur()
-				{ }
-
 				void GaussianBlur::Process(Buffers::FrameBuffer* toProcess)
 				{
 					s_Shader->enable();
