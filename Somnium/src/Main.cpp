@@ -7,6 +7,8 @@
 
 #include "Audio/AudioEngine.h"
 
+#include "Networking/Centralised/Server.h"
+
 #include "Graphics/Window.h"
 #include "Graphics/Shaders/Shader.h"
 #include "Graphics/Mesh.h"
@@ -107,6 +109,10 @@ int main(int argc, char** argv) {
 	}
 
 	cout << "---------RUNNING GAME LOOP---------" << endl;
+
+	Networking::Centralised::Server* myServer = new Networking::Centralised::Server();
+
+	myServer->run();
 
 #ifdef WEB_BUILD
 	function<void()> webMain = [&]() {

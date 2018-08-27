@@ -24,7 +24,7 @@ namespace Somnium
 				void disconnect();
 
 			private:
-				Server m_Server;
+				//Server m_ServerAddr;
 			};
 		}
 	}
