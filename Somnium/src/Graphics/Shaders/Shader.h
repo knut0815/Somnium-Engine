@@ -28,6 +28,10 @@ namespace Somnium {
 		class Shader
 		{
 		public:
+			Shader(std::string vertexFilePath, std::string fragmentFilePath)
+			: Shader(vertexFilePath.c_str(), fragmentFilePath.c_str()) {}
+
+
 			Shader(const char* vertexFilePath, const char* fragmentFilePath);
 			~Shader();
 

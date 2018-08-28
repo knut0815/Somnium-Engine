@@ -14,8 +14,11 @@ namespace Somnium
 				: public PostProcessingUnit
 				  {
 				  public:
-					Filter(char* vertexShaderFilepath, char* fragmentShaderFilepath)
-				  : s_Shader(new Shaders::Shader(vertexShaderFilepath, fragmentShaderFilepath)){};
+					Filter(std::string vertexShaderFilepath, std::string fragmentShaderFilepath)
+				  : Filter(vertexShaderFilepath.c_str(), fragmentShaderFilepath.c_str()) {}
+
+					Filter(const char* vertexShaderFilepath, const char* fragmentShaderFilepath)
+				  : s_Shader(new Shaders::Shader(vertexShaderFilepath, fragmentShaderFilepath)){}
 
 					static void initialise();
 					void Process(Buffers::FrameBuffer* toProcess);

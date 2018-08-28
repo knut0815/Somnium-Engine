@@ -5,19 +5,20 @@
 #include <vector>
 #include <thread>
 
+#define SERVER_PORT 20080
+#define MAXIMUM_CONNECTIONS 100
+
 namespace Somnium
 {
 	namespace Networking
 	{
 		namespace Centralised
 		{
-			enum NetworkError { CREATE_SOCKET_FAIL, BIND_SOCKET_FAIL, SERVER_LISTEN_FAIL };
-
 			class Server
 			: public NetworkEntity
 			{
 			public:
-				Server();
+				Server() ;
 				virtual ~Server();
 
 				void run();
@@ -34,8 +35,7 @@ namespace Somnium
 
 				bool m_Running = false;
 				std::thread m_ServerThread;
-
-				void printError(NetworkError errorCode);
+				struct sockaddr_in m_Address;
 			};
 		}
 	}

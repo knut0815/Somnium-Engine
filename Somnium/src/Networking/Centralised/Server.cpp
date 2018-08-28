@@ -1,11 +1,7 @@
 #include "Server.h"
 
-#include <cerrno>
 #include <iostream>
-#include <string.h>
-
-#define PORT 20080
-#define MAXIMUM_CONNECTIONS 100
+#include <arpa/inet.h>
 
 namespace Somnium
 {
@@ -17,18 +13,18 @@ namespace Somnium
 			{
 				if(!(m_SocketID = socket(AF_INET, SOCK_STREAM, 0)))
 				{
-					printError(NetworkError::CREATE_SOCKET_FAIL);
-					return;
+						printError(NetworkError::CREATE_SOCKET_FAIL);
+						return;
 				}
 
 				m_Address.sin_family = AF_INET;
 				m_Address.sin_addr.s_addr = INADDR_ANY;
-				m_Address.sin_port = htons( PORT );
+				m_Address.sin_port = htons( SERVER_PORT );
 
 				if(bind(m_SocketID, (struct sockaddr *) &m_Address, sizeof(m_Address)) < 0)
 				{
-					printError(NetworkError::BIND_SOCKET_FAIL);
-					return;
+						printError(NetworkError::BIND_SOCKET_FAIL);
+						return;
 				}
 			}
 
@@ -49,13 +45,13 @@ namespace Somnium
 			{
 				m_Running = true;
 
-				std::cout << "Server is listening for connections..." << std::endl;
+				std::cout << "Server is listening for connections on " << inet_ntoa(m_Address.sin_addr) << ":" << m_Address.sin_port<< std::endl;
 
 				while(m_Running)
 				{
 					if(listen(m_SocketID, MAXIMUM_CONNECTIONS) < 0)
 					{
-						printError(NetworkError::SERVER_LISTEN_FAIL);
+						NetworkEntity::printError(NetworkError::SERVER_LISTEN_FAIL);
 						return;
 					}
 				}
@@ -74,27 +70,6 @@ namespace Somnium
 			void Server::processMessage(std::string message)
 			{
 
-			}
-
-			void Server::printError(NetworkError errorCode)
-			{
-				switch(errorCode)
-				{
-				case NetworkError::CREATE_SOCKET_FAIL:
-					std::cerr << "Socket creation failed on SERVER: ";
-					break;
-				case NetworkError::BIND_SOCKET_FAIL:
-					std::cerr << "Socket binding failed on SERVER: ";
-					break;
-				case NetworkError::SERVER_LISTEN_FAIL:
-					std::cerr << "Failed to set the socket mode to listen on SERVER: ";
-					break;
-				default:
-					std::cerr << "Error on SERVER: ";
-					break;
-				}
-
-				std::cerr << strerror(errno) << std::endl;
 			}
 		}
 	}
