@@ -7,7 +7,7 @@ namespace Somnium
 	{
 		namespace PostProcessing
 		{
-			Filter *Filter::greyscale, *Filter::sepia, *Filter::brightFilter;
+			Filter *Filter::greyscale, *Filter::sepia, *Filter::brightFilter, *Filter::colourise;
 			bool Filter::s_Initialised;
 
 			void Filter::Process(Buffers::FrameBuffer* toProcess)
@@ -32,6 +32,7 @@ namespace Somnium
 				greyscale = new Filter("Resources/Graphics/Shaders/Basic/passthrough2D.vs","Resources/Graphics/Shaders/Post-Processing/Filters/greyscale.fs");
 				sepia = new Filter("Resources/Graphics/Shaders/Basic/passthrough2D.vs","Resources/Graphics/Shaders/Post-Processing/Filters/sepia.fs");
 				brightFilter = new  Filter("Resources/Graphics/Shaders/Basic/passthrough2D.vs","Resources/Graphics/Shaders/Post-Processing/Filters/brightnessFilter.fs");
+				colourise = new  Filter("Resources/Graphics/Shaders/Basic/passthrough2D.vs","Resources/Graphics/Shaders/Post-Processing/Filters/colourise.fs");
 
 				s_Initialised = true;
 			}

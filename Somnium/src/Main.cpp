@@ -60,7 +60,7 @@ int main(int argc, char** argv) {
 	#ifdef ENABLE_DEBUG_CAMERA
 		Shaders::Shader* naviShader = new Shaders::Shader("Resources/Graphics/Shaders/Debug/navigation.vs", "Resources/Graphics/Shaders/Debug/navigation.fs");
 	#endif
-	
+
 	textShader->enable();
 	textShader->setMatrix4("projection", Matrix4::orthographic(0, myWindow.getWidth(), 0, myWindow.getHeight(), -1.0f, 100.0f));
 
@@ -162,7 +162,8 @@ int main(int argc, char** argv) {
 
 		//DO POST PROCESSING
 		PostProcessing::PostProcessor::submitToQueue(Graphics::PostProcessing::Lighting::Bloom::getInstance());
-		PostProcessing::PostProcessor::submitToQueue(Graphics::PostProcessing::Filter::sepia);
+		Graphics::PostProcessing::Filter::colourise->s_Shader->setVector3(1,1,1);
+		PostProcessing::PostProcessor::submitToQueue(Graphics::PostProcessing::Filter::colourise);
 
 		PostProcessing::PostProcessor::process(&frameBuffer);
 

@@ -45,7 +45,7 @@ namespace Somnium
 			{
 				m_Running = true;
 
-				std::cout << "Server is listening for connections on " << inet_ntoa(m_Address.sin_addr) << ":" << m_Address.sin_port<< std::endl;
+				std::cout << "Server is listening for connections on " << inet_ntoa(m_Address.sin_addr) << ":" << htons(m_Address.sin_port) << std::endl;
 
 				while(m_Running)
 				{
@@ -54,6 +54,10 @@ namespace Somnium
 						NetworkEntity::printError(NetworkError::SERVER_LISTEN_FAIL);
 						return;
 					}
+
+					accept(m_SocketID, NULL, NULL);
+
+					std::cout << "Connected to client" << std::endl;
 				}
 			}
 

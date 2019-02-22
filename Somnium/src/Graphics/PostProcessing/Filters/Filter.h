@@ -24,7 +24,7 @@ namespace Somnium
 					void Process(Buffers::FrameBuffer* toProcess);
 
 				  public:
-					static Filter *greyscale, *sepia, *brightFilter;
+					static Filter *greyscale, *sepia, *brightFilter, *colourise;
 
 				  private:
 					virtual ~Filter(){};
