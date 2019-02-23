@@ -20,7 +20,7 @@
 
 #include "Graphics/PostProcessing/PostProcessor.h"
 #include "Graphics/PostProcessing/Lighting/Bloom.h"
-#include "Graphics/PostProcessing/Filter.h"
+#include "Graphics/PostProcessing/Filters/Filter.h"
 
 #include "Utilities/FileUtilities.h"
 #include "Utilities/FrameRateUtilities.h"
@@ -78,7 +78,7 @@ int main(int argc, char** argv) {
 	char buff[24];
 	for (unsigned int i = 0; i < 5; i++)
 	{
-		sprintf(buff, "lightColors[%d]", i);
+		sprintf_s(buff, "lightColors[%d]", i);
 		shader->setVector3(buff, Maths::Vector3(3000.0f, 3000.0f, 3000.0f));
 	}
 
@@ -162,8 +162,7 @@ int main(int argc, char** argv) {
 
 		//DO POST PROCESSING
 		PostProcessing::PostProcessor::submitToQueue(Graphics::PostProcessing::Lighting::Bloom::getInstance());
-		Graphics::PostProcessing::Filter::colourise->s_Shader->setVector3(1,1,1);
-		PostProcessing::PostProcessor::submitToQueue(Graphics::PostProcessing::Filter::colourise);
+//		PostProcessing::PostProcessor::submitToQueue(Graphics::PostProcessing::Filter::Colourise);
 
 		PostProcessing::PostProcessor::process(&frameBuffer);
 

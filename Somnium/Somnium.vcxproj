@@ -76,13 +76,13 @@
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <IncludePath>$(SolutionDir)Dependencies\emscripten\include;$(SolutionDir)Dependencies\FreeType\include;$(SolutionDir)Dependencies\GLEW\include;$(VC_IncludePath);$(WindowsSDK_IncludePath);$(SolutionDir)Dependencies\GLFW\include</IncludePath>
-    <LibraryPath>$(SolutionDir)Dependencies\freetype\objs\x64\Debug;$(SolutionDir)Dependencies\GLEW\lib;$(SolutionDir)Dependencies\GLFW\lib-vc2015;$(LibraryPath)</LibraryPath>
+    <LibraryPath>$(SolutionDir)Dependencies\freetype\objs;$(SolutionDir)Dependencies\GLEW\lib;$(SolutionDir)Dependencies\GLFW\lib-vc2015;$(LibraryPath)</LibraryPath>
     <OutDir>$(SolutionDir)bin\$(Configuration)\</OutDir>
     <IntDir>$(SolutionDir)bin\$(Configuration)\Intermediates\</IntDir>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <IncludePath>$(SolutionDir)Dependencies\emscripten\include;$(SolutionDir)Dependencies\FreeType\include;$(SolutionDir)Dependencies\GLEW\include;$(VC_IncludePath);$(WindowsSDK_IncludePath);$(SolutionDir)Dependencies\GLFW\include</IncludePath>
-    <LibraryPath>$(SolutionDir)Dependencies\freetype\objs\x64\Debug;$(SolutionDir)Dependencies\GLEW\lib;$(SolutionDir)Dependencies\GLFW\lib-vc2015;$(LibraryPath)</LibraryPath>
+    <LibraryPath>$(SolutionDir)Dependencies\freetype\objs;$(SolutionDir)Dependencies\GLEW\lib;$(SolutionDir)Dependencies\GLFW\lib-vc2015;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
@@ -108,11 +108,11 @@
       <FloatingPointModel>Fast</FloatingPointModel>
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
-      <AdditionalIncludeDirectories>$(SolutionDir)Dependencies\freetype\include\freetype;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)Dependencies\freetype\include;$(SolutionDir)Dependencies\GLEW\include;$(SolutionDir)Dependencies\GLFW\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <AdditionalDependencies>glfw3.lib;glew32s.lib;opengl32.lib;freetype.lib;%(AdditionalDependencies)</AdditionalDependencies>
-      <AdditionalLibraryDirectories>$(SolutionDir)Dependencies\freetype\objs\x64;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>$(SolutionDir)Dependencies\GLEW;$(SolutionDir)Dependencies\GLFW;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
@@ -135,13 +135,13 @@
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <SDLCheck>true</SDLCheck>
-      <AdditionalIncludeDirectories>$(SolutionDir)Dependencies\freetype\include\freetype;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)Dependencies\freetype\include;$(SolutionDir)Dependencies\GLEW\include;$(SolutionDir)Dependencies\GLFW\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>GLEW_STATIC;%(PreprocessorDefinitions)</PreprocessorDefinitions>
     </ClCompile>
     <Link>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
-      <AdditionalLibraryDirectories>$(SolutionDir)Dependencies\freetype\objs\x64;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>$(SolutionDir)Dependencies\GLEW;$(SolutionDir)Dependencies\GLFW;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <AdditionalDependencies>glfw3.lib;glew32s.lib;opengl32.lib;freetype.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
@@ -152,6 +152,11 @@
     <ClInclude Include="src\Graphics\Buffers\RenderBuffer.h" />
     <ClInclude Include="src\Graphics\Font.h" />
     <ClInclude Include="src\Graphics\Buffers\BufferStructure.h" />
+    <ClInclude Include="src\Graphics\PostProcessing\Distortion\GaussianBlur.h" />
+    <ClInclude Include="src\Graphics\PostProcessing\Filters\Filter.h" />
+    <ClInclude Include="src\Graphics\PostProcessing\Lighting\Bloom.h" />
+    <ClInclude Include="src\Graphics\PostProcessing\PostProcessingUnit.h" />
+    <ClInclude Include="src\Graphics\PostProcessing\PostProcessor.h" />
     <ClInclude Include="src\Graphics\Renderers\BatchRenderer.h" />
     <ClInclude Include="src\Graphics\Buffers\VertexBuffer.h" />
     <ClInclude Include="src\Graphics\Buffers\IndexBuffer.h" />
@@ -167,9 +172,14 @@
     <ClInclude Include="src\Graphics\UI\UIObject.h" />
     <ClInclude Include="src\DebugTools\ReferenceGrid.h" />
     <ClInclude Include="src\Maths\Quaternion.h" />
+    <ClInclude Include="src\Networking\Centralised\Client.h" />
+    <ClInclude Include="src\Networking\Centralised\Server.h" />
+    <ClInclude Include="src\Networking\Decentralised\Peer.h" />
+    <ClInclude Include="src\Networking\NetworkEntity.h" />
+    <ClInclude Include="src\Utilities\DebugTools\ReferenceGrid.h" />
     <ClInclude Include="src\Utilities\FileUtilities.h" />
     <ClInclude Include="src\Maths\Matrix4.h" />
-    <ClInclude Include="src\Graphics\Shader.h" />
+    <ClInclude Include="src\Graphics\Shaders\Shader.h" />
     <ClInclude Include="src\Maths\Vector2.h" />
     <ClInclude Include="src\Maths\Vector3.h" />
     <ClInclude Include="src\Maths\Vector4.h" />
@@ -180,13 +190,17 @@
     <ClCompile Include="src\Graphics\Buffers\RenderBuffer.cpp" />
     <ClCompile Include="src\Graphics\Font.cpp" />
     <ClCompile Include="src\Graphics\Buffers\BufferStructure.cpp" />
+    <ClCompile Include="src\Graphics\PostProcessing\Distortion\GaussianBlur.cpp" />
+    <ClCompile Include="src\Graphics\PostProcessing\Filters\Filter.cpp" />
+    <ClCompile Include="src\Graphics\PostProcessing\Lighting\Bloom.cpp" />
+    <ClCompile Include="src\Graphics\PostProcessing\PostProcessor.cpp" />
     <ClCompile Include="src\Graphics\Renderers\BatchRenderer.cpp" />
     <ClCompile Include="src\Graphics\Buffers\VertexBuffer.cpp" />
     <ClCompile Include="src\Graphics\Buffers\IndexBuffer.cpp" />
     <ClCompile Include="src\Graphics\Buffers\VertexArray.cpp" />
     <ClCompile Include="src\Graphics\Camera.cpp" />
     <ClCompile Include="src\Main.cpp" />
-    <ClCompile Include="src\Graphics\Shader.cpp" />
+    <ClCompile Include="src\Graphics\Shaders\Shader.cpp" />
     <ClCompile Include="src\Maths\Vector2.cpp" />
     <ClCompile Include="src\Graphics\Window.cpp" />
     <ClCompile Include="src\Maths\Vector3.cpp" />
@@ -196,10 +210,24 @@
     <ClCompile Include="src\Graphics\Renderers\SerialRenderer.cpp" />
     <ClCompile Include="src\Graphics\RenderableObject.cpp" />
     <ClCompile Include="src\Graphics\UI\UIText.cpp" />
-    <ClCompile Include="src\DebugTools\ReferenceGrid.cpp" />
     <ClCompile Include="src\Maths\Quaternion.cpp" />
+    <ClCompile Include="src\Networking\Centralised\Client.cpp" />
+    <ClCompile Include="src\Networking\Centralised\Server.cpp" />
+    <ClCompile Include="src\Utilities\DebugTools\ReferenceGrid.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
+    <Import Project="packages\freetype.redist.2.8.0.1\build\native\freetype.redist.targets" Condition="Exists('packages\freetype.redist.2.8.0.1\build\native\freetype.redist.targets')" />
+    <Import Project="packages\freetype.2.8.0.1\build\native\freetype.targets" Condition="Exists('packages\freetype.2.8.0.1\build\native\freetype.targets')" />
   </ImportGroup>
+  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
+    <PropertyGroup>
+      <ErrorText>This project references NuGet package(s) that are missing on this computer. Use NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
+    </PropertyGroup>
+    <Error Condition="!Exists('packages\freetype.redist.2.8.0.1\build\native\freetype.redist.targets')" Text="$([System.String]::Format('$(ErrorText)', 'packages\freetype.redist.2.8.0.1\build\native\freetype.redist.targets'))" />
+    <Error Condition="!Exists('packages\freetype.2.8.0.1\build\native\freetype.targets')" Text="$([System.String]::Format('$(ErrorText)', 'packages\freetype.2.8.0.1\build\native\freetype.targets'))" />
+  </Target>
 </Project>

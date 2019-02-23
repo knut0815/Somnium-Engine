@@ -1,8 +1,8 @@
 #pragma once
 
-#include "PostProcessingUnit.h"
-#include "../Shaders/Shader.h"
-#include "PostProcessor.h"
+#include "../PostProcessingUnit.h"
+#include "../../Shaders/Shader.h"
+#include "../PostProcessor.h"
 
 namespace Somnium
 {

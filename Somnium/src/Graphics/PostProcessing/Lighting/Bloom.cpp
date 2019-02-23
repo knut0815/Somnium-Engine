@@ -3,7 +3,7 @@
 #include "../../Shaders/Shader.h"
 #include "../../Buffers/FrameBuffer.h"
 #include "../Distortion/GaussianBlur.h"
-#include "../Filter.h"
+#include "../Filters/Filter.h"
 
 namespace Somnium
 {

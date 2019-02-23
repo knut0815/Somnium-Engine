@@ -1,5 +1,5 @@
 #include "PostProcessor.h"
-#include "Filter.h"
+#include "Filters/Filter.h"
 
 namespace Somnium
 {

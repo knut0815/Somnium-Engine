@@ -1,9 +1,13 @@
 #pragma once
 
+#ifdef _WIN32
+
+#else
+	#include <sys/socket.h>
+	#include <netinet/in.h>
+#endif
+
 #include <string>
-#include <sys/socket.h>
-#include <netinet/in.h>
-#include <string.h>
 #include <cerrno>
 #include <iostream>
 
@@ -46,7 +50,11 @@ namespace Somnium
 								break;
 							}
 
-							std::cerr << strerror(errno) << std::endl;
+							char errorMessage[1024];
+
+							strerror_s(errorMessage, errno);
+
+							std::cerr << errorMessage << std::endl;
 						}
 		};
 	}

@@ -57,8 +57,56 @@
     <Filter Include="Header Files\DebugTools">
       <UniqueIdentifier>{8248a912-202f-4627-8688-f87c4bbcc374}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Source Files\DebugTools">
-      <UniqueIdentifier>{3c008723-0c2f-46c0-a535-ac42bc95e034}</UniqueIdentifier>
+    <Filter Include="Source Files\Utilities">
+      <UniqueIdentifier>{b7667a71-a790-4699-ad17-7e3ca5c028ea}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Utilities\DebugTools">
+      <UniqueIdentifier>{c71e891e-dee7-4792-857c-0a414c1c6b8a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Utilities\DebugTools">
+      <UniqueIdentifier>{4d2e53f9-873f-41e7-a1af-7ebdda458d2a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Graphics\PostProcessing">
+      <UniqueIdentifier>{098b14ad-a851-4791-a4d0-0ca02aa6100b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Graphics\PostProcessing\Distortion">
+      <UniqueIdentifier>{b97fbe47-a4ca-41f2-928c-b24a09e31322}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Graphics\PostProcessing\Filters">
+      <UniqueIdentifier>{424f744c-3de0-41b0-a315-ffffd7776cef}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Graphics\PostProcessing\Lighting">
+      <UniqueIdentifier>{26e6e5d9-d47e-4592-b9e9-652ec13b177d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Graphics\PostProcessing">
+      <UniqueIdentifier>{029af030-a6b0-496c-ab7b-90b2bd93df11}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Graphics\PostProcessing\Filters">
+      <UniqueIdentifier>{1b78b098-9d4a-44e9-b44b-d2fc8f3360d3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Graphics\PostProcessing\Lighting">
+      <UniqueIdentifier>{ac0622a0-b5bb-484a-83bb-1fb728313678}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Graphics\PostProcessing\Distortion">
+      <UniqueIdentifier>{48bba217-fb6d-4a5a-bba0-27e96c014379}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Networking">
+      <UniqueIdentifier>{d670f74d-27a9-4a00-a617-f385bc77d22e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Networking\Centralised">
+      <UniqueIdentifier>{3ee5798e-f175-4265-bb5b-e04ad4be1d60}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Networking\Decentralised">
+      <UniqueIdentifier>{5101604c-fd09-4768-8e42-8cb252d595c6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Networking">
+      <UniqueIdentifier>{990af950-ff6b-4f13-afcb-cd88f53bf0fe}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Networking\Centralised">
+      <UniqueIdentifier>{6e6ca250-6a76-4e03-b1f7-60b325026a71}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Networking\Decentralised">
+      <UniqueIdentifier>{71c338ff-0f14-423f-a7a3-f6c942353d8b}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -75,9 +123,6 @@
       <Filter>Header Files\Maths</Filter>
     </ClInclude>
     <ClInclude Include="src\Graphics\Window.h">
-      <Filter>Header Files\Graphics</Filter>
-    </ClInclude>
-    <ClInclude Include="src\Graphics\Shader.h">
       <Filter>Header Files\Graphics</Filter>
     </ClInclude>
     <ClInclude Include="src\Utilities\FileUtilities.h">
@@ -146,6 +191,39 @@
     <ClInclude Include="src\Graphics\Buffers\RenderBuffer.h">
       <Filter>Header Files\Graphics\Buffers</Filter>
     </ClInclude>
+    <ClInclude Include="src\Graphics\Shaders\Shader.h">
+      <Filter>Header Files\Graphics</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Utilities\DebugTools\ReferenceGrid.h">
+      <Filter>Header Files\Utilities\DebugTools</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Graphics\PostProcessing\Lighting\Bloom.h">
+      <Filter>Header Files\Graphics\PostProcessing\Lighting</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Graphics\PostProcessing\Filters\Filter.h">
+      <Filter>Header Files\Graphics\PostProcessing\Filters</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Graphics\PostProcessing\Distortion\GaussianBlur.h">
+      <Filter>Header Files\Graphics\PostProcessing\Distortion</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Graphics\PostProcessing\PostProcessingUnit.h">
+      <Filter>Header Files\Graphics\PostProcessing</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Graphics\PostProcessing\PostProcessor.h">
+      <Filter>Header Files\Graphics\PostProcessing</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Networking\NetworkEntity.h">
+      <Filter>Header Files\Networking</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Networking\Decentralised\Peer.h">
+      <Filter>Header Files\Networking\Decentralised</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Networking\Centralised\Server.h">
+      <Filter>Header Files\Networking\Centralised</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Networking\Centralised\Client.h">
+      <Filter>Header Files\Networking\Centralised</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\Main.cpp">
@@ -153,9 +231,6 @@
     </ClCompile>
     <ClCompile Include="src\Maths\Vector2.cpp">
       <Filter>Source Files\Maths</Filter>
-    </ClCompile>
-    <ClCompile Include="src\Graphics\Shader.cpp">
-      <Filter>Source Files\Graphics</Filter>
     </ClCompile>
     <ClCompile Include="src\Graphics\Window.cpp">
       <Filter>Source Files\Graphics</Filter>
@@ -202,9 +277,6 @@
     <ClCompile Include="src\Graphics\UI\UIText.cpp">
       <Filter>Source Files\Graphics\UI</Filter>
     </ClCompile>
-    <ClCompile Include="src\DebugTools\ReferenceGrid.cpp">
-      <Filter>Source Files\DebugTools</Filter>
-    </ClCompile>
     <ClCompile Include="src\Maths\Quaternion.cpp">
       <Filter>Source Files\Maths</Filter>
     </ClCompile>
@@ -214,5 +286,32 @@
     <ClCompile Include="src\Graphics\Buffers\RenderBuffer.cpp">
       <Filter>Source Files\Graphics\Buffers</Filter>
     </ClCompile>
+    <ClCompile Include="src\Graphics\Shaders\Shader.cpp">
+      <Filter>Source Files\Graphics</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Utilities\DebugTools\ReferenceGrid.cpp">
+      <Filter>Source Files\Utilities\DebugTools</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Graphics\PostProcessing\PostProcessor.cpp">
+      <Filter>Source Files\Graphics\PostProcessing</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Graphics\PostProcessing\Lighting\Bloom.cpp">
+      <Filter>Source Files\Graphics\PostProcessing\Lighting</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Graphics\PostProcessing\Filters\Filter.cpp">
+      <Filter>Source Files\Graphics\PostProcessing\Filters</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Graphics\PostProcessing\Distortion\GaussianBlur.cpp">
+      <Filter>Source Files\Graphics\PostProcessing\Distortion</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Networking\Centralised\Server.cpp">
+      <Filter>Source Files\Networking\Centralised</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Networking\Centralised\Client.cpp">
+      <Filter>Source Files\Networking\Centralised</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
   </ItemGroup>
 </Project>

@@ -1,7 +1,12 @@
 #include "Server.h"
 
 #include <iostream>
-#include <arpa/inet.h>
+
+#ifdef _WIN32
+
+#else
+	#include <arpa/inet.h>
+#endif
 
 namespace Somnium
 {
@@ -9,8 +14,12 @@ namespace Somnium
 	{
 		namespace Centralised
 		{
+
 			Server::Server()
 			{
+#ifdef _WIN32
+
+#else
 				if(!(m_SocketID = socket(AF_INET, SOCK_STREAM, 0)))
 				{
 						printError(NetworkError::CREATE_SOCKET_FAIL);
@@ -26,6 +35,7 @@ namespace Somnium
 						printError(NetworkError::BIND_SOCKET_FAIL);
 						return;
 				}
+#endif
 			}
 
 			Server::~Server()
@@ -43,6 +53,9 @@ namespace Somnium
 
 			void Server::listenForClients()
 			{
+#ifdef _WIN32
+
+#else
 				m_Running = true;
 
 				std::cout << "Server is listening for connections on " << inet_ntoa(m_Address.sin_addr) << ":" << htons(m_Address.sin_port) << std::endl;
@@ -59,6 +72,7 @@ namespace Somnium
 
 					std::cout << "Connected to client" << std::endl;
 				}
+#endif
 			}
 
 			void Server::broadcastMessage(std::string message)

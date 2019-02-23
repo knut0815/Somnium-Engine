@@ -35,7 +35,11 @@ namespace Somnium
 
 				bool m_Running = false;
 				std::thread m_ServerThread;
+#ifdef _WIN32
+
+#else
 				struct sockaddr_in m_Address;
+#endif
 			};
 		}
 	}

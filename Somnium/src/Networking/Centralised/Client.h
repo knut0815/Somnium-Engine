@@ -18,12 +18,16 @@ namespace Somnium
 				Client() { }
 				virtual ~Client();
 
-				void broadcastMessage(std::string message);
-				void sendMessage(std::string address, std::string message);
-				void processMessage(std::string message);
+#ifdef _WIN32
+				bool connectToServer();
+#else
+				bool connectToServer(struct sockaddr_in serverAddress) {};
+#endif
 
-				bool connectToServer(struct sockaddr_in serverAddress);
-				void disconnect();
+				void broadcastMessage(std::string message) {};
+				void sendMessage(std::string address, std::string message) {};
+				void processMessage(std::string message) {};
+				void disconnect() {};
 
 			private:
 				//Server m_ServerAddr;
