@@ -75,9 +75,6 @@
     <Filter Include="Header Files\Graphics\PostProcessing\Filters">
       <UniqueIdentifier>{424f744c-3de0-41b0-a315-ffffd7776cef}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Header Files\Graphics\PostProcessing\Lighting">
-      <UniqueIdentifier>{26e6e5d9-d47e-4592-b9e9-652ec13b177d}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Source Files\Graphics\PostProcessing">
       <UniqueIdentifier>{029af030-a6b0-496c-ab7b-90b2bd93df11}</UniqueIdentifier>
     </Filter>
@@ -107,6 +104,9 @@
     </Filter>
     <Filter Include="Header Files\Networking\Decentralised">
       <UniqueIdentifier>{71c338ff-0f14-423f-a7a3-f6c942353d8b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Graphics\PostProcessing\Lighting">
+      <UniqueIdentifier>{26e6e5d9-d47e-4592-b9e9-652ec13b177d}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -224,6 +224,9 @@
     <ClInclude Include="src\Networking\Centralised\Client.h">
       <Filter>Header Files\Networking\Centralised</Filter>
     </ClInclude>
+    <ClInclude Include="src\Graphics\PostProcessing\Filters\Colourise.h">
+      <Filter>Header Files\Graphics\PostProcessing\Filters</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\Main.cpp">
@@ -309,6 +312,9 @@
     </ClCompile>
     <ClCompile Include="src\Networking\Centralised\Client.cpp">
       <Filter>Source Files\Networking\Centralised</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Graphics\PostProcessing\Filters\Colourise.cpp">
+      <Filter>Source Files\Graphics\PostProcessing\Filters</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

@@ -20,7 +20,7 @@
 
 #include "Graphics/PostProcessing/PostProcessor.h"
 #include "Graphics/PostProcessing/Lighting/Bloom.h"
-#include "Graphics/PostProcessing/Filters/Filter.h"
+#include "Graphics/PostProcessing/Filters/Colourise.h"
 
 #include "Utilities/FileUtilities.h"
 #include "Utilities/FrameRateUtilities.h"
@@ -162,7 +162,10 @@ int main(int argc, char** argv) {
 
 		//DO POST PROCESSING
 		PostProcessing::PostProcessor::submitToQueue(Graphics::PostProcessing::Lighting::Bloom::getInstance());
-//		PostProcessing::PostProcessor::submitToQueue(Graphics::PostProcessing::Filter::Colourise);
+		static float hue = 0;
+		
+		PostProcessing::PostProcessor::submitToQueue(Graphics::PostProcessing::Filters::Colourise::apply(sin(hue), sin(hue + 120), sin(hue + 240), 1));
+		hue+=0.01f;
 
 		PostProcessing::PostProcessor::process(&frameBuffer);
 

@@ -22,7 +22,7 @@
     <VCProjectVersion>15.0</VCProjectVersion>
     <ProjectGuid>{CF4C0206-39E3-4DE4-ABFE-A464E80C3C7A}</ProjectGuid>
     <RootNamespace>SomniumEngine</RootNamespace>
-    <WindowsTargetPlatformVersion>10.0.17134.0</WindowsTargetPlatformVersion>
+    <WindowsTargetPlatformVersion>10.0.17763.0</WindowsTargetPlatformVersion>
     <ProjectName>SomniumEngine</ProjectName>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
@@ -146,6 +146,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="src\Graphics\PostProcessing\Filters\Colourise.h" />
     <ClInclude Include="src\Audio\AudioEngine.h" />
     <ClInclude Include="src\Graphics\Buffers\Buffer.h" />
     <ClInclude Include="src\Graphics\Buffers\FrameBuffer.h" />
@@ -186,6 +187,7 @@
     <ClInclude Include="src\Graphics\Window.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="src\Graphics\PostProcessing\Filters\Colourise.cpp" />
     <ClCompile Include="src\Graphics\Buffers\FrameBuffer.cpp" />
     <ClCompile Include="src\Graphics\Buffers\RenderBuffer.cpp" />
     <ClCompile Include="src\Graphics\Font.cpp" />
