@@ -5,7 +5,8 @@
 	#include <emscripten.h>
 #endif
 
-#define DISABLE_POST_PROCESSING
+#define DISABLE_POST_PROCESSING true
+#define LIMIT_FRAMERATE true
 
 #include "Audio/AudioEngine.h"
 
@@ -163,7 +164,7 @@ int main(int argc, char** argv) {
 		//renderer->endMapping();
 		frameBuffer.clear();
 
-#ifdef DISABLE_POST_PROCESSING
+#if DISABLE_POST_PROCESSING
 		renderer->render(true);
 #else
 		frameBuffer.bind();
@@ -193,7 +194,9 @@ int main(int argc, char** argv) {
 		mainCamera.drawUI();
 		myWindow.update();
 
-		//Utilities::FrameRate::limitFrameRate(60);
+#if LIMIT_FRAMERATE
+		Utilities::FrameRate::limitFrameRate(60);
+#endif
 	};
 #ifdef WEB_BUILD
 	emscripten_set_main_loop_arg(startMain, &webMain, false, true);
