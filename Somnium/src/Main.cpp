@@ -5,6 +5,8 @@
 	#include <emscripten.h>
 #endif
 
+#define DISABLE_POST_PROCESSING
+
 #include "Audio/AudioEngine.h"
 
 #include "Networking/Centralised/Server.h"
@@ -41,6 +43,7 @@ static void startMain(void *mainFunction)
 
 int main(int argc, char** argv) {
 	Utilities::Debug::printWelcomeMessage();
+	srand((unsigned)time(0)); 
 
 	std::set<std::string> flags = std::set<std::string>();
 	for (int f = 0; f < argc; f++) flags.insert(argv[f]);
@@ -92,7 +95,6 @@ int main(int argc, char** argv) {
 	Matrix4 view = Matrix4::identity();
 
 	Mesh monkeyMesh = Mesh(Utilities::File::loadOBJ("Resources/Graphics/Objects/Monkey.obj", *shader));
-	monkeyMesh.translate(0,0,-50);
 
 	std::vector<RenderableObject*> objects;
 
@@ -104,8 +106,8 @@ int main(int argc, char** argv) {
 	for (RenderableObject* object : objects)
 	{
 		float scale = (float)rand() / RAND_MAX;
-		object->getMesh()->scale(scale, scale, scale);
-		object->getMesh()->translate((float)rand() / RAND_MAX * 10 * ((rand() % 2) ? 1 : -1), (float)rand() / RAND_MAX * 10 * ((rand() % 2) ? 1 : -1), (float)rand() / RAND_MAX * -1.0f);
+		object->setScale(scale, scale, scale);
+		object->setPosition((float)rand() / RAND_MAX * 10 * ((rand() % 2) ? 1 : -1), (float)rand() / RAND_MAX * 10 * ((rand() % 2) ? 1 : -1), (float)rand() / RAND_MAX * -50.0f);
 	}
 
 	cout << "---------RUNNING GAME LOOP---------" << endl;
@@ -134,8 +136,8 @@ int main(int argc, char** argv) {
 		static float monkeyZPos = 0;
 		static float offset = -0.001f;
 
-		if (monkeyZPos >= 0)  offset = -0.001f;
-		else if (monkeyZPos <= -10) offset = 0.001f;
+		if (monkeyZPos >= 0.1)  offset = -0.001f;
+		else if (monkeyZPos <= -0.1) offset = 0.001f;
 
 		monkeyZPos += offset;
 
@@ -143,8 +145,13 @@ int main(int argc, char** argv) {
 
 		for (RenderableObject* object : objects)
 		{
-			object->getMesh()->translate(0, 0, offset);
-			object->getMesh()->setOrientation(0.01f, 0.01f, 0.01f); //TODO: Setup a glPop/glPushMatrix() functionality system
+			object->move(0, 0, monkeyZPos, 0.01f);
+			float xRot = (float)rand() / RAND_MAX * ((rand() % 2) ? 1 : -1);
+			float yRot = (float)rand() / RAND_MAX * ((rand() % 2) ? 1 : -1);
+			float zRot = (float)rand() / RAND_MAX * ((rand() % 2) ? 1 : -1);
+
+			object->rotate(xRot, yRot, zRot); //TODO: Setup a glPop/glPushMatrix() functionality system
+			//object->setScale(abs(monkeyZPos) * 10000, abs(monkeyZPos) * 10000, abs(monkeyZPos) * 10000);
 			renderer->submitToQueue(object);
 		}
 
@@ -154,10 +161,12 @@ int main(int argc, char** argv) {
 		//3. Draw objects
 		//renderer->endMapping();
 		frameBuffer.clear();
-		frameBuffer.bind();
 
+#ifdef DISABLE_POST_PROCESSING
 		renderer->render(true);
-
+#else
+		frameBuffer.bind();
+		renderer->render(true);
 		frameBuffer.unbind();
 
 		//DO POST PROCESSING
@@ -169,9 +178,8 @@ int main(int argc, char** argv) {
 
 		PostProcessing::PostProcessor::process(&frameBuffer);
 
-		frameBuffer.bindColourTexture();
-
 		Graphics::PostProcessing::PostProcessor::drawScreen();
+#endif
 
 		Utilities::FrameRate::update();
 #ifdef ENABLE_DEBUG_CAMERA

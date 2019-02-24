@@ -1,5 +1,8 @@
 #pragma once
 
+#include <stdio.h>
+#include <string>
+
 namespace Somnium
 {
 	namespace Maths
@@ -39,6 +42,14 @@ namespace Somnium
 			static float dot(const Vector3& vector1, const Vector3& vector2);
 
 			double magnitude(void) const;
+
+			std::string toString() 
+			{ 
+				char buff[256];
+				sprintf_s(buff, "[%f, %f, %f]", x, y, z);
+
+				return std::string(buff);  
+			}
 		};
 	}
 }

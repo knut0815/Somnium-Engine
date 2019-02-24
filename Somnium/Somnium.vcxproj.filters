@@ -108,6 +108,12 @@
     <Filter Include="Header Files\Graphics\PostProcessing\Lighting">
       <UniqueIdentifier>{26e6e5d9-d47e-4592-b9e9-652ec13b177d}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\Physics">
+      <UniqueIdentifier>{b7a09940-665c-4527-ae51-1a4ca979e585}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Physics">
+      <UniqueIdentifier>{c1f6bd20-2b3c-449f-be4f-e1b67dc8a3ea}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\Maths\Vector3.h">
@@ -316,8 +322,5 @@
     <ClCompile Include="src\Graphics\PostProcessing\Filters\Colourise.cpp">
       <Filter>Source Files\Graphics\PostProcessing\Filters</Filter>
     </ClCompile>
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="packages.config" />
   </ItemGroup>
 </Project>

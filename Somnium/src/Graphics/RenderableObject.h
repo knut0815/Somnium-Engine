@@ -20,7 +20,27 @@ namespace Somnium
 			Mesh* getMesh() { return m_Mesh; }
 			void  setMesh(Mesh *mesh) { m_Mesh = mesh; }
 
+			void setPosition(float x, float y, float z);
+			void setPosition(Maths::Vector3 position) { setPosition(position.x, position.y, position.z); }
+			void setScale(float x, float y, float z);
+			void setOrientation(float x, float y, float z);
+
 			inline const Maths::Vector3 getPosition() const { return m_Position; }
+
+			void move(Maths::Vector3 offset);
+			void move(Maths::Vector3 direction, float amount);
+			void move(Maths::Vector4 movementVector) { move(Maths::Vector3(movementVector.x, movementVector.y, movementVector.z), movementVector.w); }
+			void move(float xDir, float yDir, float zDir, float amount) { move(Maths::Vector3(xDir, yDir, zDir), amount); }
+
+			void moveTowards(Maths::Vector3 destination, float amount);
+			void moveTowards(Maths::Vector4 movementVector) { moveTowards(Maths::Vector3(movementVector.x, movementVector.y, movementVector.z), movementVector.w); }
+			void moveTowards(float x, float y, float z, float amount) { moveTowards(Maths::Vector3(x, y, z), amount); }
+
+			void scale(float x, float y, float z) { scale(Maths::Vector3(x, y, z)); }
+			void scale(Maths::Vector3 scaleFactor);
+
+			void rotate(float x, float y, float z) { rotate(Maths::Vector3(x, y, z)); }
+			void rotate(Maths::Vector3 rotation);
 
 			void update();
 

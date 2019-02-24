@@ -33,6 +33,8 @@ namespace Somnium
 
 		class Mesh 
 		{
+			friend class RenderableObject;
+
 		public:
 			Mesh(Buffers::VertexArray* vertexArray, Buffers::IndexBuffer* indexBuffer, std::vector<Texture> textures, Shaders::Shader& shader);
 			Mesh(std::vector<GLfloat> vertexArray, std::vector<GLushort> indexBuffer, std::vector<Texture> textures, Shaders::Shader& shader);
@@ -48,6 +50,7 @@ namespace Somnium
 			inline Shaders::Shader& getShader() const { return m_Shader; }
 			const Maths::Matrix4 getModelMatrix() const;
 
+		protected:
 			void rotate(float xAngleOffset, float yAngleOffset, float zAngleOffset);
 			void rotate(Maths::Vector3 rotationOffset);
 
@@ -61,7 +64,7 @@ namespace Somnium
 			void translate(float xOffset, float yOffset, float zOffset);
 			void translate(Maths::Vector3 offset);
 
-		private:
+		protected:
 			Buffers::VertexArray* m_VAO;
 			Buffers::IndexBuffer* m_IBO;
 
