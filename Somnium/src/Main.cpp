@@ -145,13 +145,14 @@ int main(int argc, char** argv) {
 
 		for (RenderableObject* object : objects)
 		{
-			object->move(0, 0, monkeyZPos, 0.01f);
+			
 			float xRot = (float)rand() / RAND_MAX * ((rand() % 2) ? 1 : -1);
 			float yRot = (float)rand() / RAND_MAX * ((rand() % 2) ? 1 : -1);
 			float zRot = (float)rand() / RAND_MAX * ((rand() % 2) ? 1 : -1);
 
+			object->move((rand() % 2) ? 1 : -1, (rand() % 2) ? 1 : -1, (rand() % 2) ? 1 : -1, 0.1f);
 			object->rotate(xRot, yRot, zRot); //TODO: Setup a glPop/glPushMatrix() functionality system
-			//object->setScale(abs(monkeyZPos) * 10000, abs(monkeyZPos) * 10000, abs(monkeyZPos) * 10000);
+			
 			renderer->submitToQueue(object);
 		}
 
@@ -192,7 +193,7 @@ int main(int argc, char** argv) {
 		mainCamera.drawUI();
 		myWindow.update();
 
-		Utilities::FrameRate::limitFrameRate(60);
+		//Utilities::FrameRate::limitFrameRate(60);
 	};
 #ifdef WEB_BUILD
 	emscripten_set_main_loop_arg(startMain, &webMain, false, true);
